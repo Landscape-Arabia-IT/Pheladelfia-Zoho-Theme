@@ -101,23 +101,23 @@
     </div>
     <div class="ph-logo-marquee" dir="ltr">
       <div class="ph-logo-track" data-ph-logo-track>
-        <span class="ph-logo-item"><img src="{{ ph_img }}/logos/abu-dhabi-municipality%20.jpeg" alt="Abu Dhabi Municipality" loading="lazy"></span>
+        <span class="ph-logo-item"><img src="{{ ph_img }}/logos/abu-dhabi-municipality.jpeg" alt="Abu Dhabi Municipality" loading="lazy"></span>
         <span class="ph-logo-item"><img src="{{ ph_img }}/logos/adnoc.png" alt="ADNOC" loading="lazy"></span>
         <span class="ph-logo-item"><img src="{{ ph_img }}/logos/aecom.png" alt="AECOM" loading="lazy"></span>
         <span class="ph-logo-item"><img src="{{ ph_img }}/logos/al-fattan.png" alt="Al Fattan" loading="lazy"></span>
-        <span class="ph-logo-item"><img src="{{ ph_img }}/logos/al-naboodah%20.jpeg" alt="Al Naboodah" loading="lazy"></span>
+        <span class="ph-logo-item"><img src="{{ ph_img }}/logos/al-naboodah.jpeg" alt="Al Naboodah" loading="lazy"></span>
         <span class="ph-logo-item"><img src="{{ ph_img }}/logos/aldar.png" alt="Aldar" loading="lazy"></span>
-        <span class="ph-logo-item"><img src="{{ ph_img }}/logos/currie-brown%20.png" alt="Currie &amp; Brown" loading="lazy"></span>
+        <span class="ph-logo-item"><img src="{{ ph_img }}/logos/currie-brown.png" alt="Currie &amp; Brown" loading="lazy"></span>
         <span class="ph-logo-item"><img src="{{ ph_img }}/logos/damac.png" alt="DAMAC" loading="lazy"></span>
         <span class="ph-logo-item"><img src="{{ ph_img }}/logos/dubai-municipality.png" alt="Dubai Municipality" loading="lazy"></span>
         <span class="ph-logo-item"><img src="{{ ph_img }}/logos/modon.png" alt="Modon" loading="lazy"></span>
         <span class="ph-logo-item"><img src="{{ ph_img }}/logos/multiplex.png" alt="Multiplex" loading="lazy"></span>
         <span class="ph-logo-item"><img src="{{ ph_img }}/logos/nakheel.jpeg" alt="Nakheel" loading="lazy"></span>
         <span class="ph-logo-item"><img src="{{ ph_img }}/logos/neom.webp" alt="NEOM" loading="lazy"></span>
-        <span class="ph-logo-item"><img src="{{ ph_img }}/logos/presidential-court%20.jpeg" alt="Presidential Court" loading="lazy"></span>
+        <span class="ph-logo-item"><img src="{{ ph_img }}/logos/presidential-court.jpeg" alt="Presidential Court" loading="lazy"></span>
         <span class="ph-logo-item"><img src="{{ ph_img }}/logos/rixos.png" alt="Rixos" loading="lazy"></span>
         <span class="ph-logo-item"><img src="{{ ph_img }}/logos/silal.jpeg" alt="Silal" loading="lazy"></span>
-        <span class="ph-logo-item"><img src="{{ ph_img }}/logos/turner-townsend%20.png" alt="Turner &amp; Townsend" loading="lazy"></span>
+        <span class="ph-logo-item"><img src="{{ ph_img }}/logos/turner-townsend.png" alt="Turner &amp; Townsend" loading="lazy"></span>
       </div>
     </div>
     <p class="ph-sec-sub" style="text-align:center; margin-block-start:1.5rem;">Regional reach: United Arab Emirates · Saudi Arabia · Jordan · Qatar · Bahrain</p>

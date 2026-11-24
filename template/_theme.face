@@ -299,16 +299,20 @@
   <title>{% if page.title %}{{ page.title }}{% else %}Pheladelfia{% endif %}</title>
   {{ page.meta_tags }}
   {% assign ph_head_path = page.url %}
-  {% if page.primary_domain %}<link rel="canonical" href="https://{{ page.primary_domain }}{{ page.url }}">{% endif %}
   {% if ph_head_path contains 'cart' || ph_head_path contains 'checkout' || ph_head_path contains 'search' || ph_head_path contains 'account' || ph_head_path contains 'login' || ph_head_path contains 'register' %}<meta name="robots" content="noindex,follow">{% endif %}
+  {# canonical, og:url, og:type, og:title, og:image and twitter:* are emitted by page.meta_tags — do not duplicate them here. #}
   <meta property="og:site_name" content="Pheladelfia Agricultural LLC">
-  <meta property="og:type" content="{% if page.is_home_page %}website{% else %}article{% endif %}">
-  <meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}Pheladelfia Agricultural LLC{% endif %}">
   <meta property="og:description" content="Specialist nursery and specimen-tree supplier — Pheladelfia Agricultural LLC, Abu Dhabi since 2004.">
-  {% if page.primary_domain %}<meta property="og:url" content="https://{{ page.primary_domain }}{{ page.url }}">{% endif %}
-  <meta name="twitter:card" content="summary">
+  {# TODO client approval: dedicated 1200x630 og-default image; reusing an existing nursery photo meanwhile. #}
+  <meta property="og:image" content="{{ ph_img }}/palm-nursery-rows.jpg">
+  <meta name="twitter:card" content="summary_large_image">
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"Organization","name":"Pheladelfia Agricultural LLC","url":"https://www.pheladelfia.com","email":"nursery@pheladelfia.com","telephone":"+97125551662","address":{"@type":"PostalAddress","streetAddress":"Farm No. 563 & 564, Al Ajban, Muwailih","addressLocality":"Abu Dhabi","addressCountry":"AE"}}
+  {"@context":"https://schema.org","@graph":[
+    {"@type":"Organization","@id":"https://www.pheladelfia.com/#organization","name":"Pheladelfia Agricultural LLC","url":"https://www.pheladelfia.com","logo":"{{ ph_img }}/logo-full.png","email":"nursery@pheladelfia.com","telephone":"+97125551662","sameAs":["{{ ph_social_instagram }}","{{ ph_social_facebook }}","{{ ph_social_linkedin }}","{{ ph_social_x }}"],"address":{"@type":"PostalAddress","streetAddress":"Farm No. 563 & 564, Al Ajban, Muwailih","addressLocality":"Abu Dhabi","addressCountry":"AE"}},
+    {"@type":"LocalBusiness","@id":"https://www.pheladelfia.com/#nursery","name":"Pheladelfia Agricultural LLC — Al Ajban Nursery","parentOrganization":{"@id":"https://www.pheladelfia.com/#organization"},"url":"https://www.pheladelfia.com","telephone":"+97125551662","email":"nursery@pheladelfia.com","image":"{{ ph_img }}/palm-nursery-rows.jpg","priceRange":"$$","address":{"@type":"PostalAddress","streetAddress":"Farm No. 563 & 564, Al Ajban, Muwailih","addressLocality":"Abu Dhabi","addressCountry":"AE"},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Saturday","Sunday","Monday","Tuesday","Wednesday","Thursday"],"opens":"08:00","closes":"18:00"}]},
+    {"@type":"LocalBusiness","@id":"https://www.pheladelfia.com/#warsan-branch","name":"Pheladelfia Agricultural LLC — Warsan Branch","parentOrganization":{"@id":"https://www.pheladelfia.com/#organization"},"url":"https://www.pheladelfia.com","telephone":"+97125551662","address":{"@type":"PostalAddress","streetAddress":"Warsan","addressLocality":"Dubai","addressCountry":"AE"}},
+    {"@type":"WebSite","@id":"https://www.pheladelfia.com/#website","url":"https://www.pheladelfia.com","name":"Pheladelfia Agricultural LLC","publisher":{"@id":"https://www.pheladelfia.com/#organization"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://www.pheladelfia.com/search-products?q={search_term_string}"},"query-input":"required name=search_term_string"}}
+  ]}
   </script>
   {{ page.stylesheets }}
   <template id="ph-saved-header-code">{{ page.header_code }}</template>
@@ -342,7 +346,7 @@
     <div class="ph-wrap">
       <span class="ph-topbar-msg">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 7h11v8H3z"/><path d="M14 10h4l3 3v2h-7z"/><circle cx="7" cy="17" r="1.6"/><circle cx="17" cy="17" r="1.6"/></svg>
-        Premium Palms &amp; Trees — Grown in the UAE
+        Premium Palms &amp; Trees — Grown &amp; sourced for the UAE
       </span>
       <span class="ph-topbar-contact">
         <a href="{{ ph_phone_tel }}" dir="ltr">

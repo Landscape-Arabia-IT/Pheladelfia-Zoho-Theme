@@ -2418,7 +2418,7 @@ window.__phJsOnce = true;
     "Terrace planting inspiration": "أفكار لزراعة الشرفات",
     "Terrace inspiration": "أفكار للشرفات",
 
-    "Premium Palms & Trees — Grown in the UAE": "نخيل وأشجار فاخرة — مزروعة في الإمارات",
+    "Premium Palms & Trees — Grown & sourced for the UAE": "نخيل وأشجار فاخرة — مُزرعة ومُورَّدة للإمارات",
     "Agricultural LLC": "الزراعية ذ.م.م",
     "Account": "حسابي",
     "Shop palms": "تسوّق النخيل",
@@ -2678,7 +2678,7 @@ window.__phJsOnce = true;
     "Results for the term": "نتائج البحث عن",
     "Abu Dhabi nursery · Est. 2004": "مشتل أبوظبي · تأسس 2004",
     "Premium Palms & Trees,": "نخيل وأشجار فاخرة،",
-    "Grown in the UAE": "مزروعة في الإمارات",
+    "Grown & sourced for the UAE": "مُزرعة ومُورَّدة للإمارات",
     "Specimen palms, native trees and flowering shrubs — acclimatized in our Abu Dhabi nursery and delivered ready to plant across the Emirates.": "نخيل وعينات وأشجار محلية وشجيرات مزهرة — متأقلمة في مشتلنا بأبوظبي وجاهزة للزراعة في جميع أنحاء الإمارات.",
     "Shop Plants": "تسوّق النباتات",
     "Browse Palms": "تصفّح النخيل",

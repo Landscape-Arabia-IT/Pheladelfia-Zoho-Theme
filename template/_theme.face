@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <script>window.zs_site_resource_path = window.zs_site_resource_path || "";</script>
-  <meta name="ph-theme-build" content="pheladelfia-20261123-v820">
+  <meta name="ph-theme-build" content="pheladelfia-20261124-v830">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script id="ph-language-bootstrap">(function(){
     try{
@@ -19,7 +19,9 @@
     if(l==="ar"){
       var h=document.documentElement;
       h.setAttribute("lang","ar"); h.setAttribute("dir","rtl"); h.className+=" ph-ar";
-      document.write('<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap">');
+      var pre=document.createElement("link"); pre.rel="preconnect"; pre.href="https://fonts.gstatic.com"; pre.crossOrigin="";
+      var arFont=document.createElement("link"); arFont.rel="stylesheet"; arFont.href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap";
+      document.head.appendChild(pre); document.head.appendChild(arFont);
     }
     try{localStorage.setItem("ph_lang_v2",l);}catch(e){}
     try{if(!m||m[1]!==l) document.cookie="ph_lang_v2="+l+"; path=/; max-age=31536000; SameSite=Lax";}catch(e){}

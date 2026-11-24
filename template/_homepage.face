@@ -106,21 +106,21 @@
     </div>
     <div class="ph-cat-grid">
       <a class="ph-cat-card" href="{{ ph_url_palm_trees }}">
-        <img src="{{ ph_img }}/palm-grove-fan.jpg" alt="Fan palms at the Pheladelfia nursery" loading="lazy">
+        <img src="{{ ph_img }}/palm-grove-fan.jpg" alt="Fan palms at the Pheladelfia nursery" width="800" height="600" loading="lazy">
         <span class="ph-cat-body">
           <span class="ph-cat-blurb">Fan, date &amp; specimen palms</span>
           <span class="ph-cat-name">Palms <span class="ph-cat-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
         </span>
       </a>
       <a class="ph-cat-card" href="{{ ph_url_trees }}">
-        <img src="{{ ph_img }}/ghaf-tree.jpg" alt="Native Ghaf tree" loading="lazy">
+        <img src="{{ ph_img }}/ghaf-tree.jpg" alt="Native Ghaf tree" width="800" height="600" loading="lazy">
         <span class="ph-cat-body">
           <span class="ph-cat-blurb">Shade &amp; native trees</span>
           <span class="ph-cat-name">Trees <span class="ph-cat-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
         </span>
       </a>
       <a class="ph-cat-card" href="{{ ph_url_rare_trees }}">
-        <img src="{{ ph_img }}/phoenix-canariensis.jpg" alt="Specimen palm tree" loading="lazy">
+        <img src="{{ ph_img }}/phoenix-canariensis.jpg" alt="Specimen palm tree" width="800" height="600" loading="lazy">
         <span class="ph-cat-body">
           <span class="ph-cat-blurb">Heritage &amp; monumental specimens</span>
           <span class="ph-cat-name">Rare &amp; Ancient Trees <span class="ph-cat-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
@@ -128,28 +128,28 @@
       </a>
       <a class="ph-cat-card" href="{{ ph_url_cacti }}">
         <!-- TODO image: upload cacti-succulents.jpg (~800x600) to /images in the Zoho store; the card hides itself until then -->
-        <img src="{{ ph_img }}/cacti-succulents.jpg" alt="Giant cacti and succulents at the Pheladelfia nursery" loading="lazy" onerror="this.closest('a').style.display='none'">
+        <img src="{{ ph_img }}/cacti-succulents.jpg" alt="Giant cacti and succulents at the Pheladelfia nursery" width="800" height="600" loading="lazy" onerror="this.closest('a').style.display='none'">
         <span class="ph-cat-body">
           <span class="ph-cat-blurb">Giant cacti, succulents &amp; Yucca rostrata</span>
           <span class="ph-cat-name">Cacti &amp; Succulents <span class="ph-cat-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
         </span>
       </a>
       <a class="ph-cat-card" href="{{ ph_url_shrubs }}">
-        <img src="{{ ph_img }}/bougainvillea.jpg" alt="Flowering bougainvillea shrub" loading="lazy">
+        <img src="{{ ph_img }}/bougainvillea.jpg" alt="Flowering bougainvillea shrub" width="800" height="600" loading="lazy">
         <span class="ph-cat-body">
           <span class="ph-cat-blurb">Flowering shrubs &amp; ground covers</span>
           <span class="ph-cat-name">Shrubs &amp; Ground Cover <span class="ph-cat-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
         </span>
       </a>
       <a class="ph-cat-card" href="{{ ph_url_indoor }}">
-        <img src="{{ ph_img }}/indoor-plants.jpg" alt="Indoor ornamental plants" loading="lazy">
+        <img src="{{ ph_img }}/indoor-plants.jpg" alt="Indoor ornamental plants" width="800" height="600" loading="lazy">
         <span class="ph-cat-body">
           <span class="ph-cat-blurb">For homes, offices &amp; hotels</span>
           <span class="ph-cat-name">Indoor Plants <span class="ph-cat-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
         </span>
       </a>
       <a class="ph-cat-card" href="{{ ph_url_fertilizers }}">
-        <img src="{{ ph_img }}/planters.jpg" alt="Plant pots and garden supplies" loading="lazy">
+        <img src="{{ ph_img }}/planters.jpg" alt="Plant pots and garden supplies" width="800" height="600" loading="lazy">
         <span class="ph-cat-body">
           <span class="ph-cat-blurb">Planters, soil &amp; care</span>
           <span class="ph-cat-name">Pots &amp; Supplies <span class="ph-cat-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
@@ -182,7 +182,7 @@
   <div class="ph-wrap">
     <div class="ph-why-grid">
       <div class="ph-gold-frame">
-        <img src="{{ ph_img }}/palm-single-specimen.jpg" alt="A specimen fan palm at our nursery" loading="lazy">
+        <img src="{{ ph_img }}/palm-single-specimen.jpg" alt="A specimen fan palm at our nursery" width="800" height="1000" loading="lazy">
       </div>
       <div>
         <span class="ph-eyebrow">Why Pheladelfia</span>

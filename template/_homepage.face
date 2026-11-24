@@ -3,7 +3,7 @@
   <h1 class="ph-sr-only">Premium palms, trees and specimen plants — Pheladelfia Agricultural LLC, Abu Dhabi since 2004</h1>
   <div class="ph-hero-slides">
     <div class="ph-hero-slide is-active" role="group" aria-roledescription="slide" aria-label="1 of 4">
-      <div class="ph-hero-media"><img src="{{ ph_img }}/palm-nursery-rows.jpg" alt="Rows of mature Washingtonia palms at the Pheladelfia nursery in Abu Dhabi" width="1600" height="900" fetchpriority="high"></div>
+      <div class="ph-hero-media"><img src="{{ ph_img }}/palm-nursery-rows.jpg" alt="Rows of mature Washingtonia palms at the Pheladelfia nursery in Abu Dhabi" width="1000" height="666" fetchpriority="high"></div>
       <div class="ph-hero-overlay" aria-hidden="true"></div>
       <div class="ph-wrap">
         <div class="ph-hero-copy">
@@ -18,7 +18,7 @@
       </div>
     </div>
     <div class="ph-hero-slide" role="group" aria-roledescription="slide" aria-label="2 of 4">
-      <div class="ph-hero-media"><img src="{{ ph_img }}/palm-single-specimen.jpg" alt="A specimen fan palm at our nursery" width="1600" height="900" loading="lazy"></div>
+      <div class="ph-hero-media"><img src="{{ ph_img }}/palm-single-specimen.jpg" alt="A specimen fan palm at our nursery" width="666" height="1000" loading="lazy"></div>
       <div class="ph-hero-overlay" aria-hidden="true"></div>
       <div class="ph-wrap">
         <div class="ph-hero-copy">
@@ -33,7 +33,7 @@
       </div>
     </div>
     <div class="ph-hero-slide" role="group" aria-roledescription="slide" aria-label="3 of 4">
-      <div class="ph-hero-media"><img src="{{ ph_img }}/palm-grove-fan.jpg" alt="Fan palms at the Pheladelfia nursery" width="1600" height="900" loading="lazy"></div>
+      <div class="ph-hero-media"><img src="{{ ph_img }}/palm-grove-fan.jpg" alt="Fan palms at the Pheladelfia nursery" width="1000" height="666" loading="lazy"></div>
       <div class="ph-hero-overlay" aria-hidden="true"></div>
       <div class="ph-wrap">
         <div class="ph-hero-copy">
@@ -48,7 +48,7 @@
       </div>
     </div>
     <div class="ph-hero-slide" role="group" aria-roledescription="slide" aria-label="4 of 4">
-      <div class="ph-hero-media"><img src="{{ ph_img }}/phoenix-canariensis.jpg" alt="Specimen palm tree" width="1600" height="900" loading="lazy"></div>
+      <div class="ph-hero-media"><img src="{{ ph_img }}/phoenix-canariensis.jpg" alt="Specimen palm tree" width="800" height="1000" loading="lazy"></div>
       <div class="ph-hero-overlay" aria-hidden="true"></div>
       <div class="ph-wrap">
         <div class="ph-hero-copy">
@@ -64,10 +64,7 @@
     </div>
   </div>
   <div class="ph-hero-controls">
-    <button class="ph-hero-arrow" type="button" data-ph-slide-prev aria-label="Previous slide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>
     <div class="ph-hero-dots" data-ph-dots role="group" aria-label="Slide navigation"></div>
-    <button class="ph-hero-play" type="button" data-ph-slide-toggle aria-label="Pause slideshow"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" data-ph-icon-pause><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" data-ph-icon-play hidden><path d="M8 5.5v13l11-6.5z"/></svg></button>
-    <button class="ph-hero-arrow" type="button" data-ph-slide-next aria-label="Next slide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
   </div>
   <p class="ph-sr-only" data-ph-slide-status aria-live="polite"></p>
 </section>

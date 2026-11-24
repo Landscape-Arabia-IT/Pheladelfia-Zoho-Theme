@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <script>window.zs_site_resource_path = window.zs_site_resource_path || "";</script>
-  <meta name="ph-theme-build" content="pheladelfia-20261123-v820">
+  <meta name="ph-theme-build" content="pheladelfia-20261124-v830">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script id="ph-language-bootstrap">(function(){
     try{
@@ -19,7 +19,9 @@
     if(l==="ar"){
       var h=document.documentElement;
       h.setAttribute("lang","ar"); h.setAttribute("dir","rtl"); h.className+=" ph-ar";
-      document.write('<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap">');
+      var pre=document.createElement("link"); pre.rel="preconnect"; pre.href="https://fonts.gstatic.com"; pre.crossOrigin="";
+      var arFont=document.createElement("link"); arFont.rel="stylesheet"; arFont.href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap";
+      document.head.appendChild(pre); document.head.appendChild(arFont);
     }
     try{localStorage.setItem("ph_lang_v2",l);}catch(e){}
     try{if(!m||m[1]!==l) document.cookie="ph_lang_v2="+l+"; path=/; max-age=31536000; SameSite=Lax";}catch(e){}
@@ -300,11 +302,11 @@
   {{ page.meta_tags }}
   {% assign ph_head_path = page.url %}
   {% if ph_head_path contains 'cart' || ph_head_path contains 'checkout' || ph_head_path contains 'search' || ph_head_path contains 'account' || ph_head_path contains 'login' || ph_head_path contains 'register' %}<meta name="robots" content="noindex,follow">{% endif %}
-  {# canonical, og:url, og:type, og:title, og:image and twitter:* are emitted by page.meta_tags — do not duplicate them here. #}
+  {% comment %}canonical, og:url, og:type, og:title, og:image and twitter:* are emitted by page.meta_tags — do not duplicate them here.{% endcomment %}
   <meta property="og:site_name" content="Pheladelfia Agricultural LLC">
   <meta property="og:description" content="Specialist nursery and specimen-tree supplier — Pheladelfia Agricultural LLC, Abu Dhabi since 2004.">
-  {# TODO client approval: dedicated 1200x630 og-default image; reusing an existing nursery photo meanwhile. #}
-  <meta property="og:image" content="{{ ph_img }}/palm-nursery-rows.jpg">
+  {% comment %}og-default social banner uploaded by client; TODO: verify it is 1200x630.{% endcomment %}
+  <meta property="og:image" content="{{ ph_img }}/luxury_nursery_palm_rows_social_banner.jpeg">
   <meta name="twitter:card" content="summary_large_image">
   <script type="application/ld+json">
   {"@context":"https://schema.org","@graph":[
@@ -597,7 +599,7 @@
   <div class="ph-qv-modal" id="product_quick_look" role="dialog" aria-modal="true" aria-label="Quick view"></div>
 </div>
 
-{% comment %} TODO open question: ph_whatsapp_url currently equals the landline number — confirm the real WhatsApp business number with the client. Button hides itself if the variable is ever emptied. {% endcomment %}
+{% comment %}WhatsApp uses the landline business number (confirmed by client); button hides itself if the variable is ever emptied.{% endcomment %}
 {% if ph_whatsapp_url != "" %}
 <a class="ph-wa-float" href="{{ ph_whatsapp_url }}" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
   <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm5.83 14.12c-.24.68-1.42 1.3-1.96 1.35-.5.05-1.13.24-3.8-.79-3.2-1.28-5.2-4.55-5.35-4.76-.15-.21-1.2-1.6-1.2-3.05 0-1.45.76-2.16 1.03-2.46.27-.3.59-.37.79-.37h.57c.18 0 .43-.07.67.51.24.59.82 2.03.89 2.18.07.15.12.32.02.52-.1.2-.16.32-.31.5-.16.18-.33.39-.47.52-.16.16-.32.34-.14.66.18.32.79 1.3 1.7 2.1 1.17 1.04 2.15 1.36 2.46 1.52.31.16.49.13.67-.08.18-.2.77-.9.98-1.21.2-.31.4-.26.67-.16.27.1 1.73.82 2.03.97.3.15.5.22.57.35.07.12.07.72-.17 1.4z"/></svg>

@@ -2928,6 +2928,7 @@ window.__phJsOnce = true;
     "Countries of cultivation & sourcing": "دول الزراعة والتوريد",
     "Nursery: Al Ajban, Abu Dhabi": "المشتل: العجبان، أبوظبي",
     "Open in Google Maps": "افتح في خرائط جوجل",
+    "Pheladelfia Agricultural LLC — Warsan, Dubai branch": "فلادلفيا للزراعة ذ.م.م — فرع الورسان، دبي",
     "Service 04": "الخدمة 04",
     "Service 05": "الخدمة 05",
     "Service 06": "الخدمة 06",
@@ -3259,7 +3260,7 @@ window.__phJsOnce = true;
     "Pheladelfia Agricultural LLC began in 2004 with a simple belief: the region's design ambitions needed mature, design-grade plant material — grown and supplied to a documented standard. Our Abu Dhabi nursery spans more than 1.5 million square feet in Al Ajban, where plants and trees are propagated and grown on to specimen sizes.": "بدأت فلادلفيا الزراعية ذ.م.م عام 2004 بقناعة بسيطة: كانت طموحات التصميم في المنطقة بحاجة إلى مواد نباتية ناضجة بمعايير تصميمية — تُزرع وتُورد وفق معيار موثّق. يمتد مشتلنا في أبوظبي على أكثر من 1.5 مليون قدم مربع في العجبان، حيث تُكثر النباتات والأشجار وتُزرع حتى بلوغ مقاسات العينات.",
     "Today we supply design professionals, developers, consultants, contractors and institutions across the UAE and Gulf — with a branch in Warsan, Dubai.": "اليوم نورد متخصصي التصميم والمطورين والاستشاريين والمقاولين والمؤسسات في أنحاء الإمارات والخليج — مع فرع في الورسان بدبي.",
     "Contractors & Delivery Partners — specialist contractors and delivery partners realising schemes on the ground": "المقاولون وشركاء التنفيذ — مقاولون متخصصون وشركاء تسليم منفذون للمخططات على أرض الواقع",
-    /* ---- Hero slider (V8.3) — Arabic machine-drafted, TODO native review ---- */
+    /* ---- Hero slider (V8.3) ---- */
     "Featured": "مميز",
     "Slide navigation": "التنقل بين الشرائح",
     "Pause slideshow": "إيقاف العرض التلقائي",
@@ -3281,7 +3282,11 @@ window.__phJsOnce = true;
     "Heritage and monumental trees with documented provenance, sourced across the Mediterranean, GCC and Asia.": "أشجار تراثية ومعمارية بمصدر موثّق، مُورَّدة من البحر المتوسط والخليج وآسيا.",
     "Explore rare trees": "استكشف الأشجار النادرة",
     "Request availability": "اطلب توفر الكمية",
-    /* ---- Homepage content V8.3 — Arabic machine-drafted, TODO native review ---- */
+    "Desert specimens": "عينات صحراوية",
+    "Giant Cacti & Yucca Rostrata": "صبار عملاق ويوكا روستاتا",
+    "Statement desert specimens — columnar cacti, barrel cacti and architectural succulents, grown and delivered across the Emirates.": "عينات صحراوية مميزة — صبار عمودي وصبار برمي وعصاريات معمارية، تُزرع وتُسلَّم في أنحاء الإمارات.",
+    "Explore cacti": "استكشف الصبار",
+    /* ---- Homepage content V8.3 ---- */
     "Giant cacti and succulents at the Pheladelfia nursery": "صبار عملاق وعصاريات في مشتل فلادلفيا",
     "Giant cacti, succulents & Yucca rostrata": "صبار عملاق وعصاريات ويوكا روستاتا",
     "Every specimen is recorded, measured, and supported by a professional photography pack — three angles, scale reference, high-resolution — provided on request.": "كل عينة تُسجَّل وتُقاس ويدعمها حزمة تصوير احترافية — ثلاث زوايا ومرجع مقياس وعالية الدقة — تُقدَّم عند الطلب.",

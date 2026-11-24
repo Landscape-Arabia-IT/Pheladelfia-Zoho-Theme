@@ -1,0 +1,78 @@
+{% assign qv_variant_id = "" %}
+{% assign qv_oos_all = false %}
+{% if product.variants %}
+  {% assign qv_open = false %}
+  {% for variant in product.variants %}
+    {% if variant.is_out_of_stock == false && variant.hide_add_to_cart == false && variant.is_available_for_purchase != false %}
+      {% if qv_open == false %}{% assign qv_variant_id = variant.variant_id %}{% endif %}
+      {% assign qv_open = true %}
+    {% endif %}
+  {% endfor %}
+  {% if qv_open == false %}{% assign qv_oos_all = true %}{% endif %}
+{% endif %}
+{% if product.variants | size == 0 %}
+  {% if product.is_out_of_stock %}{% assign qv_oos_all = true %}{% endif %}
+{% endif %}
+<div class="ph-qv" data-ph-qv data-zs-product-id="{{ product.product_id }}" data-zs-product-url="{{ product.url }}">
+  <button type="button" class="ph-qv-close" data-ph-qv-close aria-label="Close quick view">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+  </button>
+  <div class="ph-qv-media">
+    <div class="ph-qv-main" data-ph-qv-main>
+      {% if product.images %}
+        {% assign qvimg = product.images[0].url %}
+        {% if product.images[0].is_placeholder_image == false %}{% assign qvimg = product.images[0].url + '/800x800' %}{% endif %}
+        <img src="{{ qvimg }}" alt="{{ product.name }}">
+      {% endif %}
+    </div>
+    {% if product.images | size > 1 %}
+    <div class="ph-qv-thumbs" data-ph-qv-thumbs>
+      {% for image in product.images %}
+        {% assign qvt = image.url %}
+        {% if image.is_placeholder_image == false %}{% assign qvt = image.url + '/200x200' %}{% endif %}
+        {% assign qvfull = image.url %}
+        {% if image.is_placeholder_image == false %}{% assign qvfull = image.url + '/800x800' %}{% endif %}
+        <button type="button" class="ph-qv-thumb{% if forloop.first %} is-active{% endif %}" data-ph-qv-thumb="{{ qvfull }}">
+          <img src="{{ qvt }}" alt="{{ product.name }}" loading="lazy">
+        </button>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+  <div class="ph-qv-info">
+    <div class="ph-qv-head">
+      {% if product.category_name %}<p class="ph-kicker">{{ product.category_name }}</p>{% endif %}
+      <h3 class="ph-h3">{{ product.name }}</h3>
+      <p class="ph-price ph-qv-price" data-ph-qv-price>
+        {% if product.has_variant_price %}{{ currency.symbol }}{{ product.starts_with }} – {{ currency.symbol }}{{ product.ends_with }}{% else %}{{ currency.symbol }}{{ product.selling_price }}{% endif %}
+      </p>
+    </div>
+    {% if product.short_description %}<div class="ph-lead ph-qv-desc">{{ product.short_description }}</div>{% endif %}
+    {% if product.variants %}
+    <div class="ph-variant-fields">
+      <p class="ph-field-label">Size</p>
+      <div class="ph-size-chips" data-ph-qv-chips>
+        {% for variant in product.variants %}
+        <button type="button" class="ph-size-chip{% if variant.is_out_of_stock || variant.hide_add_to_cart || variant.is_available_for_purchase == false %} is-oos{% endif %}"
+          data-ph-qv-chip data-ph-qv-variant="{{ variant.variant_id }}"
+          data-ph-qv-chip-price="{{ variant.selling_price }}"
+          {% if variant.is_out_of_stock || variant.hide_add_to_cart || variant.is_available_for_purchase == false %}data-ph-qv-oos="1" disabled{% endif %}
+          aria-pressed="false">{% for option in variant.options %}{{ option.value }}{% if forloop.last && variant.sku %} · {{ variant.sku }}{% endif %}{% endfor %}</button>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+    <div class="ph-qv-actions">
+      <button class="ph-btn ph-qv-add" type="button" data-ph-qv-add data-ph-qv-variant="{{ qv_variant_id }}"{% if qv_oos_all %} disabled{% endif %}>{% if qv_oos_all %}Out of stock{% else %}Add to selection{% endif %}</button>
+      <a class="ph-btn ph-btn-outline" href="{{ product.url }}">Full details</a>
+    </div>
+    <p class="ph-buy-error" data-theme-error style="display:none;"></p>
+    <div class="ph-qv-foot">
+      {% if page.is_portal_enabled %}
+      <button type="button" class="ph-wish-btn" data-zs-wishlist-element data-ph-auth-wishlist
+        {% if qv_variant_id %}data-zs-wishlist-variant-id="{{ qv_variant_id }}"{% endif %}
+        hidden aria-label="Save to wishlist" aria-pressed="false"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.3-9C1.2 8.6 3 5 6.6 5c2 0 3.6 1.1 4.4 2.6C11.8 6.1 13.4 5 15.4 5 19 5 20.8 8.6 19.3 12c-1.8 4.4-7.3 9-7.3 9z"/></svg></button>
+      {% endif %}
+    </div>
+  </div>
+</div>

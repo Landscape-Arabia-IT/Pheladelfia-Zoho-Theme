@@ -1,0 +1,48 @@
+<!-- Page banner -->
+<section class="ph-page-banner">
+  <div class="ph-page-banner-media"><img src="{{ ph_img }}/palm-grove-fan.jpg" alt="" aria-hidden="true"></div>
+  <div class="ph-wrap">
+    <nav aria-label="Breadcrumb" class="ph-crumbs">
+      <a href="/">Home</a><span class="ph-crumb-sep">/</span><span aria-current="page">Collections</span>
+    </nav>
+    <h1>All collections</h1>
+    <p class="ph-lead">Every category in the Pheladelfia online store, from palms and specimen trees to indoor plants, garden supply and art. Open a collection to see its species and sized specimens.</p>
+    <span class="ph-rule"></span>
+  </div>
+</section>
+
+<section class="ph-section">
+  <div class="ph-wrap">
+    <nav class="ph-coll-index" aria-label="Categories">
+      <div>
+        <h2>Outdoor Plants</h2>
+        <a href="{{ ph_url_palm_trees }}">Palm Trees</a>
+        <a class="ph-coll-sub" href="{{ ph_url_washingtonia }}">Washingtonia robusta</a>
+        <a href="{{ ph_url_trees }}">Trees</a>
+        <a href="{{ ph_url_rare_trees }}">Rare &amp; Ancient Trees</a>
+        <a href="{{ ph_url_cacti }}">Cacti &amp; Succulents</a>
+      </div>
+      <div>
+        <h2>Outdoor Plants</h2>
+        <a href="{{ ph_url_shrubs }}">Shrubs &amp; Ground Cover</a>
+        <a href="{{ ph_url_climbers }}">Climbers</a>
+        <a href="{{ ph_url_art }}">Art &amp; Sculptures</a>
+      </div>
+      <div>
+        <h2>Indoor &amp; Decor</h2>
+        <a href="{{ ph_url_indoor }}">Indoor Ornamental Plants</a>
+        <a href="{{ ph_url_flowers }}">Fresh Flowers &amp; Bouquets</a>
+        <a href="{{ ph_url_artificial }}">Artificial Plants</a>
+      </div>
+      <div>
+        <h2>Garden &amp; Nursery Supply</h2>
+        <a href="{{ ph_url_fertilizers }}">Fertilizers &amp; Soil Amendments</a>
+        <a href="{{ ph_url_seeds }}">Seeds &amp; Planting Stock</a>
+        <a href="{{ ph_url_tools }}">Tools &amp; Equipment</a>
+        <a class="ph-coll-sub" href="{{ ph_url_direct_use }}">Direct Use Purchases</a>
+        <a class="ph-coll-sub" href="{{ ph_url_small_tools }}">Small Tools &amp; Consumables</a>
+      </div>
+    </nav>
+    {% include "_store-categories" %}
+  </div>
+</section>

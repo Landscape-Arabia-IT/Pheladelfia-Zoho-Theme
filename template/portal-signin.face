@@ -1,0 +1,21 @@
+{% extends "_theme" %}
+{% block content %}
+<section class="ph-store ph-auth-page">
+  <div class="ph-wrap">
+    <div class="theme-portal-form-container ph-portal-box" id="main-content" role="main">
+      {{ page.form_code }}
+      {% if page.portal_page_type == 1 %}
+      <div class="ph-portal-links">
+        {% if page.is_portal_signup_enabled %}
+        <p class="ph-copy">New here? <a class="ph-text-link" href="/signup">Create an account</a></p>
+        {% endif %}
+        <p class="ph-copy"><a class="ph-text-link" href="/forgotpassword">Forgot your password?</a></p>
+      </div>
+      {% endif %}
+      {% if page.portal_page_type == 2 %}
+      <p class="ph-portal-links"><a class="ph-text-link" href="/signin">Back to sign in</a></p>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endblock %}

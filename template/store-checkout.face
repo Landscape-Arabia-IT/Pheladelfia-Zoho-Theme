@@ -1,0 +1,37 @@
+{% extends '_theme' %}
+{% block content %}
+<section class="ph-store ph-checkout-page">
+  <div class="ph-wrap">
+    <header class="ph-checkout-hero">
+      <p class="ph-kicker">Secure checkout</p>
+      <h1 class="ph-h2">Checkout</h1>
+      <p class="ph-lead">Review your order, choose delivery and payment, then confirm securely.</p>
+      <a class="ph-text-link ph-checkout-back" href="/cart">Back to cart</a>
+    </header>
+    <div class="ph-checkout-box">{{ checkout.form }}</div>
+    <div class="ph-checkout-trust" aria-label="Checkout assurances">
+      <div class="ph-checkout-trust-item">
+        <span class="ph-checkout-trust-icon" aria-hidden="true">✓</span>
+        <div>
+          <h3 class="ph-h3">Secure payment</h3>
+          <p class="ph-copy">Card and wallet payments are processed securely.</p>
+        </div>
+      </div>
+      <div class="ph-checkout-trust-item">
+        <span class="ph-checkout-trust-icon" aria-hidden="true">✓</span>
+        <div>
+          <h3 class="ph-h3">UAE delivery</h3>
+          <p class="ph-copy">We deliver plants and supplies across the Emirates.</p>
+        </div>
+      </div>
+      <div class="ph-checkout-trust-item">
+        <span class="ph-checkout-trust-icon" aria-hidden="true">✓</span>
+        <div>
+          <h3 class="ph-h3">Nursery support</h3>
+          <p class="ph-copy">Our Al Ajban team can help with order questions.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

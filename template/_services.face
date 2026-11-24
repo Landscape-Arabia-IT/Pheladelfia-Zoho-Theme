@@ -1,0 +1,136 @@
+<!-- Page banner -->
+<section class="ph-page-banner">
+  <div class="ph-page-banner-media"><img src="{{ ph_img }}/palm-nursery-rows.jpg" alt="" aria-hidden="true"></div>
+  <div class="ph-wrap">
+    <nav aria-label="Breadcrumb" class="ph-crumbs">
+      <a href="/">Home</a><span class="ph-crumb-sep">/</span><span aria-current="page">Services</span>
+    </nav>
+    <h1>Our Services</h1>
+    <p class="ph-lead">From sourcing and quality control to logistics, import and export — we manage the full horticultural supply chain so you receive the right plants, in the right condition, on time.</p>
+    <span class="ph-rule"></span>
+  </div>
+</section>
+
+<section class="ph-section">
+  <div class="ph-wrap" style="display:flex; flex-direction:column; gap:5rem;">
+
+    <!-- Service 01 -->
+    <article class="ph-split" id="sourcing">
+      <div class="ph-gold-frame"><img src="{{ ph_img }}/palm-nursery-rows.jpg" alt="Plant Sourcing" loading="lazy" style="width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:1rem;"></div>
+      <div>
+        <span class="ph-eyebrow">Service 01</span>
+        <h2 class="ph-sec-title" style="margin-block-start:0.8rem;">Plant Sourcing</h2>
+        <p class="ph-copy" style="margin-block-start:1.2rem;">The right material, in the right condition, on schedule.</p>
+        <p class="ph-copy" style="margin-block-start:1rem;">We source directly through our own nursery, cultivation base and a trusted grower network at origin — securing specimen-grade material for projects across the UAE and Gulf.</p>
+        <ul class="ph-check-list">
+          <li>Own nursery &amp; cultivation base</li>
+          <li>Trusted grower network at origin</li>
+          <li>Right material on schedule</li>
+        </ul>
+        <div class="ph-actions-row">
+          <a class="ph-btn" href="/all-collections">Browse collections</a>
+          <a class="ph-btn ph-btn-outline" href="/contact">Contact us</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Service 02 -->
+    <article class="ph-split ph-split-reverse" id="importing">
+      <div class="ph-gold-frame"><img src="{{ ph_img }}/phoenix-canariensis.jpg" alt="Importing" loading="lazy" style="width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:1rem;"></div>
+      <div>
+        <span class="ph-eyebrow">Service 02</span>
+        <h2 class="ph-sec-title" style="margin-block-start:0.8rem;">Importing</h2>
+        <p class="ph-copy" style="margin-block-start:1.2rem;">Specialist plant material, expanded project selection.</p>
+        <p class="ph-copy" style="margin-block-start:1rem;">We import specialist plant material to expand project selection and meet specific design requirements — consolidated at our Ajban nursery for inspection, acclimatisation and supply.</p>
+        <ul class="ph-check-list">
+          <li>Specialist plant material</li>
+          <li>Expanded project selection</li>
+          <li>Design-led requirements</li>
+        </ul>
+        <div class="ph-actions-row">
+          <a class="ph-btn" href="/contact">Contact us</a>
+          <a class="ph-btn ph-btn-outline" href="/nursery">Visit the nursery</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Service 03 -->
+    <article class="ph-split" id="exporting">
+      <div class="ph-gold-frame"><img src="{{ ph_img }}/date-palm.jpg" alt="Exporting" loading="lazy" style="width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:1rem;"></div>
+      <div>
+        <span class="ph-eyebrow">Service 03</span>
+        <h2 class="ph-sec-title" style="margin-block-start:0.8rem;">Exporting</h2>
+        <p class="ph-copy" style="margin-block-start:1.2rem;">Documented plant material to regional and international markets.</p>
+        <p class="ph-copy" style="margin-block-start:1rem;">We export high-quality plant material across regional and international markets, with documentation and quality control managed from Abu Dhabi.</p>
+        <ul class="ph-check-list">
+          <li>Regional &amp; international markets</li>
+          <li>Documented shipments</li>
+          <li>Quality control at origin</li>
+        </ul>
+        <div class="ph-actions-row">
+          <a class="ph-btn" href="/contact">Contact us</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Service 04 -->
+    <article class="ph-split ph-split-reverse" id="quality">
+      <div class="ph-gold-frame"><img src="{{ ph_img }}/indoor-plants.jpg" alt="Quality Assurance" loading="lazy" style="width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:1rem;"></div>
+      <div>
+        <span class="ph-eyebrow">Service 04</span>
+        <h2 class="ph-sec-title" style="margin-block-start:0.8rem;">Quality Assurance</h2>
+        <p class="ph-copy" style="margin-block-start:1.2rem;">Every plant inspected before delivery.</p>
+        <p class="ph-copy" style="margin-block-start:1rem;">Rigorous quality control runs through cultivation and supply — we work only with trusted nurseries and inspect every plant before it leaves the nursery.</p>
+        <ul class="ph-check-list">
+          <li>Trusted nurseries only</li>
+          <li>Inspect every plant</li>
+          <li>Documented standards</li>
+        </ul>
+        <div class="ph-actions-row">
+          <a class="ph-btn" href="/contact">Contact us</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Service 05 -->
+    <article class="ph-split" id="purchasing">
+      <div class="ph-gold-frame"><img src="{{ ph_img }}/planters.jpg" alt="Centralized Purchasing" loading="lazy" style="width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:1rem;"></div>
+      <div>
+        <span class="ph-eyebrow">Service 05</span>
+        <h2 class="ph-sec-title" style="margin-block-start:0.8rem;">Centralized Purchasing</h2>
+        <p class="ph-copy" style="margin-block-start:1.2rem;">One point of contact for coordinated project supply.</p>
+        <p class="ph-copy" style="margin-block-start:1rem;">Consolidated procurement for efficient, coordinated project supply — one team managing your plant list, sizes, quantities and schedule.</p>
+        <ul class="ph-check-list">
+          <li>One point of contact</li>
+          <li>Coordinated schedules</li>
+          <li>Consolidated shipments</li>
+        </ul>
+        <div class="ph-actions-row">
+          <a class="ph-btn" href="/contact">Contact us</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Service 06 -->
+    <article class="ph-split ph-split-reverse" id="logistics">
+      <div class="ph-gold-frame"><img src="{{ ph_img }}/ghaf-tree.jpg" alt="Logistics" loading="lazy" style="width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:1rem;"></div>
+      <div>
+        <span class="ph-eyebrow">Service 06</span>
+        <h2 class="ph-sec-title" style="margin-block-start:0.8rem;">Logistics</h2>
+        <p class="ph-copy" style="margin-block-start:1.2rem;">On time, and in the condition you expect.</p>
+        <p class="ph-copy" style="margin-block-start:1rem;">Plants delivered on time and in the condition expected — because receiving them when you need them is critical to your project schedule.</p>
+        <ul class="ph-check-list">
+          <li>Timely delivery</li>
+          <li>Phased project supply</li>
+          <li>UAE &amp; Gulf coverage</li>
+        </ul>
+        <div class="ph-actions-row">
+          <a class="ph-btn" href="/contact">Contact us</a>
+        </div>
+      </div>
+    </article>
+
+    <p class="ph-copy" style="text-align:center; font-weight:600; color:var(--forest);">The full horticultural supply chain, managed end to end — SOURCE · GROW · DELIVER</p>
+
+  </div>
+</section>

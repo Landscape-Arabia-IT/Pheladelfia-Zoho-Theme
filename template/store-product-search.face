@@ -1,0 +1,20 @@
+<section class="ph-search-results ph-store">
+  <div class="ph-wrap">
+    <nav class="ph-crumbs" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span class="ph-crumb-sep">/</span>
+      <span>Search</span>
+    </nav>
+    <h1 class="ph-h2">{% if search.query %}Results for “{{ search.query }}”{% else %}Search results{% endif %}</h1>
+    {% if no_products_message %}
+      <p class="ph-lead">{{ no_products_message }}</p>
+      <p><a class="ph-btn" href="/all-collections">Explore collections</a></p>
+    {% endif %}
+    <div class="ph-product-grid" data-ph-product-grid data-sort-by-products-target>
+      {% for product in search.products %}
+        {% include "store-product-list" %}
+      {% endfor %}
+    </div>
+    {% include '_store-pagination' %}
+  </div>
+</section>

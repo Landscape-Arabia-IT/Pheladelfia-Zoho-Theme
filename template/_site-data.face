@@ -1,0 +1,44 @@
+{% comment %}
+  Single source of truth for Pheladelfia contact, location, social and
+  category-link data. Included once by _theme.face; Liquid assigns stay in
+  scope for every child template and included partial.
+{% endcomment %}
+{% assign ph_phone_raw = "+97125551662" %}
+{% assign ph_phone_tel = "tel:+97125551662" %}
+{% assign ph_phone_display = "+971 2 555 1662" %}
+{% assign ph_whatsapp_url = "https://wa.me/97125551662" %}
+{% assign ph_email = "nursery@pheladelfia.com" %}
+{% assign ph_email_jobs = "nursery@pheladelfia.com?subject=Job%20application" %}
+{% assign ph_website = "https://www.pheladelfia.com" %}
+{% assign ph_img = "https://testpheladelfia.zohoecommerce.com/images" %}
+{% assign ph_company_pdf = "https://pheladelfia.com/public/assets/company-profile/company-profile.pdf" %}
+{% assign ph_maps_url = "https://www.google.com/maps/search/?api=1&amp;query=Pheladelfia+Agricultural+Al+Ajban+Abu+Dhabi" %}
+{% assign ph_hours = "Sat–Thu 8am–6pm · Friday closed" %}
+{% assign ph_address_nursery = "Farm No. 563 &amp; 564, Al Ajban, Muwailih, Abu Dhabi" %}
+{% assign ph_address_nursery_short = "Nursery: Al Ajban, Abu Dhabi" %}
+{% assign ph_address_branch = "Branch: Warsan, Dubai" %}
+{% assign ph_po_box = "P.O. Box 39752, UAE" %}
+{% assign ph_vat_note = "Exclusive of 5% VAT" %}
+{% assign ph_vat_short = "Prices in AED, excluding 5% VAT." %}
+{% assign ph_delivery_note = "Delivered across the UAE" %}
+{% assign ph_social_instagram = "https://www.instagram.com/pheladelfiaagri/" %}
+{% assign ph_social_facebook = "https://www.facebook.com/pheladelfiaagri/" %}
+{% assign ph_social_linkedin = "https://www.linkedin.com/company/pheladelfiaagri/" %}
+{% assign ph_social_x = "https://x.com/pheladelfiaagri" %}
+
+{% assign ph_url_palm_trees = "/categories/palm_trees/1149036000001419436" %}
+{% assign ph_url_washingtonia = "/categories/washingtonia-robusta-واشنطونيا-روبوستا/1149036000001419475" %}
+{% assign ph_url_trees = "/categories/trees/1149036000001419439" %}
+{% assign ph_url_rare_trees = "/categories/large_rare_ancient_trees/1149036000001419442" %}
+{% assign ph_url_cacti = "/categories/cacti_succulents/1149036000001419445" %}
+{% assign ph_url_shrubs = "/categories/shrubs_ground_cover_plants/1149036000001419454" %}
+{% assign ph_url_climbers = "/categories/climbers/1149036000001419457" %}
+{% assign ph_url_art = "/categories/art_section_sculptures/1149036000001419469" %}
+{% assign ph_url_indoor = "/categories/indoor_ornamental_plants/1149036000001419448" %}
+{% assign ph_url_flowers = "/categories/fresh_flowers_floral_bouquets/1149036000001419460" %}
+{% assign ph_url_artificial = "/categories/artificial_plants/1149036000001419451" %}
+{% assign ph_url_fertilizers = "/categories/fertilizers_soil_amendments/1149036000001419466" %}
+{% assign ph_url_seeds = "/categories/seeds_planting_stock/1149036000001419463" %}
+{% assign ph_url_tools = "/categories/tools_equipment_direct_purchases/1149036000001419472" %}
+{% assign ph_url_direct_use = "/categories/direct-use-purchases-مشتريات-للاستخدام-المباشر/1149036000001419478" %}
+{% assign ph_url_small_tools = "/categories/small-tools-consumables-أدوات-ومواد-استهلاكية/1149036000001419481" %}

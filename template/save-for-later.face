@@ -1,0 +1,39 @@
+<div class="ph-sfl" data-ph-sfl data-zs-save-for-later-container {% if save_for_later | size == 0 %}hidden{% endif %}>
+  <p class="ph-kicker">Saved for later</p>
+  <h2 class="ph-h3">Buy another time</h2>
+  <div class="ph-product-grid">
+    {% for variant in save_for_later %}
+    <article class="ph-product-card ph-sfl-card" data-zs-variant-save-for-later data-zs-variant-id="{{ variant.variant_id }}" data-zs-product-id="{{ variant.variant_id }}" data-zs-save-for-later-grid>
+      <a href="{{ variant.url }}">
+        <div class="ph-product-photo">
+          {% if variant.images %}
+            {% assign sflimg = variant.images[0].url %}
+            {% if variant.images[0].is_placeholder_image == false %}{% assign sflimg = variant.images[0].url + '/400x400' %}{% endif %}
+            <img src="{{ sflimg }}" alt="{{ variant.name }}" loading="lazy">
+          {% endif %}
+        </div>
+        <div class="ph-card-body">
+          <h3 class="ph-h3" data-zs-save-for-later-variant-name>{{ variant.name }}</h3>
+          {% if !variant.hide_price %}
+          <p class="ph-price">
+            <span data-zs-selling-price="{{ variant.rate }}">{{ currency.symbol }}{{ variant.rate }}</span>
+            {% if variant.label_price && variant.label_price > variant.rate %}<span class="ph-price-note" data-zs-label-price="{{ variant.label_price }}">{{ currency.symbol }}{{ variant.label_price }}</span>{% endif %}
+          </p>
+          {% endif %}
+          <span class="ph-more">View specimen</span>
+        </div>
+      </a>
+      <div class="ph-wish-actions">
+        {% if variant.is_out_of_stock == true %}
+        <a class="ph-btn" href="{{ variant.url }}">Out of stock</a>
+        {% else %}
+          {% if !variant.hide_add_to_cart %}
+          <a class="ph-btn" href="javascript:;" data-zs-move-to-cart data-zs-product-variant-id="{{ variant.variant_id }}" data-zs-product-lineitem-id="{{ variant.item_id }}">Move to selection</a>
+          {% endif %}
+        {% endif %}
+        <button class="ph-text-link ph-sfl-remove" type="button" data-zs-delete-save-for-later-variant data-zs-product-variant-id="{{ variant.variant_id }}" data-zs-product-lineitem-id="{{ variant.item_id }}" aria-label="Remove">Remove</button>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+</div>

@@ -1,0 +1,26 @@
+<!-- Job detail page: /job?job=<id> -->
+<section class="ph-page-banner">
+  <div class="ph-page-banner-media"><img src="{{ ph_img }}/palm-nursery-rows.jpg" alt="" aria-hidden="true"></div>
+  <div class="ph-wrap">
+    <nav aria-label="Breadcrumb" class="ph-crumbs">
+      <a href="/">Home</a><span class="ph-crumb-sep">/</span><a href="/join-us">Join Us</a><span class="ph-crumb-sep">/</span><span aria-current="page">Job details</span>
+    </nav>
+    <h1>Career opportunities</h1>
+    <p class="ph-lead">Explore our open positions and grow your career with Pheladelfia Agricultural.</p>
+    <span class="ph-rule"></span>
+  </div>
+</section>
+
+<section class="ph-section">
+  <div class="ph-wrap">
+    <div class="ph-sec-head ph-sec-head-center">
+      <span class="ph-eyebrow">Open positions</span>
+      <h2 class="ph-sec-title">Current openings</h2>
+    </div>
+    <div class="ph-jobs-grid" data-ph-jobs-list></div>
+    <div class="ph-job-detail" data-ph-job-detail hidden></div>
+    <p class="ph-jobs-empty" data-ph-jobs-empty hidden>No positions available right now — send us your application anyway and we will keep your profile on file.</p>
+    {% include "_jobs-data" %}
+    <p class="ph-copy" style="text-align:center; margin-block-start:1.5rem;">Ready to apply? <a class="ph-text-link" href="/join-us#apply">Go to the application form</a> — or <a class="ph-text-link" href="/join-us">view all openings</a>.</p>
+  </div>
+</section>

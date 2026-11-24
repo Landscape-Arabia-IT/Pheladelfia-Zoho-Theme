@@ -1,0 +1,237 @@
+/* ==========================================================================
+   Pheladelfia payment status — order confirmation and payment attention
+   ========================================================================== */
+
+.ph-payment-page {
+  padding-block: 3rem 4rem;
+}
+.ph-payment-card {
+  position: relative;
+  max-width: 46rem;
+  margin-inline: auto;
+  padding: 2.5rem 2rem;
+  background: linear-gradient(180deg, #fffdf8 0%, var(--card) 100%);
+  border: 1px solid var(--line);
+  border-radius: 1.25rem;
+  box-shadow: var(--shadow-card);
+  text-align: center;
+  overflow: hidden;
+}
+.ph-payment-card::before {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 5px;
+  background: var(--grad-gold);
+}
+.ph-payment-card.is-error::before {
+  background: linear-gradient(90deg, var(--danger), #d98a76);
+}
+.ph-payment-icon {
+  width: 4.75rem;
+  height: 4.75rem;
+  margin: 0 auto 1.25rem;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  box-shadow: var(--shadow-soft);
+}
+.ph-payment-icon svg {
+  width: 2.3rem;
+  height: 2.3rem;
+}
+.ph-payment-icon.is-success {
+  background: var(--sage);
+  color: var(--forest);
+  border: 1px solid rgba(62, 142, 90, 0.35);
+}
+.ph-payment-icon.is-error {
+  background: #f8e7e2;
+  color: var(--danger);
+  border: 1px solid rgba(179, 64, 46, 0.28);
+}
+.ph-payment-card .ph-kicker {
+  margin-block-end: 0.45rem;
+}
+.ph-payment-card .ph-h2 {
+  margin-block-end: 0.55rem;
+}
+.ph-payment-card .ph-lead {
+  margin-inline: auto;
+  margin-block-end: 1.75rem;
+}
+.ph-payment-details {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-block-end: 1.5rem;
+  text-align: start;
+}
+.ph-payment-detail {
+  padding: 0.85rem 1rem;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 0.85rem;
+}
+.ph-payment-detail span {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted-ink);
+  margin-block-end: 0.2rem;
+}
+.ph-payment-detail strong {
+  color: var(--forest);
+  font-size: 0.95rem;
+  word-break: break-word;
+}
+.ph-payment-detail.is-total {
+  grid-column: 1 / -1;
+  background: var(--forest);
+  border-color: var(--forest);
+}
+.ph-payment-detail.is-total span,
+.ph-payment-detail.is-total strong {
+  color: #f7f4ec;
+}
+.ph-payment-order {
+  margin-block-end: 1.75rem;
+  padding: 1.25rem;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  text-align: start;
+}
+.ph-payment-order .ph-h3 {
+  margin-block-end: 0.9rem;
+  text-align: center;
+}
+.ph-payment-items {
+  list-style: none;
+  margin: 0 0 1rem;
+  padding: 0;
+}
+.ph-payment-items li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 0.65rem;
+  border-block-end: 1px dashed var(--line);
+  font-size: 0.92rem;
+}
+.ph-payment-items li:last-child {
+  border-block-end: 0;
+}
+.ph-payment-items li span {
+  color: var(--ink-soft);
+}
+.ph-payment-items li strong {
+  color: var(--forest);
+  white-space: nowrap;
+}
+.ph-payment-totals {
+  display: grid;
+  gap: 0.55rem;
+  padding-block-start: 0.85rem;
+  border-block-start: 1px solid var(--line);
+}
+.ph-payment-error {
+  margin-block-end: 1.5rem;
+  padding: 1rem;
+  background: #f8e7e2;
+  border: 1px solid rgba(179, 64, 46, 0.25);
+  border-radius: 0.85rem;
+  text-align: start;
+}
+.ph-payment-error span {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--danger);
+  margin-block-end: 0.35rem;
+}
+.ph-payment-error p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+}
+.ph-payment-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-block-end: 1.25rem;
+}
+.ph-payment-actions .ph-btn {
+  min-width: 10.5rem;
+}
+.ph-payment-note {
+  font-size: 0.88rem;
+  color: var(--muted-ink);
+}
+.ph-payment-note a {
+  color: var(--forest);
+  font-weight: 600;
+}
+@media (max-width: 640px) {
+  .ph-payment-page {
+    padding-block: 2rem 3rem;
+  }
+  .ph-payment-card {
+    padding: 2rem 1.25rem;
+    border-radius: 1rem;
+  }
+  .ph-payment-details,
+  .ph-payment-items li {
+    grid-template-columns: 1fr;
+  }
+  .ph-payment-items li {
+    display: grid;
+  }
+  .ph-payment-items li strong {
+    white-space: normal;
+  }
+  .ph-payment-actions .ph-btn {
+    width: 100%;
+  }
+}
+
+/* Native Zoho payment markup fallback */
+.theme-payment-content-area .zpcontainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-block: 3rem;
+  padding-inline: 1rem;
+}
+.theme-payment-content-area .theme-payment-success-indicator svg {
+  width: 220px;
+  max-width: 100%;
+  height: auto;
+}
+.theme-payment-content-area .theme-payment-success-message,
+.theme-payment-content-area .theme-payment-info,
+.theme-payment-content-area .theme-payment-thank-message {
+  width: min(46rem, 100%);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  box-shadow: var(--shadow-soft);
+  padding: 1.5rem;
+}
+.theme-payment-content-area .theme-payment-message-box {
+  border-color: var(--line);
+  border-radius: 0.85rem;
+}
+.theme-payment-content-area .theme-payment-info-list span {
+  color: var(--forest);
+}
+.theme-payment-content-area .theme-payment-button .zpbutton {
+  border-radius: 999px;
+}

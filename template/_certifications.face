@@ -1,0 +1,47 @@
+<!-- Certifications -->
+<section class="ph-section ph-certs" id="certifications">
+  <div class="ph-wrap">
+    <div class="ph-sec-head ph-sec-head-center">
+      <span class="ph-eyebrow">Certified excellence</span>
+      <h2 class="ph-sec-title">Quality, environment and safety you can verify</h2>
+      <p class="ph-sec-sub">Pheladelfia operates to internationally recognised management standards, certified by Bureau Veritas under EIAC accreditation.</p>
+    </div>
+    <div class="ph-cert-grid">
+      <article class="ph-cert-card">
+        <a class="ph-cert-thumb" href="{{ ph_img }}/cert-iso-9001-full.jpg" target="_blank" rel="noopener" aria-label="View certificate">
+          <img src="{{ ph_img }}/cert-iso-9001.jpg" alt="ISO 9001:2015 certificate" loading="lazy">
+        </a>
+        <h3 data-ph-no-translate>ISO 9001:2015</h3>
+        <p class="ph-cert-name">Quality Management System</p>
+        <p class="ph-cert-meta"><span>Certified by</span> <span>Bureau Veritas · EIAC-accredited</span></p>
+      </article>
+      <article class="ph-cert-card">
+        <a class="ph-cert-thumb" href="{{ ph_img }}/cert-iso-14001-full.jpg" target="_blank" rel="noopener" aria-label="View certificate">
+          <img src="{{ ph_img }}/cert-iso-14001.jpg" alt="ISO 14001:2015 certificate" loading="lazy">
+        </a>
+        <h3 data-ph-no-translate>ISO 14001:2015</h3>
+        <p class="ph-cert-name">Environmental Management System</p>
+        <p class="ph-cert-meta"><span>Certified by</span> <span>Bureau Veritas · EIAC-accredited</span></p>
+      </article>
+      <article class="ph-cert-card">
+        <a class="ph-cert-thumb" href="{{ ph_img }}/cert-iso-45001-full.jpg" target="_blank" rel="noopener" aria-label="View certificate">
+          <img src="{{ ph_img }}/cert-iso-45001.jpg" alt="ISO 45001:2018 certificate" loading="lazy">
+        </a>
+        <h3 data-ph-no-translate>ISO 45001:2018</h3>
+        <p class="ph-cert-name">Occupational Health & Safety Management System</p>
+        <p class="ph-cert-meta"><span>Certified by</span> <span>Bureau Veritas · EIAC-accredited</span></p>
+      </article>
+      <article class="ph-cert-card">
+        <a class="ph-cert-thumb" href="{{ ph_img }}/icv-certificate.jpg" target="_blank" rel="noopener" aria-label="View certificate">
+          <img src="{{ ph_img }}/icv-certificate.jpg" alt="ICV certificate" loading="lazy">
+        </a>
+        <h3 data-ph-no-translate>ICV</h3>
+        <p class="ph-cert-name">In-Country Value Certificate</p>
+        <p class="ph-cert-meta"><span>Certificate No.</span> <span dir="ltr" data-ph-no-translate>151974</span></p>
+        <p class="ph-cert-meta"><span>Valid until</span> <time datetime="2027-05-01" dir="ltr">05/2027</time></p>
+      </article>
+    </div>
+
+    <p class="ph-cert-note" style="padding-top: 6px">Certified by Bureau Veritas under EIAC accreditation · ICV certificate No. 151974 valid to 05/2027 · Licences &amp; registrations include Abu Dhabi trade licence CN-1078760, agriculture licence AGL-2021-15516, commercial registration 6091168, Abu Dhabi Chamber member 208354, and Federal VAT &amp; corporate tax registration.</p>
+  </div>
+</section>

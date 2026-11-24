@@ -1,0 +1,127 @@
+<!-- Page banner -->
+<section class="ph-page-banner">
+  <div class="ph-page-banner-media"><img src="{{ ph_img }}/palm-grove-fan.jpg" alt="" aria-hidden="true"></div>
+  <div class="ph-wrap">
+    <nav aria-label="Breadcrumb" class="ph-crumbs">
+      <a href="/">Home</a><span class="ph-crumb-sep">/</span><span aria-current="page">About</span>
+    </nav>
+    <h1>Our story</h1>
+    <p class="ph-lead">Two decades of growing specimen trees in the Emirates.</p>
+    <span class="ph-rule"></span>
+  </div>
+</section>
+
+<!-- Story -->
+<section class="ph-section">
+  <div class="ph-wrap">
+    <div class="ph-split">
+      <div>
+        <span class="ph-eyebrow">Since 2004</span>
+        <h2 class="ph-sec-title" style="margin-block-start:0.8rem;">From a single nursery to a regional specimen supplier</h2>
+        <div class="ph-copy" style="margin-block-start:1.5rem; display:flex; flex-direction:column; gap:1rem;">
+          <p>Pheladelfia Agricultural LLC began in 2004 with a simple belief: the region's design ambitions needed mature, design-grade plant material — grown and supplied to a documented standard. Our Abu Dhabi nursery spans more than 1.5 million square feet in Al Ajban, where plants and trees are propagated and grown on to specimen sizes.</p>
+          <p>Today we supply design professionals, developers, consultants, contractors and institutions across the UAE and Gulf — with a branch in Warsan, Dubai.</p>
+        </div>
+        <div class="ph-two-col" style="margin-block-start:2rem;">
+          <div class="ph-info-card" style="display:flex; gap:0.8rem; align-items:flex-start;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c9a227" stroke-width="2" style="flex-shrink:0; margin-block-start:0.2rem;"><path d="M12 21s-7-6.1-7-11a7 7 0 1 1 14 0c0 4.9-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+            <span class="ph-copy" style="font-size:0.9rem;">Nursery: Al Ajban, Abu Dhabi</span>
+          </div>
+          <div class="ph-info-card" style="display:flex; gap:0.8rem; align-items:flex-start;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c9a227" stroke-width="2" style="flex-shrink:0; margin-block-start:0.2rem;"><path d="M12 21s-7-6.1-7-11a7 7 0 1 1 14 0c0 4.9-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+            <span class="ph-copy" style="font-size:0.9rem;">Branch: Warsan, Dubai</span>
+          </div>
+        </div>
+      </div>
+      <div class="ph-gold-frame">
+        <img src="{{ ph_img }}/palm-single-specimen.jpg" alt="Specimen palm at the Pheladelfia nursery" style="width:100%; aspect-ratio:4/5; object-fit:cover; border-radius:1rem;">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats -->
+<section class="ph-stats">
+  <div class="ph-wrap">
+    <div class="ph-stats-grid">
+      <div class="ph-stat"><div class="ph-stat-num">2004</div><div class="ph-stat-label">Founded in Abu Dhabi</div></div>
+      <div class="ph-stat"><div class="ph-stat-num">Al Ajban</div><div class="ph-stat-label">Abu Dhabi nursery</div></div>
+      <div class="ph-stat"><div class="ph-stat-num">3</div><div class="ph-stat-label">ISO certifications</div></div>
+      <div class="ph-stat"><div class="ph-stat-num">Warsan, Dubai</div><div class="ph-stat-label">Our branch</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Mission & vision -->
+<section class="ph-section">
+  <div class="ph-wrap">
+    <div class="ph-sec-head ph-sec-head-center">
+      <span class="ph-eyebrow">What drives us</span>
+      <h2 class="ph-sec-title">Mission &amp; vision</h2>
+    </div>
+    <div class="ph-two-col">
+      <div class="ph-info-card">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#c9a227" stroke-width="1.6"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
+        <h3>Our vision</h3>
+        <p>To create a greener future for all, using our expertise and experience to introduce innovative standards of horticulture and trading that bring new vibrancy to the green environment.</p>
+      </div>
+      <div class="ph-info-card">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#c9a227" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 1v4M12 19v4M1 12h4M19 12h4"/></svg>
+        <h3>Our mission</h3>
+        <p>To set the regional standard for specimen-grade plant material — pairing horticultural rigour with the documentation and supply reliability our clients can specify with confidence.</p>
+      </div>
+    </div>
+    <div class="ph-center ph-mt-12"><a class="ph-btn" href="/contact">Visit our nursery</a></div>
+  </div>
+</section>
+
+<!-- Values -->
+<section class="ph-section" style="padding-block-start:0;">
+  <div class="ph-wrap">
+    <div class="ph-sec-head ph-sec-head-center">
+      <span class="ph-eyebrow">What we stand for</span>
+      <h2 class="ph-sec-title">Our values</h2>
+    </div>
+    <div class="ph-values-grid">
+      <div class="ph-feature"><h3>Integrity</h3><p>We conduct our business with honesty in every dealing and relationship.</p></div>
+      <div class="ph-feature"><h3>Sustainability</h3><p>We are committed to protecting the environment through everything we grow.</p></div>
+      <div class="ph-feature"><h3>Quality</h3><p>We hold every specimen to a measured, documented standard — and supply it exactly as specified.</p></div>
+      <div class="ph-feature"><h3>Innovation</h3><p>We stay at the forefront of industry advancements and techniques.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Clients -->
+<section class="ph-section" style="padding-block-start:0;">
+  <div class="ph-wrap">
+    <div class="ph-sec-head ph-sec-head-center">
+      <span class="ph-eyebrow">Clients &amp; approvals</span>
+      <h2 class="ph-sec-title">An approved supplier to the region's leading names</h2>
+      <p class="ph-sec-sub">Pheladelfia is a registered and approved supplier to leading developers, government entities, and consultants across the UAE and the Kingdom of Saudi Arabia.</p>
+    </div>
+    <div class="ph-logo-marquee" dir="ltr">
+      <div class="ph-logo-track" data-ph-logo-track>
+        <span class="ph-logo-item"><img src="{{ ph_img }}/logos/abu-dhabi-municipality%20.jpeg" alt="Abu Dhabi Municipality" loading="lazy"></span>
+        <span class="ph-logo-item"><img src="{{ ph_img }}/logos/adnoc.png" alt="ADNOC" loading="lazy"></span>
+        <span class="ph-logo-item"><img src="{{ ph_img }}/logos/aecom.png" alt="AECOM" loading="lazy"></span>
+        <span class="ph-logo-item"><img src="{{ ph_img }}/logos/al-fattan.png" alt="Al Fattan" loading="lazy"></span>
+        <span class="ph-logo-item"><img src="{{ ph_img }}/logos/al-naboodah%20.jpeg" alt="Al Naboodah" loading="lazy"></span>
+        <span class="ph-logo-item"><img src="{{ ph_img }}/logos/aldar.png" alt="Aldar" loading="lazy"></span>
+        <span class="ph-logo-item"><img src="{{ ph_img }}/logos/currie-brown%20.png" alt="Currie &amp; Brown" loading="lazy"></span>
+        <span class="ph-logo-item"><img src="{{ ph_img }}/logos/damac.png" alt="DAMAC" loading="lazy"></span>
+        <span class="ph-logo-item"><img src="{{ ph_img }}/logos/dubai-municipality.png" alt="Dubai Municipality" loading="lazy"></span>
+        <span class="ph-logo-item"><img src="{{ ph_img }}/logos/modon.png" alt="Modon" loading="lazy"></span>
+        <span class="ph-logo-item"><img src="{{ ph_img }}/logos/multiplex.png" alt="Multiplex" loading="lazy"></span>
+        <span class="ph-logo-item"><img src="{{ ph_img }}/logos/nakheel.jpeg" alt="Nakheel" loading="lazy"></span>
+        <span class="ph-logo-item"><img src="{{ ph_img }}/logos/neom.webp" alt="NEOM" loading="lazy"></span>
+        <span class="ph-logo-item"><img src="{{ ph_img }}/logos/presidential-court%20.jpeg" alt="Presidential Court" loading="lazy"></span>
+        <span class="ph-logo-item"><img src="{{ ph_img }}/logos/rixos.png" alt="Rixos" loading="lazy"></span>
+        <span class="ph-logo-item"><img src="{{ ph_img }}/logos/silal.jpeg" alt="Silal" loading="lazy"></span>
+        <span class="ph-logo-item"><img src="{{ ph_img }}/logos/turner-townsend%20.png" alt="Turner &amp; Townsend" loading="lazy"></span>
+      </div>
+    </div>
+    <p class="ph-sec-sub" style="text-align:center; margin-block-start:1.5rem;">Regional reach: United Arab Emirates · Saudi Arabia · Jordan · Qatar · Bahrain</p>
+  </div>
+</section>
+
+{% include "_certifications" %}

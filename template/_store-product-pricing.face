@@ -1,0 +1,4 @@
+<div class="ph-price" data-zs-selling-price="{{ product.selling_price }}"{% if product.has_variant_price %} data-ph-price-min="{{ product.starts_with }}" data-ph-price-max="{{ product.ends_with }}"{% endif %}>
+  {% if product.on_sale && product.label_price %}<s data-ph-price-old="{{ product.label_price }}">{{ currency.symbol }}{{ product.label_price }}</s> {% endif %}
+  <span data-ph-price-value>{% if product.has_variant_price %}{{ currency.symbol }}{{ product.starts_with }} – {{ currency.symbol }}{{ product.ends_with }}{% else %}{{ currency.symbol }}{{ product.selling_price }}{% endif %}</span>
+</div>

@@ -2,7 +2,7 @@
 <section class="ph-hero ph-hero-slider" id="top" data-ph-slider aria-roledescription="carousel" aria-label="Featured">
   <h1 class="ph-sr-only">Premium palms, trees and specimen plants — Pheladelfia Agricultural LLC, Abu Dhabi since 2004</h1>
   <div class="ph-hero-slides">
-    <div class="ph-hero-slide is-active" role="group" aria-roledescription="slide" aria-label="1 of 5">
+    <div class="ph-hero-slide is-active" role="group" aria-roledescription="slide" aria-label="1 of 4">
       <div class="ph-hero-media"><img src="{{ ph_img }}/palm-nursery-rows.jpg" alt="Rows of mature Washingtonia palms at the Pheladelfia nursery in Abu Dhabi" width="1000" height="666" fetchpriority="high"></div>
       <div class="ph-hero-overlay" aria-hidden="true"></div>
       <div class="ph-wrap">
@@ -17,22 +17,7 @@
         </div>
       </div>
     </div>
-    <div class="ph-hero-slide" role="group" aria-roledescription="slide" aria-label="2 of 5">
-      <div class="ph-hero-media"><img src="{{ ph_img }}/palm-single-specimen.jpg" alt="A specimen fan palm at our nursery" width="666" height="1000" loading="lazy"></div>
-      <div class="ph-hero-overlay" aria-hidden="true"></div>
-      <div class="ph-wrap">
-        <div class="ph-hero-copy">
-          <span class="ph-eyebrow ph-anim ph-anim-1">For developers &amp; designers</span>
-          <h2 class="ph-hero-title ph-anim ph-anim-2">Project Supply, End to End</h2>
-          <p class="ph-hero-lead ph-anim ph-anim-3">Sourcing, quality control, logistics and delivery — one partner from nursery row to site.</p>
-          <div class="ph-hero-actions ph-anim ph-anim-4">
-            <a class="ph-btn ph-btn-gold" href="/contact">Discuss your project <span aria-hidden="true">→</span></a>
-            <a class="ph-btn ph-btn-ghost" href="/services">Our services</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="ph-hero-slide" role="group" aria-roledescription="slide" aria-label="3 of 5">
+    <div class="ph-hero-slide" role="group" aria-roledescription="slide" aria-label="2 of 4">
       <div class="ph-hero-media"><img src="{{ ph_img }}/palm-grove-fan.jpg" alt="Fan palms at the Pheladelfia nursery" width="1000" height="666" loading="lazy"></div>
       <div class="ph-hero-overlay" aria-hidden="true"></div>
       <div class="ph-wrap">
@@ -47,7 +32,7 @@
         </div>
       </div>
     </div>
-    <div class="ph-hero-slide" role="group" aria-roledescription="slide" aria-label="4 of 5">
+    <div class="ph-hero-slide" role="group" aria-roledescription="slide" aria-label="3 of 4">
       <div class="ph-hero-media"><img src="{{ ph_img }}/mediterranean_nursery_ancient_olive_trees.jpeg" alt="Ancient olive trees in a Mediterranean nursery" loading="lazy"></div>
       <div class="ph-hero-overlay" aria-hidden="true"></div>
       <div class="ph-wrap">
@@ -62,7 +47,7 @@
         </div>
       </div>
     </div>
-    <div class="ph-hero-slide" role="group" aria-roledescription="slide" aria-label="5 of 5">
+    <div class="ph-hero-slide" role="group" aria-roledescription="slide" aria-label="4 of 4">
       <div class="ph-hero-media"><img src="{{ ph_img }}/cacti-succulents.jpeg" alt="Giant cacti and succulents at the Pheladelfia nursery" width="800" height="600" loading="lazy"></div>
       <div class="ph-hero-overlay" aria-hidden="true"></div>
       <div class="ph-wrap">

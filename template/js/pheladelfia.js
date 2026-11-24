@@ -236,6 +236,14 @@
     window.phFormatPrices(document);
     initHeroSlider();
     loadCatalog();
+    var quoteSubject = new URLSearchParams(window.location.search).get("subject");
+    if (quoteSubject === "quote") {
+      document.querySelectorAll('select[name="Subject"]').forEach(function (sel) {
+        for (var i = 0; i < sel.options.length; i++) {
+          if (sel.options[i].text === "Specimen or project supply") { sel.selectedIndex = i; break; }
+        }
+      });
+    }
     var grid = document.querySelector("[data-ph-best-sellers]");
     if (grid) [["[data-ph-carousel-prev]", -1], ["[data-ph-carousel-next]", 1]].forEach(function (entry) {
       var button = document.querySelector(entry[0]);
@@ -3280,7 +3288,41 @@ window.__phJsOnce = true;
     "Rare & Ancient Specimens": "عينات نادرة ومعمّرة",
     "Heritage and monumental trees with documented provenance, sourced across the Mediterranean, GCC and Asia.": "أشجار تراثية ومعمارية بمصدر موثّق، مُورَّدة من البحر المتوسط والخليج وآسيا.",
     "Explore rare trees": "استكشف الأشجار النادرة",
-    "Request availability": "اطلب توفر الكمية"
+    "Request availability": "اطلب توفر الكمية",
+    /* ---- Homepage content V8.3 — Arabic machine-drafted, TODO native review ---- */
+    "Giant cacti and succulents at the Pheladelfia nursery": "صبار عملاق وعصاريات في مشتل فلادلفيا",
+    "Giant cacti, succulents & Yucca rostrata": "صبار عملاق وعصاريات ويوكا روستاتا",
+    "Every specimen is recorded, measured, and supported by a professional photography pack — three angles, scale reference, high-resolution — provided on request.": "كل عينة تُسجَّل وتُقاس ويدعمها حزمة تصوير احترافية — ثلاث زوايا ومرجع مقياس وعالية الدقة — تُقدَّم عند الطلب.",
+    "Transplanting protocol": "بروتوكول النقل",
+    "Large specimens are relocated under documented transplanting protocols, with monitored establishment and aftercare support.": "تُنقل العينات الكبيرة وفق بروتوكولات نقل موثّقة، مع مراقبة للاعتماد ودعم لاحق.",
+    "Built for designers": "مصممة للمصممين",
+    "Site visits, sample photography, and specification-ready documentation for landscape architects and design-led contractors.": "زيارات للموقع وتصوير عينات وتوثيق جاهز للمواصفات لمهندسي المناظر الطبيعية والمقاولين المعماريين.",
+    "Our sourcing network": "شبكة التوريد لدينا",
+    "Beyond our own cultivation, we select specimen-grade material at origin across three continents — consolidating every shipment into our Ajban nursery for inspection, acclimatisation, and supply across the Gulf.": "إلى جانب زراعتنا الخاصة، نختار مواد بدرجة العينات من بلد المنشأ عبر ثلاث قارات — ونجمع كل شحنة في مشتلنا بالعجبان للفحص والتأقلم والتوريد في أنحاء الخليج.",
+    "Spain, Italy, Netherlands — ancient olives, ornamental specimens, and field-grown stock.": "إسبانيا وإيطاليا وهولندا — زيتون معمّر وعينات زينة ومخزون مزروع في الحقول.",
+    "GCC & Levant": "الخليج والشام",
+    "Saudi Arabia, Jordan, Egypt, Qatar, Bahrain, Oman — palms, regional natives, and acclimatised material.": "السعودية والأردن ومصر وقطر والبحرين وعُمان — نخيل ونباتات محلية ومواد مؤقلمة.",
+    "China, Thailand, Vietnam — tropical specimens and architectural plants.": "الصين وتايلاند وفيتنام — عينات استوائية ونباتات معمارية.",
+    "Every shipment is received at our 1.5 million ft² nursery, inspected and acclimatised to UAE conditions, then supplied across the Emirates and wider Gulf.": "تُستلم كل شحنة في مشتلنا البالغ 1.5 مليون قدم² وتُفحص وتُؤقلم لظروف الإمارات ثم تُورَّد في أنحاء الإمارات والخليج الأوسع.",
+    "From enquiry to established planting": "من الاستفسار إلى زراعة راسخة",
+    "Enquiry & requirements": "الاستفسار والمتطلبات",
+    "Sourcing & availability": "التوريد والتوفر",
+    "Quality control": "مراقبة الجودة",
+    "Delivery & support": "التسليم والدعم",
+    "Share your plant list, sizes, and quantities. We review them against our nursery stock and sourcing network.": "شاركنا قائمة النباتات والمقاسات والكميات. نراجعها وفق مخزون مشتلنا وشبكة التوريد لدينا.",
+    "Delivery across the Emirates and wider Gulf, with aftercare support through establishment.": "تسليم في أنحاء الإمارات والخليج الأوسع، مع دعم لاحق حتى الاعتماد.",
+    "Projects": "المشاريع",
+    "Developers & Consultants": "المطورون والاستشاريون",
+    "Master developers, real-estate houses, hospitality destinations and design-led contractors.": "كبار المطورين وشركات العقارات ووجهات الضيافة والمقاولون المعماريون.",
+    "Authorities & Institutions": "الجهات والمؤسسات",
+    "Federal and emirate authorities, sovereign offices and institutional landowners.": "الجهات الاتحادية والإماراتية والمكاتب السيادية والجهات المؤسسية المالكة.",
+    "Contractors & Delivery Partners": "المقاولون وشركاء التنفيذ",
+    "Specialist contractors and delivery partners realising schemes on the ground.": "مقاولون متخصصون وشركاء تسليم منفذون للمخططات على أرض الواقع.",
+    "For landscape architects & developers": "لمعماريي المناظر الطبيعية والمطورين",
+    "Tell us what you need to plant": "أخبرنا بما تحتاج زراعته",
+    "Send us your plant schedule or specification — we reply with availability, sizes and pricing across our nursery and sourcing network.": "أرسل لنا جدول النباتات أو المواصفات — ونرد بالتوفر والمقاسات والأسعار عبر مشتلنا وشبكة التوريد. <!-- TODO client approval -->",
+    "Request a quote": "اطلب عرض سعر",
+    "Download company profile": "حمّل الملف التعريفي للشركة"
   };
   var BILINGUAL = /^(.*[A-Za-z].*?)\s*\|\s*([\u0600-\u06FF][^|]*)$/;
   var SIZE = /^(\d+(?:\.\d+)?-\d+(?:\.\d+)?) MTR CT$/;

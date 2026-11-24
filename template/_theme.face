@@ -302,10 +302,10 @@
   {{ page.meta_tags }}
   {% assign ph_head_path = page.url %}
   {% if ph_head_path contains 'cart' || ph_head_path contains 'checkout' || ph_head_path contains 'search' || ph_head_path contains 'account' || ph_head_path contains 'login' || ph_head_path contains 'register' %}<meta name="robots" content="noindex,follow">{% endif %}
-  {# canonical, og:url, og:type, og:title, og:image and twitter:* are emitted by page.meta_tags — do not duplicate them here. #}
+  {% comment %}canonical, og:url, og:type, og:title, og:image and twitter:* are emitted by page.meta_tags — do not duplicate them here.{% endcomment %}
   <meta property="og:site_name" content="Pheladelfia Agricultural LLC">
   <meta property="og:description" content="Specialist nursery and specimen-tree supplier — Pheladelfia Agricultural LLC, Abu Dhabi since 2004.">
-  {# TODO client approval: dedicated 1200x630 og-default image; reusing an existing nursery photo meanwhile. #}
+  {% comment %}TODO client approval: dedicated 1200x630 og-default image; reusing an existing nursery photo meanwhile.{% endcomment %}
   <meta property="og:image" content="{{ ph_img }}/palm-nursery-rows.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <script type="application/ld+json">

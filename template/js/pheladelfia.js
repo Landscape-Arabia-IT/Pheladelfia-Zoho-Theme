@@ -105,7 +105,6 @@
     var count = slides.length;
     var dotsHost = root.querySelector("[data-ph-dots]");
     var status = root.querySelector("[data-ph-slide-status]");
-    var countEl = root.querySelector("[data-ph-slide-count]");
     var prevBtn = root.querySelector("[data-ph-slide-prev]");
     var nextBtn = root.querySelector("[data-ph-slide-next]");
     var toggleBtn = root.querySelector("[data-ph-slide-toggle]");
@@ -139,11 +138,6 @@
         if (i === index) dot.setAttribute("aria-current", "true");
         else dot.removeAttribute("aria-current");
       });
-      if (countEl) {
-        countEl.textContent =
-          (index + 1 < 10 ? "0" : "") + (index + 1) + " / " +
-          (count < 10 ? "0" : "") + count;
-      }
       if (status && !autoplayAllowed()) status.textContent = "Slide " + slideLabel(index);
     }
     function arm() {

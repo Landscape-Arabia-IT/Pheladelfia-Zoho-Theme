@@ -2802,7 +2802,7 @@ window.__phJsOnce = true;
     "Since 2004": "منذ 2004",
     "Two decades of growing": "عقدان من الزراعة",
     "UAE-adapted plants": "نباتات متكيفة مع مناخ الإمارات",
-    "Acclimatized in Abu Dhabi": "متأقلمة في أبوظبي",
+    "Acclimatized in Abu Dhabi": "متأقلمة في الامارات",
     "Delivery across the UAE": "توصيل في جميع أنحاء الإمارات",
     "All seven Emirates": "الإمارات السبع",
     "Design to maintenance": "من التصميم إلى الصيانة",
@@ -3280,7 +3280,22 @@ window.__phJsOnce = true;
     "Rare & Ancient Specimens": "عينات نادرة ومعمّرة",
     "Heritage and monumental trees with documented provenance, sourced across the Mediterranean, GCC and Asia.": "أشجار تراثية ومعمارية بمصدر موثّق، مُورَّدة من البحر المتوسط والخليج وآسيا.",
     "Explore rare trees": "استكشف الأشجار النادرة",
-    "Request availability": "اطلب توفر الكمية"
+    "Request availability": "اطلب توفر الكمية",
+    /* ---- Homepage content V8.3 — Arabic machine-drafted, TODO native review ---- */
+    "Giant cacti and succulents at the Pheladelfia nursery": "صبار عملاق وعصاريات في مشتل فلادلفيا",
+    "Giant cacti, succulents & Yucca rostrata": "صبار عملاق وعصاريات ويوكا روستاتا",
+    "Every specimen is recorded, measured, and supported by a professional photography pack — three angles, scale reference, high-resolution — provided on request.": "كل عينة تُسجَّل وتُقاس ويدعمها حزمة تصوير احترافية — ثلاث زوايا ومرجع مقياس وعالية الدقة — تُقدَّم عند الطلب.",
+    "Transplanting protocol": "بروتوكول النقل",
+    "Large specimens are relocated under documented transplanting protocols, with monitored establishment and aftercare support.": "تُنقل العينات الكبيرة وفق بروتوكولات نقل موثّقة، مع مراقبة للاعتماد ودعم لاحق.",
+    "Built for designers": "مصممة للمصممين",
+    "Site visits, sample photography, and specification-ready documentation for landscape architects and design-led contractors.": "زيارات للموقع وتصوير عينات وتوثيق جاهز للمواصفات لمهندسي المناظر الطبيعية والمقاولين المعماريين.",
+    "From enquiry to established planting": "من الاستفسار إلى زراعة راسخة",
+    "Enquiry & requirements": "الاستفسار والمتطلبات",
+    "Sourcing & availability": "التوريد والتوفر",
+    "Quality control": "مراقبة الجودة",
+    "Delivery & support": "التسليم والدعم",
+    "Share your plant list, sizes, and quantities. We review them against our nursery stock and sourcing network.": "شاركنا قائمة النباتات والمقاسات والكميات. نراجعها وفق مخزون مشتلنا وشبكة التوريد لدينا.",
+    "Delivery across the Emirates and wider Gulf, with aftercare support through establishment.": "تسليم في أنحاء الإمارات والخليج الأوسع، مع دعم لاحق حتى الاعتماد.",
   };
   var BILINGUAL = /^(.*[A-Za-z].*?)\s*\|\s*([\u0600-\u06FF][^|]*)$/;
   var SIZE = /^(\d+(?:\.\d+)?-\d+(?:\.\d+)?) MTR CT$/;

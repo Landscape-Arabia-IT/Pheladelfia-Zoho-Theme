@@ -33,7 +33,7 @@
       </div>
     </div>
     <div class="ph-hero-slide" role="group" aria-roledescription="slide" aria-label="3 of 4">
-      <div class="ph-hero-media"><img src="{{ ph_img }}/mediterranean_nursery_ancient_olive_trees.jpeg" alt="Ancient olive trees in a Mediterranean nursery" loading="lazy"></div>
+      <div class="ph-hero-media"><img src="{{ ph_img }}/mediterranean_nursery_ancient_olive_trees.jpeg" alt="Ancient olive trees in a Mediterranean nursery" width="1264" height="848" loading="lazy"></div>
       <div class="ph-hero-overlay" aria-hidden="true"></div>
       <div class="ph-wrap">
         <div class="ph-hero-copy">
@@ -48,7 +48,7 @@
       </div>
     </div>
     <div class="ph-hero-slide" role="group" aria-roledescription="slide" aria-label="4 of 4">
-      <div class="ph-hero-media"><img src="{{ ph_img }}/cacti-succulents.jpeg" alt="Giant cacti and succulents at the Pheladelfia nursery" width="800" height="600" loading="lazy"></div>
+      <div class="ph-hero-media"><img src="{{ ph_img }}/cacti-succulents.jpeg" alt="Giant cacti and succulents at the Pheladelfia nursery" width="1264" height="848" loading="lazy"></div>
       <div class="ph-hero-overlay" aria-hidden="true"></div>
       <div class="ph-wrap">
         <div class="ph-hero-copy">
@@ -126,8 +126,7 @@
         </span>
       </a>
       <a class="ph-cat-card" href="{{ ph_url_cacti }}">
-        <!-- TODO: publish cacti-succulents.jpeg in the Zoho media library; the card hides itself until then -->
-        <img src="{{ ph_img }}/cacti-succulents.jpeg" alt="Giant cacti and succulents at the Pheladelfia nursery" width="800" height="600" loading="lazy" onerror="this.closest('a').style.display='none'">
+        <img src="{{ ph_img }}/cacti-succulents.jpeg" alt="Giant cacti and succulents at the Pheladelfia nursery" width="1264" height="848" loading="lazy" onerror="this.closest('a').style.display='none'">
         <span class="ph-cat-body">
           <span class="ph-cat-blurb">Giant cacti, succulents &amp; Yucca rostrata</span>
           <span class="ph-cat-name">Cacti &amp; Succulents <span class="ph-cat-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>

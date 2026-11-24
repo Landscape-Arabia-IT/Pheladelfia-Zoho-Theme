@@ -305,7 +305,7 @@
   {% comment %}canonical, og:url, og:type, og:title, og:image and twitter:* are emitted by page.meta_tags — do not duplicate them here.{% endcomment %}
   <meta property="og:site_name" content="Pheladelfia Agricultural LLC">
   <meta property="og:description" content="Specialist nursery and specimen-tree supplier — Pheladelfia Agricultural LLC, Abu Dhabi since 2004.">
-  {% comment %}og-default social banner uploaded by client; TODO: verify it is 1200x630.{% endcomment %}
+  {% comment %}og-default social banner uploaded by client (1376x768 — close to the ideal 1200x630 ratio).{% endcomment %}
   <meta property="og:image" content="{{ ph_img }}/luxury_nursery_palm_rows_social_banner.jpeg">
   <meta name="twitter:card" content="summary_large_image">
   <script type="application/ld+json">

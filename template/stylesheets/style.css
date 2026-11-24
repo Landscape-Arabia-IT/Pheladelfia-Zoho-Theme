@@ -3261,6 +3261,18 @@ html[dir="rtl"] .ph-step-num {
   .ph-map-block {
     grid-template-columns: minmax(16rem, 5fr) 7fr;
   }
+  .ph-map-block--flip {
+    grid-template-columns: 7fr minmax(16rem, 5fr);
+  }
+  .ph-map-block--flip .ph-map-info {
+    order: 2;
+  }
+  .ph-map-block--flip .ph-map-frame {
+    order: 1;
+  }
+}
+.ph-map-block + .ph-map-block {
+  margin-block-start: 1.5rem;
 }
 .ph-map-info {
   display: flex;

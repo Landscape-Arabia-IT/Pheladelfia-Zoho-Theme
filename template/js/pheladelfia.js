@@ -2928,6 +2928,7 @@ window.__phJsOnce = true;
     "Countries of cultivation & sourcing": "دول الزراعة والتوريد",
     "Nursery: Al Ajban, Abu Dhabi": "المشتل: العجبان، أبوظبي",
     "Open in Google Maps": "افتح في خرائط جوجل",
+    "Pheladelfia Agricultural LLC — Warsan, Dubai branch": "فلادلفيا للزراعة ذ.م.م — فرع الورسان، دبي",
     "Service 04": "الخدمة 04",
     "Service 05": "الخدمة 05",
     "Service 06": "الخدمة 06",

@@ -2802,7 +2802,7 @@ window.__phJsOnce = true;
     "Since 2004": "منذ 2004",
     "Two decades of growing": "عقدان من الزراعة",
     "UAE-adapted plants": "نباتات متكيفة مع مناخ الإمارات",
-    "Acclimatized in Abu Dhabi": "متأقلمة في أبوظبي",
+    "Acclimatized in Abu Dhabi": "متأقلمة في الامارات",
     "Delivery across the UAE": "توصيل في جميع أنحاء الإمارات",
     "All seven Emirates": "الإمارات السبع",
     "Design to maintenance": "من التصميم إلى الصيانة",
@@ -3289,13 +3289,6 @@ window.__phJsOnce = true;
     "Large specimens are relocated under documented transplanting protocols, with monitored establishment and aftercare support.": "تُنقل العينات الكبيرة وفق بروتوكولات نقل موثّقة، مع مراقبة للاعتماد ودعم لاحق.",
     "Built for designers": "مصممة للمصممين",
     "Site visits, sample photography, and specification-ready documentation for landscape architects and design-led contractors.": "زيارات للموقع وتصوير عينات وتوثيق جاهز للمواصفات لمهندسي المناظر الطبيعية والمقاولين المعماريين.",
-    "Our sourcing network": "شبكة التوريد لدينا",
-    "Beyond our own cultivation, we select specimen-grade material at origin across three continents — consolidating every shipment into our Ajban nursery for inspection, acclimatisation, and supply across the Gulf.": "إلى جانب زراعتنا الخاصة، نختار مواد بدرجة العينات من بلد المنشأ عبر ثلاث قارات — ونجمع كل شحنة في مشتلنا بالعجبان للفحص والتأقلم والتوريد في أنحاء الخليج.",
-    "Spain, Italy, Netherlands — ancient olives, ornamental specimens, and field-grown stock.": "إسبانيا وإيطاليا وهولندا — زيتون معمّر وعينات زينة ومخزون مزروع في الحقول.",
-    "GCC & Levant": "الخليج والشام",
-    "Saudi Arabia, Jordan, Egypt, Qatar, Bahrain, Oman — palms, regional natives, and acclimatised material.": "السعودية والأردن ومصر وقطر والبحرين وعُمان — نخيل ونباتات محلية ومواد مؤقلمة.",
-    "China, Thailand, Vietnam — tropical specimens and architectural plants.": "الصين وتايلاند وفيتنام — عينات استوائية ونباتات معمارية.",
-    "Every shipment is received at our 1.5 million ft² nursery, inspected and acclimatised to UAE conditions, then supplied across the Emirates and wider Gulf.": "تُستلم كل شحنة في مشتلنا البالغ 1.5 مليون قدم² وتُفحص وتُؤقلم لظروف الإمارات ثم تُورَّد في أنحاء الإمارات والخليج الأوسع.",
     "From enquiry to established planting": "من الاستفسار إلى زراعة راسخة",
     "Enquiry & requirements": "الاستفسار والمتطلبات",
     "Sourcing & availability": "التوريد والتوفر",
@@ -3303,13 +3296,6 @@ window.__phJsOnce = true;
     "Delivery & support": "التسليم والدعم",
     "Share your plant list, sizes, and quantities. We review them against our nursery stock and sourcing network.": "شاركنا قائمة النباتات والمقاسات والكميات. نراجعها وفق مخزون مشتلنا وشبكة التوريد لدينا.",
     "Delivery across the Emirates and wider Gulf, with aftercare support through establishment.": "تسليم في أنحاء الإمارات والخليج الأوسع، مع دعم لاحق حتى الاعتماد.",
-    "Projects": "المشاريع",
-    "Developers & Consultants": "المطورون والاستشاريون",
-    "Master developers, real-estate houses, hospitality destinations and design-led contractors.": "كبار المطورين وشركات العقارات ووجهات الضيافة والمقاولون المعماريون.",
-    "Authorities & Institutions": "الجهات والمؤسسات",
-    "Federal and emirate authorities, sovereign offices and institutional landowners.": "الجهات الاتحادية والإماراتية والمكاتب السيادية والجهات المؤسسية المالكة.",
-    "Contractors & Delivery Partners": "المقاولون وشركاء التنفيذ",
-    "Specialist contractors and delivery partners realising schemes on the ground.": "مقاولون متخصصون وشركاء تسليم منفذون للمخططات على أرض الواقع."
   };
   var BILINGUAL = /^(.*[A-Za-z].*?)\s*\|\s*([\u0600-\u06FF][^|]*)$/;
   var SIZE = /^(\d+(?:\.\d+)?-\d+(?:\.\d+)?) MTR CT$/;

@@ -209,32 +209,6 @@
   </div>
 </section>
 
-<!-- ===== Global sourcing network ===== -->
-<section class="ph-section">
-  <div class="ph-wrap">
-    <div class="ph-sec-head ph-sec-head-center">
-      <span class="ph-eyebrow">Our sourcing network</span>
-      <h2 class="ph-sec-title">Global Sourcing Network</h2>
-      <p class="ph-sec-sub">Beyond our own cultivation, we select specimen-grade material at origin across three continents — consolidating every shipment into our Ajban nursery for inspection, acclimatisation, and supply across the Gulf.</p>
-    </div>
-    <div class="ph-feature-grid">
-      <div class="ph-feature">
-        <h3>Mediterranean &amp; Europe</h3>
-        <p>Spain, Italy, Netherlands — ancient olives, ornamental specimens, and field-grown stock.</p>
-      </div>
-      <div class="ph-feature">
-        <h3>GCC &amp; Levant</h3>
-        <p>Saudi Arabia, Jordan, Egypt, Qatar, Bahrain, Oman — palms, regional natives, and acclimatised material.</p>
-      </div>
-      <div class="ph-feature">
-        <h3>Asia</h3>
-        <p>China, Thailand, Vietnam — tropical specimens and architectural plants.</p>
-      </div>
-    </div>
-    <p class="ph-copy" style="text-align:center; font-weight:600; color:var(--forest); margin-block-start:2rem;">Every shipment is received at our 1.5 million ft² nursery, inspected and acclimatised to UAE conditions, then supplied across the Emirates and wider Gulf.</p>
-  </div>
-</section>
-
 <!-- ===== Process ===== -->
 <section class="ph-section ph-section-sand">
   <div class="ph-wrap">
@@ -268,35 +242,6 @@
         <h3>Delivery &amp; support</h3>
         <p>Delivery across the Emirates and wider Gulf, with aftercare support through establishment. <!-- TODO client approval --></p>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== Selected projects ===== -->
-<!-- TODO confirm permission: replace audience-level descriptors with named projects once client approves -->
-<section class="ph-section">
-  <div class="ph-wrap">
-    <div class="ph-sec-head ph-sec-head-center">
-      <span class="ph-eyebrow">Projects</span>
-      <h2 class="ph-sec-title">Specimen Material Supplied Across the UAE</h2>
-      <p class="ph-sec-sub">From nursery rows in Al Ajban to design-led projects across the UAE and Gulf — Pheladelfia supports schemes of every scale with specimen trees, palms, architectural plants, technical coordination and logistics.</p>
-    </div>
-    <div class="ph-feature-grid">
-      <div class="ph-feature">
-        <h3>Developers &amp; Consultants</h3>
-        <p>Master developers, real-estate houses, hospitality destinations and design-led contractors.</p>
-      </div>
-      <div class="ph-feature">
-        <h3>Authorities &amp; Institutions</h3>
-        <p>Federal and emirate authorities, sovereign offices and institutional landowners.</p>
-      </div>
-      <div class="ph-feature">
-        <h3>Contractors &amp; Delivery Partners</h3>
-        <p>Specialist contractors and delivery partners realising schemes on the ground.</p>
-      </div>
-    </div>
-    <div class="ph-actions-row" style="justify-content:center;">
-      <a class="ph-btn" href="/contact">Discuss your project</a>
     </div>
   </div>
 </section>

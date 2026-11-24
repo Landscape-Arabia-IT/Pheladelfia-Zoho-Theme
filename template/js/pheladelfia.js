@@ -97,6 +97,122 @@
     if (status) status.hidden = seenProducts.size > 0;
     if (controls) controls.hidden = seenProducts.size < 2;
   }
+  function initHeroSlider() {
+    var root = document.querySelector("[data-ph-slider]");
+    if (!root) return;
+    var slides = Array.prototype.slice.call(root.querySelectorAll(".ph-hero-slide"));
+    if (!slides.length) return;
+    var count = slides.length;
+    var dotsHost = root.querySelector("[data-ph-dots]");
+    var status = root.querySelector("[data-ph-slide-status]");
+    var prevBtn = root.querySelector("[data-ph-slide-prev]");
+    var nextBtn = root.querySelector("[data-ph-slide-next]");
+    var toggleBtn = root.querySelector("[data-ph-slide-toggle]");
+    var playIcon = toggleBtn && toggleBtn.querySelector("[data-ph-icon-play]");
+    var pauseIcon = toggleBtn && toggleBtn.querySelector("[data-ph-icon-pause]");
+    var index = 0;
+    var timer = null;
+    var playing = true;
+    var hover = false;
+    var focused = false;
+    var touching = false;
+    var touchX = 0;
+    var reduced = !!(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches);
+    var dots = [];
+
+    function rtl() {
+      return document.documentElement.dir === "rtl" || document.documentElement.lang === "ar";
+    }
+    function autoplayAllowed() {
+      return playing && !reduced && !hover && !focused && !touching;
+    }
+    function slideLabel(i) {
+      return (i + 1) + " of " + count;
+    }
+    function render() {
+      slides.forEach(function (slide, i) {
+        slide.classList.toggle("is-active", i === index);
+        slide.setAttribute("aria-label", slideLabel(i));
+      });
+      dots.forEach(function (dot, i) {
+        if (i === index) dot.setAttribute("aria-current", "true");
+        else dot.removeAttribute("aria-current");
+      });
+      if (status && !autoplayAllowed()) status.textContent = "Slide " + slideLabel(index);
+    }
+    function arm() {
+      if (timer) { clearTimeout(timer); timer = null; }
+      if (autoplayAllowed()) timer = setTimeout(function () { goTo(index + 1); }, 6000);
+    }
+    function goTo(i) {
+      index = (i + count) % count;
+      if (index < 0) index += count;
+      render();
+      arm();
+    }
+
+    if (dotsHost && count > 1) {
+      for (var d = 0; d < count; d++) {
+        (function (i) {
+          var dot = document.createElement("button");
+          dot.type = "button";
+          dot.className = "ph-hero-dot";
+          dot.setAttribute("aria-label", "Slide " + (i + 1));
+          dot.addEventListener("click", function () { goTo(i); });
+          dotsHost.appendChild(dot);
+          dots.push(dot);
+        })(d);
+      }
+    }
+    if (prevBtn) prevBtn.addEventListener("click", function () { goTo(index - 1); });
+    if (nextBtn) nextBtn.addEventListener("click", function () { goTo(index + 1); });
+    if (toggleBtn) {
+      function syncToggle() {
+        var paused = !autoplayAllowed();
+        toggleBtn.setAttribute("aria-label", paused ? "Play slideshow" : "Pause slideshow");
+        if (playIcon) playIcon.hidden = !paused;
+        if (pauseIcon) pauseIcon.hidden = paused;
+      }
+      toggleBtn.addEventListener("click", function () {
+        playing = !playing;
+        syncToggle();
+        arm();
+      });
+      syncToggle();
+      if (reduced && toggleBtn.parentNode) toggleBtn.hidden = true;
+    }
+
+    root.addEventListener("mouseenter", function () { hover = true; arm(); });
+    root.addEventListener("mouseleave", function () { hover = false; arm(); });
+    root.addEventListener("focusin", function () { focused = true; arm(); });
+    root.addEventListener("focusout", function (event) {
+      if (!root.contains(event.relatedTarget)) { focused = false; arm(); }
+    });
+    root.addEventListener("pointerdown", function (event) {
+      touching = true;
+      touchX = event.clientX;
+      arm();
+    });
+    function endTouch(event) {
+      if (!touching) return;
+      touching = false;
+      var dx = event.clientX - touchX;
+      var delta = rtl() ? -dx : dx;
+      if (delta < -40) goTo(index + 1);
+      else if (delta > 40) goTo(index - 1);
+      else arm();
+    }
+    window.addEventListener("pointerup", endTouch);
+    window.addEventListener("pointercancel", endTouch);
+    root.addEventListener("keydown", function (event) {
+      if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+      var backwards = (event.key === "ArrowLeft") !== rtl();
+      goTo(index + (backwards ? -1 : 1));
+    });
+
+    render();
+    arm();
+  }
   function ready() {
     document.querySelectorAll("style").forEach(function (style) {
       var text = style.textContent || "";
@@ -118,6 +234,7 @@
       });
     });
     window.phFormatPrices(document);
+    initHeroSlider();
     loadCatalog();
     var grid = document.querySelector("[data-ph-best-sellers]");
     if (grid) [["[data-ph-carousel-prev]", -1], ["[data-ph-carousel-next]", 1]].forEach(function (entry) {
@@ -3141,7 +3258,29 @@ window.__phJsOnce = true;
     "Trade lists on request": "قوائم أسعار عند الطلب",
     "Pheladelfia Agricultural LLC began in 2004 with a simple belief: the region's design ambitions needed mature, design-grade plant material — grown and supplied to a documented standard. Our Abu Dhabi nursery spans more than 1.5 million square feet in Al Ajban, where plants and trees are propagated and grown on to specimen sizes.": "بدأت فلادلفيا الزراعية ذ.م.م عام 2004 بقناعة بسيطة: كانت طموحات التصميم في المنطقة بحاجة إلى مواد نباتية ناضجة بمعايير تصميمية — تُزرع وتُورد وفق معيار موثّق. يمتد مشتلنا في أبوظبي على أكثر من 1.5 مليون قدم مربع في العجبان، حيث تُكثر النباتات والأشجار وتُزرع حتى بلوغ مقاسات العينات.",
     "Today we supply design professionals, developers, consultants, contractors and institutions across the UAE and Gulf — with a branch in Warsan, Dubai.": "اليوم نورد متخصصي التصميم والمطورين والاستشاريين والمقاولين والمؤسسات في أنحاء الإمارات والخليج — مع فرع في الورسان بدبي.",
-    "Contractors & Delivery Partners — specialist contractors and delivery partners realising schemes on the ground": "المقاولون وشركاء التنفيذ — مقاولون متخصصون وشركاء تسليم منفذون للمخططات على أرض الواقع"
+    "Contractors & Delivery Partners — specialist contractors and delivery partners realising schemes on the ground": "المقاولون وشركاء التنفيذ — مقاولون متخصصون وشركاء تسليم منفذون للمخططات على أرض الواقع",
+    /* ---- Hero slider (V8.3) — Arabic machine-drafted, TODO native review ---- */
+    "Featured": "مميز",
+    "Slide navigation": "التنقل بين الشرائح",
+    "Pause slideshow": "إيقاف العرض التلقائي",
+    "Play slideshow": "تشغيل العرض التلقائي",
+    "Premium palms, trees and specimen plants — Pheladelfia Agricultural LLC, Abu Dhabi since 2004": "نخيل وأشجار ونباتات مختارة — فلادلفيا الزراعية ذ.م.م، أبوظبي منذ 2004",
+    "Abu Dhabi nursery · Est. 2004": "مشتل أبوظبي · تأسس 2004",
+    "Specimen Palms & Washingtonia": "نخيل العينات وواشنطونيا",
+    "Fan, date and specimen palms — selected, acclimatized and delivered ready to plant across the Emirates.": "نخيل مروحي وتمر وعينات — مختارة ومؤقلمة وتُسلَّم جاهزة للزراعة في أنحاء الإمارات.",
+    "Browse palms": "تصفّح النخيل",
+    "For developers & designers": "للمطورين والمصممين",
+    "Project Supply, End to End": "توريد المشاريع، من البداية إلى النهاية",
+    "Sourcing, quality control, logistics and delivery — one partner from nursery row to site.": "التوريد ومراقبة الجودة واللوجستيات والتسليم — شريك واحد من صف المشتل إلى الموقع.",
+    "Documented provenance": "مصدر موثّق",
+    "Every Specimen, Documented": "كل عينة، موثّقة",
+    "Photographed at three angles with scale reference, measured and recorded — documentation provided on request.": "تُصوَّر من ثلاث زوايا مع مرجع للمقياس وتُقاس وتُسجَّل — التوثيق متاح عند الطلب.",
+    "Get in touch": "تواصل معنا",
+    "Rare & ancient trees": "الأشجار النادرة والمعمّرة",
+    "Rare & Ancient Specimens": "عينات نادرة ومعمّرة",
+    "Heritage and monumental trees with documented provenance, sourced across the Mediterranean, GCC and Asia.": "أشجار تراثية ومعمارية بمصدر موثّق، مُورَّدة من البحر المتوسط والخليج وآسيا.",
+    "Explore rare trees": "استكشف الأشجار النادرة",
+    "Request availability": "اطلب توفر الكمية"
   };
   var BILINGUAL = /^(.*[A-Za-z].*?)\s*\|\s*([\u0600-\u06FF][^|]*)$/;
   var SIZE = /^(\d+(?:\.\d+)?-\d+(?:\.\d+)?) MTR CT$/;
@@ -3175,6 +3314,12 @@ window.__phJsOnce = true;
     if (pair) return pair[2].trim();
     var size = key.match(SIZE);
     if (size) return size[1] + " م جذع صافي";
+    var slideOf = key.match(/^Slide (\d+) of (\d+)$/);
+    if (slideOf) return "الشريحة " + slideOf[1] + " من " + slideOf[2];
+    var slideN = key.match(/^Slide (\d+)$/);
+    if (slideN) return "الشريحة " + slideN[1];
+    var ofN = key.match(/^(\d+) of (\d+)$/);
+    if (ofN) return "الشريحة " + ofN[1] + " من " + ofN[2];
     if (/^\d+ in nursery$/.test(key)) return key.replace(" in nursery", " في المشتل");
     if (/^\d+ NOS$/.test(key)) return key.replace(" NOS", " قطعة");
     if (/ added to your selection\.$/.test(key)) return key.replace(/ added to your selection\.$/, " أُضيف إلى اختياراتك.");

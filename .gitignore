@@ -1,0 +1,9 @@
+# Secrets and local-only files — never commit
+form-endpoint/config.php
+form-endpoint/submissions.log
+
+# Build output
+*.zip
+
+# macOS
+.DS_Store

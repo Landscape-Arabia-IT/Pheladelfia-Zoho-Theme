@@ -1,21 +1,23 @@
 # تعديل قالب Pheladelfia وبناء ZIP
 
-المجلد ده نسخة مستقلة من مصدر القالب الحالي **V7.0.2**. أي تعديل هنا لا يغيّر ملفات المشروع الأصلية.
+المجلد ده نسخة مستقلة من مصدر القالب الحالي **V8.2.0**. أي تعديل هنا لا يغيّر ملفات المشروع الأصلية.
 
 ## فين أعدل؟
 
 كل ملفات القالب موجودة داخل `template/`:
 
 - ملفات `.face`: هيكل ومحتوى صفحات Zoho.
-- `stylesheets/pheladelfia.css`: التنسيق والألوان والتجاوب مع الموبايل.
+- `stylesheets/style.css`: التنسيق والألوان والتجاوب مع الموبايل.
 - `js/pheladelfia.js`: التفاعلات والترجمة (يشمل مزامنة أزرار المفضلة `data-zs-wishlist-element`).
 - `images/`: صور وأصول القالب.
+
+ملاحظة: `form-endpoint/config.php` يحتوي بيانات اعتماد وهو مستثنى من Git — استخدم `form-endpoint/config.sample.php` كقالب.
 
 حافظ على المحتوى العربي والإنجليزي معًا عند تعديل النصوص، واتبع أسلوب الترجمة الموجود في JavaScript والقوالب.
 
 ## قبل إصدار نسخة برقم جديد
 
-عدّل بيانات الإصدار في `template/template.conf`:
+عدّل بيانات الإصدار في `template/template.conf` (الحالي: `8.2.0`):
 
 - `name`
 - `version`
@@ -28,7 +30,7 @@
 بعد حفظ التعديلات، افتح Terminal ونفّذ:
 
 ```sh
-cd ~/Desktop/Pheladelfia-Zoho-Theme-V7.0.2
+cd ~/Desktop/Pheladelfia-Zoho-Theme
 sh ./build-zip.sh
 ```
 

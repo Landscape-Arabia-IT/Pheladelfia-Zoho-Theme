@@ -1,18 +1,75 @@
-<!-- ===== Hero ===== -->
-<section class="ph-hero" id="top">
-  <div class="ph-hero-media"><img src="{{ ph_img }}/palm-nursery-rows.jpg" alt="Rows of mature Washingtonia palms at the Pheladelfia nursery in Abu Dhabi" fetchpriority="high"></div>
-  <div class="ph-hero-overlay" aria-hidden="true"></div>
-  <div class="ph-wrap">
-    <div class="ph-hero-copy">
-      <span class="ph-eyebrow ph-anim ph-anim-1">Abu Dhabi nursery · Est. 2004</span>
-      <h1 class="ph-hero-title ph-anim ph-anim-2">Premium Palms &amp; Trees, <em class="ph-text-gradient-gold">Grown &amp; sourced for the UAE</em></h1>
-      <p class="ph-hero-lead ph-anim ph-anim-3" style="margin-top: 16px">Specimen palms, native trees and flowering shrubs — acclimatized in our Abu Dhabi nursery and delivered ready to plant across the Emirates.</p>
-      <div class="ph-hero-actions ph-anim ph-anim-4">
-        <a class="ph-btn ph-btn-gold" href="/all-collections">Shop Plants <span aria-hidden="true">→</span></a>
-        <a class="ph-btn ph-btn-ghost" href="{{ ph_url_palm_trees }}">Browse Palms</a>
+<!-- ===== Hero slider ===== -->
+<section class="ph-hero ph-hero-slider" id="top" data-ph-slider aria-roledescription="carousel" aria-label="Featured">
+  <h1 class="ph-sr-only">Premium palms, trees and specimen plants — Pheladelfia Agricultural LLC, Abu Dhabi since 2004</h1>
+  <div class="ph-hero-slides">
+    <div class="ph-hero-slide is-active" role="group" aria-roledescription="slide" aria-label="1 of 4">
+      <div class="ph-hero-media"><img src="{{ ph_img }}/palm-nursery-rows.jpg" alt="Rows of mature Washingtonia palms at the Pheladelfia nursery in Abu Dhabi" width="1600" height="900" fetchpriority="high"></div>
+      <div class="ph-hero-overlay" aria-hidden="true"></div>
+      <div class="ph-wrap">
+        <div class="ph-hero-copy">
+          <span class="ph-eyebrow ph-anim ph-anim-1">Abu Dhabi nursery · Est. 2004</span>
+          <h2 class="ph-hero-title ph-anim ph-anim-2">Specimen Palms &amp; Washingtonia</h2>
+          <p class="ph-hero-lead ph-anim ph-anim-3">Fan, date and specimen palms — selected, acclimatized and delivered ready to plant across the Emirates.</p>
+          <div class="ph-hero-actions ph-anim ph-anim-4">
+            <a class="ph-btn ph-btn-gold" href="{{ ph_url_palm_trees }}">Browse palms <span aria-hidden="true">→</span></a>
+            <a class="ph-btn ph-btn-ghost" href="/all-collections">Shop plants</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ph-hero-slide" role="group" aria-roledescription="slide" aria-label="2 of 4">
+      <div class="ph-hero-media"><img src="{{ ph_img }}/palm-single-specimen.jpg" alt="A specimen fan palm at our nursery" width="1600" height="900" loading="lazy"></div>
+      <div class="ph-hero-overlay" aria-hidden="true"></div>
+      <div class="ph-wrap">
+        <div class="ph-hero-copy">
+          <span class="ph-eyebrow ph-anim ph-anim-1">For developers &amp; designers</span>
+          <h2 class="ph-hero-title ph-anim ph-anim-2">Project Supply, End to End</h2>
+          <p class="ph-hero-lead ph-anim ph-anim-3">Sourcing, quality control, logistics and delivery — one partner from nursery row to site.</p>
+          <div class="ph-hero-actions ph-anim ph-anim-4">
+            <a class="ph-btn ph-btn-gold" href="/contact">Discuss your project <span aria-hidden="true">→</span></a>
+            <a class="ph-btn ph-btn-ghost" href="/services">Our services</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ph-hero-slide" role="group" aria-roledescription="slide" aria-label="3 of 4">
+      <div class="ph-hero-media"><img src="{{ ph_img }}/palm-grove-fan.jpg" alt="Fan palms at the Pheladelfia nursery" width="1600" height="900" loading="lazy"></div>
+      <div class="ph-hero-overlay" aria-hidden="true"></div>
+      <div class="ph-wrap">
+        <div class="ph-hero-copy">
+          <span class="ph-eyebrow ph-anim ph-anim-1">Documented provenance</span>
+          <h2 class="ph-hero-title ph-anim ph-anim-2">Every Specimen, Documented</h2>
+          <p class="ph-hero-lead ph-anim ph-anim-3">Photographed at three angles with scale reference, measured and recorded — documentation provided on request.</p>
+          <div class="ph-hero-actions ph-anim ph-anim-4">
+            <a class="ph-btn ph-btn-gold" href="/services">How we work <span aria-hidden="true">→</span></a>
+            <a class="ph-btn ph-btn-ghost" href="/contact">Get in touch</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ph-hero-slide" role="group" aria-roledescription="slide" aria-label="4 of 4">
+      <div class="ph-hero-media"><img src="{{ ph_img }}/phoenix-canariensis.jpg" alt="Specimen palm tree" width="1600" height="900" loading="lazy"></div>
+      <div class="ph-hero-overlay" aria-hidden="true"></div>
+      <div class="ph-wrap">
+        <div class="ph-hero-copy">
+          <span class="ph-eyebrow ph-anim ph-anim-1">Rare &amp; ancient trees</span>
+          <h2 class="ph-hero-title ph-anim ph-anim-2">Rare &amp; Ancient Specimens</h2>
+          <p class="ph-hero-lead ph-anim ph-anim-3">Heritage and monumental trees with documented provenance, sourced across the Mediterranean, GCC and Asia.</p>
+          <div class="ph-hero-actions ph-anim ph-anim-4">
+            <a class="ph-btn ph-btn-gold" href="{{ ph_url_rare_trees }}">Explore rare trees <span aria-hidden="true">→</span></a>
+            <a class="ph-btn ph-btn-ghost" href="/contact">Request availability</a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+  <div class="ph-hero-controls">
+    <button class="ph-hero-arrow" type="button" data-ph-slide-prev aria-label="Previous slide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>
+    <div class="ph-hero-dots" data-ph-dots role="group" aria-label="Slide navigation"></div>
+    <button class="ph-hero-play" type="button" data-ph-slide-toggle aria-label="Pause slideshow"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" data-ph-icon-pause><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" data-ph-icon-play hidden><path d="M8 5.5v13l11-6.5z"/></svg></button>
+    <button class="ph-hero-arrow" type="button" data-ph-slide-next aria-label="Next slide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+  </div>
+  <p class="ph-sr-only" data-ph-slide-status aria-live="polite"></p>
 </section>
 
 <!-- ===== Trust bar ===== -->

@@ -2001,21 +2001,33 @@ html[dir="rtl"] .ph-quote blockquote {
   align-items: center;
   gap: 0.4rem;
   font-size: 0.85rem;
-  color: black;
+  color: var(--ink-soft);
   margin-block-end: 1.25rem;
   list-style: none;
   padding: 0;
 }
 .ph-crumbs a {
-  color: black;
+  color: var(--ink);
 }
 .ph-crumbs a:hover {
-  color: var(--gold-light);
+  color: var(--forest);
 }
 .ph-crumbs .ph-crumb-sep {
   opacity: 0.5;
 }
 .ph-crumbs [aria-current] {
+  color: var(--forest);
+}
+.ph-page-banner .ph-crumbs {
+  color: rgba(250, 248, 243, 0.75);
+}
+.ph-page-banner .ph-crumbs a {
+  color: var(--ivory);
+}
+.ph-page-banner .ph-crumbs a:hover {
+  color: var(--gold-light);
+}
+.ph-page-banner .ph-crumbs [aria-current] {
   color: var(--gold-light);
 }
 .ph-page-banner h1 {

@@ -5555,3 +5555,102 @@ html[dir="rtl"] .ph-hero-count {
   background: var(--gold);
   color: var(--gold-ink);
 }
+
+/* V8.4 — footer links: gold sweep underline */
+.ph-footer ul a {
+  position: relative;
+}
+.ph-footer ul a::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: -1px;
+  height: 1px;
+  background: var(--gold-light);
+  transform: scaleX(0);
+  transform-origin: inset-inline-start;
+  transition: transform var(--dur-med) var(--ease-swift);
+}
+.ph-footer ul a:hover::after {
+  transform: scaleX(1);
+}
+html[dir="rtl"] .ph-footer ul a::after,
+.ph-ar .ph-footer ul a::after {
+  transform-origin: inset-inline-end;
+}
+
+/* V8.4 — gentle page entrance */
+.ph-main > section:first-child,
+.ph-main > div:first-child > section:first-child {
+  animation: phPageIn 0.6s var(--ease-out-expo) both;
+}
+@keyframes phPageIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ph-main > section:first-child,
+  .ph-main > div:first-child > section:first-child {
+    animation: none;
+  }
+}
+
+/* V8.4 — empty states */
+.ph-jobs-empty,
+.ph-catalog-status:empty {
+  text-align: center;
+  color: var(--muted-ink);
+  padding-block: 2rem;
+}
+
+/* V8.4 — print: clean specimen-catalog output */
+@media print {
+  .ph-header,
+  .ph-topbar,
+  .ph-footer,
+  .ph-wa-float,
+  .ph-cart-drawer,
+  .ph-qv-overlay,
+  .ph-hero-controls,
+  .ph-nav,
+  .ph-actions-row,
+  .ph-buy,
+  .ph-share,
+  .ph-carousel-nav,
+  .ph-jobs-tools {
+    display: none !important;
+  }
+  body.ph-body {
+    background: #fff;
+    color: #000;
+  }
+  .ph-section,
+  .ph-page-banner {
+    padding-block: 1rem;
+  }
+  .ph-page-banner {
+    background: #fff;
+    color: #000;
+  }
+  .ph-page-banner h1,
+  .ph-page-banner .ph-lead,
+  .ph-crumbs,
+  .ph-crumbs a {
+    color: #000;
+  }
+  .ph-card-lift:hover,
+  .ph-steps > div:hover {
+    transform: none;
+    box-shadow: none;
+  }
+  .ph-reveal,
+  .ph-stagger > * {
+    opacity: 1;
+    transform: none;
+  }
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: #555;
+  }
+}

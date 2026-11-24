@@ -1,14 +1,19 @@
 <section class="ph-page-banner">
+  <div class="ph-page-banner-media"><img src="{{ ph_img }}/palm-grove-fan.jpg" alt="" aria-hidden="true"></div>
   <div class="ph-wrap">
+    <nav aria-label="Breadcrumb" class="ph-crumbs">
+      <a href="/">Home</a><span class="ph-crumb-sep">/</span><span aria-current="page">Projects</span>
+    </nav>
     <p class="ph-kicker">Projects</p>
     <h1 class="ph-h2">Specimen Material Supplied Across the UAE</h1>
     <p class="ph-lead">From nursery rows in Al Ajban to design-led projects across the UAE and Gulf — Pheladelfia supports schemes of every scale with specimen trees, palms, architectural plants, technical coordination and logistics.</p>
+    <span class="ph-rule"></span>
   </div>
 </section>
 
 <section class="ph-section" style="padding-block-start:0;">
   <div class="ph-wrap">
-    <div class="ph-service-block ph-split">
+    <div class="ph-service-block ph-split ph-reveal">
       <div>
         <h2 class="ph-h3">One partner, from propagation to delivery</h2>
         <p class="ph-copy">Our nursery in Al Ajban, Abu Dhabi is the operational heart of every project: plants are propagated, grown, received, inspected and prepared to project specifications before delivery.</p>
@@ -17,7 +22,7 @@
       <div class="ph-photo" data-ph-page-photo role="img" aria-label="Pheladelfia specimen supply"></div>
     </div>
 
-    <div class="ph-steps">
+    <div class="ph-steps ph-stagger">
       <div>
         <div class="ph-step-num">01</div>
         <h3 class="ph-h3">Enquiry &amp; Requirements</h3>

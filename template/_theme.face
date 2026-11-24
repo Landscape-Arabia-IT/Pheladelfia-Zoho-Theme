@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <script>window.zs_site_resource_path = window.zs_site_resource_path || "";</script>
-  <meta name="ph-theme-build" content="pheladelfia-20261124-v830">
+  <meta name="ph-theme-build" content="pheladelfia-20261124-v840">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script id="ph-language-bootstrap">(function(){
     try{
@@ -542,6 +542,7 @@
         <h3>Company</h3>
         <ul>
           <li><a href="/services">Services</a></li>
+          <li><a href="/projects">Projects</a></li>
           <li><a href="/about">About us</a></li>
           <li><a href="/join-us">Join Us</a></li>
       <li><a href="/contact">Contact</a></li>

@@ -105,6 +105,7 @@
     var count = slides.length;
     var dotsHost = root.querySelector("[data-ph-dots]");
     var status = root.querySelector("[data-ph-slide-status]");
+    var countEl = root.querySelector("[data-ph-slide-count]");
     var prevBtn = root.querySelector("[data-ph-slide-prev]");
     var nextBtn = root.querySelector("[data-ph-slide-next]");
     var toggleBtn = root.querySelector("[data-ph-slide-toggle]");
@@ -138,6 +139,11 @@
         if (i === index) dot.setAttribute("aria-current", "true");
         else dot.removeAttribute("aria-current");
       });
+      if (countEl) {
+        countEl.textContent =
+          (index + 1 < 10 ? "0" : "") + (index + 1) + " / " +
+          (count < 10 ? "0" : "") + count;
+      }
       if (status && !autoplayAllowed()) status.textContent = "Slide " + slideLabel(index);
     }
     function arm() {
@@ -213,6 +219,23 @@
     render();
     arm();
   }
+  function initScrollReveals() {
+    var targets = document.querySelectorAll(".ph-reveal, .ph-stagger");
+    if (!targets.length) return;
+    if (!("IntersectionObserver" in window)) {
+      targets.forEach(function (el) { el.classList.add("is-in"); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-in");
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
+    targets.forEach(function (el) { io.observe(el); });
+  }
   function ready() {
     document.querySelectorAll("style").forEach(function (style) {
       var text = style.textContent || "";
@@ -235,6 +258,7 @@
     });
     window.phFormatPrices(document);
     initHeroSlider();
+    initScrollReveals();
     loadCatalog();
     var grid = document.querySelector("[data-ph-best-sellers]");
     if (grid) [["[data-ph-carousel-prev]", -1], ["[data-ph-carousel-next]", 1]].forEach(function (entry) {

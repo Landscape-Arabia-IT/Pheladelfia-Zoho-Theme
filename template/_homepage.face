@@ -65,6 +65,7 @@
   </div>
   <div class="ph-hero-controls">
     <div class="ph-hero-dots" data-ph-dots role="group" aria-label="Slide navigation"></div>
+    <span class="ph-hero-count" data-ph-slide-count aria-hidden="true">01 / 04</span>
   </div>
   <p class="ph-sr-only" data-ph-slide-status aria-live="polite"></p>
 </section>
@@ -96,12 +97,13 @@
 <!-- ===== Categories ===== -->
 <section class="ph-section">
   <div class="ph-wrap">
-    <div class="ph-sec-head ph-sec-head-center">
+    <div class="ph-sec-head ph-sec-head-center ph-reveal">
       <span class="ph-eyebrow">Shop by category</span>
       <h2 class="ph-sec-title">Everything for design-led planting</h2>
       <p class="ph-sec-sub">Browse our nursery by plant type — every item grown or selected for the UAE climate.</p>
+      <span class="ph-hairline"></span>
     </div>
-    <div class="ph-cat-grid">
+    <div class="ph-cat-grid ph-stagger">
       <a class="ph-cat-card" href="{{ ph_url_palm_trees }}">
         <img src="{{ ph_img }}/palm-grove-fan.jpg" alt="Fan palms at the Pheladelfia nursery" width="800" height="600" loading="lazy">
         <span class="ph-cat-body">
@@ -159,7 +161,7 @@
 <!-- Catalog cards are rendered by the category FACE layout and loaded progressively. -->
 <section class="ph-section ph-section-sand" data-ph-best-section>
   <div class="ph-wrap">
-    <div class="ph-sec-head ph-sec-head-row">
+    <div class="ph-sec-head ph-sec-head-row ph-reveal">
       <div class="ph-sec-head-text">
         <span class="ph-eyebrow">From our nursery</span>
         <h2 class="ph-sec-title">Explore our plants</h2>
@@ -178,10 +180,10 @@
 <section class="ph-why ph-section">
   <div class="ph-wrap">
     <div class="ph-why-grid">
-      <div class="ph-gold-frame">
+      <div class="ph-gold-frame ph-zoom ph-reveal-l">
         <img src="{{ ph_img }}/palm-single-specimen.jpg" alt="A specimen fan palm at our nursery" width="800" height="1000" loading="lazy">
       </div>
-      <div>
+      <div class="ph-reveal-r">
         <span class="ph-eyebrow">Why Pheladelfia</span>
         <h2 class="ph-why-title">Rooted in the Emirates for over 20 years</h2>
         <div class="ph-why-items">
@@ -209,11 +211,12 @@
 <!-- ===== Process ===== -->
 <section class="ph-section ph-section-sand">
   <div class="ph-wrap">
-    <div class="ph-sec-head ph-sec-head-center">
+    <div class="ph-sec-head ph-sec-head-center ph-reveal">
       <span class="ph-eyebrow">How we work</span>
       <h2 class="ph-sec-title">From enquiry to established planting</h2>
+      <span class="ph-hairline"></span>
     </div>
-    <div class="ph-steps ph-steps-5">
+    <div class="ph-steps ph-steps-5 ph-stagger">
       <div>
         <div class="ph-step-num">01</div>
         <h3>Enquiry &amp; requirements</h3>
@@ -248,9 +251,10 @@
 <!-- Partner logos -->
 <section class="ph-section">
   <div class="ph-wrap">
-    <div class="ph-sec-head ph-sec-head-center">
+    <div class="ph-sec-head ph-sec-head-center ph-reveal">
       <span class="ph-eyebrow">Trusted by</span>
       <h2 class="ph-sec-title">Our clients</h2>
+      <span class="ph-hairline"></span>
     </div>
     <div class="ph-logo-marquee" dir="ltr">
       <div class="ph-logo-track" data-ph-logo-track>

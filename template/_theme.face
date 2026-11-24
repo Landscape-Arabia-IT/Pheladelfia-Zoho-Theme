@@ -305,8 +305,8 @@
   {% comment %}canonical, og:url, og:type, og:title, og:image and twitter:* are emitted by page.meta_tags — do not duplicate them here.{% endcomment %}
   <meta property="og:site_name" content="Pheladelfia Agricultural LLC">
   <meta property="og:description" content="Specialist nursery and specimen-tree supplier — Pheladelfia Agricultural LLC, Abu Dhabi since 2004.">
-  {% comment %}TODO client approval: dedicated 1200x630 og-default image; reusing an existing nursery photo meanwhile.{% endcomment %}
-  <meta property="og:image" content="{{ ph_img }}/palm-nursery-rows.jpg">
+  {% comment %}og-default social banner uploaded by client; TODO: verify it is 1200x630.{% endcomment %}
+  <meta property="og:image" content="{{ ph_img }}/luxury_nursery_palm_rows_social_banner.jpeg">
   <meta name="twitter:card" content="summary_large_image">
   <script type="application/ld+json">
   {"@context":"https://schema.org","@graph":[

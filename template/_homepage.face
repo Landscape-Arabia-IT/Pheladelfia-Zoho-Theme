@@ -301,21 +301,6 @@
   </div>
 </section>
 
-<!-- ===== Trade / quote block — NEW COPY, TODO client approval ===== -->
-<section class="ph-section ph-section-sand">
-  <div class="ph-wrap">
-    <div class="ph-sec-head ph-sec-head-center">
-      <span class="ph-eyebrow">For landscape architects &amp; developers</span>
-      <h2 class="ph-sec-title">Tell us what you need to plant</h2>
-      <p class="ph-sec-sub">Send us your plant schedule or specification — we reply with availability, sizes and pricing across our nursery and sourcing network. <!-- TODO client approval --></p>
-    </div>
-    <div class="ph-actions-row" style="justify-content:center;">
-      <a class="ph-btn ph-btn-gold" href="/contact?subject=quote">Request a quote <span aria-hidden="true">→</span></a>
-      <a class="ph-btn ph-btn-outline" href="{{ ph_company_pdf }}" target="_blank" rel="noopener">Download company profile</a>
-    </div>
-  </div>
-</section>
-
 {% include "_certifications" %}
 
 <!-- Partner logos -->

@@ -236,14 +236,6 @@
     window.phFormatPrices(document);
     initHeroSlider();
     loadCatalog();
-    var quoteSubject = new URLSearchParams(window.location.search).get("subject");
-    if (quoteSubject === "quote") {
-      document.querySelectorAll('select[name="Subject"]').forEach(function (sel) {
-        for (var i = 0; i < sel.options.length; i++) {
-          if (sel.options[i].text === "Specimen or project supply") { sel.selectedIndex = i; break; }
-        }
-      });
-    }
     var grid = document.querySelector("[data-ph-best-sellers]");
     if (grid) [["[data-ph-carousel-prev]", -1], ["[data-ph-carousel-next]", 1]].forEach(function (entry) {
       var button = document.querySelector(entry[0]);
@@ -3317,12 +3309,7 @@ window.__phJsOnce = true;
     "Authorities & Institutions": "الجهات والمؤسسات",
     "Federal and emirate authorities, sovereign offices and institutional landowners.": "الجهات الاتحادية والإماراتية والمكاتب السيادية والجهات المؤسسية المالكة.",
     "Contractors & Delivery Partners": "المقاولون وشركاء التنفيذ",
-    "Specialist contractors and delivery partners realising schemes on the ground.": "مقاولون متخصصون وشركاء تسليم منفذون للمخططات على أرض الواقع.",
-    "For landscape architects & developers": "لمعماريي المناظر الطبيعية والمطورين",
-    "Tell us what you need to plant": "أخبرنا بما تحتاج زراعته",
-    "Send us your plant schedule or specification — we reply with availability, sizes and pricing across our nursery and sourcing network.": "أرسل لنا جدول النباتات أو المواصفات — ونرد بالتوفر والمقاسات والأسعار عبر مشتلنا وشبكة التوريد. <!-- TODO client approval -->",
-    "Request a quote": "اطلب عرض سعر",
-    "Download company profile": "حمّل الملف التعريفي للشركة"
+    "Specialist contractors and delivery partners realising schemes on the ground.": "مقاولون متخصصون وشركاء تسليم منفذون للمخططات على أرض الواقع."
   };
   var BILINGUAL = /^(.*[A-Za-z].*?)\s*\|\s*([\u0600-\u06FF][^|]*)$/;
   var SIZE = /^(\d+(?:\.\d+)?-\d+(?:\.\d+)?) MTR CT$/;

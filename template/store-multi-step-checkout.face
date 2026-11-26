@@ -3,7 +3,7 @@
 <div class="phx-shell phx-checkout">
 {% include "_purchase-header" %}
 <section class="phx-main">
-  <header class="phx-title"><div><p class="phx-eyebrow">PHELADELFIA / CHECKOUT</p><h1>Complete your order.</h1><p>One step closer to your green space.</p></div><a class="phx-back" href="/cart">Edit cart <span aria-hidden="true">↗</span></a></header>
+  <header class="phx-title"><h1>Checkout</h1></header>
   <div class="phx-flow">{{ checkout.form }}</div>
 </section>
 {% include "_purchase-footer" %}

@@ -1029,7 +1029,7 @@ window.__phJsOnce = true;
     if (specStock) specStock.textContent = unavailable ? "Out of stock" : (stock > 0 ? stock + " NOS" : "Available");
     if (button) {
       button.disabled = unavailable;
-      button.textContent = unavailable ? "Out of stock" : "Add to selection";
+      button.textContent = unavailable ? "Out of stock" : "Add to cart";
     }
     var qty = qs(".ph-product-page [data-zs-quantity]");
     if (qty) {
@@ -1060,6 +1060,11 @@ window.__phJsOnce = true;
     });
     var pick = qs("[data-ph-variant-pick]");
     if (pick) pick.value = variant.variant_id;
+    qsa("[data-ph-color-swatch]").forEach(function (swatch) {
+      var on = (variant.options || []).some(function (option) { return String(option.id) === String(swatch.getAttribute("data-ph-option-id")); });
+      swatch.classList.toggle("is-active", on);
+      swatch.setAttribute("aria-pressed", on ? "true" : "false");
+    });
     if (options.updateUrl !== false) {
       try {
         var url = new URL(location.href);
@@ -1088,9 +1093,68 @@ window.__phJsOnce = true;
       var variant = findVariant(chip.getAttribute("data-ph-variant-id"));
       var blocked = variantIsUnavailable(variant);
       chip.classList.toggle("is-oos", blocked);
-      chip.disabled = false;
-      chip.setAttribute("aria-disabled", "false");
-      chip.title = blocked ? "Out of stock — enquire about availability" : "";
+      chip.disabled = blocked;
+      chip.setAttribute("aria-disabled", blocked ? "true" : "false");
+      chip.title = blocked ? "Out of stock" : "";
+    });
+  }
+
+  var SWATCH_COLORS = {
+    white: "#f7f4ee", cream: "#f3ead7", "cream white": "#f3ead7", ivory: "#f6f1e4",
+    beige: "#e6d3b4", grey: "#b7b7b7", gray: "#b7b7b7", "light grey": "#d7d7d7", "light gray": "#d7d7d7",
+    "dark grey": "#5e5e5e", "dark gray": "#5e5e5e", black: "#242424", brown: "#8a5a3a", "dark brown": "#5c4033",
+    "light brown": "#c4a484", green: "#2f6b4f", anthracite: "#3c3c3c", taupe: "#8d7b6a", terracotta: "#c46a45",
+    rust: "#a3522f", bronze: "#8a6a3b", champagne: "#e7d7b8", natural: "#d8d2c6"
+  };
+
+  function swatchColor(label) {
+    var key = String(label || "").trim().toLowerCase();
+    if (SWATCH_COLORS[key]) return SWATCH_COLORS[key];
+    if (/^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(key)) return key;
+    return "";
+  }
+
+  function isColorAttribute(select) {
+    return /color|colour|لون/i.test(select.getAttribute("aria-label") || "");
+  }
+
+  function bindColorSwatches() {
+    var host = qs("[data-ph-color-fields]");
+    var row = qs("[data-ph-color-swatches]");
+    if (!host || !row || row.childElementCount) return;
+    var selects = qsa("[data-zs-attribute-select]").filter(isColorAttribute);
+    if (!selects.length) return;
+    host.hidden = false;
+    var label = qs("[data-ph-color-label]");
+    if (label) label.textContent = selects[0].getAttribute("aria-label") || "Color";
+    selects.forEach(function (select) {
+      Array.from(select.options).forEach(function (choice) {
+        if (!choice.value) return;
+        var swatch = document.createElement("button");
+        swatch.type = "button";
+        swatch.className = "ph-color-swatch";
+        swatch.setAttribute("data-ph-color-swatch", "");
+        swatch.setAttribute("data-ph-option-id", choice.value);
+        swatch.setAttribute("data-ph-attr-id", select.getAttribute("data-zs-attribute-id") || "");
+        swatch.setAttribute("aria-label", choice.textContent.trim());
+        swatch.setAttribute("title", choice.textContent.trim());
+        swatch.setAttribute("aria-pressed", "false");
+        var paint = swatchColor(choice.textContent);
+        if (paint) swatch.style.backgroundColor = paint;
+        swatch.addEventListener("click", function () {
+          select.value = choice.value;
+          var selected = qsa("[data-zs-attribute-select]").map(function (item) { return item.value; }).filter(Boolean);
+          var variant = findVariantByOptions(selected);
+          if (!variant) {
+            variant = productVariants().filter(function (item) {
+              return (item.options || []).some(function (option) { return String(option.id) === String(choice.value); }) && !variantIsUnavailable(item);
+            })[0];
+          }
+          if (variant) applyVariant(variant);
+          else select.dispatchEvent(new Event("change", { bubbles: true }));
+        });
+        row.appendChild(swatch);
+      });
     });
   }
 
@@ -1131,11 +1195,13 @@ window.__phJsOnce = true;
     var wanted = new URLSearchParams(location.search).get("variant");
     qsa("[data-ph-size-chip]").forEach(function (chip) {
       chip.addEventListener("click", function () {
+        if (chip.disabled) return;
         var variant = findVariant(chip.getAttribute("data-ph-variant-id"));
-        if (!variant) return;
+        if (!variant || variantIsUnavailable(variant)) return;
         applyVariant(variant);
       });
     });
+    bindColorSwatches(resolveVariant);
     qsa("[data-zs-attribute-select], [data-ph-variant-pick]").forEach(function (sel) {
       sel.addEventListener("change", function () { resolveVariant(true); });
     });
@@ -1224,7 +1290,9 @@ window.__phJsOnce = true;
             openCartDrawer();
             if (note) {
               note.hidden = false;
-              note.textContent = sizeLabel + " added to your selection.";
+              var sizeNode = qs("[data-ph-buy-ok-size]", note);
+              if (sizeNode) sizeNode.textContent = sizeLabel;
+              else note.textContent = sizeLabel + " added to your cart.";
             }
             return;
           }
@@ -2026,7 +2094,7 @@ window.__phJsOnce = true;
       if (addBtn) {
         addBtn.setAttribute("data-ph-qv-variant", variantId);
         addBtn.disabled = !!chipOos;
-        addBtn.textContent = chipOos ? "Out of stock" : "Add to selection";
+        addBtn.textContent = chipOos ? "Out of stock" : "Add to cart";
       }
       if (priceEl && price !== null && price !== "") priceEl.textContent = money(price);
       qsa("[data-zs-wishlist-element]", qv).forEach(function (el) {
@@ -2441,6 +2509,25 @@ window.__phJsOnce = true;
     catch (err) { start(null); }
   }
 
+  function bindCheckoutSummary() {
+    var box = qs(".phx-checkout .theme-cart-details");
+    if (!box || qs("[data-ph-summary-toggle]", box)) return;
+    var list = qs(".theme-cart-details-summary-list", box);
+    if (!list || !list.parentNode) return;
+    var title = qs(".theme-cart-details-summary-title", box);
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "phx-summary-toggle";
+    btn.setAttribute("data-ph-summary-toggle", "");
+    btn.setAttribute("aria-expanded", "false");
+    btn.textContent = (title && title.textContent.trim()) || "Order summary";
+    list.parentNode.insertBefore(btn, list);
+    btn.addEventListener("click", function () {
+      var open = box.classList.toggle("is-summary-open");
+      btn.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+  }
+
   ready(function () {
     if (window.__phThemeBound) return;
     window.__phThemeBound = true;
@@ -2454,6 +2541,8 @@ window.__phJsOnce = true;
     fillFileSlots();
     fillMissingCatPhotos();
     bindProductBuy();
+    bindCheckoutSummary();
+    window.setTimeout(bindCheckoutSummary, 800);
     bindSearchSuggest();
     bindWishlist();
     bindWishlistPage();

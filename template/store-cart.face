@@ -3,7 +3,7 @@
 <div class="phx-shell phx-cart">
 {% include "_purchase-header" %}
 <section class="phx-main">
-  <header class="phx-title"><div><p class="phx-eyebrow">YOUR NEXT GREEN CHAPTER</p><h1>Shopping cart</h1><p>Good things are taking root. Review your order below.</p></div><span class="phx-stage">Cart <span aria-hidden="true">/</span> Checkout</span></header>
+  <header class="phx-title"><h1>Your cart</h1></header>
   {% assign ph_cart_count = cart.items | size %}
   {% if ph_cart_count > 0 %}
   <div class="phx-grid">
@@ -24,7 +24,7 @@
       {% include "_purchase-saved" %}
     </div>
     <aside class="phx-summary"><h2>Order summary</h2><div class="phx-summary-line phx-summary-subtotal"><span>Subtotal</span><strong data-ph-cart-subtotal>{{ cart.symbol }} {{ cart.sub_total }}</strong></div><div class="phx-summary-line"><span>VAT &amp; delivery</span><small>Calculated at checkout</small></div><p class="phx-summary-note">Prices exclude 5% VAT. Final charges are shown at checkout.</p>
-    {% if cart.checkout_url %}<a class="phx-button" data-zs-checkout href="{{ cart.checkout_url }}"><span>Continue to checkout</span><span aria-hidden="true">→</span></a>{% endif %}
+    {% if cart.checkout_url %}<a class="phx-button" data-zs-checkout href="{{ cart.checkout_url }}"><span>Checkout</span></a>{% endif %}
     <p class="phx-summary-support">Need a hand with your order? <a href="{{ ph_phone_tel }}">Contact our team</a></p></aside>
   </div>
   {% else %}

@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <script>window.zs_site_resource_path = window.zs_site_resource_path || "";</script>
-  <meta name="ph-theme-build" content="pheladelfia-20261126-v875">
+  <meta name="ph-theme-build" content="pheladelfia-20261126-v876">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script id="ph-language-bootstrap">(function(){
     try{
@@ -489,8 +489,7 @@
   <aside class="ph-drawer-panel" role="dialog" aria-modal="true" aria-label="Your cart" tabindex="-1">
     <header class="ph-drawer-head">
       <div>
-        <p class="ph-kicker">Nursery</p>
-        <h2 class="ph-drawer-title">Your selection</h2>
+        <h2 class="ph-drawer-title">Your cart</h2>
       </div>
       <button class="ph-icon-btn" type="button" data-ph-drawer-close aria-label="Close selection">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 6l12 12M18 6L6 18"/></svg>
@@ -503,8 +502,8 @@
         <strong data-ph-drawer-subtotal></strong>
       </div>
       <p class="ph-drawer-note">{{ ph_vat_note }} · {{ ph_delivery_note }}</p>
-      <a class="ph-btn" data-ph-drawer-checkout href="/checkout">Continue to checkout</a>
-      <a class="ph-text-link" href="/cart">View full selection</a>
+      <a class="ph-btn" data-ph-drawer-checkout href="/checkout">Checkout</a>
+      <a class="ph-text-link" href="/cart">View cart</a>
     </footer>
   </aside>
 </div>

@@ -6,7 +6,7 @@
   <div class="phx-receipt {% if payment_status.order_placed %}is-success{% else %}is-error{% endif %}">
   {% if payment_status.order_placed %}
     <div class="phx-result-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="m5 12 4 4L19 6"/></svg></div>
-    <p class="phx-eyebrow">THANK YOU FOR CHOOSING PHELADELFIA</p><h1>Good things are on their way.</h1><p>Your order has been received. Keep your order reference for any enquiries.</p>
+    <p class="phx-eyebrow">ORDER RECEIVED</p><h1>Thank you.</h1><p>Your order has been received. Keep your order reference for any enquiries.</p>
   {% else %}
     <div class="phx-result-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M12 7v6m0 3v1"/></svg></div>
     <p class="phx-eyebrow">LET’S GET THIS SORTED</p><h1>Payment needs attention</h1><p>We could not confirm this payment. If you see a charge, contact our team with your order reference before trying again.</p>

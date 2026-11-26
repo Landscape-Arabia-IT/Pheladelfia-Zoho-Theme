@@ -1,7 +1,5 @@
-<aside class="phx-rail">
-  <a class="phx-brand" href="/" aria-label="Pheladelfia home"><svg viewBox="0 0 32 38" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M16 36V12M16 25C3 26 1 17 3 10c8 0 13 5 13 15ZM16 19C28 20 32 10 28 2c-8 1-12 7-12 17Z"/></svg><span>Pheladelfia<small>AGRICULTURAL LLC</small></span></a>
-  <a class="phx-store-link" href="/all-collections"><span aria-hidden="true">←</span> <span>Back to the nursery</span></a>
-  <div class="phx-rail-story"><span class="phx-rail-rule"></span><p>ROOTED IN THE UAE · SINCE 2004</p><h2>Every space.<br>A little greener.</h2><span>Plants, palms and trees, selected with care.</span></div>
-  <svg class="phx-rail-leaves" viewBox="0 0 240 300" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><path d="M30 310C40 210 100 130 200 25M69 219C-5 220-10 149 12 120c50 13 63 45 57 99ZM101 168c-60-3-65-74-40-107 44 22 52 61 40 107ZM138 120c-38-19-32-71-10-97 34 25 38 60 10 97ZM73 212c72 35 120-8 128-51-58-19-93-3-128 51ZM116 151c61 20 111-18 113-59-51-10-87 8-113 59Z"/></svg>
-  <div class="phx-rail-help"><span>HERE TO HELP</span><a href="{{ ph_phone_tel }}" dir="ltr">{{ ph_phone_display }}</a><a href="mailto:{{ ph_email }}">{{ ph_email }}</a></div>
-</aside>
+<header class="phx-top">
+  <a class="phx-brand" href="/" aria-label="Pheladelfia home"><img src="{{ ph_img }}/logo-full.png" alt="" onerror="this.hidden=true"><span class="phx-word">Pheladelfia<small>AGRICULTURAL LLC</small></span></a>
+  <a class="phx-top-link phx-top-cart" href="/all-collections">Continue shopping</a>
+  <a class="phx-top-link phx-top-checkout" href="/cart">Back to cart</a>
+</header>

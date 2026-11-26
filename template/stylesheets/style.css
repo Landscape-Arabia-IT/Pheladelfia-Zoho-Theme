@@ -6097,3 +6097,26 @@ html[dir="rtl"] .ph-body :is(.ph-lead, .ph-copy, .ph-sec-sub, .ph-quote blockquo
 .ph-ar .ph-body :is(.ph-lead, .ph-copy, .ph-sec-sub, .ph-quote blockquote, .ph-card-body p) {
   line-height: 1.85;
 }
+
+/* Selects — custom chevron keeps the arrow off the border edge and gives
+   the control consistent padding in both LTR and RTL. */
+.ph-body select {
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23183d2b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  padding-inline-end: 2rem;
+}
+html[dir="rtl"] .ph-body select,
+.ph-ar .ph-body select {
+  background-position: left 0.75rem center;
+}
+.ph-search select {
+  background-position: right 0.3rem center;
+  padding-inline-end: 1.4rem;
+}
+html[dir="rtl"] .ph-search select,
+.ph-ar .ph-search select {
+  background-position: left 0.3rem center;
+}

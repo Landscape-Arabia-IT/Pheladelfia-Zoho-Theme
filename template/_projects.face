@@ -1,5 +1,9 @@
 <section class="ph-page-banner">
+  <div class="ph-page-banner-media"><img src="{{ ph_img }}/palm-nursery-rows.jpg" alt="" aria-hidden="true"></div>
   <div class="ph-wrap">
+    <nav aria-label="Breadcrumb" class="ph-crumbs">
+      <a href="/">Home</a><span class="ph-crumb-sep">/</span><span aria-current="page">Projects</span>
+    </nav>
     <p class="ph-kicker">Projects</p>
     <h1 class="ph-h2">Specimen Material Supplied Across the UAE</h1>
     <p class="ph-lead">From nursery rows in Al Ajban to design-led projects across the UAE and Gulf — Pheladelfia supports schemes of every scale with specimen trees, palms, architectural plants, technical coordination and logistics.</p>

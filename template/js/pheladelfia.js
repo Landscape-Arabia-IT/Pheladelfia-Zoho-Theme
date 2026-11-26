@@ -3141,7 +3141,10 @@ window.__phJsOnce = true;
     "Trade lists on request": "قوائم أسعار عند الطلب",
     "Pheladelfia Agricultural LLC began in 2004 with a simple belief: the region's design ambitions needed mature, design-grade plant material — grown and supplied to a documented standard. Our Abu Dhabi nursery spans more than 1.5 million square feet in Al Ajban, where plants and trees are propagated and grown on to specimen sizes.": "بدأت فلادلفيا الزراعية ذ.م.م عام 2004 بقناعة بسيطة: كانت طموحات التصميم في المنطقة بحاجة إلى مواد نباتية ناضجة بمعايير تصميمية — تُزرع وتُورد وفق معيار موثّق. يمتد مشتلنا في أبوظبي على أكثر من 1.5 مليون قدم مربع في العجبان، حيث تُكثر النباتات والأشجار وتُزرع حتى بلوغ مقاسات العينات.",
     "Today we supply design professionals, developers, consultants, contractors and institutions across the UAE and Gulf — with a branch in Warsan, Dubai.": "اليوم نورد متخصصي التصميم والمطورين والاستشاريين والمقاولين والمؤسسات في أنحاء الإمارات والخليج — مع فرع في الورسان بدبي.",
-    "Contractors & Delivery Partners — specialist contractors and delivery partners realising schemes on the ground": "المقاولون وشركاء التنفيذ — مقاولون متخصصون وشركاء تسليم منفذون للمخططات على أرض الواقع"
+    "Contractors & Delivery Partners — specialist contractors and delivery partners realising schemes on the ground": "المقاولون وشركاء التنفيذ — مقاولون متخصصون وشركاء تسليم منفذون للمخططات على أرض الواقع",
+    "Visit": "الزيارة",
+    "Capabilities": "القدرات",
+    "The full horticultural supply chain": "سلسلة التوريد البستنية الكاملة"
   };
   var BILINGUAL = /^(.*[A-Za-z].*?)\s*\|\s*([\u0600-\u06FF][^|]*)$/;
   var SIZE = /^(\d+(?:\.\d+)?-\d+(?:\.\d+)?) MTR CT$/;

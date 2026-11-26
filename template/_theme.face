@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <script>window.zs_site_resource_path = window.zs_site_resource_path || "";</script>
-  <meta name="ph-theme-build" content="pheladelfia-20261123-v820">
+  <meta name="ph-theme-build" content="pheladelfia-20261126-v900">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script id="ph-language-bootstrap">(function(){
     try{
@@ -376,11 +376,6 @@
     </a>
 
     <form class="ph-search" action="{% if page.search_url %}{{ page.search_url }}{% else %}/search{% endif %}" method="get" role="search">
-      <select aria-label="All categories" data-ph-search-filter>
-        <option value="">All categories</option>
-        <option value="outdoor">Outdoor</option>
-        <option value="indoor">Indoor</option>
-      </select>
       <input type="search" name="q" placeholder="Search palms, trees, shrubs…" aria-label="Search" autocomplete="off" aria-expanded="false" aria-controls="ph-search-suggest">
       <button type="submit" aria-label="Search">Search</button>
       <div class="ph-suggest" id="ph-search-suggest" data-ph-suggest hidden></div>
@@ -446,8 +441,7 @@
             <a href="{{ ph_url_rare_trees }}">Rare &amp; Ancient Trees</a>
             <a href="{{ ph_url_cacti }}">Cacti &amp; Succulents</a>
           </div>
-          <div class="ph-mega-col">
-            <h5>More Outdoor</h5>
+          <div class="ph-mega-col ph-mega-continue">
             <a href="{{ ph_url_shrubs }}">Shrubs &amp; Ground Cover</a>
             <a href="{{ ph_url_climbers }}">Climbers</a>
             <a href="{{ ph_url_art }}">Art &amp; Sculptures</a>
@@ -463,12 +457,35 @@
             <a href="{{ ph_url_fertilizers }}">Fertilizers &amp; Soil Amendments</a>
             <a href="{{ ph_url_seeds }}">Seeds &amp; Planting Stock</a>
             <a href="{{ ph_url_tools }}">Tools &amp; Equipment</a>
+            <a class="ph-mega-sub" href="{{ ph_url_direct_use }}">Direct Use Purchases</a>
+            <a class="ph-mega-sub" href="{{ ph_url_small_tools }}">Small Tools &amp; Consumables</a>
           </div>
         </div>
       </li>
-      <li><a href="/services">Services</a></li>
-      <li><a href="/about">About</a></li>
-      <li><a href="/join-us">Join Us</a></li>
+      <li class="ph-drop">
+        <a href="/services">Services</a>
+        <div class="ph-drop-menu">
+          <a href="/services#sourcing">Plant Sourcing</a>
+          <a href="/services#importing">Importing</a>
+          <a href="/services#exporting">Exporting</a>
+          <a href="/services#quality">Quality Assurance</a>
+          <a href="/services#purchasing">Centralized Purchasing</a>
+          <a href="/services#logistics">Logistics</a>
+        </div>
+      </li>
+      <li class="ph-drop">
+        <a href="/about">About</a>
+        <div class="ph-drop-menu">
+          <a href="/about">About us</a>
+          <a href="/nursery">Nursery</a>
+          <a href="/projects">Projects</a>
+          <a href="/sustainability">Sustainability</a>
+          <a href="/capabilities">Capabilities</a>
+          <a href="/join-us">Join Us</a>
+        </div>
+      </li>
+      <li><a href="/visit">Visit</a></li>
+      <li><a href="/blog">Blog</a></li>
       <li><a href="/contact">Contact</a></li>
       <li class="ph-nav-cta-item"><a class="ph-nav-cta" href="{{ ph_url_palm_trees }}">Shop palms <span class="ph-arrow" aria-hidden="true">→</span></a></li>
     </ul>
@@ -528,17 +545,33 @@
           <li><a href="{{ ph_url_trees }}">Trees</a></li>
           <li><a href="{{ ph_url_shrubs }}">Shrubs &amp; Ground Cover</a></li>
           <li><a href="{{ ph_url_indoor }}">Indoor Plants</a></li>
-          <li><a href="{{ ph_url_fertilizers }}">Pots &amp; Supplies</a></li>
+          <li><a href="{{ ph_url_flowers }}">Fresh Flowers &amp; Bouquets</a></li>
+          <li><a href="{{ ph_url_fertilizers }}">Fertilizers &amp; Soil Amendments</a></li>
           <li><a href="/all-collections">All collections</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Services</h3>
+        <ul>
+          <li><a href="/services#sourcing">Plant Sourcing</a></li>
+          <li><a href="/services#importing">Importing</a></li>
+          <li><a href="/services#exporting">Exporting</a></li>
+          <li><a href="/services#quality">Quality Assurance</a></li>
+          <li><a href="/services#purchasing">Centralized Purchasing</a></li>
+          <li><a href="/services#logistics">Logistics</a></li>
         </ul>
       </div>
       <div>
         <h3>Company</h3>
         <ul>
-          <li><a href="/services">Services</a></li>
           <li><a href="/about">About us</a></li>
+          <li><a href="/nursery">Nursery</a></li>
+          <li><a href="/projects">Projects</a></li>
+          <li><a href="/sustainability">Sustainability</a></li>
+          <li><a href="/capabilities">Capabilities</a></li>
+          <li><a href="/blog">Blog</a></li>
           <li><a href="/join-us">Join Us</a></li>
-      <li><a href="/contact">Contact</a></li>
+          <li><a href="/contact">Contact</a></li>
           <li><a href="{{ ph_company_pdf }}" target="_blank" rel="noopener">Company profile (PDF)</a></li>
           {% if page.is_portal_enabled %}<li><span class="ph-auth-slot" data-ph-auth-slot="account" data-ph-auth-label="My account" data-ph-auth-class="ph-footer-account-link" hidden inert aria-hidden="true"><template>My account</template></span></li>{% endif %}
         </ul>
@@ -552,11 +585,11 @@
           </li>
           <li>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>
-            <a href="{{ ph_phone_tel }}" dir="ltr">{{ ph_phone_display }}</a>
+            <span><a href="{{ ph_phone_tel }}" dir="ltr">{{ ph_phone_display }}</a><br><a href="{{ ph_phone_alt_tel }}" dir="ltr">{{ ph_phone_alt_display }}</a></span>
           </li>
           <li>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
-            <a href="mailto:{{ ph_email }}">{{ ph_email }}</a>
+            <span><a href="mailto:{{ ph_email }}">{{ ph_email }}</a><br><a href="mailto:{{ ph_email_info }}">{{ ph_email_info }}</a></span>
           </li>
           <li>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg>

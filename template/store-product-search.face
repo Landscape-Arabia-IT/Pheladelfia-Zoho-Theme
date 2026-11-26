@@ -1,11 +1,19 @@
-<section class="ph-search-results ph-store">
+{% extends "_theme" %}
+{% block content %}
+<section class="ph-page-banner">
   <div class="ph-wrap">
     <nav class="ph-crumbs" aria-label="Breadcrumb">
       <a href="/">Home</a>
       <span class="ph-crumb-sep">/</span>
-      <span>Search</span>
+      <span aria-current="page">Search</span>
     </nav>
-    <h1 class="ph-h2">{% if search.query %}Results for “{{ search.query }}”{% else %}Search results{% endif %}</h1>
+    <p class="ph-kicker">Search</p>
+    <h1>Search results{% if search.query %} <span data-ph-no-translate>“{{ search.query }}”</span>{% endif %}</h1>
+    <span class="ph-rule"></span>
+  </div>
+</section>
+<section class="ph-search-results ph-store ph-catalog">
+  <div class="ph-wrap">
     {% if no_products_message %}
       <p class="ph-lead">{{ no_products_message }}</p>
       <p><a class="ph-btn" href="/all-collections">Explore collections</a></p>
@@ -18,3 +26,4 @@
     {% include '_store-pagination' %}
   </div>
 </section>
+{% endblock %}

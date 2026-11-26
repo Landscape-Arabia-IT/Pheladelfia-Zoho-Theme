@@ -1,0 +1,48 @@
+<section class="ph-page-banner">
+  <div class="ph-page-banner-media"><img src="{{ ph_img }}/palm-grove-fan.jpg" alt="" aria-hidden="true"></div>
+  <div class="ph-wrap">
+    <nav aria-label="Breadcrumb" class="ph-crumbs">
+      <a href="/">Home</a><span class="ph-crumb-sep">/</span><span aria-current="page">Visit</span>
+    </nav>
+    <h1>Visit the nursery</h1>
+    <p class="ph-lead">More than 1.5 million square feet in Al Ajban, Abu Dhabi.</p>
+    <span class="ph-rule"></span>
+  </div>
+</section>
+
+<section class="ph-section">
+  <div class="ph-wrap ph-visit-page">
+    <div class="ph-visit-cards">
+      <article class="ph-info-card">
+        <p class="ph-kicker">Nursery</p>
+        <h2 class="ph-h3">{{ ph_address_nursery_short }}</h2>
+        <p class="ph-copy">{{ ph_address_nursery }}</p>
+        <p class="ph-copy">{{ ph_po_box }}</p>
+        <a class="ph-btn" href="{{ ph_maps_url }}" target="_blank" rel="noopener">Open in Google Maps</a>
+      </article>
+      <article class="ph-info-card">
+        <p class="ph-kicker">Our branch</p>
+        <h2 class="ph-h3">{{ ph_address_branch }}</h2>
+      </article>
+      <article class="ph-info-card">
+        <p class="ph-kicker">Opening hours</p>
+        <h2 class="ph-h3">{{ ph_hours }}</h2>
+        <p class="ph-copy">Call us</p>
+        <p><a href="{{ ph_phone_tel }}" dir="ltr">{{ ph_phone_display }}</a></p>
+        <p><a href="{{ ph_phone_alt_tel }}" dir="ltr">{{ ph_phone_alt_display }}</a></p>
+        <p><a href="mailto:{{ ph_email }}">{{ ph_email }}</a></p>
+        <p><a href="mailto:{{ ph_email_info }}">{{ ph_email_info }}</a></p>
+        <a class="ph-btn ph-btn-outline" href="{{ ph_whatsapp_url }}" target="_blank" rel="noopener">Chat on WhatsApp</a>
+      </article>
+    </div>
+    <div class="ph-map-block">
+      <iframe class="ph-map-frame" src="https://www.google.com/maps?q=Pheladelfia+Agricultural+Al+Ajban+Abu+Dhabi&z=13&output=embed" title="Pheladelfia Agricultural LLC — Al Ajban, Abu Dhabi" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+    </div>
+    <div class="ph-actions-row">
+      <a class="ph-btn" href="/contact">Contact us</a>
+      <a class="ph-btn ph-btn-outline" href="/nursery">Nursery</a>
+    </div>
+    <!-- Separate Warsan hours and a map pin are not published. Add them in the Zoho page editor. -->
+    <div class="ph-editor-slot" data-ph-gap="visit-editor">{{ page.content }}</div>
+  </div>
+</section>

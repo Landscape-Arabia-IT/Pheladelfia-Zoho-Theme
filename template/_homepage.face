@@ -1,16 +1,22 @@
 <!-- ===== Hero ===== -->
-<section class="ph-hero" id="top">
-  <div class="ph-hero-media"><img src="{{ ph_img }}/palm-nursery-rows.jpg" alt="Rows of mature Washingtonia palms at the Pheladelfia nursery in Abu Dhabi" fetchpriority="high"></div>
-  <div class="ph-hero-overlay" aria-hidden="true"></div>
-  <div class="ph-wrap">
+<section class="ph-hero ph-hero-split" id="top">
+  <div class="ph-wrap ph-hero-grid">
     <div class="ph-hero-copy">
       <span class="ph-eyebrow ph-anim ph-anim-1">Abu Dhabi nursery · Est. 2004</span>
       <h1 class="ph-hero-title ph-anim ph-anim-2">Premium Palms &amp; Trees, <em class="ph-text-gradient-gold">Grown in the UAE</em></h1>
-      <p class="ph-hero-lead ph-anim ph-anim-3" style="margin-top: 16px">Specimen palms, native trees and flowering shrubs — acclimatized in our Abu Dhabi nursery and delivered ready to plant across the Emirates.</p>
+      <p class="ph-hero-lead ph-anim ph-anim-3">Specimen palms, native trees and flowering shrubs — acclimatized in our Abu Dhabi nursery and delivered ready to plant across the Emirates.</p>
       <div class="ph-hero-actions ph-anim ph-anim-4">
         <a class="ph-btn ph-btn-gold" href="/all-collections">Shop Plants <span aria-hidden="true">→</span></a>
-        <a class="ph-btn ph-btn-ghost" href="{{ ph_url_palm_trees }}">Browse Palms</a>
+        <a class="ph-btn ph-btn-outline" href="{{ ph_url_palm_trees }}">Browse Palms</a>
       </div>
+      <ul class="ph-hero-facts">
+        <li><a href="/nursery">Nursery: Al Ajban, Abu Dhabi</a></li>
+        <li>{{ ph_address_branch }}</li>
+        <li>{{ ph_hours }}</li>
+      </ul>
+    </div>
+    <div class="ph-hero-media">
+      <img src="{{ ph_img }}/palm-nursery-rows.jpg" alt="Rows of mature Washingtonia palms at the Pheladelfia nursery in Abu Dhabi" fetchpriority="high">
     </div>
   </div>
 </section>
@@ -39,15 +45,18 @@
   </div>
 </section>
 
-<!-- ===== Categories ===== -->
-<section class="ph-section">
+<!-- ===== Shop by category ===== -->
+<section class="ph-section" id="shop">
   <div class="ph-wrap">
-    <div class="ph-sec-head ph-sec-head-center">
-      <span class="ph-eyebrow">Shop by category</span>
-      <h2 class="ph-sec-title">Everything for design-led planting</h2>
-      <p class="ph-sec-sub">Browse our nursery by plant type — every item grown or selected for the UAE climate.</p>
+    <div class="ph-sec-head ph-sec-head-row">
+      <div class="ph-sec-head-text">
+        <span class="ph-eyebrow">Shop by category</span>
+        <h2 class="ph-sec-title">Everything for design-led planting</h2>
+        <p class="ph-sec-sub">Browse our nursery by plant type — every item grown or selected for the UAE climate.</p>
+      </div>
+      <a class="ph-btn ph-btn-outline" href="/all-collections">All collections</a>
     </div>
-    <div class="ph-cat-grid">
+    <div class="ph-cat-grid ph-cat-mosaic">
       <a class="ph-cat-card" href="{{ ph_url_palm_trees }}">
         <img src="{{ ph_img }}/palm-grove-fan.jpg" alt="Fan palms at the Pheladelfia nursery" loading="lazy">
         <span class="ph-cat-body">
@@ -112,7 +121,61 @@
   </div>
 </section>
 
-<!-- ===== Why us ===== -->
+<!-- ===== Real departments ===== -->
+<section class="ph-section">
+  <div class="ph-wrap">
+    <div class="ph-dept-grid">
+      <a class="ph-dept" href="{{ ph_url_palm_trees }}">
+        <img src="{{ ph_img }}/date-palm.jpg" alt="Date palms" loading="lazy">
+        <span class="ph-dept-copy">
+          <span class="ph-eyebrow">Outdoor Plants</span>
+          <strong>Palm Trees</strong>
+          <span>Architectural palms. Open this collection to reach species such as Washingtonia robusta.</span>
+        </span>
+      </a>
+      <a class="ph-dept" href="{{ ph_url_indoor }}">
+        <img src="{{ ph_img }}/indoor-plants.jpg" alt="Indoor ornamental plants" loading="lazy">
+        <span class="ph-dept-copy">
+          <span class="ph-eyebrow">Indoor &amp; Decor</span>
+          <strong>Indoor Ornamental Plants</strong>
+          <span>Interior specimens for hospitality, residences and workplaces.</span>
+        </span>
+      </a>
+      <a class="ph-dept" href="{{ ph_url_shrubs }}">
+        <img src="{{ ph_img }}/bougainvillea.jpg" alt="Flowering bougainvillea shrub" loading="lazy">
+        <span class="ph-dept-copy">
+          <span class="ph-eyebrow">Outdoor Plants</span>
+          <strong>Shrubs &amp; Ground Cover</strong>
+          <span>Mass planting, edges and ground plane for complete schemes.</span>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Services ===== -->
+<section class="ph-section ph-section-sand" id="home-services">
+  <div class="ph-wrap">
+    <div class="ph-sec-head ph-sec-head-row">
+      <div class="ph-sec-head-text">
+        <span class="ph-eyebrow">Our Services</span>
+        <h2 class="ph-sec-title">The full horticultural supply chain</h2>
+        <p class="ph-sec-sub">From sourcing and quality control to logistics, import and export — we manage the full horticultural supply chain so you receive the right plants, in the right condition, on time.</p>
+      </div>
+      <a class="ph-btn ph-btn-outline" href="/services">Services</a>
+    </div>
+    <div class="ph-service-tiles">
+      <a class="ph-service-tile" href="/services#sourcing"><span>01</span><strong>Plant Sourcing</strong><em>The right material, in the right condition, on schedule.</em></a>
+      <a class="ph-service-tile" href="/services#importing"><span>02</span><strong>Importing</strong><em>Specialist plant material, expanded project selection.</em></a>
+      <a class="ph-service-tile" href="/services#exporting"><span>03</span><strong>Exporting</strong><em>Documented plant material to regional and international markets.</em></a>
+      <a class="ph-service-tile" href="/services#quality"><span>04</span><strong>Quality Assurance</strong><em>Every plant inspected before delivery.</em></a>
+      <a class="ph-service-tile" href="/services#purchasing"><span>05</span><strong>Centralized Purchasing</strong><em>One point of contact for coordinated project supply.</em></a>
+      <a class="ph-service-tile" href="/services#logistics"><span>06</span><strong>Logistics</strong><em>On time, and in the condition you expect.</em></a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Why us / story ===== -->
 <section class="ph-why ph-section">
   <div class="ph-wrap">
     <div class="ph-why-grid">
@@ -122,6 +185,7 @@
       <div>
         <span class="ph-eyebrow">Why Pheladelfia</span>
         <h2 class="ph-why-title">Rooted in the Emirates for over 20 years</h2>
+        <p class="ph-copy">Pheladelfia Agricultural LLC began in 2004 with a simple belief: the region's design ambitions needed mature, design-grade plant material — grown and supplied to a documented standard. Our Abu Dhabi nursery spans more than 1.5 million square feet in Al Ajban, where plants and trees are propagated and grown on to specimen sizes.</p>
         <div class="ph-why-items">
           <div class="ph-why-item">
             <span class="ph-why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21c-4-3-7-6-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 4-3 7-7 10z"/></svg></span>
@@ -144,7 +208,48 @@
             <p>Discuss specimen sizes, quantities and delivery schedules with our project supply team.</p>
           </div>
         </div>
+        <div class="ph-actions-row">
+          <a class="ph-btn" href="/about">About us</a>
+          <a class="ph-btn ph-btn-outline" href="/projects">Projects</a>
+        </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Visit ===== -->
+<section class="ph-visit-band" id="visit">
+  <div class="ph-wrap ph-visit-grid">
+    <div>
+      <span class="ph-eyebrow">Visit &amp; contact</span>
+      <h2 class="ph-sec-title">The Operational Heart of Pheladelfia</h2>
+      <p class="ph-copy">More than 1.5 million square feet in Al Ajban, Abu Dhabi.</p>
+      <ul class="ph-visit-list">
+        <li>
+          <strong>Nursery</strong>
+          <span>{{ ph_address_nursery }}</span>
+        </li>
+        <li>
+          <strong>Branch</strong>
+          <span>{{ ph_address_branch }}</span>
+        </li>
+        <li>
+          <strong>Opening hours</strong>
+          <span>{{ ph_hours }}</span>
+        </li>
+        <li>
+          <strong>Call us</strong>
+          <a href="{{ ph_phone_tel }}" dir="ltr">{{ ph_phone_display }}</a>
+          <a href="{{ ph_phone_alt_tel }}" dir="ltr">{{ ph_phone_alt_display }}</a>
+        </li>
+      </ul>
+      <div class="ph-actions-row">
+        <a class="ph-btn ph-btn-gold" href="/visit">Visit the nursery</a>
+        <a class="ph-btn ph-btn-ghost" href="{{ ph_maps_url }}" target="_blank" rel="noopener">Open in Google Maps</a>
+      </div>
+    </div>
+    <div class="ph-visit-photo">
+      <img src="{{ ph_img }}/palm-grove-fan.jpg" alt="Fan palms at the Pheladelfia nursery" loading="lazy">
     </div>
   </div>
 </section>
@@ -155,6 +260,7 @@
     <div class="ph-sec-head ph-sec-head-center">
       <span class="ph-eyebrow">Trusted by</span>
       <h2 class="ph-sec-title">Our clients</h2>
+      <p class="ph-sec-sub">Pheladelfia is a registered and approved supplier to leading developers, government entities, and consultants across the UAE and the Kingdom of Saudi Arabia.</p>
     </div>
     <div class="ph-logo-marquee" dir="ltr">
       <div class="ph-logo-track" data-ph-logo-track>
@@ -177,7 +283,26 @@
         <span class="ph-logo-item"><img src="{{ ph_img }}/logos/turner-townsend%20.png" alt="Turner &amp; Townsend" loading="lazy"></span>
       </div>
     </div>
+    <p class="ph-sec-sub ph-center">Regional reach: United Arab Emirates · Saudi Arabia · Jordan · Qatar · Bahrain</p>
   </div>
 </section>
 
 {% include "_certifications" %}
+
+<!-- Journal: posts come from Zoho Blog. No sample articles are stored in the theme. -->
+<section class="ph-section ph-journal-band">
+  <div class="ph-wrap ph-journal-row">
+    <div>
+      <span class="ph-eyebrow">Journal</span>
+      <h2 class="ph-sec-title">Blog</h2>
+    </div>
+    <a class="ph-btn" href="/blog">Blog</a>
+  </div>
+</section>
+
+<!-- Zoho page editor slot. Hidden when the Home page has no editor content. -->
+<section class="ph-editor-gap" id="home-editor" data-ph-gap="home-editor">
+  <div class="ph-wrap">
+    <div class="ph-editor-slot">{{ page.content }}</div>
+  </div>
+</section>

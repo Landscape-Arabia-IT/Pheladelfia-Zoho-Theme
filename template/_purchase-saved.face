@@ -1,0 +1,39 @@
+{% assign ph_saved_count = save_for_later | size %}
+<div class="phx-saved" data-ph-sfl data-zs-save-for-later-container {% if ph_saved_count == 0 %}hidden{% endif %}>
+  <h2 class="phx-saved-title">Saved for later</h2>
+  <div class="phx-saved-grid">
+    {% for variant in save_for_later %}
+    <article class="phx-saved-item" data-zs-variant-save-for-later data-zs-variant-id="{{ variant.variant_id }}" data-zs-product-id="{{ variant.variant_id }}" data-zs-save-for-later-grid>
+      <a href="{{ variant.url }}">
+        <div class="phx-saved-photo">
+          {% if variant.images %}
+            {% assign sflimg = variant.images[0].url %}
+            {% if variant.images[0].is_placeholder_image == false %}{% assign sflimg = variant.images[0].url + '/400x400' %}{% endif %}
+            <img src="{{ sflimg }}" alt="{{ variant.name }}" loading="lazy">
+          {% endif %}
+        </div>
+        <div class="phx-saved-body">
+          <h3 class="phx-saved-name" data-zs-save-for-later-variant-name>{{ variant.name }}</h3>
+          {% if !variant.hide_price %}
+          <p class="phx-saved-price">
+            <span data-zs-selling-price="{{ variant.rate }}">{{ currency.symbol }}{{ variant.rate }}</span>
+            {% if variant.label_price && variant.label_price > variant.rate %}<span class="phx-saved-old-price" data-zs-label-price="{{ variant.label_price }}">{{ currency.symbol }}{{ variant.label_price }}</span>{% endif %}
+          </p>
+          {% endif %}
+          <span class="phx-saved-more">View plant</span>
+        </div>
+      </a>
+      <div class="phx-saved-actions">
+        {% if variant.is_out_of_stock == true %}
+        <a class="phx-saved-move" href="{{ variant.url }}">Out of stock</a>
+        {% else %}
+          {% if !variant.hide_add_to_cart %}
+          <a class="phx-saved-move" href="javascript:;" data-zs-move-to-cart data-zs-product-variant-id="{{ variant.variant_id }}" data-zs-product-lineitem-id="{{ variant.item_id }}">Move to cart</a>
+          {% endif %}
+        {% endif %}
+        <button class="phx-saved-remove" type="button" data-zs-delete-save-for-later-variant data-zs-product-variant-id="{{ variant.variant_id }}" data-zs-product-lineitem-id="{{ variant.item_id }}" aria-label="Remove">Remove</button>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+</div>

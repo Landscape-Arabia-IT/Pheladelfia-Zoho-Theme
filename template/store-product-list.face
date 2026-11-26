@@ -1,4 +1,20 @@
-<article class="ph-product-card" data-ph-product-card data-ph-product-id="{{ product.product_id }}" data-ph-options="">   <a href="{{ product.url }}">     <div class="ph-product-photo" data-ph-gallery>{% include "_store-product-image" %}</div>     <div class="ph-card-body">       {% if product.category_name %}<p class="ph-kicker">{{ product.category_name }}</p>{% endif %}       <h3 class="ph-h3">{{ product.name }}</h3>       {% if product.short_description %}<p class="ph-copy">{{ product.short_description }}</p>{% endif %}       {% include "_store-product-pricing" %}       <span class="ph-more">View specimen</span>     </div>   </a>   <span hidden data-ph-option-source>{% for attribute in product.attributes %}{% for option in attribute.options %}{{ option.id }} {% endfor %}{% endfor %}</span>
-   <button type="button" class="ph-qv-btn" data-zs-quick-view data-zs-product-url="{{ product.url }}" aria-label="Quick view"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6z"/><circle cx="12" cy="12" r="2.6"/></svg></button>
-   {% if page.is_portal_enabled %}<button type="button" class="ph-wish-btn" data-zs-wishlist-element data-ph-auth-wishlist data-ph-wish-btn{% if product.variants %}{% for variant in product.variants %}{% if forloop.first %} data-zs-wishlist-variant-id="{{ variant.variant_id }}"{% endif %}{% endfor %}{% endif %} hidden aria-label="Save to wishlist" aria-pressed="false"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.3-9C1.2 8.6 3 5 6.6 5c2 0 3.6 1.1 4.4 2.6C11.8 6.1 13.4 5 15.4 5 19 5 20.8 8.6 19.3 12c-1.8 4.4-7.3 9-7.3 9z"/></svg></button>{% endif %}
- </article> 
+<article class="ph-product-card" data-ph-product-card data-ph-product-id="{{ product.product_id }}" data-ph-options="">
+  {% assign ph_vcount = 0 %}
+  {% if product.variants %}{% assign ph_vcount = product.variants | size %}{% endif %}
+  <a class="ph-product-link" href="{{ product.url }}">
+    <div class="ph-product-photo" data-ph-gallery>
+      {% include "_store-product-image" %}
+      {% if product.is_out_of_stock %}<span class="ph-stock-badge">Out of stock</span>{% endif %}
+    </div>
+    <div class="ph-card-body">
+      {% if product.category_name %}<p class="ph-kicker">{{ product.category_name }}</p>{% endif %}
+      <h3 class="ph-h3">{{ product.name }}</h3>
+      {% if product.short_description %}<p class="ph-copy ph-card-desc">{{ product.short_description }}</p>{% endif %}
+      {% include "_store-product-pricing" %}
+      <span class="ph-more">{% if ph_vcount > 1 %}Select size{% else %}View plant{% endif %}</span>
+    </div>
+  </a>
+  <span hidden data-ph-option-source>{% for attribute in product.attributes %}{% for option in attribute.options %}{{ option.id }} {% endfor %}{% endfor %}</span>
+  <button type="button" class="ph-qv-btn" data-zs-quick-view data-zs-product-url="{{ product.url }}" aria-label="Quick view"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6z"/><circle cx="12" cy="12" r="2.6"/></svg></button>
+  {% if page.is_portal_enabled %}<button type="button" class="ph-wish-btn" data-zs-wishlist-element data-ph-auth-wishlist data-ph-wish-btn{% if product.variants %}{% for variant in product.variants %}{% if forloop.first %} data-zs-wishlist-variant-id="{{ variant.variant_id }}"{% endif %}{% endfor %}{% endif %} hidden aria-label="Save to wishlist" aria-pressed="false"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>{% endif %}
+</article>

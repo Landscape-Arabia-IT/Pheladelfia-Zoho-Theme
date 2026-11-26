@@ -15,8 +15,8 @@
   <div class="ph-wrap" style="display:flex; flex-direction:column; gap:5rem;">
 
     <!-- Service 01 -->
-    <article class="ph-split" id="sourcing">
-      <div class="ph-gold-frame"><img src="{{ ph_img }}/palm-nursery-rows.jpg" alt="Plant Sourcing" loading="lazy" style="width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:1rem;"></div>
+    <article class="ph-split ph-reveal" id="sourcing">
+      <div class="ph-gold-frame ph-gold-frame--thin ph-zoom"><img src="{{ ph_img }}/palm-nursery-rows.jpg" alt="Plant Sourcing" loading="lazy" style="width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:1rem;"></div>
       <div>
         <span class="ph-eyebrow">Service 01</span>
         <h2 class="ph-sec-title" style="margin-block-start:0.8rem;">Plant Sourcing</h2>
@@ -35,8 +35,8 @@
     </article>
 
     <!-- Service 02 -->
-    <article class="ph-split ph-split-reverse" id="importing">
-      <div class="ph-gold-frame"><img src="{{ ph_img }}/phoenix-canariensis.jpg" alt="Importing" loading="lazy" style="width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:1rem;"></div>
+    <article class="ph-split ph-split-reverse ph-reveal" id="importing">
+      <div class="ph-gold-frame ph-gold-frame--thin ph-zoom"><img src="{{ ph_img }}/phoenix-canariensis.jpg" alt="Importing" loading="lazy" style="width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:1rem;"></div>
       <div>
         <span class="ph-eyebrow">Service 02</span>
         <h2 class="ph-sec-title" style="margin-block-start:0.8rem;">Importing</h2>
@@ -55,8 +55,8 @@
     </article>
 
     <!-- Service 03 -->
-    <article class="ph-split" id="exporting">
-      <div class="ph-gold-frame"><img src="{{ ph_img }}/date-palm.jpg" alt="Exporting" loading="lazy" style="width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:1rem;"></div>
+    <article class="ph-split ph-reveal" id="exporting">
+      <div class="ph-gold-frame ph-gold-frame--thin ph-zoom"><img src="{{ ph_img }}/date-palm.jpg" alt="Exporting" loading="lazy" style="width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:1rem;"></div>
       <div>
         <span class="ph-eyebrow">Service 03</span>
         <h2 class="ph-sec-title" style="margin-block-start:0.8rem;">Exporting</h2>
@@ -74,8 +74,8 @@
     </article>
 
     <!-- Service 04 -->
-    <article class="ph-split ph-split-reverse" id="quality">
-      <div class="ph-gold-frame"><img src="{{ ph_img }}/indoor-plants.jpg" alt="Quality Assurance" loading="lazy" style="width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:1rem;"></div>
+    <article class="ph-split ph-split-reverse ph-reveal" id="quality">
+      <div class="ph-gold-frame ph-gold-frame--thin ph-zoom"><img src="{{ ph_img }}/indoor-plants.jpg" alt="Quality Assurance" loading="lazy" style="width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:1rem;"></div>
       <div>
         <span class="ph-eyebrow">Service 04</span>
         <h2 class="ph-sec-title" style="margin-block-start:0.8rem;">Quality Assurance</h2>
@@ -93,8 +93,8 @@
     </article>
 
     <!-- Service 05 -->
-    <article class="ph-split" id="purchasing">
-      <div class="ph-gold-frame"><img src="{{ ph_img }}/planters.jpg" alt="Centralized Purchasing" loading="lazy" style="width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:1rem;"></div>
+    <article class="ph-split ph-reveal" id="purchasing">
+      <div class="ph-gold-frame ph-gold-frame--thin ph-zoom"><img src="{{ ph_img }}/planters.jpg" alt="Centralized Purchasing" loading="lazy" style="width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:1rem;"></div>
       <div>
         <span class="ph-eyebrow">Service 05</span>
         <h2 class="ph-sec-title" style="margin-block-start:0.8rem;">Centralized Purchasing</h2>
@@ -112,8 +112,8 @@
     </article>
 
     <!-- Service 06 -->
-    <article class="ph-split ph-split-reverse" id="logistics">
-      <div class="ph-gold-frame"><img src="{{ ph_img }}/ghaf-tree.jpg" alt="Logistics" loading="lazy" style="width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:1rem;"></div>
+    <article class="ph-split ph-split-reverse ph-reveal" id="logistics">
+      <div class="ph-gold-frame ph-gold-frame--thin ph-zoom"><img src="{{ ph_img }}/ghaf-tree.jpg" alt="Logistics" loading="lazy" style="width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:1rem;"></div>
       <div>
         <span class="ph-eyebrow">Service 06</span>
         <h2 class="ph-sec-title" style="margin-block-start:0.8rem;">Logistics</h2>

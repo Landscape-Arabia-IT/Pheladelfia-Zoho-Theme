@@ -1,89 +1,39 @@
 {% extends "_theme" %}
 {% block content %}
-<section class="ph-store ph-selection-page ph-cart-page">
-  <div class="ph-wrap">
-    <header class="ph-cart-hero">
-      <p class="ph-kicker">Nursery</p>
-      <h1 class="ph-h2">Your selection</h1>
-      <p class="ph-lead">Review your specimens, adjust quantities and continue to secure checkout.</p>
-    </header>
-
-    {% if cart.items %}
-    <div class="ph-selection-layout">
-      <div class="ph-selection-main">
-        <div class="ph-selection-list-head" aria-hidden="true">
-          <span></span>
-          <span>Specimen</span>
-          <span>Quantity</span>
-          <span>Total</span>
-          <span></span>
-        </div>
-        <div class="ph-selection-list" data-cart-items>
-          {% for item in cart.items %}
-          <article class="ph-selection-row" data-ph-cart-row data-ph-item-url="{{ item.url }}" data-zs-product-id="" data-zs-product-variant-id="" data-zs-product-wrapper-lineitem-id="">
-            <div class="ph-selection-photo" data-ph-cart-photo></div>
-            <div class="ph-selection-info">
-              <a class="ph-selection-name" href="{{ item.url }}">{{ item.name }}</a>
-              <p class="ph-copy" data-ph-cart-meta></p>
-              <p class="ph-selection-unit"><span>Unit price</span><strong class="ph-price" data-ph-cart-unit></strong></p>
-            </div>
-            <div class="ph-selection-qty">
-              <div class="ph-qty-box">
-                <button class="ph-qty-btn" type="button" data-ph-qty-minus aria-label="Decrease quantity">−</button>
-                <input class="ph-qty" type="number" min="1" value="{{ item.quantity }}" data-zs-quantity aria-label="Quantity">
-                <button class="ph-qty-btn" type="button" data-ph-qty-plus aria-label="Increase quantity">+</button>
-              </div>
-            </div>
-            <div class="ph-selection-total">
-              <span class="ph-selection-total-label">Total</span>
-              <strong data-ph-cart-total>{{ cart.symbol }}{{ item.total_price }}</strong>
-            </div>
-            <div class="ph-row-actions ph-selection-actions">
-              <button class="ph-text-link ph-selection-remove" type="button" data-zs-delete data-ph-remove>Remove</button>
-              <span class="ph-text-link ph-sfl-save" data-zs-save-for-later data-zs-product-variant-id="{{ item.variant_id }}" data-zs-product-lineitem-id="{{ item.line_item_id }}" role="button" tabindex="0">Save for later</span>
-            </div>
-          </article>
-          {% endfor %}
-        </div>
+<div class="phx-shell phx-cart">
+{% include "_purchase-header" %}
+<section class="phx-main">
+  <header class="phx-title"><h1>Your cart</h1></header>
+  {% assign ph_cart_count = cart.items | size %}
+  {% if ph_cart_count > 0 %}
+  <div class="phx-grid">
+    <div class="phx-products"><div class="phx-panel-heading"><h2>Your plants</h2><span>{{ ph_cart_count }} {% if ph_cart_count == 1 %}<span>item</span>{% else %}<span>items</span>{% endif %}</span></div>
+      <p class="phx-feedback" data-ph-cart-feedback role="status" aria-live="polite" hidden></p>
+      <div data-cart-items>
+      {% for item in cart.items %}
+        <article class="phx-item" data-ph-cart-row data-ph-item-url="{{ item.url }}" data-zs-product-id="{{ item.product_id }}" data-zs-product-variant-id="{{ item.variant_id }}" data-zs-product-wrapper-lineitem-id="{{ item.line_item_id }}">
+          <div class="phx-photo" data-ph-cart-photo></div>
+          <div class="phx-item-info"><a href="{{ item.url }}">{{ item.name }}</a><p data-ph-cart-meta></p><span class="phx-unit"><span>Unit price</span> <strong data-ph-cart-unit></strong></span></div>
+          <div class="phx-quantity"><button type="button" data-ph-qty-minus aria-label="Decrease quantity">−</button><input type="number" min="1" value="{{ item.quantity }}" data-zs-quantity aria-label="Quantity"><button type="button" data-ph-qty-plus aria-label="Increase quantity">+</button></div>
+          <strong class="phx-item-total" data-ph-cart-total>{{ cart.symbol }} {{ item.total_price }}</strong>
+          <div class="phx-item-actions"><button type="button" data-zs-delete data-ph-remove>Remove</button><button type="button" data-zs-save-for-later data-zs-product-variant-id="{{ item.variant_id }}" data-zs-product-lineitem-id="{{ item.line_item_id }}">Save for later</button></div>
+        </article>
+      {% endfor %}
       </div>
-
-      <aside class="ph-selection-summary">
-        <p class="ph-kicker">Summary</p>
-        <h2 class="ph-h3">Order summary</h2>
-        <div class="ph-selection-summary-row">
-          <span>Items</span>
-          <strong>{{ cart.items | size }}</strong>
-        </div>
-        <div class="ph-selection-summary-row is-subtotal">
-          <span>Subtotal</span>
-          <strong data-ph-cart-subtotal>{{ cart.symbol }}{{ cart.sub_total }}</strong>
-        </div>
-        <p class="ph-copy ph-selection-note">{{ ph_vat_note }} · {{ ph_delivery_note }}</p>
-        {% if cart.checkout_url %}
-        <a class="ph-btn" data-zs-checkout href="{{ cart.checkout_url }}">Continue to checkout</a>
-        {% endif %}
-        <a class="ph-text-link" href="/all-collections">Keep browsing</a>
-        <ul class="ph-trust-list ph-selection-trust">
-          <li>Secure checkout</li>
-          <li>Delivery across the UAE</li>
-          <li>Nursery support</li>
-        </ul>
-      </aside>
+      <a class="phx-inline-link" href="/all-collections">Add more plants <span aria-hidden="true">→</span></a>
+      {% include "_purchase-saved" %}
     </div>
-    {% else %}
-    <div class="ph-empty ph-cart-empty">
-      <div class="ph-cart-empty-icon" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21c-4.5-3.2-8-6.6-8-10.5A5.5 5.5 0 0 1 12 7a5.5 5.5 0 0 1 8 3.5c0 3.9-3.5 7.3-8 10.5z"/><path d="M12 21V10"/></svg>
-      </div>
-      <h2 class="ph-h3">Your selection is empty.</h2>
-      <p class="ph-lead">Browse palms, trees, shrubs and garden supplies to start your order.</p>
-      <a class="ph-btn" href="/all-collections">Browse collections</a>
-    </div>
-    {% endif %}
-
-    {% include 'save-for-later' %}
-    <div class="ph-sfl-alert" data-save-for-later-alert-update="theme-save-for-later-alert-update" role="status" aria-live="polite"></div>
-    <div data-zs-cross-sell-products></div>
+    <aside class="phx-summary"><h2>Order summary</h2><div class="phx-summary-line phx-summary-subtotal"><span>Subtotal</span><strong data-ph-cart-subtotal>{{ cart.symbol }} {{ cart.sub_total }}</strong></div><div class="phx-summary-line"><span>VAT &amp; delivery</span><small>Calculated at checkout</small></div><p class="phx-summary-note">Prices exclude 5% VAT. Final charges are shown at checkout.</p>
+    {% if cart.checkout_url %}<a class="phx-button" data-zs-checkout href="{{ cart.checkout_url }}"><span>Checkout</span></a>{% endif %}
+    <p class="phx-summary-support">Need a hand with your order? <a href="{{ ph_phone_tel }}">Contact our team</a></p></aside>
   </div>
+  {% else %}
+  <div class="phx-empty"><span class="phx-empty-icon" aria-hidden="true">✳</span><h2>A little room for something green.</h2><p>Your cart is empty. Find a plant to make your space your own.</p><a class="phx-button" href="/all-collections">Explore our plants <span aria-hidden="true">→</span></a></div>
+  {% endif %}
+  {% if ph_cart_count == 0 %}{% include "_purchase-saved" %}{% endif %}
+  <div data-save-for-later-alert-update="theme-save-for-later-alert-update" role="status" aria-live="polite"></div>
+  <div data-zs-cross-sell-products></div>
 </section>
+{% include "_purchase-footer" %}
+</div>
 {% endblock %}

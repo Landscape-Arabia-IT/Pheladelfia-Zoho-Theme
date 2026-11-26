@@ -13,10 +13,10 @@
       <div class="ph-selection-main">
         <div class="ph-selection-list-head" aria-hidden="true">
           <span></span>
-          <span>Specimen</span>
+          <span>Product</span>
+          <span>Price</span>
           <span>Quantity</span>
-          <span>Total</span>
-          <span></span>
+          <span>Subtotal</span>
         </div>
         <div class="ph-selection-list" data-cart-items>
           {% for item in cart.items %}
@@ -25,8 +25,8 @@
             <div class="ph-selection-info">
               <a class="ph-selection-name" href="{{ item.url }}">{{ item.name }}</a>
               <p class="ph-copy" data-ph-cart-meta></p>
-              <p class="ph-selection-unit"><span>Unit price</span><strong class="ph-price" data-ph-cart-unit></strong></p>
             </div>
+            <p class="ph-selection-unit"><strong class="ph-price" data-ph-cart-unit></strong></p>
             <div class="ph-selection-qty">
               <div class="ph-qty-box">
                 <button class="ph-qty-btn" type="button" data-ph-qty-minus aria-label="Decrease quantity">−</button>

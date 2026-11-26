@@ -528,20 +528,20 @@
   <aside class="ph-drawer-panel" role="dialog" aria-modal="true" aria-label="Your cart" tabindex="-1">
     <header class="ph-drawer-head">
       <div>
-        <p class="ph-kicker">Nursery</p>
         <h2 class="ph-drawer-title">Your selection</h2>
       </div>
       <button class="ph-icon-btn" type="button" data-ph-drawer-close aria-label="Close selection">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 6l12 12M18 6L6 18"/></svg>
       </button>
     </header>
+    <p class="ph-drawer-note">{{ ph_vat_note }} · {{ ph_delivery_note }}</p>
     <div class="ph-drawer-body" data-ph-drawer-items></div>
+    <div data-zs-cross-sell-products class="ph-drawer-cross"></div>
     <footer class="ph-drawer-foot" data-ph-drawer-foot hidden>
       <div class="ph-drawer-sub">
         <span>Subtotal</span>
         <strong data-ph-drawer-subtotal></strong>
       </div>
-      <p class="ph-drawer-note">{{ ph_vat_note }} · {{ ph_delivery_note }}</p>
       <a class="ph-btn" data-ph-drawer-checkout href="/checkout">Continue to checkout</a>
       <a class="ph-text-link" href="/cart">View full selection</a>
     </footer>

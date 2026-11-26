@@ -262,3 +262,19 @@ html[dir='rtl'] .phx-shell :is(h1,h2,h3,h4,.phx-brand > span,.theme-cart-details
 html[dir='rtl'] .phx-shell .phx-flow .theme-cart-details-summary-total { display:flex; align-items:baseline; justify-content:space-between; gap:16px; flex-wrap:wrap; }
 html[dir='rtl'] .phx-shell .phx-flow .theme-cart-details-summary-list-item { gap:16px; }
 html[dir='rtl'] .phx-shell :is(.phx-item-total,[data-ph-cart-subtotal],[data-ph-cart-unit],.phx-summary-line strong,.phx-receipt-details dd) { unicode-bidi:plaintext; }
+
+/* Selects — same custom chevron as the storefront so the dropdown arrow
+   keeps breathing room from the field edge (native arrows sit flush). */
+.phx-shell select,
+.phx-shell .phx-flow select {
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23183d2b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-inline-end: 2rem;
+}
+html[dir='rtl'] .phx-shell select,
+html[dir='rtl'] .phx-shell .phx-flow select {
+  background-position: left 12px center;
+}

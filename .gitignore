@@ -7,3 +7,4 @@ form-endpoint/submissions.log
 
 # macOS
 .DS_Store
+template/js/ph-i18n.js

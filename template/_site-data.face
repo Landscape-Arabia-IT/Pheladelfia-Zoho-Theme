@@ -15,7 +15,7 @@
 {% assign ph_maps_url = "https://www.google.com/maps/search/?api=1&amp;query=Pheladelfia+Agricultural+Al+Ajban+Abu+Dhabi" %}
 {% assign ph_maps_url_branch = "https://maps.app.goo.gl/Cay3NqKLeijobKWE6" %}
 {% assign ph_maps_embed_branch = "https://www.google.com/maps?q=25.157331,55.460442&z=15&output=embed" %}
-{% assign ph_hours = "Sat–Thu 8am–6pm · Friday closed" %}
+{% assign ph_hours = "Mon–Sat 8am–6pm · Sunday closed" %}
 {% assign ph_address_nursery = "Farm No. 563 &amp; 564, Al Ajban, Muwailih, Abu Dhabi" %}
 {% assign ph_address_nursery_short = "Nursery: Al Ajban, Abu Dhabi" %}
 {% assign ph_address_branch = "Branch: Warsan, Dubai" %}

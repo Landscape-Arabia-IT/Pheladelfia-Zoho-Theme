@@ -17,8 +17,6 @@
   {% include "_capabilities" %}
 {% elif ph_page_url == "/sustainability" || ph_page_url == "/sustainability/" || ph_page_url == "sustainability" || ph_page_url == "sustainability/" || ph_page_title == "sustainability" || ph_page_title == "الاستدامة" %}
   {% include "_sustainability" %}
-{% elif ph_page_url == "/projects" || ph_page_url == "/projects/" || ph_page_url == "projects" || ph_page_url == "projects/" || ph_page_title == "projects" || ph_page_title == "المشاريع" %}
-  {% include "_projects" %}
 {% elif ph_page_url == "/contact" || ph_page_url == "/contact/" || ph_page_url == "contact" || ph_page_title == "contact" || ph_page_title == "contact us" || ph_page_title == "تواصل معنا" %}
   {% include "_contact" %}
 {% elif ph_page_url == "/join-us" || ph_page_url == "/join-us/" || ph_page_url == "join-us" || ph_page_url == "/careers" || ph_page_url == "/careers/" || ph_page_url == "careers" || ph_page_title == "join us" || ph_page_title == "careers" || ph_page_title == "انضم إلينا" %}
@@ -40,7 +38,6 @@
   <template data-ph-route="all-collections">{% include "_collections" %}</template>
   <template data-ph-route="capabilities">{% include "_capabilities" %}</template>
   <template data-ph-route="sustainability">{% include "_sustainability" %}</template>
-  <template data-ph-route="projects">{% include "_projects" %}</template>
   <template data-ph-route="contact">{% include "_contact" %}</template>
   <template data-ph-route="join-us">{% include "_careers" %}</template>
   <template data-ph-route="careers">{% include "_careers" %}</template>

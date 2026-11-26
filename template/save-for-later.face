@@ -1,4 +1,5 @@
-<div class="ph-sfl" data-ph-sfl data-zs-save-for-later-container {% if save_for_later | size == 0 %}hidden{% endif %}>
+{% assign ph_saved_count = save_for_later | size %}
+<div class="ph-sfl" data-ph-sfl data-zs-save-for-later-container {% if ph_saved_count == 0 %}hidden{% endif %}>
   <p class="ph-kicker">Saved for later</p>
   <h2 class="ph-h3">Buy another time</h2>
   <div class="ph-product-grid">
@@ -20,7 +21,7 @@
             {% if variant.label_price && variant.label_price > variant.rate %}<span class="ph-price-note" data-zs-label-price="{{ variant.label_price }}">{{ currency.symbol }}{{ variant.label_price }}</span>{% endif %}
           </p>
           {% endif %}
-          <span class="ph-more">View specimen</span>
+          <span class="ph-more">View plant</span>
         </div>
       </a>
       <div class="ph-wish-actions">

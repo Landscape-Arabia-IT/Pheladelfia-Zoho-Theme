@@ -216,6 +216,13 @@
   function initScrollReveals() {
     var targets = document.querySelectorAll(".ph-reveal, .ph-stagger");
     if (!targets.length) return;
+    var reduced = !!(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches);
+    if (reduced) {
+      targets.forEach(function (el) { el.classList.add("is-in"); });
+      return;
+    }
+    // Hidden initial states apply only once JS opts in — no-JS keeps content visible.
+    document.documentElement.classList.add("ph-motion");
     if (!("IntersectionObserver" in window)) {
       targets.forEach(function (el) { el.classList.add("is-in"); });
       return;
@@ -1344,6 +1351,32 @@ window.__phJsOnce = true;
     var root = qs("[data-cart-items]");
     if (!root) return;
 
+    var feedback = qs("[data-ph-cart-feedback]");
+    function cartFeedback(message, error) {
+      if (!feedback) return;
+      feedback.hidden = false;
+      feedback.classList.toggle("is-error", !!error);
+      feedback.textContent = message;
+    }
+    function mutateCart(row, url, options) {
+      if (row.getAttribute("aria-busy") === "true") return;
+      row.setAttribute("aria-busy", "true");
+      var controls = qsa("button, input", row);
+      controls.forEach(function (el) { el.disabled = true; });
+      cartFeedback("Updating your cart…", false);
+      fetch(url, options).then(function (response) {
+        if (!response.ok) throw new Error("Cart request failed");
+        return response.json();
+      }).then(function (data) {
+        if (data.code !== undefined && Number(data.code) !== 0) throw new Error("Cart update rejected");
+        window.location.reload();
+      }).catch(function () {
+        row.removeAttribute("aria-busy");
+        controls.forEach(function (el) { el.disabled = false; });
+        cartFeedback("Unable to update your cart. Please try again.", true);
+      });
+    }
+
     function updateRow(row) {
       var qty = qs("[data-zs-quantity]", row);
       var variantId = row.getAttribute("data-zs-product-variant-id");
@@ -1354,12 +1387,12 @@ window.__phJsOnce = true;
       qty.value = String(cappedQty);
       var body = { product_variant_id: variantId, quantity: String(cappedQty) };
       if (lineId) body.line_item_id = lineId;
-      fetch("/storefront/api/v1/cart", {
+      mutateCart(row, "/storefront/api/v1/cart", {
         method: "PUT",
         headers: cartHeaders(),
         credentials: "same-origin",
         body: JSON.stringify(body)
-      }).then(function () { window.location.reload(); });
+      });
     }
 
     function removeRow(row) {
@@ -1368,11 +1401,11 @@ window.__phJsOnce = true;
       if (!variantId) return;
       var url = "/storefront/api/v1/cart?product_variant_id=" + encodeURIComponent(variantId);
       if (lineId) url += "&line_item_id=" + encodeURIComponent(lineId);
-      fetch(url, {
+      mutateCart(row, url, {
         method: "DELETE",
         headers: cartHeaders(),
         credentials: "same-origin"
-      }).then(function () { window.location.reload(); });
+      });
     }
 
     fetch("/storefront/api/v1/cart", {
@@ -1382,6 +1415,8 @@ window.__phJsOnce = true;
       var payload = data.payload || data.cart_details || {};
       var items = payload.items || [];
       var rows = qsa("[data-ph-cart-row]", root);
+      var subtotal = qs("[data-ph-cart-subtotal]");
+      if (subtotal && payload.sub_total != null) subtotal.textContent = money(payload.sub_total);
       items.forEach(function (item) {
         var row = rows.filter(function (el) {
           var url = el.getAttribute("data-ph-item-url") || "";
@@ -1424,9 +1459,15 @@ window.__phJsOnce = true;
         }
         var unit = qs("[data-ph-cart-unit]", row);
         if (unit && (item.selling_price || item.selling_price === 0)) {
-          unit.textContent = (payload.symbol || "AED") + item.selling_price;
+          unit.textContent = money(item.selling_price);
+        }
+        var total = qs("[data-ph-cart-total]", row);
+        if (total && item.total_price != null) {
+          total.textContent = money(item.total_price);
         }
       });
+    }).catch(function () {
+      cartFeedback("Unable to update your cart. Please try again.", true);
     });
 
     root.addEventListener("click", function (event) {
@@ -2431,7 +2472,8 @@ window.__phJsOnce = true;
 
 (function () {
   if (!document.querySelector(".theme-portal-form-container")) return;
-  var pageCss = "html,body{background:#f7f4ec!important;color:#1b3022!important;font-family:Montserrat,Trebuchet MS,sans-serif!important}" +
+  var portalFont = "'Plus Jakarta Sans','Tajawal',ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif";
+  var pageCss = "html,body{background:#f7f4ec!important;color:#1b3022!important;font-family:" + portalFont + "!important}" +
     ".theme-header{background:#fff;border-bottom:1px solid rgba(27,48,34,.08);padding:10px 0 6px}" +
     ".theme-logo-parent{text-align:center}" +
     ".theme-logo-parent img,img[data-zs-logo]{height:108px!important;width:auto!important;max-width:280px!important;object-fit:contain;mix-blend-mode:multiply;background:transparent!important}" +
@@ -2446,9 +2488,9 @@ window.__phJsOnce = true;
   style.id = "ph-portal-page";
   style.textContent = pageCss;
   document.head.appendChild(style);
-  var frameCss = "html,body,.bg_one,.signin_container,.signin_box{background:#fff!important;color:#1b3022!important;font-family:Montserrat,Trebuchet MS,sans-serif!important}" +
+  var frameCss = "html,body,.bg_one,.signin_container,.signin_box{background:#fff!important;color:#1b3022!important;font-family:" + portalFont + "!important}" +
     ".signin_head,.service_name,.titlename,.username,.hellouser,#headtitle,#trytitle{color:#1b3022!important}#headtitle{font-weight:700;font-size:22px;letter-spacing:.04em}" +
-    ".textbox{border:1px solid #d7d0c4!important;border-radius:0!important;color:#1b3022!important;background:#fff!important;font-family:Montserrat,Trebuchet MS,sans-serif!important}" +
+    ".textbox{border:1px solid #d7d0c4!important;border-radius:0!important;color:#1b3022!important;background:#fff!important;font-family:" + portalFont + "!important}" +
     ".btn.blue,#nextbtn,button.btn{background:#c39b3e!important;border:0!important;color:#1b3022!important;border-radius:0!important;font-weight:700!important;letter-spacing:.08em;text-transform:uppercase}" +
     "a,.bluetext{color:#1b3022!important}" +
     "a:hover,.bluetext:hover{color:#c39b3e!important}";
@@ -2456,6 +2498,15 @@ window.__phJsOnce = true;
     try {
       var doc = frame.contentDocument;
       if (!doc || !doc.head || doc.getElementById("ph-portal-frame")) return;
+      var rtl = document.documentElement.getAttribute("dir") === "rtl" ||
+        document.documentElement.classList.contains("ph-rtl");
+      if (rtl && !doc.getElementById("ph-portal-frame-font")) {
+        var fontLink = doc.createElement("link");
+        fontLink.id = "ph-portal-frame-font";
+        fontLink.rel = "stylesheet";
+        fontLink.href = "https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap";
+        doc.head.appendChild(fontLink);
+      }
       var s = doc.createElement("style");
       s.id = "ph-portal-frame";
       s.textContent = frameCss;
@@ -2492,833 +2543,19 @@ window.__phJsOnce = true;
   if (only.length === 1) location.replace(only[0].getAttribute("href"));
 })();
 
-/* Language switch (English / Arabic), cookie-bar spacing and sign-in page layout. */
+/* Language switch — dictionaries live in window.PH_I18N (built from lang/*.js). */
 (function () {
   var KEY = "ph_lang_v2";
-  var AR = {
-    "Explore our plant collections": "تصفّح مجموعاتنا النباتية",
-    "Since 2004, Pheladelfia has grown palms, trees and plants in Al Ajban, Abu Dhabi. Join a team that values safety, quality and care for the environment.": "منذ 2004، تزرع فلادلفيا النخيل والأشجار والنباتات في العجبان بأبوظبي. انضم إلى فريق يقدّر السلامة والجودة والعناية بالبيئة.",
-    "Choose a collection to explore plant species and the sizes listed in our online store.": "اختر مجموعة لتصفّح أنواع النباتات والمقاسات المدرجة في متجرنا الإلكتروني.",
-    "Garden supplies and more": "مستلزمات الحدائق والمزيد",
-    "Explore additional nursery supplies and contact our team to confirm availability for your project.": "تصفّح مستلزمات المشتل الإضافية وتواصل مع فريقنا لتأكيد توفرها لمشروعك.",
-    "Collection": "مجموعة",
-    "Talk to our nursery team about plant selection, current availability and project supply.": "تواصل مع فريق المشتل لاختيار النباتات وتأكيد توفرها وتنسيق توريد مشروعك.",
-    "Explore palms, trees and ground covers, and ask our team about current nursery availability.": "تصفّح النخيل والأشجار ونباتات التغطية، واسأل فريقنا عن المتوفر حاليًا في المشتل.",
-    "Discuss specimen sizes, quantities and delivery schedules with our project supply team.": "ناقش المقاسات والكميات ومواعيد التسليم مع فريق توريد المشاريع.",
-    "Nursery: Farm 563 & 564, Al Ajban, Abu Dhabi": "المشتل: مزرعة 563 و564، العجبان، أبوظبي",
-    "Out of stock — enquire about availability": "غير متوفر — استفسر عن إمكانية التوريد",
-    "Al Ajban": "العجبان",
-    "Abu Dhabi nursery": "مشتل أبوظبي",
-    "Our branch": "فرعنا",
-    "Dubai": "دبي",
-    "Warsan, Dubai": "الورسان، دبي",
-    "27 April 2029": "27 أبريل 2029",
-    "Your email address": "بريدك الإلكتروني",
-    "Decrease quantity": "تقليل الكمية",
-    "Increase quantity": "زيادة الكمية",
-    "Quantity": "الكمية",
-    "Rows of mature Washingtonia palms at the Pheladelfia nursery in Abu Dhabi": "صفوف نخيل واشنطونيا في مشتل فلادلفيا بأبوظبي",
-    "Fan palms at the Pheladelfia nursery": "نخيل مروحي في مشتل فلادلفيا",
-    "Native Ghaf tree": "شجرة غاف محلية",
-    "Specimen palm tree": "نخلة مختارة",
-    "Flowering bougainvillea shrub": "شجيرة جهنمية مزهرة",
-    "Indoor ornamental plants": "نباتات زينة داخلية",
-    "Plant pots and garden supplies": "أصص ومستلزمات حدائق",
-    "Grounds maintenance crew": "فريق صيانة المساحات الخضراء",
-    "Interior plant maintenance": "العناية بالنباتات الداخلية",
-    "A specimen fan palm at our nursery": "نخلة مروحية مختارة في مشتلنا",
-    "Fresh Flowers and Bouquets": "زهور طبيعية وباقات ورد",
-    "Seeds and Planting Stock": "بذور وتقاوي",
-    "Fertilizers and Soil Amendments": "أسمدة ومصلحات زراعية",
-    "Art and Sculptures": "فنون ومنحوتات",
-    "Tools and Equipment": "أدوات ومعدات",
-    "Courtyard planting": "زراعة الأفنية",
-    "Courtyard planting inspiration": "أفكار لزراعة الأفنية",
-    "Hospitality inspiration": "أفكار للمساحات الفندقية",
-    "Garden planting": "زراعة الحدائق",
-    "Garden planting inspiration": "أفكار لزراعة الحدائق",
-    "Residential inspiration": "أفكار للحدائق السكنية",
-    "Washingtonia palms": "نخيل واشنطونيا",
-    "Washingtonia nursery palms": "نخيل واشنطونيا في المشتل",
-    "Nursery collection": "تشكيلة المشتل",
-    "Indoor greenery": "نباتات داخلية",
-    "Indoor planting inspiration": "أفكار للزراعة الداخلية",
-    "Interior inspiration": "أفكار للمساحات الداخلية",
-    "Maintenance inspiration": "أفكار للصيانة",
-    "Date palms": "نخيل التمر",
-    "Palm collection": "تشكيلة النخيل",
-    "Native Ghaf trees": "أشجار غاف محلية",
-    "Native planting inspiration": "أفكار للزراعة المحلية",
-    "Terrace planting": "زراعة الشرفات",
-    "Terrace planting inspiration": "أفكار لزراعة الشرفات",
-    "Terrace inspiration": "أفكار للشرفات",
+  var RTL_LANGS = { ar: 1, he: 1, fa: 1, ur: 1 };
 
-    "Premium Palms & Trees — Grown & sourced for the UAE": "نخيل وأشجار فاخرة — مُزرعة ومُورَّدة للإمارات",
-    "Agricultural LLC": "الزراعية ذ.م.م",
-    "Account": "حسابي",
-    "Shop palms": "تسوّق النخيل",
-    "Exclusive of 5% VAT · Delivered across the UAE": "غير شامل ضريبة القيمة المضافة 5% · توصيل لجميع أنحاء الإمارات",
-    "Shop": "المتجر",
-    "Company": "الشركة",
-    "About us": "من نحن",
-    "My account": "حسابي",
-    "Visit & contact": "الزيارة والتواصل",
-    "Pheladelfia Agricultural LLC. All rights reserved.": "فلادلفيا الزراعية ذ.م.م. جميع الحقوق محفوظة.",
-    "Prices in AED, excluding 5% VAT.": "الأسعار بالدرهم الإماراتي، وغير شاملة ضريبة القيمة المضافة 5%.",
-    "Search palms, trees, shrubs…": "ابحث عن النخيل والأشجار والشجيرات…",
-    "Your cart": "سلتك",
-    "Pheladelfia home": "فلادلفيا — الرئيسية",
-    "Pheladelfia Agricultural LLC": "فلادلفيا الزراعية ذ.م.م",
-    "Previous": "السابق",
-    "Next": "التالي",
-    "From our nursery": "من مشتلنا",
-    "Explore our plants": "اكتشف نباتاتنا",
-    "Loading plants…": "جارٍ تحميل النباتات…",
-    "Browse collections": "تصفّح المجموعات",
-    "PHELADELFIA AGRICULTURAL LLC": "فلادلفيا الزراعية ذ.م.م",
-    "Pheladelfia Agricultural": "فلادلفيا الزراعية",
-    "Pheladelfia": "فلادلفيا",
-    "All categories": "جميع الفئات",
-    "Outdoor": "خارجي",
-    "Indoor": "داخلي",
-    "Search": "بحث",
-    "What are you looking for?": "عمّ تبحث؟",
-    "Inquire": "استفسار",
-    "Sign in": "تسجيل الدخول",
-    "Register": "إنشاء حساب",
-    "Your selection": "اختياراتك",
-    "Open menu": "فتح القائمة",
-    "Main": "القائمة الرئيسية",
-    "Collections": "المجموعات",
-    "All collections": "جميع المجموعات",
-    "Browse every collection": "تصفّح جميع المجموعات",
-    "Outdoor Plants": "النباتات الخارجية",
-    "Indoor & Decor": "النباتات الداخلية والديكور",
-    "Garden & Nursery Supply": "مستلزمات الحدائق والمشتل",
-    "Palm Trees": "النخيل",
-    "Trees": "الأشجار",
-    "Rare & Ancient Trees": "الأشجار النادرة والمعمّرة",
-    "Rare and Ancient Trees": "الأشجار النادرة والمعمّرة",
-    "Large, Rare & Ancient Trees": "الأشجار الكبيرة النادرة والمعمّرة",
-    "Large, Rare and Ancient Trees": "الأشجار الكبيرة النادرة والمعمّرة",
-    "Cacti & Succulents": "الصباريات والعصاريات",
-    "Cacti and Succulents": "الصباريات والعصاريات",
-    "Shrubs & Ground Cover": "الشجيرات ونباتات التغطية الأرضية",
-    "Shrubs and Ground Cover": "الشجيرات ونباتات التغطية الأرضية",
-    "Climbers": "المتسلقات",
-    "Indoor Plants": "النباتات الداخلية",
-    "Indoor Ornamental Plants": "نباتات الزينة الداخلية",
-    "Indoor Ornamentals": "نباتات الزينة الداخلية",
-    "Fresh Flowers": "الزهور الطبيعية",
-    "Fresh Flowers & Bouquets": "الزهور الطبيعية وباقات الورد",
-    "Artificial Plants": "نباتات اصطناعية",
-    "Garden Supply": "مستلزمات الحدائق",
-    "Fertilizers & Soil": "الأسمدة والتربة",
-    "Fertilizers & Soil Amendments": "الأسمدة والمصلحات الزراعية",
-    "Seeds & Planting Stock": "البذور والتقاوي",
-    "Tools & Equipment": "الأدوات والمعدات",
-    "Art & Sculptures": "القسم الفني والمنحوتات",
-    "Washingtonia robusta": "واشنطونيا روبوستا",
-    "Direct Use Purchases": "مشتريات للاستخدام المباشر",
-    "Small Tools & Consumables": "أدوات ومواد استهلاكية",
-    "Home": "الرئيسية",
-    "About": "من نحن",
-    "Nursery": "المشتل",
-    "Blog": "المدونة",
-    "Journal": "المدونة",
-    "Contact": "تواصل معنا",
-    "Where Nature": "حيث تصبح الطبيعة",
-    "Becomes Legacy": "إرثًا خالدًا",
-    "Where Nature Becomes Legacy": "حيث تصبح الطبيعة إرثًا خالدًا",
-    "A premium nursery in the UAE": "مشتل متميز في دولة الإمارات",
-    "Abu Dhabi | Since 2004": "أبوظبي | منذ 2004",
-    "Visit the nursery": "زيارة المشتل",
-    "Established in Abu Dhabi": "تأسست في أبوظبي",
-    "1.5M ft²": "1.5 مليون قدم²",
-    "Specialist nursery footprint in Al Ajban": "مساحة مشتل متخصص في العجبان",
-    "UAE & GCC": "الإمارات ودول الخليج",
-    "Regional project and supply reach": "امتداد إقليمي للمشاريع والتوريد",
-    "Continental Sourcing": "توريد من عدة قارات",
-    "Europe, Asia and the Middle East": "أوروبا وآسيا والشرق الأوسط",
-    "Specimen Focused Expertise": "خبرة متخصصة في العينات النباتية",
-    "Mature trees, palms and architectural plants": "أشجار ناضجة ونخيل ونباتات معمارية",
-    "Project Scaled Capability": "قدرات بحجم المشاريع",
-    "From individual statement pieces to large planting programmes": "من القطع المميزة الفردية إلى برامج الزراعة الكبيرة",
-    "Management-System Certification": "شهادات أنظمة الإدارة",
-    "Achieved Internationally Recognised Certifications": "حاصلون على شهادات معترف بها دوليًا",
-    "Featured collections": "المجموعات المميزة",
-    "Outdoor": "خارجي",
-    "Indoor": "داخلي",
-    "Sculptures": "المنحوتات",
-    "Ornamental plants, fresh flowers and artificial greenery for interiors.": "نباتات زينة وزهور طبيعية ونباتات اصطناعية للديكور الداخلي.",
-    "Sculptures and art pieces for gardens and landmark projects.": "منحوتات وقطع فنية للحدائق والمشاريع.",
-    "Explore outdoor plants": "استكشف النباتات الخارجية",
-    "Explore indoor plants": "استكشف النباتات الداخلية",
-    "View sculptures": "عرض المنحوتات",
-    "View collections": "عرض المجموعات",
-    "Previous slide": "الشريحة السابقة",
-    "Next slide": "الشريحة التالية",
-    "Outdoor and indoor collections": "مجموعات النباتات الخارجية والداخلية",
-    "Plants and trees selected to bring life and beauty to your spaces.": "نباتات وأشجار تضيف الحياة والجمال إلى مساحاتك.",
-    "Global Sourcing Network": "شبكة توريد عالمية",
-    "Selected at origin. Linked to Pheladelfia Nursery, Abu Dhabi.": "مختارة من بلد المنشأ ومرتبطة بمشتل فلادلفيا في أبوظبي.",
-    "Every origin on this map connects to our nursery in Al Ajban, Abu Dhabi — where stock is received, grown on and prepared for project delivery.": "كل مصدر على هذه الخريطة مرتبط بمشتلنا في العجبان، أبوظبي — حيث يتم استلام النباتات ورعايتها وتجهيزها لتسليم المشاريع.",
-    "Mediterranean & Europe": "البحر المتوسط وأوروبا",
-    "Spain · Italy · The Netherlands · Greece · Turkey": "إسبانيا · إيطاليا · هولندا · اليونان · تركيا",
-    "GCC & Middle East": "الخليج والشرق الأوسط",
-    "Saudi Arabia · Jordan · Egypt · Qatar · Bahrain · Oman · Syria · Lebanon": "السعودية · الأردن · مصر · قطر · البحرين · عُمان · سوريا · لبنان",
-    "Africa": "أفريقيا",
-    "Morocco · South Africa": "المغرب · جنوب أفريقيا",
-    "Asia": "آسيا",
-    "China · Thailand · Vietnam · Japan · Malaysia": "الصين · تايلاند · فيتنام · اليابان · ماليزيا",
-    "South America": "أمريكا الجنوبية",
-    "Brazil · Paraguay": "البرازيل · باراغواي",
-    "+971 2 555 1662 · nursery@pheladelfia.com · Farm No. 563 & 564, Al Ajban, Muwailih, Abu Dhabi": "+971 2 555 1662 · nursery@pheladelfia.com · مزرعة رقم 563 و564، العجبان، مويلح، أبوظبي",
-    "Key Clients & Project Stakeholders": "أبرز العملاء وشركاء المشاريع",
-    "Presidential Court": "ديوان الرئاسة",
-    "ADNOC": "أدنوك",
-    "Abu Dhabi Municipality": "بلدية أبوظبي",
-    "Dubai Municipality": "بلدية دبي",
-    "Aldar": "الدار",
-    "Nakheel": "نخيل",
-    "DAMAC": "داماك",
-    "Modon": "مدن",
-    "Silal": "سلال",
-    "Al Naboodah": "النابودة",
-    "Rixos": "ريكسوس",
-    "Al Fattan": "الفتان",
-    "Subtotal": "المجموع الفرعي",
-    "Exclusive of 5% VAT · Held at Al Ajban nursery": "غير شامل ضريبة القيمة المضافة 5% · محفوظة في مشتل العجبان",
-    "Continue to checkout": "متابعة إلى الدفع",
-    "View full selection": "عرض كامل الاختيارات",
-    "Close selection": "إغلاق",
-    "Abu Dhabi · Since 2004": "أبوظبي · منذ 2004",
-    "Farm No. 563 & 564, Al Ajban, Muwailih, Abu Dhabi": "مزرعة رقم 563 و564، العجبان، مويلح، أبوظبي",
-    "Explore": "استكشف",
-    "Catalog": "الكتالوج",
-    "Send an inquiry": "أرسل استفسارًا",
-    "Instagram": "إنستغرام",
-    "Facebook": "فيسبوك",
-    "LinkedIn": "لينكدإن",
-    "TikTok": "تيك توك",
-    "Snapchat": "سناب شات",
-    "Pinterest": "بنترست",
-    "Connect sales": "تواصل مع المبيعات",
-    "Since 2004 · Where Nature Becomes Legacy": "منذ 2004 · حيث تصبح الطبيعة إرثًا خالدًا",
-    "3 Continents": "3 قارات",
-    "Sourcing Europe, Asia and the Middle East": "توريد من أوروبا وآسيا والشرق الأوسط",
-    "Capability and stewardship": "القدرة والمسؤولية",
-    "Specimen-focused expertise covers mature trees, palms and architectural plants, from individual statement pieces to large planting programmes. Grow-to-order programmes and specimen documentation are managed from Abu Dhabi: specimen code, botanical and common name, origin, height, trunk dimensions and availability.": "تشمل خبرتنا المتخصصة الأشجار الناضجة والنخيل والنباتات المعمارية، من القطع المميزة الفردية إلى برامج الزراعة الكبيرة. وتُدار برامج الزراعة حسب الطلب وتوثيق العينات من أبوظبي: رمز العينة، والاسم العلمي والشائع، والمنشأ، والارتفاع، وأبعاد الجذع، والتوفر.",
-    "Certifications": "الشهادات",
-    "Begin with the right botanical material": "ابدأ بالمادة النباتية المناسبة",
-    "The Nursery": "المشتل",
-    "The nursery": "المشتل",
-    "The Operational Heart of Pheladelfia": "القلب التشغيلي لفلادلفيا",
-    "More than 1.5 million square feet in Al Ajban, Abu Dhabi.": "أكثر من 1.5 مليون قدم مربع في العجبان، أبوظبي.",
-    "Curation. Cultivation. Delivery.": "انتقاء. زراعة. تسليم.",
-    "Located in Al Ajban, Abu Dhabi, Pheladelfia's specialist nursery is where plants are propagated, grown, received, inspected, organised and prepared for project requirements.": "يقع مشتل فلادلفيا المتخصص في العجبان بأبوظبي، وفيه يتم إكثار النباتات وزراعتها واستلامها وفحصها وتنظيمها وتجهيزها وفق متطلبات المشاريع.",
-    "It also provides the controlled space necessary for imported material to adapt to local environmental conditions before final selection and delivery.": "كما يوفر المساحة المضبوطة اللازمة لتتأقلم النباتات المستوردة مع الظروف البيئية المحلية قبل الاختيار النهائي والتسليم.",
-    "Botanical Curation": "الانتقاء النباتي",
-    "Nursery Cultivation": "الزراعة في المشتل",
-    "Propagated, grown, received, inspected and acclimatised across more than 1.5 million square feet.": "إكثار وزراعة واستلام وفحص وأقلمة على مساحة تزيد عن 1.5 مليون قدم مربع.",
-    "Project Logistics": "الخدمات اللوجستية للمشاريع",
-    "Quality control, technical coordination, import and export, and establishment guidance.": "مراقبة الجودة والتنسيق الفني والاستيراد والتصدير وإرشادات الغرس.",
-    "Arrange a nursery visit": "رتّب زيارة للمشتل",
-    "Visit our nursery, share your planting schedule or speak with our team.": "زر مشتلنا، أو شاركنا جدول الزراعة، أو تحدّث مع فريقنا.",
-    "Farm No. 563 & 564": "مزرعة رقم 563 و564",
-    "Al Ajban, Muwailih": "العجبان، مويلح",
-    "Abu Dhabi": "أبوظبي",
-    "Name": "الاسم",
-    "Email": "البريد الإلكتروني",
-    "Contact Number": "رقم التواصل",
-    "Type of Inquiry": "نوع الاستفسار",
-    "Specimen supply": "توريد عينات",
-    "Grow to order": "زراعة حسب الطلب",
-    "Nursery visit": "زيارة المشتل",
-    "Project consultation": "استشارة مشروع",
-    "Message": "الرسالة",
-    "Submit Inquiry": "إرسال الاستفسار",
-    "Collection": "المجموعة",
-    "Species and sub-collections": "الأنواع والمجموعات الفرعية",
-    "View specimens": "عرض العينات",
-    "View specimen": "عرض العينة",
-    "View species": "عرض الأنواع",
-    "View collection": "عرض المجموعة",
-    "Parent collection": "مجموعة رئيسية",
-    "Living collections": "مجموعات حيّة",
-    "Nursery support": "دعم المشتل",
-    "Botanical parents from the Books catalog": "الفئات النباتية الرئيسية من كتالوجنا",
-    "Each card is a Zoho Books category. Species such as Washingtonia robusta sit underneath their parent, then open into sized specimens.": "كل بطاقة تمثل فئة من الكتالوج. تندرج الأنواع مثل واشنطونيا روبوستا تحت فئتها الرئيسية، ثم تتفرع إلى عينات بمقاسات مختلفة.",
-    "Architectural palms. Open this collection to reach species such as Washingtonia robusta.": "نخيل معماري. افتح هذه المجموعة للوصول إلى أنواع مثل واشنطونيا روبوستا.",
-    "Heritage olives and monumental specimens with documented character.": "زيتون تراثي وعينات ضخمة ذات طابع موثّق.",
-    "Sculptural desert forms, including yucca and monumental cacti.": "أشكال صحراوية نحتية، منها اليوكا والصبار الضخم.",
-    "Mass planting, edges and ground plane for complete schemes.": "زراعة كثيفة وحواف وتغطية أرضية لمخططات متكاملة.",
-    "Vertical greening for walls, pergolas and architectural screens.": "تخضير عمودي للجدران والعرائش والواجهات المعمارية.",
-    "Cut flowers and arrangements for events and hospitality.": "زهور مقطوفة وتنسيقات للمناسبات والضيافة.",
-    "These parents stay off the homepage signature row. They remain available here for project supply.": "هذه الفئات غير معروضة في الصفحة الرئيسية، لكنها متاحة هنا لتوريد المشاريع.",
-    "Botanical forms for controlled or interior settings.": "أشكال نباتية للأماكن المغلقة والداخلية.",
-    "Propagation material and grow-to-order stock.": "مواد إكثار ومخزون يُزرع حسب الطلب.",
-    "Soil and nutrition for establishment and aftercare.": "تربة وتغذية للغرس والعناية اللاحقة.",
-    "Nursery tools, consumables and direct purchases.": "أدوات المشتل والمواد الاستهلاكية والمشتريات المباشرة.",
-    "Every category in the Pheladelfia online store, from palms and specimen trees to indoor plants, garden supply and art. Open a collection to see its species and sized specimens.": "جميع فئات متجر فلادلفيا الإلكتروني، من النخيل والأشجار المميزة إلى النباتات الداخلية ومستلزمات الحدائق والفنون. افتح أي مجموعة لعرض أنواعها وعيناتها بمقاساتها المختلفة.",
-    "Categories": "الفئات",
-    "WASHINGTONIA ROBUSTA": "واشنطونيا روبوستا",
-    "Size": "المقاس",
-    "Select Size": "اختر المقاس",
-    "Add to selection": "أضف إلى اختياراتك",
-    "View selection": "عرض الاختيارات",
-    "Save to wishlist": "حفظ في قائمة الأمنيات",
-    "Saved": "محفوظ",
-    "Stock held at Farm 563 & 564, Al Ajban, Abu Dhabi": "المخزون متوفر في المزرعة 563 و564، العجبان، أبوظبي",
-    "Clear-trunk (CT) heights, priced per specimen": "ارتفاعات الجذع الصافي (CT)، والسعر لكل عينة",
-    "Exclusive of 5% VAT · Sold as NOS": "غير شامل ضريبة القيمة المضافة 5% · يباع بالقطعة",
-    "Available": "متوفر",
-    "Out of stock": "غير متوفر",
-    "Select a size first.": "اختر المقاس أولًا.",
-    "Could not add this specimen.": "تعذّرت إضافة هذه العينة.",
-    "Could not load your selection. You can view the cart page instead.": "تعذّر تحميل اختياراتك. يمكنك فتح صفحة السلة بدلًا من ذلك.",
-    "Specimen": "عينة",
-    "Summary": "الملخص",
-    "Keep browsing": "متابعة التصفح",
-    "Search Products": "البحث عن المنتجات",
-    "Don't have an account?": "ليس لديك حساب؟",
-    "Sign Up": "إنشاء حساب",
-    "Sign In": "تسجيل الدخول",
-    "Forgot Password": "نسيت كلمة المرور؟",
-    "Menu": "القائمة",
-    "Close menu": "إغلاق القائمة",
-    "Show sub-menu": "عرض القائمة الفرعية",
-    "Social media": "وسائل التواصل الاجتماعي",
-    "Pheladelfia Agricultural LLC": "فلادلفيا الزراعية ذ.م.م",
-    "All rights reserved": "جميع الحقوق محفوظة",
-    "Welcome back": "مرحبًا بعودتك",
-    "Sign in to follow your selections, quotations and orders.": "سجّل الدخول لمتابعة اختياراتك وعروض الأسعار وطلباتك.",
-    "Back to the store": "العودة إلى المتجر",
-    "Explore collections": "تصفّح المجموعات",
-    "About Pheladelfia": "عن فلادلفيا",
-    "Our story": "قصتنا",
-    "More than plant supply": "أكثر من مجرد توريد نباتات",
-    "Considered selection": "اختيار مدروس",
-    "Grow-to-order and documentation": "الزراعة حسب الطلب والتوثيق",
-    "Climate-responsive stewardship": "مسؤولية متوافقة مع المناخ",
-    "How we work": "كيف نعمل",
-    "Also in the Books catalog": "متوفر أيضًا في كتالوجنا",
-    "Back to collections": "العودة إلى المجموعات",
-    "Details": "التفاصيل",
-    "Species": "النوع",
-    "SKU": "رمز المنتج",
-    "Unit": "الوحدة",
-    "NOS": "قطعة",
-    "Availability": "التوفر",
-    "Results for the term": "نتائج البحث عن",
-    "Abu Dhabi nursery · Est. 2004": "مشتل أبوظبي · تأسس 2004",
-    "Premium Palms & Trees,": "نخيل وأشجار فاخرة،",
-    "Grown & sourced for the UAE": "مُزرعة ومُورَّدة للإمارات",
-    "Specimen palms, native trees and flowering shrubs — acclimatized in our Abu Dhabi nursery and delivered ready to plant across the Emirates.": "نخيل وعينات وأشجار محلية وشجيرات مزهرة — متأقلمة في مشتلنا بأبوظبي وجاهزة للزراعة في جميع أنحاء الإمارات.",
-    "Shop Plants": "تسوّق النباتات",
-    "Browse Palms": "تصفّح النخيل",
-    "Since 2004": "منذ 2004",
-    "Two decades of growing": "عقدان من الزراعة",
-    "UAE-adapted plants": "نباتات متكيفة مع مناخ الإمارات",
-    "Acclimatized in Abu Dhabi": "متأقلمة في الامارات",
-    "Delivery across the UAE": "توصيل في جميع أنحاء الإمارات",
-    "All seven Emirates": "الإمارات السبع",
-    "Design to maintenance": "من التصميم إلى الصيانة",
-    "Shop by category": "تسوّق حسب الفئة",
-    "Browse our nursery by plant type — every item grown or selected for the UAE climate.": "تصفّح مشتلنا حسب نوع النبات — كل صنف مُزرع أو مختار ليناسب مناخ الإمارات.",
-    "Fan, date & specimen palms": "نخيل مروحية وتمر وعينات",
-    "Palms": "النخيل",
-    "Shade & native trees": "أشجار الظل والأشجار المحلية",
-    "Heritage & monumental specimens": "عينات تراثية وضخمة",
-    "Flowering shrubs & ground covers": "شجيرات مزهرة ونباتات تغطية أرضية",
-    "For homes, offices & hotels": "للمنازل والمكاتب والفنادق",
-    "Planters, soil & care": "أصيص وتربة وعناية",
-    "Pots & Supplies": "أصص ومستلزمات",
-    "Best sellers": "الأكثر مبيعًا",
-    "Our most-loved plants": "أكثر نباتاتنا شعبية",
-    "Our services": "خدماتنا",
-    "Beyond the nursery": "ما بعد المشتل",
-    "We supply plants, source specimens and care for interiors for clients across the UAE.": "نوفر النباتات ونورد العينات ونعتني بالمساحات الداخلية لعملائنا في أنحاء الإمارات.",
-    "Learn more": "اعرف المزيد",
-    "Interior Plant Maintenance": "العناية بالنباتات الداخلية",
-    "Living interiors for offices, hotels and malls.": "ديكورات حية للمكاتب والفنادق والمراكز التجارية.",
-    "Page not found": "الصفحة غير موجودة",
-    "This page is no longer available.": "هذه الصفحة لم تعد متاحة.",
-    "Back to home": "العودة إلى الرئيسية",
-    "Why Pheladelfia": "لماذا فلادلفيا",
-    "Rooted in the Emirates for over 20 years": "جذورنا في الإمارات لأكثر من 20 عامًا",
-    "Locally acclimatized": "متأقلمة محليًا",
-    "Every plant is hardened in our Abu Dhabi nursery to thrive in UAE heat, wind and soil.": "كل نبتة تُقوّى في مشتلنا بأبوظبي لتزدهر في حرارة الإمارات ورياحها وتربتها.",
-    "Wide variety": "تشكيلة واسعة",
-    "From rare specimen palms to native Ghaf and ground covers — hundreds of species in stock.": "من نخيل العينات النادر إلى الغاف المحلي ونباتات التغطية — مئات الأنواع متوفرة.",
-    "Experienced team": "فريق ذو خبرة",
-    "Large-scale capacity": "قدرة على نطاق واسع",
-    "Thousands of mature palms ready to supply government and developer projects.": "آلاف النخيل الناضج جاهزة لتوريد مشاريع حكومية ومشاريع مطورين.",
-    "10% off your first order": "خصم 10% على طلبك الأول",
-    "Use code GREEN10 at checkout for 10% off your first order.": "استخدم الرمز GREEN10 عند الدفع للحصول على خصم 10% على طلبك الأول.",
-    "Shop now": "تسوّق الآن",
-    "Testimonials": "آراء عملائنا",
-    "Trusted by developers, hotels & homeowners": "موثوقون من المطورين والفنادق وأصحاب المنازل",
-    "“Pheladelfia supplied over a thousand Washingtonia palms for our community on time and in excellent condition. Their team made a complex logistics job look easy.”": "«ورّدت فلادلفيا أكثر من ألف نخلة واشنطونيا لمجتمعنا في موعدها وبحالة ممتازة. جعل فريقهم مهمة لوجستية معقدة تبدو سهلة.»",
-    "Khalid Al Mansoori": "خالد المنصوري",
-    "Project Director, Real Estate Developer": "مدير مشاريع، مطور عقاري",
-    "“We've used their grounds maintenance for three years. The gardens have never looked better, and reporting is always clear.”": "«نستخدم خدماتهم في صيانة المساحات الخضراء منذ ثلاث سنوات. لم تبدُ الحدائق أفضل من أي وقت مضى، والتقارير واضحة دائمًا.»",
-    "Sarah Thompson": "سارة تومسون",
-    "Facilities Manager, Hotel Group": "مديرة مرافق، مجموعة فنادق",
-    "“Beautiful, healthy plants that actually survive our summer. The advice on choosing the right palms was invaluable.”": "«نباتات جميلة وصحية تنجو فعلًا من صيفنا. ونصيحتهم في اختيار النخيل المناسب كانت لا تُقدّر بثمن.»",
-    "Mariam Al Hosani": "مريم الحوسني",
-    "Villa owner, Abu Dhabi": "مالكة فيلا، أبوظبي",
-    "Newsletter": "النشرة البريدية",
-    "Seasonal planting tips & offers": "نصائح موسمية للزراعة وعروض",
-    "One calm email a month. No spam.": "بريد واحد هادئ شهريًا. بدون إزعاج.",
-    "Email address": "البريد الإلكتروني",
-    "Subscribe": "اشترك",
-    "Two decades of growing the green heart of the Emirates.": "عقدان من زراعة القلب الأخضر للإمارات.",
-    "Pheladelfia Agricultural LLC began in 2004 with a simple belief: plants for the UAE should be grown in the UAE. Our Abu Dhabi nursery acclimatizes every palm, tree and shrub to local heat, soil and water so it thrives from the day it is planted.": "بدأت فلادلفيا الزراعية ذ.م.م عام 2004 بقناعة بسيطة: نباتات الإمارات يجب أن تُزرع في الإمارات. يقوم مشتلنا في أبوظبي بتأقلمة كل نخلة وشجرة وشجيرة مع الحرارة والتربة والمياه المحلية لتزدهر منذ يوم زراعتها.",
-    "Nursery: Al Wathba, Abu Dhabi": "المشتل: الوثبة، أبوظبي",
-    "Branch: Warsan, Dubai": "الفرع: الورسان، دبي",
-    "Founded in Abu Dhabi": "تأسست في أبوظبي",
-    "Plants in the nursery": "نباتات في المشتل",
-    "Projects delivered": "مشاريع منجزة",
-    "Emirates served": "إمارات نخدمها",
-    "What drives us": "ما يحركنا",
-    "Mission & vision": "الرسالة والرؤية",
-    "Our mission": "رسالتنا",
-    "Our vision": "رؤيتنا",
-    "Visit our nursery": "زوروا مشتلنا",
-    "Services": "الخدمات",
-    "Our Services": "خدماتنا",
-    "Service 01": "الخدمة 01",
-    "Concept & planting design": "تصميم المفهوم والزرع",
-    "Irrigation & lighting": "الري والإضاءة",
-    "Specimen palm transplanting": "نقل نخيل العينات",
-    "Contact us": "تواصل معنا",
-    "Service 02": "الخدمة 02",
-    "Service 03": "الخدمة 03",
-    "We design, supply and maintain indoor planting schemes — regular visits for watering, cleaning, feeding and plant rotation so your interiors always look their best.": "نصمم ونورد ونعتني بمخططات الزرع الداخلي — زيارات منتظمة للسقي والتنظيف والتغذية وتدوير النباتات لتبدو ديكوراتكم الداخلية في أفضل حال دائمًا.",
-    "Plant & planter supply": "توريد النباتات والأصيص",
-    "Weekly care visits": "زيارات عناية أسبوعية",
-    "Seasonal rotation": "تدوير موسمي",
-    "Shop the plants": "تسوّق النباتات",
-    "Questions about a plant, an order or a project? We're happy to help.": "أسئلة حول نبتة أو طلب أو مشروع؟ يسعدنا المساعدة.",
-    "Send us a message": "أرسل لنا رسالة",
-    "Tell us about your plant, order or project — the form opens your email app with everything filled in.": "أخبرنا عن نبتتك أو طلبك أو مشروعك — النموذج يفتح تطبيق البريد معبأً بالكامل.",
-    "Opens your email app addressed to nursery@pheladelfia.com — no data leaves your device until you press send.": "يفتح تطبيق بريدك موجهًا إلى nursery@pheladelfia.com — لا تغادر أي بيانات جهازك حتى تضغط إرسال.",
-    "Your message is sent securely to nursery@pheladelfia.com.": "تُرسل رسالتك بأمان إلى nursery@pheladelfia.com.",
-    "Thank you! Your message was sent — we'll get back to you soon.": "شكرًا لك! تم إرسال رسالتك — سنعود إليك قريبًا.",
-    "Thank you! Your application was sent — our team will review it and contact you.": "شكرًا لك! تم إرسال طلبك — سيراجعه فريقنا ويتواصل معك.",
-    "Attach your CV": "أرفق سيرتك الذاتية",
-    "PDF, DOC or DOCX — up to 5MB.": "PDF أو DOC أو DOCX — حتى 5 ميجابايت.",
-    "PDF, DOC or DOCX — up to 10MB.": "PDF أو DOC أو DOCX — حتى 10 ميجابايت.",
-    "You can also email your CV directly to nursery@pheladelfia.com.": "يمكنك أيضًا إرسال سيرتك الذاتية مباشرة إلى nursery@pheladelfia.com.",
-    "The attached file is too large — please keep it under 5MB.": "الملف المرفق كبير جدًا — يرجى إبقاؤه تحت 5 ميجابايت.",
-    "The attached file is too large — please keep it under 10MB.": "الملف المرفق كبير جدًا — يرجى إبقاؤه تحت 10 ميجابايت.",
-    "Couldn't send right now — please try again or email us at nursery@pheladelfia.com.": "تعذّر الإرسال الآن — حاول مرة أخرى أو راسلنا على nursery@pheladelfia.com.",
-    "Full name": "الاسم الكامل",
-    "Phone": "الهاتف",
-    "Subject": "الموضوع",
-    "Plant enquiry": "استفسار عن نبتة",
-    "Existing order": "طلب قائم",
-    "Maintenance contract": "عقد صيانة",
-    "Send message": "أرسل الرسالة",
-    "Call us": "اتصل بنا",
-    "Opening hours": "ساعات العمل",
-    "Sat–Thu 8am–6pm · Friday closed": "السبت–الخميس 8ص–6م · الجمعة مغلق",
-    "Locations": "المواقع",
-    "Sustainability": "الاستدامة",
-    "Chat on WhatsApp": "محادثة عبر واتساب",
-    "Interactive map will appear here": "ستظهر الخريطة التفاعلية هنا",
-    /* ---- V5 additions ---- */
-    "Join Us": "انضم إلينا",
-    "Certified excellence": "تميّز معتمد",
-    "Quality, environment and safety you can verify": "جودة وبيئة وسلامة يمكنك التحقق منها",
-    "Our management systems are independently certified by Veritas under EIAC accreditation.": "أنظمة الإدارة لدينا معتمدة بشكل مستقل من فيريتاس وفق اعتماد المركز الإماراتي الدولي للاعتماد (EIAC).",
-    "Quality Management System": "نظام إدارة الجودة",
-    "Environmental Management System": "نظام الإدارة البيئية",
-    "Occupational Health & Safety Management System": "نظام إدارة الصحة والسلامة المهنية",
-    "Certificate No.": "رقم الشهادة",
-    "Valid until": "صالحة حتى",
-    "View certificate": "عرض الشهادة",
-    "Issued by Veritas System Quality Certificates Issuing LLC · Validity can be confirmed at veritasassurance.com": "صادرة عن Veritas System Quality Certificates Issuing LLC · يمكن التحقق من الصلاحية عبر veritasassurance.com",
-    "1.5M+ ft²": "+1.5 مليون قدم²",
-    "Nursery area in Al Ajban": "مساحة المشتل في العجبان",
-    "ISO certifications": "شهادات آيزو",
-    "Countries of cultivation & sourcing": "دول الزراعة والتوريد",
-    "Nursery: Al Ajban, Abu Dhabi": "المشتل: العجبان، أبوظبي",
-    "Open in Google Maps": "افتح في خرائط جوجل",
-    "Pheladelfia Agricultural LLC — Warsan, Dubai branch": "فلادلفيا للزراعة ذ.م.م — فرع الورسان، دبي",
-    "Service 04": "الخدمة 04",
-    "Service 05": "الخدمة 05",
-    "Service 06": "الخدمة 06",
-    "Plant Supply — Wholesale & Retail": "توريد النباتات — جملة وتجزئة",
-    "Palms, trees, shrubs and indoor plants for projects of every size.": "نخيل وأشجار وشجيرات ونباتات داخلية لمشاريع بمختلف أحجامها.",
-    "Wholesale and retail supply of natural palms, trees, shrubs, ground covers, saplings and seedlings, plus artificial and dried flowers and plants — graded and ready for delivery from our Abu Dhabi nursery.": "بيع بالجملة والتجزئة للنخيل والأشجار والشجيرات والمغطيات الأرضية والفسائل والشتلات، إضافة إلى الزهور والنباتات الصناعية والمجففة — مصنّفة وجاهزة للتسليم من مشتلنا في أبوظبي.",
-    "Palms, trees & shrubs": "نخيل وأشجار وشجيرات",
-    "Saplings & seedlings": "فسائل وشتلات",
-    "Natural, artificial & dried plants": "نباتات طبيعية وصناعية ومجففة",
-    "Shop plants": "تسوّق النباتات",
-    "Grow-to-Order & Specimen Sourcing": "الزراعة حسب الطلب وتوريد العينات",
-    "Bespoke programmes for project-specific botanical requirements.": "برامج مخصصة للاحتياجات النباتية الخاصة بكل مشروع.",
-    "We propagate and grow plants to usable sizes in our Abu Dhabi nursery and source specimens from the UAE, Egypt and Thailand. Imported material adapts to local conditions at the nursery before final selection and delivery.": "نُكثر النباتات ونزرعها حتى تبلغ الأحجام المطلوبة في مشتلنا بأبوظبي، ونورّد العينات من الإمارات ومصر وتايلاند. وتتأقلم المواد المستوردة مع الظروف المحلية في المشتل قبل الاختيار النهائي والتسليم.",
-    "Grow-to-order programmes": "برامج الزراعة حسب الطلب",
-    "Specimen selection & documentation": "اختيار العينات وتوثيقها",
-    "Acclimatisation before delivery": "أقلمة قبل التسليم",
-    "Import & Export": "الاستيراد والتصدير",
-    "Regional supply across the UAE and GCC.": "توريد إقليمي في الإمارات ودول الخليج.",
-    "Importing and exporting of plants, trees, seeds and agricultural materials, with quality control, technical coordination and project logistics managed from Abu Dhabi.": "استيراد وتصدير النباتات والأشجار والبذور والمواد الزراعية، مع مراقبة الجودة والتنسيق الفني وخدمات المشاريع اللوجستية من أبوظبي.",
-    "Import & export coordination": "تنسيق الاستيراد والتصدير",
-    "Quality control & inspection": "مراقبة الجودة والفحص",
-    "Project logistics & delivery": "لوجستيات المشاريع والتسليم",
-    "Interior Plant Provision & Maintenance": "توريد النباتات الداخلية والعناية بها",
-    "Fertilizers, Soil & Seeds": "الأسمدة والتربة والبذور",
-    "Everything to establish and sustain healthy planting.": "كل ما يلزم لإنشاء زراعة صحية والحفاظ عليها.",
-    "Wholesale supply of natural fertilizers, agricultural reclamation and soil-amendment materials, cereals and seeds, alongside planters and care products.": "توريد بالجملة للأسمدة الطبيعية ومواد استصلاح التربة والمحسّنات الزراعية والحبوب والبذور، إلى جانب الأحواض ومنتجات العناية.",
-    "Natural fertilizers & soil amendments": "أسمدة طبيعية ومحسّنات تربة",
-    "Seeds & planting stock": "بذور ومواد زراعة",
-    "Planters & care products": "أحواض ومنتجات عناية",
-    "Browse supplies": "تصفّح المستلزمات",
-    "Artworks and models that bring a design to life.": "أعمال فنية ونماذج تُجسّد التصميم.",
-    "Garden sculpture & artwork": "منحوتات وأعمال فنية للحدائق",
-    "Models & maquettes": "نماذج ومجسمات",
-    "Careers": "الوظائف",
-    "Build a career in horticulture": "ابنِ مسيرة مهنية في البستنة",
-    "Since 2004, Pheladelfia has grown palms, trees and plants across more than 1.5 million square feet in Al Ajban, Abu Dhabi. Join a team that values safety, quality and care for the environment.": "منذ 2004 تزرع فلادلفيا النخيل والأشجار والنباتات على مساحة تزيد عن 1.5 مليون قدم مربع في العجبان بأبوظبي. انضم إلى فريق يقدّر السلامة والجودة والعناية بالبيئة.",
-    "Safe workplace": "بيئة عمل آمنة",
-    "Our occupational health and safety system is certified to ISO 45001:2018.": "نظام الصحة والسلامة المهنية لدينا معتمد وفق ISO 45001:2018.",
-    "Hands-on experience": "خبرة عملية",
-    "Work with palms, rare trees and large-scale projects across the UAE.": "اعمل مع النخيل والأشجار النادرة والمشاريع الكبرى في أنحاء الإمارات.",
-    "Quality & environment": "الجودة والبيئة",
-    "Certified to ISO 9001 and ISO 14001, so good practice is part of every task.": "حاصلون على ISO 9001 وISO 14001، فالممارسات الجيدة جزء من كل مهمة.",
-    "Where you could fit": "أين يمكنك أن تنضم",
-    "Our teams": "فرقنا",
-    "Nursery & Horticulture": "المشتل والبستنة",
-    "Propagation, growing, irrigation and plant care at the nursery.": "الإكثار والزراعة والري والعناية بالنباتات في المشتل.",
-    "Installation crews, supervisors and grounds maintenance teams.": "فرق التركيب والمشرفون وفرق صيانة المساحات الخارجية.",
-    "Sales & Customer Service": "المبيعات وخدمة العملاء",
-    "Helping developers, contractors and homeowners choose the right plants.": "مساعدة المطورين والمقاولين وأصحاب المنازل على اختيار النباتات المناسبة.",
-    "Logistics, Import & Export": "اللوجستيات والاستيراد والتصدير",
-    "Transport, quality control, documentation and project coordination.": "النقل ومراقبة الجودة والتوثيق وتنسيق المشاريع.",
-    "Administration & Accounts": "الإدارة والحسابات",
-    "Office, procurement and finance support for a growing business.": "دعم المكتب والمشتريات والمالية لشركة في نمو.",
-    "Apply now": "قدّم الآن",
-    "Send us your details. We review every application and keep promising profiles on file for future openings.": "أرسل لنا بياناتك. نراجع كل طلب ونحتفظ بالملفات المميزة لفرص مستقبلية.",
-    "Area of interest": "مجال الاهتمام",
-    "Other": "أخرى",
-    "About you": "نبذة عنك",
-    "Please attach your CV to the email that opens, or send it directly to nursery@pheladelfia.com.": "يرجى إرفاق سيرتك الذاتية في البريد الذي سيفتح، أو إرسالها مباشرة إلى nursery@pheladelfia.com.",
-    "Submit application": "إرسال الطلب",
-    "Open positions": "الوظائف المتاحة",
-    "Current openings": "الفرص الحالية",
-    "Career opportunities": "فرص وظيفية",
-    "Explore our open positions and grow your career with Pheladelfia Agricultural.": "استكشف وظائفنا المتاحة وانمُ مسيرتك المهنية مع فلادلفيا الزراعية.",
-    "Job details": "تفاصيل الوظيفة",
-    "Ready to apply?": "هل أنت مستعد للتقديم؟",
-    "Go to the application form": "اذهب إلى استمارة التقديم",
-    "view all openings": "عرض كل الوظائف",
-    "No positions available right now — send us your application anyway and we will keep your profile on file.": "لا توجد وظائف متاحة حالياً — أرسل لنا طلبك على أي حال وسنحتفظ بملفك للمستقبل.",
-    "Looking for a hands-on role in a certified horticulture nursery? Browse our open positions below.": "هل تبحث عن وظيفة عملية في مشتل بستنة معتمد؟ تصفّح الوظائف المتاحة أدناه.",
-    "Search jobs by title, location or team…": "ابحث في الوظائف بالمسمى أو الموقع أو الفريق…",
-    "Search open positions": "البحث في الوظائف المتاحة",
-    "No positions match your search — send us your application anyway and we will keep your profile on file.": "لا توجد وظائف مطابقة لبحثك — أرسل طلبك على أي حال وسنحتفظ بملفك للمستقبل.",
-    "Don't see your role?": "لا ترى وظيفتك؟",
-    "Apply anyway": "قدّم على أي حال",
-    "Apply for this role": "قدّم على هذه الوظيفة",
-    "What you will do": "ماذا ستفعل",
-    "What we look for": "ما الذي نبحث عنه",
-    "Position": "الوظيفة",
-    "e.g. Site Engineer": "مثال: مهندس موقع",
-    "Site Engineer": "مهندس موقع",
-    "Foreman": "فورمان",
-    "Supervise planting and installation sites across UAE projects — setting out, planting, irrigation and handover quality.": "الإشراف على مواقع الزراعة والتركيب في مشاريع الإمارات — التخطيط والزراعة والري وجودة التسليم.",
-    "Review drawings, quantities and planting schedules": "مراجعة الرسومات والكميات وجداول الزراعة",
-    "Coordinate with nurseries, contractors and clients": "التنسيق مع المشاتل والمقاولين والعملاء",
-    "Ensure ISO 45001 safety and quality standards on site": "ضمان معايير السلامة والجودة ISO 45001 في الموقع",
-    "Diploma or degree in civil engineering, horticulture or related field": "دبلوم أو بكالوريوس في الهندسة المدنية أو البستنة أو مجال ذي صلة",
-    "3+ years of site supervision experience": "أكثر من 3 سنوات خبرة في الإشراف على المواقع",
-    "Valid UAE residence visa": "إقامة سارية في الإمارات",
-    "Fluent English; Arabic is an advantage": "إتقان الإنجليزية؛ والعربية ميزة إضافية",
-    "Lead a nursery crew responsible for planting, pruning, irrigation and daily plant care across our 1.5M sq ft nursery.": "قيادة فريق مشتل مسؤول عن الزراعة والتقليم والري والعناية اليومية بالنباتات في مشتلنا البالغ 1.5 مليون قدم مربع.",
-    "Supervise daily nursery operations and crew scheduling": "الإشراف على العمليات اليومية في المشتل وجدولة الفرق",
-    "Train workers on planting, pruning and irrigation techniques": "تدريب العمال على تقنيات الزراعة والتقليم والري",
-    "Monitor plant health and report issues": "متابعة صحة النباتات والإبلاغ عن المشكلات",
-    "Enforce safety and housekeeping standards": "تطبيق معايير السلامة والنظافة",
-    "2+ years of experience as a foreman or senior nursery worker": "أكثر من سنتين خبرة كفورمان أو عامل أول في المشتل",
-    "Hands-on knowledge of palms, trees and shrubs": "معرفة عملية بالنخيل والأشجار والشجيرات",
-    "Ability to read basic instructions and reports": "القدرة على قراءة التعليمات والتقارير الأساسية",
-    "UAE residence visa": "إقامة في الإمارات",
-    "Al Ajban, Abu Dhabi": "العجبان، أبوظبي",
-    "Full-time": "دوام كامل",
-    "UAE residence visa?": "هل لديك إقامة في الإمارات؟",
-    "Visa type": "نوع الإقامة",
-    "UAE driving licence?": "هل لديك رخصة قيادة في الإمارات؟",
-    "Current salary": "الراتب الحالي",
-    "Expected salary": "الراتب المتوقع",
-    "Years of experience": "سنوات الخبرة",
-    "Less than 1 year": "أقل من سنة",
-    "1–2 years": "1–2 سنة",
-    "3–5 years": "3–5 سنوات",
-    "5–10 years": "5–10 سنوات",
-    "10+ years": "أكثر من 10 سنوات",
-    "e.g. AED 5,000": "مثال: 5,000 درهم",
-    "e.g. AED 7,000": "مثال: 7,000 درهم",
-    "Select": "اختر",
-    "Yes": "نعم",
-    "No": "لا",
-    "Employment visa": "إقامة عمل",
-    "Investor visa": "إقامة مستثمر",
-    "Family sponsorship": "كفالة عائلية",
-    "Golden visa": "الإقامة الذهبية",
-    "Prefer email?": "تفضّل البريد الإلكتروني؟",
-    "Verification code": "رمز التحقق",
-    "Verify & send": "تحقق وأرسل",
-    "Verifying…": "جارٍ التحقق…",
-    "Resend code": "إعادة إرسال الرمز",
-    "Enter the 6-digit code we emailed you.": "أدخل الرمز المكوّن من 6 أرقام الذي أرسلناه إليك.",
-    "Incorrect code. Please try again.": "رمز غير صحيح. حاول مرة أخرى.",
-    "Could not resend the code. Please try again.": "تعذّرت إعادة إرسال الرمز. حاول مرة أخرى.",
-    "Sending is unavailable.": "الإرسال غير متاح.",
-    "Based at": "المقر",
-    "Projects": "المشاريع",
-    "One partner, from propagation to establishment": "شريك واحد، من الإكثار حتى التأسيس",
-    "Our nursery in Al Ajban, Abu Dhabi is the operational heart of every project: plants are propagated, grown, received, inspected and prepared to project specifications before delivery.": "يُعد مشتلنا في العجبان بأبوظبي القلب التشغيلي لكل مشروع: تُكاثر النباتات وتُزرع وتُستلم وتُفحص وتُجهز وفق مواصفات المشروع قبل التوصيل.",
-    "Our Warsan, Dubai branch extends the same standards to projects across the Emirates.": "ويمتد فرعنا في الورسان بدبي ليطبّق المعايير نفسها على مشاريع في أنحاء الإمارات.",
-    "Consultation & Design Support": "الاستشارة ودعم التصميم",
-    "Supply & Logistics": "التوريد واللوجستيات",
-    "Import and export coordination, quality control and phased delivery to site across the UAE.": "تنسيق الاستيراد والتصدير ومراقبة الجودة والتسليم المرحلي إلى الموقع في أنحاء الإمارات.",
-    "Establishment & Aftercare": "التأسيس والرعاية اللاحقة",
-    "Planting guidance, maintenance protocols and horticultural support through the establishment period.": "إرشادات الزراعة وبروتوكولات الصيانة والدعم البستني خلال فترة التأسيس.",
-    "Government & Public Realm — parks, streetscapes and civic green infrastructure": "الجهات الحكومية والفضاء العام — حدائق وشوارع وبنية تحتية خضراء",
-    "Discuss your project": "ناقش مشروعك",
-    "Explore our services": "استكشف خدماتنا",
-    "Skip to content": "تخطَّ إلى المحتوى",
-    "Search results": "نتائج البحث",
-
-    "ISO 9001:2015 certificate": "شهادة ISO 9001:2015",
-    "ISO 14001:2015 certificate": "شهادة ISO 14001:2015",
-    "ISO 45001:2018 certificate": "شهادة ISO 45001:2018",
-    "Breadcrumb": "مسار التنقل",
-    "Specimen palm at the Pheladelfia nursery": "نخلة نموذجية في مشتل فلادلفيا",
-    "What we stand for": "ما نقف عليه",
-    "Our values": "قيمنا",
-    "Integrity": "النزاهة",
-    "We conduct our business with honesty in every dealing and relationship.": "ندير أعمالنا بصدق في كل معاملة وعلاقة.",
-    "We are committed to protecting the environment through everything we grow.": "نلتزم بحماية البيئة في كل ما نزرع.",
-    "Quality": "الجودة",
-    "We deliver top-quality plants, products, and services, every time.": "نقدم نباتات ومنتجات وخدمات عالية الجودة في كل مرة.",
-    "Innovation": "الابتكار",
-    "We stay at the forefront of industry advancements and techniques.": "نبقى في طليعة التطورات والتقنيات في المجال.",
-    "To be a leading, professional nursery corporation — implementing plans of unrepresented quality standards with innovative designs at the most competitive cost.": "أن نكون مؤسسة مشاتل رائدة ومحترفة — نطبق خططًا بمعايير جودة استثنائية وتصاميم مبتكرة بأكثر تكلفة تنافسية.",
-    "To create a greener future for all, using our expertise and experience to introduce innovative standards of horticulture and trading that bring new vibrancy to the green environment.": "أن نصنع مستقبلًا أكثر اخضرارًا للجميع، باستخدام خبرتنا ومعرفتنا لنقدم معايير مبتكرة في البستنة والتجارة تضفي حيوية جديدة على البيئة الخضراء.",
-    "Clients & approvals": "العملاء والاعتمادات",
-    "Trusted by": "موثوقون لدى",
-    "Our clients": "عملاؤنا",
-    "An approved supplier to the region's leading names": "مورّد معتمد لدى كبرى الجهات في المنطقة",
-    "Pheladelfia is a registered and approved supplier to leading developers, government entities, and consultants across the UAE and the Kingdom of Saudi Arabia.": "فلادلفيا مورّد مسجل ومعتمد لدى كبار المطورين والجهات الحكومية والاستشاريين في الإمارات والمملكة العربية السعودية.",
-    "Regional reach: United Arab Emirates · Saudi Arabia · Jordan · Qatar · Bahrain": "الانتشار الإقليمي: الإمارات العربية المتحدة · السعودية · الأردن · قطر · البحرين",
-    "Sustainability, Environment & Wellbeing": "الاستدامة والبيئة والرفاهية",
-    "Climate Responsive Selection": "اختيار يتكيف مع المناخ",
-    "Local Cultivation & Acclimatisation": "زراعة محلية وتأقلم",
-    "Reduced Replacement Risk": "تقليل مخاطر الاستبدال",
-    "Water-Aware Plant Selection": "اختيار نباتات واعٍ بالمياه",
-    "Long-Lived Botanical Assets": "أصول نباتية طويلة العمر",
-    "Biodiversity & Environmental Quality": "التنوع البيولوجي والجودة البيئية",
-    "Human Wellbeing": "الرفاهية البشرية",
-    "Community Value": "القيمة المجتمعية",
-    "Botanical Excellence": "التميز النباتي",
-    "Design Awareness": "الوعي التصميمي",
-    "Stewardship": "الوصاية",
-    "Integrated Botanical Capability": "قدرة نباتية متكاملة",
-    "From curation and cultivation to sourcing, documentation, quality control and project logistics.": "من الانتقاء والزراعة إلى التوريد والتوثيق ومراقبة الجودة ولوجستيات المشاريع.",
-    "Specimen-focused expertise covers mature trees, palms and architectural plants — from individual statement pieces to large planting programmes.": "تشمل خبرتنا المتخصصة الأشجار الناضجة والنخيل والنباتات المعمارية — من القطع المميزة الفردية إلى برامج الزراعة الكبيرة.",
-    "Grow to Order": "الزراعة حسب الطلب",
-    "Bespoke sourcing and grow-to-order programmes for project-specific botanical requirements, managed from Abu Dhabi.": "توريد مصمم وبرامج زراعة حسب الطلب لمتطلبات المشاريع النباتية، تُدار من أبوظبي.",
-    "Specimen Documentation": "توثيق العينات",
-    "Every tree has an identity: specimen code, botanical and common name, origin, height, trunk dimensions and availability status.": "لكل شجرة هوية: رمز العينة والاسم العلمي والشائع والمنشأ والارتفاع وأبعاد الجذع وحالة التوفر.",
-    "Remove": "إزالة",
-    "Your selection is empty.": "اختياراتك فارغة.",
-    "Checkout": "إتمام الطلب",
-    "Order received": "تم استلام الطلب",
-    "Payment needs attention": "الدفع يحتاج إلى انتباه",
-    "Return home": "العودة إلى الرئيسية",
-    "Refine": "تصفية",
-    "Filter the catalog": "تصفية الكتالوج",
-    "View details": "عرض التفاصيل",
-    "Wishlist": "قائمة الأمنيات",
-    "Company profile (PDF)": "الملف التعريفي للشركة (PDF)",
-    "Nursery: Al Ajban, Muwailih, Abu Dhabi": "المشتل: العجبان، مويلح، أبوظبي",
-    "P.O. Box 39752, UAE": "ص.ب 39752، الإمارات",
-    "Review your specimens, adjust quantities and continue to secure checkout.": "راجع عيناتك وعدّل الكميات ثم تابع إلى الدفع الآمن.",
-    "Unit price": "سعر الوحدة",
-    "Total": "الإجمالي",
-    "Items": "العناصر",
-    "Order summary": "ملخص الطلب",
-    "Exclusive of 5% VAT": "غير شامل ضريبة القيمة المضافة 5%",
-    "Delivered across the UAE": "توصيل في جميع أنحاء الإمارات",
-    "Secure checkout": "دفع آمن",
-    "Back to cart": "العودة إلى السلة",
-    "Secure payment": "دفع آمن",
-    "UAE delivery": "توصيل في الإمارات",
-    "Card and wallet payments are processed securely.": "تتم معالجة مدفوعات البطاقات والمحافظ بأمان.",
-    "We deliver plants and supplies across the Emirates.": "نوصل النباتات والمستلزمات في أنحاء الإمارات.",
-    "Our Al Ajban team can help with order questions.": "يمكن لفريقنا في العجبان المساعدة في استفسارات الطلب.",
-    "Review your order, choose delivery and payment, then confirm securely.": "راجع طلبك واختر التوصيل والدفع ثم أكّد بأمان.",
-    "Complete each step to review your order, choose delivery and pay securely.": "أكمل كل خطوة لمراجعة طلبك واختيار التوصيل والدفع بأمان.",
-    "Order confirmation": "تأكيد الطلب",
-    "Thank you. Your payment was successful and we are preparing your order for delivery.": "شكرًا لك. تم الدفع بنجاح ونحن نجهّز طلبك للتوصيل.",
-    "Order number": "رقم الطلب",
-    "Amount paid": "المبلغ المدفوع",
-    "Payment method": "طريقة الدفع",
-    "Confirmation email": "بريد التأكيد",
-    "A confirmation email will be sent to": "سيتم إرسال بريد تأكيد إلى",
-    "A confirmation email will be sent to you.": "سيتم إرسال بريد تأكيد إليك.",
-    "Questions?": "لديك استفسار؟",
-    "Continue shopping": "متابعة التسوق",
-    "View my orders": "عرض طلباتي",
-    "Payment status": "حالة الدفع",
-    "We could not confirm this payment. If an amount was deducted, it will be reversed automatically or our team will contact you.": "تعذّر تأكيد هذا الدفع. إذا خُصم أي مبلغ فسيُسترد تلقائيًا أو سيتواصل معك فريقنا.",
-    "Status": "الحالة",
-    "Order reference": "مرجع الطلب",
-    "Error": "خطأ",
-    "Need help? Contact": "هل تحتاج مساعدة؟ تواصل مع",
-    "or call": "أو اتصل على",
-    "Browse palms, trees, shrubs and garden supplies to start your order.": "تصفّح النخيل والأشجار والشجيرات ومستزمات الحدائق لبدء طلبك.",
-    "Save for later": "حفظ لوقت لاحق",
-    "Select size": "اختر المقاس",
-
-    /* ---- Company-profile content refresh (nursery / specimen supplier) ---- */
-    "A specialist nursery and specimen-tree supplier in Abu Dhabi since 2004 — growing, sourcing and delivering design-grade plants across the UAE and Gulf.": "مورّد متخصص في المشاتل وأشجار العينات في أبوظبي منذ 2004 — نزرع ونورد ونوصّل نباتات بمعايير تصميمية في أنحاء الإمارات والخليج.",
-    "Specialist nursery and specimen-tree supplier — Pheladelfia Agricultural LLC, Abu Dhabi since 2004.": "مورّد متخصص في المشاتل وأشجار العينات — فلادلفيا الزراعية ذ.م.م، أبوظبي منذ 2004.",
-    "Project supply": "توريد المشاريع",
-    "Sourcing to delivery": "من التوريد إلى التسليم",
-    "Everything for design-led planting": "كل ما تحتاجه الزراعة التصميمية",
-    "Horticulturists and supply specialists with 20+ years of regional experience.": "بستانيون ومتخصصو توريد بخبرة إقليمية تتجاوز 20 عامًا.",
-    "Two decades of growing specimen trees in the Emirates.": "عقدان من زراعة أشجار العينات في الإمارات.",
-    "From a single nursery to a regional specimen supplier": "من مشتل واحد إلى مورّد إقليمي لأشجار العينات",
-    "To set the regional standard for specimen-grade plant material — pairing horticultural rigour with the documentation and supply reliability our clients can specify with confidence.": "أن نضع المعيار الإقليمي للمواد النباتية بمعايير العينات — بجمع الصرامة البستنية والتوثيق وموثوقية التوريد التي يمكن لعملائنا الاعتماد عليها بثقة.",
-    "We hold every specimen to a measured, documented standard — and supply it exactly as specified.": "نلتزم بكل عينة بمعيار مقاس وموثّق — ونوردها تمامًا كما هو محدد.",
-    "Selected for species, height, trunk character, canopy balance, climatic suitability and long-term planting performance.": "تُختار وفق النوع والارتفاع وطابع الجذع وتوازن التاج وملاءمة المناخ والأداء طويل الأمد للزراعة.",
-    "Selected for more than species and size. Every selection is considered in relation to architectural character, spatial scale, user experience, climate suitability and long-term planting performance.": "نختار لما هو أبعد من النوع والحجم؛ فكل اختيار يُدرس وفق الطابع المعماري والمقياس المكاني وتجربة المستخدم وملاءمة المناخ والأداء طويل الأمد للزراعة.",
-    "Climate-responsive plant selection of lasting value": "اختيار نباتات يتكيف مع المناخ وقيمة تدوم",
-    "Specimen Material Supplied Across the UAE": "توريد مواد العينات في أنحاء الإمارات",
-    "From nursery rows in Al Ajban to design-led projects across the UAE and Gulf — Pheladelfia supports schemes of every scale with specimen trees, palms, architectural plants, technical coordination and logistics.": "من صفوف المشتل في العجبان إلى مشاريع التصميم في أنحاء الإمارات والخليج — تدعم فلادلفيا مخططات بجميع الأحجام عبر أشجار العينات والنخيل والنباتات المعمارية والتنسيق الفني واللوجستيات.",
-    "One partner, from propagation to delivery": "شريك واحد، من الإكثار إلى التسليم",
-    "Imported material is consolidated at our Ajban nursery, inspected and acclimatised before supply across the Emirates and wider Gulf.": "تُجمّع المواد المستوردة في مشتلنا بالعجبان وتُفحص وتُؤقلم قبل التوريد في أنحاء الإمارات والخليج الأوسع.",
-    "Enquiry & Requirements": "الاستفسار والمتطلبات",
-    "Share your plant list, sizes and quantities. We review them against nursery stock and our sourcing network.": "شاركنا قائمة النباتات والمقاسات والكميات. نراجعها وفق مخزون المشتل وشبكة التوريد لدينا.",
-    "Sourcing & Availability": "التوريد والتوفر",
-    "Our field team checks prices and availability — drawing on our own farm and trusted nurseries at origin.": "يتحقق فريقنا الميداني من الأسعار والتوفر — بالاعتماد على مزرعتنا ومشاتل موثوقة في بلد المنشأ.",
-    "Quality Control & Logistics": "مراقبة الجودة واللوجستيات",
-    "Every plant is inspected before delivery, then transported so it arrives on time and in the expected condition.": "تُفحص كل نبتة قبل التسليم ثم تُنقل لتصل في موعدها وبالحالة المتوقعة.",
-    "Developers & Consultants — master developers, real-estate houses, hospitality destinations and design-led contractors": "المطورون والاستشاريون — كبار المطورين وشركات العقارات ووجهات الضيافة والمقاولون المعماريون",
-    "Authorities & Institutions — federal and emirate authorities, sovereign offices and institutional landowners": "الجهات والمؤسسات — الجهات الاتحادية والإماراتية والمكاتب السيادية والجهات المؤسسية المالكة",
-    "Pheladelfia operates to internationally recognised management standards, certified by Bureau Veritas under EIAC accreditation.": "تعمل فلادلفيا وفق معايير إدارة معترف بها دوليًا، ومعتمدة من Bureau Veritas تحت اعتماد EIAC.",
-    "Certified by": "معتمد من",
-    "Bureau Veritas · EIAC-accredited": "Bureau Veritas · معتمد من EIAC",
-    "Certified by Bureau Veritas under EIAC accreditation · Licences & registrations include Abu Dhabi trade licence CN-1078760, agriculture licence AGL-2021-15516, commercial registration 6091168, Abu Dhabi Chamber member 208354, and Federal VAT & corporate tax registration.": "معتمد من Bureau Veritas تحت اعتماد EIAC · تشمل التراخيص والتسجيلات رخصة أبوظبي التجارية CN-1078760 ورخصة الزراعة AGL-2021-15516 والسجل التجاري 6091168 وعضوية غرفة أبوظبي 208354 وتسجيل ضريبة القيمة المضافة والضريبة المؤسسية الاتحادي.",
-    "Questions about a plant, an order or a project supply? We're happy to help.": "أسئلة حول نبتة أو طلب أو توريد مشروع؟ يسعدنا المساعدة.",
-    "Specimen or project supply": "عينة أو توريد مشروع",
-    "Import / export": "استيراد / تصدير",
-    "Grow your career with an ISO-certified nursery and horticulture team in Abu Dhabi.": "طوّر مسيرتك المهنية مع مشتل وبستنة حاصلين على شهادات آيزو في أبوظبي.",
-    "Plant Sourcing & Trading": "توريد النباتات والتجارة",
-    "Selecting specimens and coordinating supply across the Gulf.": "اختيار العينات وتنسيق التوريد في أنحاء الخليج.",
-    "Helping developers, consultants and contractors choose the right plants.": "مساعدة المطورين والاستشاريين والمقاولين على اختيار النباتات المناسبة.",
-    "Supply & Logistics Coordinator": "منسق التوريد واللوجستيات",
-    "e.g. Supply Coordinator": "مثال: منسق توريد",
-    "Coordinate specimen supply, phased deliveries and project requirements across the UAE and Gulf.": "تنسيق توريد العينات والتسليمات المرحلية ومتطلبات المشاريع في أنحاء الإمارات والخليج.",
-    "Coordinate plant lists, sizes and quantities with nurseries and growers": "تنسيق قوائم النباتات والمقاسات والكميات مع المشاتل والمزارعين",
-    "Manage import/export documentation and quality inspections": "إدارة وثائق الاستيراد/التصدير وعمليات فحص الجودة",
-    "Plan phased deliveries to project sites across the UAE": "التخطيط للتسليمات المرحلية إلى مواقع المشاريع في أنحاء الإمارات",
-    "Ensure ISO 45001 safety and quality standards": "ضمان معايير السلامة والجودة ISO 45001",
-    "Diploma or degree in logistics, horticulture or related field": "دبلوم أو بكالوريوس في اللوجستيات أو البستنة أو مجال ذي صلة",
-    "3+ years of supply or project coordination experience": "أكثر من 3 سنوات خبرة في التوريد أو تنسيق المشاريع",
-    "Shade, avenue and specimen trees for design-led planting.": "أشجار ظل وشوارع وعينات للزراعة التصميمية.",
-    "Interior specimens for hospitality, residences and workplaces.": "عينات داخلية للفنادق والمساكن وأماكن العمل.",
-    "Sculpture and art for gardens and public spaces.": "منحوتات وفنون للحدائق والمساحات العامة.",
-
-    "From sourcing and quality control to logistics, import and export — we manage the full horticultural supply chain so you receive the right plants, in the right condition, on time.": "من التوريد ومراقبة الجودة إلى اللوجستيات والاستيراد والتصدير — ندير سلسلة التوريد البستنية الكاملة لتصلك النباتات المناسبة وبالحالة المناسبة وفي الوقت المناسب.",
-    "Plant Sourcing": "توريد النباتات",
-    "The right material, in the right condition, on schedule.": "المادة المناسبة وبالحالة المناسبة وفي الموعد المحدد.",
-    "We source directly through our own nursery, cultivation base and a trusted grower network at origin — securing specimen-grade material for projects across the UAE and Gulf.": "نورّد مباشرة عبر مشتلنا وقاعدة زراعتنا وشبكة مزارعين موثوقة في بلد المنشأ — لتأمين مواد بمعايير العينات لمشاريع في أنحاء الإمارات والخليج.",
-    "Own nursery & cultivation base": "مشتل وقاعدة زراعة خاصة",
-    "Trusted grower network at origin": "شبكة مزارعين موثوقة في بلد المنشأ",
-    "Right material on schedule": "المادة المناسبة في الموعد",
-    "Importing": "الاستيراد",
-    "Specialist plant material, expanded project selection.": "مواد نباتية متخصصة وتشكيلة مشاريع موسّعة.",
-    "We import specialist plant material to expand project selection and meet specific design requirements — consolidated at our Ajban nursery for inspection, acclimatisation and supply.": "نستورد مواد نباتية متخصصة لتوسيع تشكيلة المشاريع وتلبية متطلبات التصميم المحددة — تُجمّع في مشتلنا بالعجبان للفحص والأقلمة والتوريد.",
-    "Specialist plant material": "مواد نباتية متخصصة",
-    "Expanded project selection": "تشكيلة مشاريع موسّعة",
-    "Design-led requirements": "متطلبات التصميم",
-    "Exporting": "التصدير",
-    "Documented plant material to regional and international markets.": "مواد نباتية موثّقة لأسواق إقليمية ودولية.",
-    "We export high-quality plant material across regional and international markets, with documentation and quality control managed from Abu Dhabi.": "نصدّر مواد نباتية عالية الجودة لأسواق إقليمية ودولية، مع إدارة التوثيق ومراقبة الجودة من أبوظبي.",
-    "Regional & international markets": "أسواق إقليمية ودولية",
-    "Documented shipments": "شحنات موثّقة",
-    "Quality control at origin": "مراقبة الجودة في بلد المنشأ",
-    "Quality Assurance": "ضمان الجودة",
-    "Every plant inspected before delivery.": "كل نبتة تُفحص قبل التسليم.",
-    "Rigorous quality control runs through cultivation and supply — we work only with trusted nurseries and inspect every plant before it leaves the nursery.": "تجري مراقبة جودة صارمة عبر الزراعة والتوريد — نعمل فقط مع مشاتل موثوقة ونفحص كل نبتة قبل مغادرة المشتل.",
-    "Trusted nurseries only": "مشاتل موثوقة فقط",
-    "Inspect every plant": "نفحص كل نبتة",
-    "Documented standards": "معايير موثّقة",
-    "Centralized Purchasing": "المشتريات المركزية",
-    "One point of contact for coordinated project supply.": "جهة اتصال واحدة لتوريد المشاريع المنسّق.",
-    "Consolidated procurement for efficient, coordinated project supply — one team managing your plant list, sizes, quantities and schedule.": "مشتريات مجمّعة لتوريد مشاريع فعّال ومنسّق — فريق واحد يدير قائمة نباتاتك ومقاساتها وكمياتك وجدولك.",
-    "One point of contact": "جهة اتصال واحدة",
-    "Coordinated schedules": "جداول منسّقة",
-    "Consolidated shipments": "شحنات مجمّعة",
-    "Logistics": "اللوجستيات",
-    "On time, and in the condition you expect.": "في الوقت المحدد وبالحالة التي تتوقعها.",
-    "Plants delivered on time and in the condition expected — because receiving them when you need them is critical to your project schedule.": "تُوصّل النباتات في وقتها وبالحالة المتوقعة — لأن استلامها عند الحاجة أمر بالغ الأهمية لجدول مشروعك.",
-    "Timely delivery": "تسليم في الوقت",
-    "Phased project supply": "توريد مشاريع مرحلي",
-    "UAE & Gulf coverage": "تغطية الإمارات والخليج",
-    "The full horticultural supply chain, managed end to end — SOURCE · GROW · DELIVER": "سلسلة التوريد البستنية الكاملة، تُدار من البداية إلى النهاية — توريد · زراعة · تسليم",
-    "Trade lists on request": "قوائم أسعار عند الطلب",
-    "Pheladelfia Agricultural LLC began in 2004 with a simple belief: the region's design ambitions needed mature, design-grade plant material — grown and supplied to a documented standard. Our Abu Dhabi nursery spans more than 1.5 million square feet in Al Ajban, where plants and trees are propagated and grown on to specimen sizes.": "بدأت فلادلفيا الزراعية ذ.م.م عام 2004 بقناعة بسيطة: كانت طموحات التصميم في المنطقة بحاجة إلى مواد نباتية ناضجة بمعايير تصميمية — تُزرع وتُورد وفق معيار موثّق. يمتد مشتلنا في أبوظبي على أكثر من 1.5 مليون قدم مربع في العجبان، حيث تُكثر النباتات والأشجار وتُزرع حتى بلوغ مقاسات العينات.",
-    "Today we supply design professionals, developers, consultants, contractors and institutions across the UAE and Gulf — with a branch in Warsan, Dubai.": "اليوم نورد متخصصي التصميم والمطورين والاستشاريين والمقاولين والمؤسسات في أنحاء الإمارات والخليج — مع فرع في الورسان بدبي.",
-    "Contractors & Delivery Partners — specialist contractors and delivery partners realising schemes on the ground": "المقاولون وشركاء التنفيذ — مقاولون متخصصون وشركاء تسليم منفذون للمخططات على أرض الواقع",
-    /* ---- Hero slider (V8.3) ---- */
-    "Featured": "مميز",
-    "Slide navigation": "التنقل بين الشرائح",
-    "Pause slideshow": "إيقاف العرض التلقائي",
-    "Play slideshow": "تشغيل العرض التلقائي",
-    "Premium palms, trees and specimen plants — Pheladelfia Agricultural LLC, Abu Dhabi since 2004": "نخيل وأشجار ونباتات مختارة — فلادلفيا الزراعية ذ.م.م، أبوظبي منذ 2004",
-    "Abu Dhabi nursery · Est. 2004": "مشتل أبوظبي · تأسس 2004",
-    "Specimen Palms & Washingtonia": "نخيل العينات وواشنطونيا",
-    "Fan, date and specimen palms — selected, acclimatized and delivered ready to plant across the Emirates.": "نخيل مروحي وتمر وعينات — مختارة ومؤقلمة وتُسلَّم جاهزة للزراعة في أنحاء الإمارات.",
-    "Browse palms": "تصفّح النخيل",
-    "For developers & designers": "للمطورين والمصممين",
-    "Project Supply, End to End": "توريد المشاريع، من البداية إلى النهاية",
-    "Sourcing, quality control, logistics and delivery — one partner from nursery row to site.": "التوريد ومراقبة الجودة واللوجستيات والتسليم — شريك واحد من صف المشتل إلى الموقع.",
-    "Documented provenance": "مصدر موثّق",
-    "Every Specimen, Documented": "كل عينة، موثّقة",
-    "Photographed at three angles with scale reference, measured and recorded — documentation provided on request.": "تُصوَّر من ثلاث زوايا مع مرجع للمقياس وتُقاس وتُسجَّل — التوثيق متاح عند الطلب.",
-    "Get in touch": "تواصل معنا",
-    "Rare & ancient trees": "الأشجار النادرة والمعمّرة",
-    "Rare & Ancient Specimens": "عينات نادرة ومعمّرة",
-    "Heritage and monumental trees with documented provenance, sourced across the Mediterranean, GCC and Asia.": "أشجار تراثية ومعمارية بمصدر موثّق، مُورَّدة من البحر المتوسط والخليج وآسيا.",
-    "Explore rare trees": "استكشف الأشجار النادرة",
-    "Request availability": "اطلب توفر الكمية",
-    "Desert specimens": "عينات صحراوية",
-    "Giant Cacti & Yucca Rostrata": "صبار عملاق ويوكا روستاتا",
-    "Statement desert specimens — columnar cacti, barrel cacti and architectural succulents, grown and delivered across the Emirates.": "عينات صحراوية مميزة — صبار عمودي وصبار برمي وعصاريات معمارية، تُزرع وتُسلَّم في أنحاء الإمارات.",
-    "Explore cacti": "استكشف الصبار",
-    /* ---- Homepage content V8.3 ---- */
-    "Giant cacti and succulents at the Pheladelfia nursery": "صبار عملاق وعصاريات في مشتل فلادلفيا",
-    "Giant cacti, succulents & Yucca rostrata": "صبار عملاق وعصاريات ويوكا روستاتا",
-    "Every specimen is recorded, measured, and supported by a professional photography pack — three angles, scale reference, high-resolution — provided on request.": "كل عينة تُسجَّل وتُقاس ويدعمها حزمة تصوير احترافية — ثلاث زوايا ومرجع مقياس وعالية الدقة — تُقدَّم عند الطلب.",
-    "Transplanting protocol": "بروتوكول النقل",
-    "Large specimens are relocated under documented transplanting protocols, with monitored establishment and aftercare support.": "تُنقل العينات الكبيرة وفق بروتوكولات نقل موثّقة، مع مراقبة للاعتماد ودعم لاحق.",
-    "Built for designers": "مصممة للمصممين",
-    "Site visits, sample photography, and specification-ready documentation for landscape architects and design-led contractors.": "زيارات للموقع وتصوير عينات وتوثيق جاهز للمواصفات لمهندسي المناظر الطبيعية والمقاولين المعماريين.",
-    "From enquiry to established planting": "من الاستفسار إلى زراعة راسخة",
-    "Enquiry & requirements": "الاستفسار والمتطلبات",
-    "Sourcing & availability": "التوريد والتوفر",
-    "Quality control": "مراقبة الجودة",
-    "Delivery & support": "التسليم والدعم",
-    "Share your plant list, sizes, and quantities. We review them against our nursery stock and sourcing network.": "شاركنا قائمة النباتات والمقاسات والكميات. نراجعها وفق مخزون مشتلنا وشبكة التوريد لدينا.",
-    "Delivery across the Emirates and wider Gulf, with aftercare support through establishment.": "تسليم في أنحاء الإمارات والخليج الأوسع، مع دعم لاحق حتى الاعتماد.",
-  };
+  function knownLangs() {
+    var codes = ["en"];
+    var i18n = window.PH_I18N || {};
+    for (var k in i18n) {
+      if (Object.prototype.hasOwnProperty.call(i18n, k) && codes.indexOf(k) < 0) codes.push(k);
+    }
+    return codes;
+  }
   var BILINGUAL = /^(.*[A-Za-z].*?)\s*\|\s*([\u0600-\u06FF][^|]*)$/;
   var SIZE = /^(\d+(?:\.\d+)?-\d+(?:\.\d+)?) MTR CT$/;
 
@@ -3329,7 +2566,10 @@ window.__phJsOnce = true;
       var m = document.cookie.match(/(?:^|; )ph_lang_v2=([^;]+)/);
       if (m) v = m[1];
     }
-    return v === "ar" ? "ar" : "en";
+    v = String(v || "").toLowerCase();
+    if (!/^[a-z]{2}(-[a-z]{2,4})?$/.test(v)) return "en";
+    if (v !== "en" && knownLangs().indexOf(v) < 0) return "en";
+    return v;
   }
 
   function writeLang(v) {
@@ -3338,19 +2578,55 @@ window.__phJsOnce = true;
   }
 
   var lang = readLang();
+  var DICT = lang !== "en" ? ((window.PH_I18N && window.PH_I18N[lang]) || null) : null;
   var html = document.documentElement;
   html.setAttribute("lang", lang);
-  html.setAttribute("dir", lang === "ar" ? "rtl" : "ltr");
+  html.setAttribute("dir", RTL_LANGS[lang] ? "rtl" : "ltr");
   html.classList.toggle("ph-ar", lang === "ar");
+  html.classList.toggle("ph-rtl", !!RTL_LANGS[lang]);
 
-  function arabicFor(text) {
+  function localizedFor(text) {
     var key = String(text || "").replace(/\s+/g, " ").trim();
     if (!key || !/[A-Za-z]/.test(key)) return null;
-    if (Object.prototype.hasOwnProperty.call(AR, key)) return AR[key];
+    if (DICT && Object.prototype.hasOwnProperty.call(DICT, key)) return DICT[key];
+    if (lang !== "ar") return null;
+    // Zoho composes checkout labels at runtime; exact dictionary keys alone
+    // cannot cover item counts, lead times, required labels or size values.
+    var countedSubtotal = key.match(/^Subtotal\s*\(\s*(\d+)\s+Items?\s*\)$/i);
+    if (countedSubtotal) return "المجموع الفرعي (عدد المنتجات: " + countedSubtotal[1] + ")";
+    var countedItems = key.match(/^(\d+)\s+Items?$/i);
+    if (countedItems) return "عدد المنتجات: " + countedItems[1];
+    var decoratedLabel = key.match(/^(.*?)\s*([:*])$/);
+    if (decoratedLabel && DICT && Object.prototype.hasOwnProperty.call(DICT, decoratedLabel[1].trim())) {
+      return DICT[decoratedLabel[1].trim()] + " " + decoratedLabel[2];
+    }
+    var sizeLabel = key.match(/^Size\s*:\s*(.+)$/i);
+    if (sizeLabel) {
+      var sizeValue = localizedFor(sizeLabel[1]);
+      return "المقاس: " + (sizeValue === null ? "\u2066" + sizeLabel[1] + "\u2069" : sizeValue);
+    }
+    var duration = key.match(/^\(?\s*(\d+)\s*[-–]\s*(\d+)\s+business days?\s*\)?$/i);
+    if (duration) return "من " + duration[1] + " إلى " + duration[2] + " أيام عمل";
+    var oneDuration = key.match(/^\(?\s*(\d+)\s+business days?\s*\)?$/i);
+    if (oneDuration) return oneDuration[1] + " أيام عمل";
+    var shippingDuration = key.match(/^(Standard Shipping|Express Shipping|Shipping|Delivery)\s*\(([^)]+)\)$/i);
+    if (shippingDuration) {
+      var translatedMethod = localizedFor(shippingDuration[1]);
+      var translatedDuration = localizedFor(shippingDuration[2]);
+      if (translatedMethod !== null && translatedDuration !== null) return translatedMethod + " (" + translatedDuration + ")";
+    }
+    var pricedDuration = key.match(/^(AED\s*[\d,]+(?:\.\d+)?)\s*(\([^)]+\))$/i);
+    if (pricedDuration) {
+      var translatedPrice = localizedFor(pricedDuration[1]);
+      var translatedLead = localizedFor(pricedDuration[2]);
+      if (translatedPrice !== null && translatedLead !== null) return translatedPrice + " (" + translatedLead + ")";
+    }
+    var dirhamAmount = key.match(/^AED\s*([\d,]+(?:\.\d+)?)$/i);
+    if (dirhamAmount) return "\u2066" + dirhamAmount[1] + " د.إ\u2069";
     var pair = key.match(BILINGUAL);
     if (pair) return pair[2].trim();
     var size = key.match(SIZE);
-    if (size) return size[1] + " م جذع صافي";
+    if (size) return "\u2066" + size[1] + "\u2069 م (ارتفاع الجذع الصافي)";
     var slideOf = key.match(/^Slide (\d+) of (\d+)$/);
     if (slideOf) return "الشريحة " + slideOf[1] + " من " + slideOf[2];
     var slideN = key.match(/^Slide (\d+)$/);
@@ -3360,14 +2636,23 @@ window.__phJsOnce = true;
     if (/^\d+ in nursery$/.test(key)) return key.replace(" in nursery", " في المشتل");
     if (/^\d+ NOS$/.test(key)) return key.replace(" NOS", " قطعة");
     if (/ added to your selection\.$/.test(key)) return key.replace(/ added to your selection\.$/, " أُضيف إلى اختياراتك.");
+    var unavail = key.match(/^(.*?)\s+—\s+unavailable$/);
+    if (unavail) {
+      var inner = localizedFor(unavail[1]);
+      return (inner === null ? unavail[1] : inner) + " — غير متوفر";
+    }
+    var resultsFor = key.match(/^Results for\s+[“"](.+)[”"]$/);
+    if (resultsFor) return "نتائج البحث عن “" + resultsFor[1] + "”";
+    var soldAs = key.match(/^Exclusive of 5% VAT\s*·\s*Sold as\s+(.+)$/i);
+    if (soldAs) return "غير شامل ضريبة القيمة المضافة 5% · يُباع كـ \u2066" + soldAs[1] + "\u2069";
     return null;
   }
 
   function swapText(node) {
     var raw = node.nodeValue;
-    var ar = arabicFor(raw);
-    if (ar === null) return;
-    node.nodeValue = raw.match(/^\s*/)[0] + ar + raw.match(/\s*$/)[0];
+    var tr = localizedFor(raw);
+    if (tr === null) return;
+    node.nodeValue = raw.match(/^\s*/)[0] + tr + raw.match(/\s*$/)[0];
   }
 
   var ATTRS = ["placeholder", "aria-label", "title", "alt"];
@@ -3375,11 +2660,11 @@ window.__phJsOnce = true;
     for (var i = 0; i < ATTRS.length; i++) {
       var v = el.getAttribute(ATTRS[i]);
       if (!v) continue;
-      var ar = arabicFor(v);
-      if (ar !== null) el.setAttribute(ATTRS[i], ar);
+      var tr = localizedFor(v);
+      if (tr !== null && tr !== v) el.setAttribute(ATTRS[i], tr);
     }
     if (el.tagName === "INPUT" && /^(submit|button)$/i.test(el.type || "") && el.value) {
-      var val = arabicFor(el.value);
+      var val = localizedFor(el.value);
       if (val !== null) el.value = val;
     }
   }
@@ -3390,7 +2675,7 @@ window.__phJsOnce = true;
   }
 
   function translate(scope) {
-    if (lang !== "ar" || !scope) return;
+    if (!DICT || !scope) return;
     if (scope.nodeType === 3) {
       if (scope.parentNode && scope.parentNode.nodeType === 1 && skipped(scope.parentNode)) return;
       swapText(scope);
@@ -3415,15 +2700,15 @@ window.__phJsOnce = true;
   }
 
   function translateTitle() {
-    if (lang !== "ar") return;
+    if (!DICT) return;
     document.title = document.title.split("|").map(function (part) {
-      var ar = arabicFor(part);
-      return ar === null ? part.trim() : ar;
+      var tr = localizedFor(part);
+      return tr === null ? part.trim() : tr;
     }).join(" | ");
   }
 
   function watchChanges() {
-    if (lang !== "ar" || !window.MutationObserver || !document.body) return;
+    if (!DICT || !window.MutationObserver || !document.body) return;
     var queue = [];
     var queued = false;
     function flush() {
@@ -3434,25 +2719,91 @@ window.__phJsOnce = true;
     }
     new MutationObserver(function (records) {
       records.forEach(function (r) {
-        if (r.type === "characterData") queue.push(r.target);
+        if (r.type === "characterData" || r.type === "attributes") queue.push(r.target);
         for (var i = 0; i < r.addedNodes.length; i++) queue.push(r.addedNodes[i]);
       });
       if (!queued && queue.length) {
         queued = true;
         (window.requestAnimationFrame || window.setTimeout)(flush);
       }
-    }).observe(document.body, { childList: true, subtree: true, characterData: true });
+    }).observe(document.body, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ATTRS });
   }
 
-  function bindToggles(scope) {
-    var list = (scope || document).querySelectorAll("[data-ph-lang-toggle]");
-    for (var i = 0; i < list.length; i++) {
-      if (list[i].__phBound) continue;
-      list[i].__phBound = true;
-      list[i].addEventListener("click", function (event) {
-        event.preventDefault();
-        writeLang(lang === "ar" ? "en" : "ar");
-        location.reload();
+  var LANG_NAMES = { en: "English", ar: "العربية" };
+  function langLabel(code) { return LANG_NAMES[code] || code.toUpperCase(); }
+  function langShort(code) { return code === "ar" ? "عربي" : code.toUpperCase(); }
+
+  function closeLangDrops(except) {
+    var drops = document.querySelectorAll("[data-ph-lang-drop]");
+    for (var i = 0; i < drops.length; i++) {
+      if (drops[i] === except) continue;
+      drops[i].setAttribute("hidden", "");
+      var b = drops[i].parentNode && drops[i].parentNode.querySelector("[data-ph-lang-toggle]");
+      if (b) b.setAttribute("aria-expanded", "false");
+    }
+  }
+
+  function setupLangMenus() {
+    var menus = document.querySelectorAll(".ph-lang-menu");
+    if (!menus.length) return;
+    var codes = knownLangs().filter(function (c) { return c !== lang; });
+    var i, j;
+    for (i = 0; i < menus.length; i++) {
+      var menu = menus[i];
+      var drop = menu.querySelector("[data-ph-lang-drop]");
+      var btn = menu.querySelector("[data-ph-lang-toggle]");
+      var cur = menu.querySelector("[data-ph-lang-current]");
+      if (cur) {
+        cur.textContent = langShort(lang);
+        cur.setAttribute("lang", lang === "ar" ? "ar" : "en");
+      }
+      if (!drop) continue;
+      if (!codes.length) { menu.hidden = true; continue; }
+      drop.innerHTML = "";
+      for (j = 0; j < codes.length; j++) {
+        var item = document.createElement("button");
+        item.type = "button";
+        item.className = "ph-lang-item";
+        item.setAttribute("data-ph-lang-set", codes[j]);
+        item.setAttribute("lang", codes[j]);
+        item.textContent = langLabel(codes[j]);
+        drop.appendChild(item);
+      }
+      if (btn && !btn.__phBound) {
+        btn.__phBound = true;
+        btn.addEventListener("click", function (event) {
+          event.preventDefault();
+          event.stopPropagation();
+          var d = this.parentNode && this.parentNode.querySelector("[data-ph-lang-drop]");
+          if (!d) return;
+          var willOpen = d.hasAttribute("hidden");
+          closeLangDrops(d);
+          if (willOpen) {
+            d.removeAttribute("hidden");
+            this.setAttribute("aria-expanded", "true");
+          } else {
+            this.setAttribute("aria-expanded", "false");
+          }
+        });
+      }
+    }
+    if (!document.__phLangDocBound) {
+      document.__phLangDocBound = true;
+      document.addEventListener("click", function (event) {
+        var t = event.target;
+        var item = t && t.closest ? t.closest("[data-ph-lang-set]") : null;
+        if (item) {
+          event.preventDefault();
+          writeLang(item.getAttribute("data-ph-lang-set"));
+          location.reload();
+          return;
+        }
+        if (!(t && t.closest && (t.closest("[data-ph-lang-drop]") || t.closest("[data-ph-lang-toggle]")))) {
+          closeLangDrops();
+        }
+      });
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") closeLangDrops();
       });
     }
   }
@@ -3766,7 +3117,7 @@ window.__phJsOnce = true;
   }
 
   function start() {
-    bindToggles();
+    setupLangMenus();
     bindHostedForms();
     setupDrawer();
     markCurrentLinks();

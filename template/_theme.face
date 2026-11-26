@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <script>window.zs_site_resource_path = window.zs_site_resource_path || "";</script>
-  <meta name="ph-theme-build" content="pheladelfia-20261126-v900">
+  <meta name="ph-theme-build" content="pheladelfia-20261126-v910">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script id="ph-language-bootstrap">(function(){
     try{
@@ -19,7 +19,7 @@
     if(l==="ar"){
       var h=document.documentElement;
       h.setAttribute("lang","ar"); h.setAttribute("dir","rtl"); h.className+=" ph-ar";
-      document.write('<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap">');
+      document.write('<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap">');
     }
     try{localStorage.setItem("ph_lang_v2",l);}catch(e){}
     try{if(!m||m[1]!==l) document.cookie="ph_lang_v2="+l+"; path=/; max-age=31536000; SameSite=Lax";}catch(e){}
@@ -295,7 +295,7 @@
   {% endif %}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fraunces:ital,wght@0,500;0,600;0,700;1,500&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700&display=swap">
   <title>{% if page.title %}{{ page.title }}{% else %}Pheladelfia{% endif %}</title>
   {{ page.meta_tags }}
   {% assign ph_head_path = page.url %}
@@ -333,7 +333,7 @@
   </script>
   <style type="text/css">{{ page.custom_css }}</style>
 </head>
-<body class="ph-body{% if page.is_home_page %} is-home{% endif %}">
+<body class="ph-body ph-redesign{% if page.is_home_page %} is-home{% endif %}">
 <a class="ph-skip-link" href="#ph-main">Skip to content</a>
 
 <header class="ph-header">
@@ -376,6 +376,11 @@
     </a>
 
     <form class="ph-search" action="{% if page.search_url %}{{ page.search_url }}{% else %}/search{% endif %}" method="get" role="search">
+      <select aria-label="All categories" data-ph-search-filter>
+        <option value="">All categories</option>
+        <option value="outdoor">Outdoor</option>
+        <option value="indoor">Indoor</option>
+      </select>
       <input type="search" name="q" placeholder="Search palms, trees, shrubs…" aria-label="Search" autocomplete="off" aria-expanded="false" aria-controls="ph-search-suggest">
       <button type="submit" aria-label="Search">Search</button>
       <div class="ph-suggest" id="ph-search-suggest" data-ph-suggest hidden></div>
@@ -441,7 +446,8 @@
             <a href="{{ ph_url_rare_trees }}">Rare &amp; Ancient Trees</a>
             <a href="{{ ph_url_cacti }}">Cacti &amp; Succulents</a>
           </div>
-          <div class="ph-mega-col ph-mega-continue">
+          <div class="ph-mega-col">
+            <h5>More Outdoor</h5>
             <a href="{{ ph_url_shrubs }}">Shrubs &amp; Ground Cover</a>
             <a href="{{ ph_url_climbers }}">Climbers</a>
             <a href="{{ ph_url_art }}">Art &amp; Sculptures</a>
@@ -460,6 +466,9 @@
             <a class="ph-mega-sub" href="{{ ph_url_direct_use }}">Direct Use Purchases</a>
             <a class="ph-mega-sub" href="{{ ph_url_small_tools }}">Small Tools &amp; Consumables</a>
           </div>
+          <aside class="ph-mega-photo">
+            <img src="{{ ph_img }}/palm-grove-fan.jpg" alt="Fan palms at the Pheladelfia nursery" loading="lazy">
+          </aside>
         </div>
       </li>
       <li class="ph-drop">
@@ -484,6 +493,7 @@
           <a href="/join-us">Join Us</a>
         </div>
       </li>
+      <li><a href="/join-us">Join Us</a></li>
       <li><a href="/visit">Visit</a></li>
       <li><a href="/blog">Blog</a></li>
       <li><a href="/contact">Contact</a></li>
@@ -545,6 +555,7 @@
           <li><a href="{{ ph_url_trees }}">Trees</a></li>
           <li><a href="{{ ph_url_shrubs }}">Shrubs &amp; Ground Cover</a></li>
           <li><a href="{{ ph_url_indoor }}">Indoor Plants</a></li>
+          <li><a href="{{ ph_url_fertilizers }}">Pots &amp; Supplies</a></li>
           <li><a href="{{ ph_url_flowers }}">Fresh Flowers &amp; Bouquets</a></li>
           <li><a href="{{ ph_url_fertilizers }}">Fertilizers &amp; Soil Amendments</a></li>
           <li><a href="/all-collections">All collections</a></li>
@@ -564,6 +575,7 @@
       <div>
         <h3>Company</h3>
         <ul>
+          <li><a href="/services">Services</a></li>
           <li><a href="/about">About us</a></li>
           <li><a href="/nursery">Nursery</a></li>
           <li><a href="/projects">Projects</a></li>

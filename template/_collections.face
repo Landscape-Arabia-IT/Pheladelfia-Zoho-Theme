@@ -21,6 +21,9 @@
         <a href="{{ ph_url_trees }}">Trees</a>
         <a href="{{ ph_url_rare_trees }}">Rare &amp; Ancient Trees</a>
         <a href="{{ ph_url_cacti }}">Cacti &amp; Succulents</a>
+      </div>
+      <div>
+        <h2>Outdoor Plants</h2>
         <a href="{{ ph_url_shrubs }}">Shrubs &amp; Ground Cover</a>
         <a href="{{ ph_url_climbers }}">Climbers</a>
         <a href="{{ ph_url_art }}">Art &amp; Sculptures</a>

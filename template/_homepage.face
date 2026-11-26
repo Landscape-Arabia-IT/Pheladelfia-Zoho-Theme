@@ -1,6 +1,6 @@
 <!-- ===== Hero ===== -->
-<section class="ph-hero ph-hero-split" id="top">
-  <div class="ph-wrap ph-hero-grid">
+<section class="ph-hero ph-hero-retail" id="top">
+  <div class="ph-hero-retail-grid">
     <div class="ph-hero-copy">
       <span class="ph-eyebrow ph-anim ph-anim-1">Abu Dhabi nursery · Est. 2004</span>
       <h1 class="ph-hero-title ph-anim ph-anim-2">Premium Palms &amp; Trees, <em class="ph-text-gradient-gold">Grown in the UAE</em></h1>
@@ -56,7 +56,7 @@
       </div>
       <a class="ph-btn ph-btn-outline" href="/all-collections">All collections</a>
     </div>
-    <div class="ph-cat-grid ph-cat-mosaic">
+    <div class="ph-cat-grid ph-cat-shop">
       <a class="ph-cat-card" href="{{ ph_url_palm_trees }}">
         <img src="{{ ph_img }}/palm-grove-fan.jpg" alt="Fan palms at the Pheladelfia nursery" loading="lazy">
         <span class="ph-cat-body">

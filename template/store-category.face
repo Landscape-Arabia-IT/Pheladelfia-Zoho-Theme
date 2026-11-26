@@ -20,6 +20,13 @@
     <h1>{{ category.name }}</h1>
     {% if category.description %}<div class="ph-lead">{{ category.description }}</div>{% endif %}
     <span class="ph-rule"></span>
+    {% if category.images %}
+    <div class="ph-cat-photos">
+      {% for image in category.images %}
+      <img src="{{ image.url }}/1600x1600" alt="{{ category.name }}">
+      {% endfor %}
+    </div>
+    {% endif %}
   </div>
 </section>
 <section class="ph-store ph-catalog">

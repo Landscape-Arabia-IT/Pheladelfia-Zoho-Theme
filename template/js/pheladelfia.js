@@ -3144,7 +3144,8 @@ window.__phJsOnce = true;
     "Contractors & Delivery Partners — specialist contractors and delivery partners realising schemes on the ground": "المقاولون وشركاء التنفيذ — مقاولون متخصصون وشركاء تسليم منفذون للمخططات على أرض الواقع",
     "Visit": "الزيارة",
     "Capabilities": "القدرات",
-    "The full horticultural supply chain": "سلسلة التوريد البستنية الكاملة"
+    "The full horticultural supply chain": "سلسلة التوريد البستنية الكاملة",
+    "More Outdoor": "المزيد في الهواء الطلق"
   };
   var BILINGUAL = /^(.*[A-Za-z].*?)\s*\|\s*([\u0600-\u06FF][^|]*)$/;
   var SIZE = /^(\d+(?:\.\d+)?-\d+(?:\.\d+)?) MTR CT$/;

@@ -1,6 +1,6 @@
 {% extends "_theme" %}
 {% block content %}
-<section class="ph-store ph-selection-page ph-cart-page">
+<section class="ph-store ph-selection-page ph-cart-page ph-agc-cart">
   <div class="ph-wrap">
     <header class="ph-cart-hero">
       <p class="ph-kicker">Nursery</p>

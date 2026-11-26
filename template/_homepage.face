@@ -1,6 +1,8 @@
 <!-- ===== Hero ===== -->
-<section class="ph-hero ph-hero-retail" id="top">
-  <div class="ph-hero-retail-grid">
+<section class="ph-hero ph-hero-agc" id="top">
+  <div class="ph-hero-media"><img src="{{ ph_img }}/palm-nursery-rows.jpg" alt="Rows of mature Washingtonia palms at the Pheladelfia nursery in Abu Dhabi" fetchpriority="high"></div>
+  <div class="ph-hero-shade" aria-hidden="true"></div>
+  <div class="ph-wrap">
     <div class="ph-hero-copy">
       <span class="ph-eyebrow ph-anim ph-anim-1">Abu Dhabi nursery · Est. 2004</span>
       <h1 class="ph-hero-title ph-anim ph-anim-2">Premium Palms &amp; Trees, <em class="ph-text-gradient-gold">Grown in the UAE</em></h1>
@@ -14,9 +16,6 @@
         <li>{{ ph_address_branch }}</li>
         <li>{{ ph_hours }}</li>
       </ul>
-    </div>
-    <div class="ph-hero-media">
-      <img src="{{ ph_img }}/palm-nursery-rows.jpg" alt="Rows of mature Washingtonia palms at the Pheladelfia nursery in Abu Dhabi" fetchpriority="high">
     </div>
   </div>
 </section>

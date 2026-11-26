@@ -3603,3 +3603,37 @@ window.__phJsOnce = true;
   else start();
 })();
 }
+
+/* Acacia-style header: solid bar after scroll, search overlay. */
+(function () {
+  function boot() {
+    var header = document.querySelector(".ph-agc-header");
+    var overlay = document.querySelector("[data-ph-search-overlay]");
+    function solid() {
+      if (!header) return;
+      var onHero = document.body.classList.contains("is-home") && window.scrollY < 24;
+      header.classList.toggle("is-solid", !onHero);
+    }
+    solid();
+    window.addEventListener("scroll", solid, { passive: true });
+    function openSearch(event) {
+      if (!overlay) return;
+      if (event) event.preventDefault();
+      overlay.hidden = false;
+      var input = overlay.querySelector('input[name="q"]');
+      if (input) input.focus();
+    }
+    function closeSearch() {
+      if (overlay) overlay.hidden = true;
+    }
+    var openers = document.querySelectorAll("[data-ph-search-open]");
+    for (var i = 0; i < openers.length; i++) openers[i].addEventListener("click", openSearch);
+    var closers = document.querySelectorAll("[data-ph-search-close]");
+    for (var j = 0; j < closers.length; j++) closers[j].addEventListener("click", closeSearch);
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") closeSearch();
+    });
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
+  else boot();
+})();

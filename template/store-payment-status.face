@@ -1,6 +1,6 @@
 {% extends '_theme' %}
 {% block content %}
-<section class="ph-store ph-payment-page">
+<section class="ph-store ph-payment-page ph-agc-thanks">
   <div class="ph-wrap">
     <div class="ph-payment-card {% if payment_status.order_placed %}is-success{% else %}is-error{% endif %}">
       {% if payment_status.order_placed %}

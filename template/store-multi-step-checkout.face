@@ -1,6 +1,6 @@
 {% extends "_theme" %}
 {% block content %}
-<section class="ph-store ph-checkout-page">
+<section class="ph-store ph-checkout-page ph-agc-checkout ph-agc-checkout-steps">
   <div class="ph-wrap">
     <header class="ph-checkout-hero">
       <p class="ph-kicker">Secure checkout</p>

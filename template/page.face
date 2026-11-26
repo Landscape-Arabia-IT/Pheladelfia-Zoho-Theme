@@ -21,6 +21,8 @@
   {% include "_projects" %}
 {% elif ph_page_url == "/contact" || ph_page_url == "/contact/" || ph_page_url == "contact" || ph_page_title == "contact" || ph_page_title == "contact us" || ph_page_title == "تواصل معنا" %}
   {% include "_contact" %}
+{% elif ph_page_url == "/visit" || ph_page_url == "/visit/" || ph_page_url == "visit" || ph_page_title == "visit" || ph_page_title == "visit us" || ph_page_title == "visit the nursery" || ph_page_title == "الزيارة" %}
+  {% include "_visit" %}
 {% elif ph_page_url == "/join-us" || ph_page_url == "/join-us/" || ph_page_url == "join-us" || ph_page_url == "/careers" || ph_page_url == "/careers/" || ph_page_url == "careers" || ph_page_title == "join us" || ph_page_title == "careers" || ph_page_title == "انضم إلينا" %}
   {% include "_careers" %}
 {% elif ph_page_url == "/job" || ph_page_url == "/job/" || ph_page_url == "/jobs" || ph_page_url == "/jobs/" || ph_page_url == "job" || ph_page_url == "jobs" || ph_page_title == "job" || ph_page_title == "job details" || ph_page_title == "وظيفة" %}
@@ -42,6 +44,7 @@
   <template data-ph-route="sustainability">{% include "_sustainability" %}</template>
   <template data-ph-route="projects">{% include "_projects" %}</template>
   <template data-ph-route="contact">{% include "_contact" %}</template>
+  <template data-ph-route="visit">{% include "_visit" %}</template>
   <template data-ph-route="join-us">{% include "_careers" %}</template>
   <template data-ph-route="careers">{% include "_careers" %}</template>
   <template data-ph-route="job">{% include "_job" %}</template>

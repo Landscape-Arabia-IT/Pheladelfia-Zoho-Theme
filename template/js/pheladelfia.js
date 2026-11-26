@@ -3141,7 +3141,11 @@ window.__phJsOnce = true;
     "Trade lists on request": "قوائم أسعار عند الطلب",
     "Pheladelfia Agricultural LLC began in 2004 with a simple belief: the region's design ambitions needed mature, design-grade plant material — grown and supplied to a documented standard. Our Abu Dhabi nursery spans more than 1.5 million square feet in Al Ajban, where plants and trees are propagated and grown on to specimen sizes.": "بدأت فلادلفيا الزراعية ذ.م.م عام 2004 بقناعة بسيطة: كانت طموحات التصميم في المنطقة بحاجة إلى مواد نباتية ناضجة بمعايير تصميمية — تُزرع وتُورد وفق معيار موثّق. يمتد مشتلنا في أبوظبي على أكثر من 1.5 مليون قدم مربع في العجبان، حيث تُكثر النباتات والأشجار وتُزرع حتى بلوغ مقاسات العينات.",
     "Today we supply design professionals, developers, consultants, contractors and institutions across the UAE and Gulf — with a branch in Warsan, Dubai.": "اليوم نورد متخصصي التصميم والمطورين والاستشاريين والمقاولين والمؤسسات في أنحاء الإمارات والخليج — مع فرع في الورسان بدبي.",
-    "Contractors & Delivery Partners — specialist contractors and delivery partners realising schemes on the ground": "المقاولون وشركاء التنفيذ — مقاولون متخصصون وشركاء تسليم منفذون للمخططات على أرض الواقع"
+    "Contractors & Delivery Partners — specialist contractors and delivery partners realising schemes on the ground": "المقاولون وشركاء التنفيذ — مقاولون متخصصون وشركاء تسليم منفذون للمخططات على أرض الواقع",
+    "Visit": "الزيارة",
+    "Capabilities": "القدرات",
+    "The full horticultural supply chain": "سلسلة التوريد البستنية الكاملة",
+    "More Outdoor": "المزيد في الهواء الطلق"
   };
   var BILINGUAL = /^(.*[A-Za-z].*?)\s*\|\s*([\u0600-\u06FF][^|]*)$/;
   var SIZE = /^(\d+(?:\.\d+)?-\d+(?:\.\d+)?) MTR CT$/;
@@ -3599,3 +3603,37 @@ window.__phJsOnce = true;
   else start();
 })();
 }
+
+/* Acacia-style header: solid bar after scroll, search overlay. */
+(function () {
+  function boot() {
+    var header = document.querySelector(".ph-agc-header");
+    var overlay = document.querySelector("[data-ph-search-overlay]");
+    function solid() {
+      if (!header) return;
+      var onHero = document.body.classList.contains("is-home") && window.scrollY < 24;
+      header.classList.toggle("is-solid", !onHero);
+    }
+    solid();
+    window.addEventListener("scroll", solid, { passive: true });
+    function openSearch(event) {
+      if (!overlay) return;
+      if (event) event.preventDefault();
+      overlay.hidden = false;
+      var input = overlay.querySelector('input[name="q"]');
+      if (input) input.focus();
+    }
+    function closeSearch() {
+      if (overlay) overlay.hidden = true;
+    }
+    var openers = document.querySelectorAll("[data-ph-search-open]");
+    for (var i = 0; i < openers.length; i++) openers[i].addEventListener("click", openSearch);
+    var closers = document.querySelectorAll("[data-ph-search-close]");
+    for (var j = 0; j < closers.length; j++) closers[j].addEventListener("click", closeSearch);
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") closeSearch();
+    });
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
+  else boot();
+})();

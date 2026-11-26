@@ -1,1 +1,32 @@
-{% extends "_theme" %} {% block content %} <section class="ph-projects">   <div class="ph-wrap">     <p class="ph-kicker">Journal</p>     <h1 class="ph-h2">Blog</h1>     <div class="ph-project-grid">       {% for post in blog_posts %}       <article class="ph-project-card">         <h3 class="ph-h3"><a href="{{ post.post_url }}">{{ post.post_title }}</a></h3>         <p>{{ post.summary }}</p>       </article>       {% endfor %}     </div>   </div> </section> {% endblock %} 
+{% extends "_theme" %}
+{% block content %}
+<section class="ph-page-banner">
+  <div class="ph-page-banner-media"><img src="{{ ph_img }}/palm-nursery-rows.jpg" alt="" aria-hidden="true"></div>
+  <div class="ph-wrap">
+    <nav aria-label="Breadcrumb" class="ph-crumbs">
+      <a href="/">Home</a><span class="ph-crumb-sep">/</span><span aria-current="page">Blog</span>
+    </nav>
+    <p class="ph-kicker">Journal</p>
+    <h1>Blog</h1>
+    <span class="ph-rule"></span>
+  </div>
+</section>
+<section class="ph-section ph-journal">
+  <div class="ph-wrap">
+    {% assign ph_blog_count = blog_posts | size %}
+    {% if ph_blog_count > 0 %}
+    <div class="ph-journal-grid">
+      {% for post in blog_posts %}
+      <article class="ph-journal-card">
+        <h2 class="ph-h3"><a href="{{ post.post_url }}">{{ post.post_title }}</a></h2>
+        {% if post.summary %}<p class="ph-copy">{{ post.summary }}</p>{% endif %}
+        <a class="ph-more" href="{{ post.post_url }}">{{ post.post_title }}</a>
+      </article>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="ph-editor-slot" data-ph-gap="blog-empty"></div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

@@ -1,6 +1,6 @@
 {% extends "_theme" %}
 {% block content %}
-<section class="ph-store ph-auth-page">
+<section class="ph-store ph-auth-page ph-agc-account">
   <div class="ph-wrap">
     <div class="theme-portal-form-container ph-portal-box" id="main-content" role="main">
       {{ page.form_code }}

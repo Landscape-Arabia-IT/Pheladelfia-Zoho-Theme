@@ -6,8 +6,12 @@
 {% assign ph_phone_raw = "+97125551662" %}
 {% assign ph_phone_tel = "tel:+97125551662" %}
 {% assign ph_phone_display = "+971 2 555 1662" %}
+{% assign ph_phone_alt_raw = "+971564105580" %}
+{% assign ph_phone_alt_tel = "tel:+971564105580" %}
+{% assign ph_phone_alt_display = "+971 56 410 5580" %}
 {% assign ph_whatsapp_url = "https://wa.me/97125551662" %}
 {% assign ph_email = "nursery@pheladelfia.com" %}
+{% assign ph_email_info = "info@pheladelfia.com" %}
 {% assign ph_email_jobs = "nursery@pheladelfia.com?subject=Job%20application" %}
 {% assign ph_website = "https://www.pheladelfia.com" %}
 {% assign ph_img = "https://testpheladelfia.zohoecommerce.com/images" %}

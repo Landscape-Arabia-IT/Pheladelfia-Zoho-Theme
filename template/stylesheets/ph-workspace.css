@@ -268,7 +268,7 @@ html[dir='rtl'] .phx-shell :is(h1,h2,h3,h4,.phx-brand > span,.theme-cart-details
 /* Keep Arabic totals apart from their amounts and isolate identifiers. */
 html[dir='rtl'] .phx-shell .phx-flow .theme-cart-details-summary-total { display:flex; align-items:baseline; justify-content:space-between; gap:16px; flex-wrap:wrap; }
 html[dir='rtl'] .phx-shell .phx-flow .theme-cart-details-summary-list-item { gap:16px; }
-html[dir='rtl'] .phx-shell :is(.phx-item-total,[data-ph-cart-subtotal],[data-ph-cart-unit],.phx-summary-line strong,.phx-receipt-details dd) { unicode-bidi:plaintext; }
+html[dir='rtl'] .phx-shell :is(.phx-item-total,[data-ph-cart-subtotal],[data-ph-cart-unit],.phx-summary-line strong,.phx-receipt-details dd,.phx-item-info p,.phx-unit strong) { unicode-bidi:plaintext; }
 
 /* Selects — same custom chevron as the storefront so the dropdown arrow
    keeps breathing room from the field edge (native arrows sit flush). */
@@ -444,4 +444,266 @@ html[dir='rtl'] .phx-shell .phx-flow select {
 }
 @media (max-width:640px) {
   .phx-shell .phx-flow .theme-form-container .theme-form-row { grid-template-columns:minmax(0, 1fr); }
+}
+
+/* V8.9 — cart and checkout, closer to a quiet retail checkout.
+   Zoho field layout above is unchanged; this pass only restyles it. */
+.phx-shell {
+  --px-forest: #183d2b;
+  --px-ink: #1a1a1a;
+  --px-soft: #6b6b6b;
+  --px-line: #e6e6e6;
+  background: #fff;
+}
+.phx-top {
+  min-height: 72px;
+  border-block-end-color: #eee;
+}
+.phx-checkout .phx-top {
+  justify-content: center;
+  padding-inline: max(20px, calc((100% - 1180px) / 2));
+}
+.phx-checkout .phx-top-tools {
+  position: absolute;
+  inset-inline-end: max(20px, calc((100% - 1180px) / 2));
+}
+.phx-top { position: relative; }
+.phx-title h1 {
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  color: #1a1a1a;
+}
+html[dir="rtl"] .phx-title h1 { letter-spacing: 0; }
+.phx-shell .ph-order-journey { margin: 0 0 28px; }
+.phx-shell .ph-order-journey ol {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.phx-shell .ph-order-journey li {
+  display: flex;
+  align-items: center;
+  color: #6b6b6b;
+  font-size: 13px;
+  font-weight: 500;
+}
+.phx-shell .ph-order-journey li:not(:last-child)::after {
+  content: "";
+  width: 18px;
+  height: 1px;
+  margin-inline: 12px;
+  background: #d0d0d0;
+}
+.phx-shell .ph-order-journey .ph-order-step { display: none; }
+.phx-shell .ph-order-journey a { color: inherit; text-decoration: none; }
+.phx-shell .ph-order-journey a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.phx-shell .ph-order-journey .is-current { color: #183d2b; font-weight: 700; }
+
+.phx-cart .phx-grid {
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 56px;
+}
+.phx-cart .phx-photo {
+  width: 112px;
+  height: 112px;
+  border-radius: 0;
+  background-color: #f4f5f1;
+}
+.phx-cart .phx-item {
+  grid-template-columns: 112px minmax(0, 1fr) auto;
+  gap: 8px 20px;
+  padding: 22px 0;
+}
+.phx-cart .phx-item-info > a { font-size: 16px; font-weight: 600; color: #1a1a1a; }
+.phx-cart .phx-quantity { border-radius: 4px; border-color: #d9d9d9; height: 44px; }
+.phx-shell .phx-item-actions > button { border-radius: 4px; }
+.phx-summary,
+.phx-shell .phx-flow .theme-checkout-body > .theme-cart-details {
+  background: #f6f6f4 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 28px 24px !important;
+}
+.phx-summary h2,
+.phx-shell .phx-flow .theme-cart-details-summary-title {
+  color: #1a1a1a !important;
+  font-size: 18px !important;
+  font-weight: 600 !important;
+}
+.phx-button,
+.phx-shell .phx-flow .zpbutton.zpbutton-type-primary,
+.phx-shell .phx-flow .checkout-form .submit-button,
+.phx-shell .phx-flow .theme-continue-btn .zpbutton-type-primary {
+  border-radius: 4px;
+  background: #183d2b;
+  border-color: #183d2b;
+  min-height: 52px;
+  letter-spacing: 0.01em;
+}
+.phx-shell .phx-flow .theme-checkout-steps {
+  gap: 0;
+  border: 0;
+  margin-block-end: 8px;
+}
+.phx-shell .phx-flow .theme-checkout-steps li a {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: #6b6b6b;
+  background: transparent;
+}
+.phx-shell .phx-flow .theme-checkout-steps li a::before { content: none; }
+.phx-shell .phx-flow .theme-checkout-steps li:not(:last-child) a::after {
+  content: "";
+  width: 16px;
+  height: 1px;
+  margin-inline: 12px;
+  background: #d0d0d0;
+}
+.phx-shell .phx-flow .theme-checkout-steps li a.active {
+  color: #183d2b;
+  font-weight: 700;
+  border: 0;
+  background: transparent;
+}
+.phx-shell .phx-flow .theme-checkout-head { margin-block-end: 28px; }
+.phx-shell .phx-flow .theme-checkout-body {
+  grid-template-columns: minmax(0, 1.15fr) minmax(300px, 380px);
+  gap: 48px;
+}
+.phx-shell .phx-flow .theme-checkout-details {
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+.phx-shell .phx-flow .theme-checkout-details-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+.phx-shell .phx-flow :is(input.theme-checkout-input, select.theme-checkout-input, textarea.theme-checkout-input),
+.phx-shell .phx-flow .theme-checkout-country-code-display {
+  border-radius: 5px !important;
+  border-color: #d9d9d9 !important;
+  background: #fff !important;
+}
+.phx-shell .phx-flow .theme-checkout-list {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 16px;
+}
+.phx-shell .phx-flow .theme-checkout-list-edit-btn { margin-inline-start: auto; }
+.phx-shell .phx-flow .theme-cart-details-coupon-enter.theme-coupon-active {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+  width: 100%;
+}
+.phx-shell .phx-flow .theme-checkout-list,
+.phx-shell .phx-flow :is(.theme-payment-option, .theme-checkout-payment-option, .payment-option, .zs-payment-method, [class*="payment-method"], [class*="payment_method"]) {
+  border-radius: 6px;
+  border: 1px solid #e3e3e3;
+  background: #fff;
+  box-shadow: none;
+}
+.phx-shell .phx-flow .theme-checkout-list > input { margin-block-start: 4px; flex: 0 0 auto; }
+.phx-shell .phx-flow .theme-checkout-list-content { flex: 1 1 auto; }
+.phx-shell .phx-flow .theme-checkout-list-selected,
+.phx-shell .phx-flow .theme-checkout-list:has(input:checked),
+.phx-shell .phx-flow :is(.theme-payment-option, .theme-checkout-payment-option, .payment-option, .zs-payment-method, [class*="payment-method"], [class*="payment_method"]):has(input:checked) {
+  border-color: #183d2b;
+  background: #fff;
+  box-shadow: inset 0 0 0 1px #183d2b;
+}
+.phx-shell .phx-flow .theme-continue-btn {
+  border: 0;
+  padding-block-start: 8px;
+  margin-block-start: 8px;
+}
+.phx-shell .phx-flow .theme-cart-details :is(.theme-cart-details-summary-title, .theme-cart-details-summary-total, .theme-cart-details-summary-total span, .theme-cart-details-summary-total strong, .theme-cart-details-summary-list-item, .theme-cart-details-summary-list-item span, .theme-cart-details-summary-list-item strong) {
+  color: #1a1a1a;
+}
+.phx-shell .phx-flow .theme-cart-details-summary-list-item,
+.phx-shell .phx-flow .theme-cart-details-summary-total {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+}
+.phx-shell .phx-flow .theme-checkout-list-content,
+.phx-shell .phx-flow .theme-checkout-list-content p {
+  text-align: start;
+}
+.phx-shell .phx-flow .theme-cart-details-summary-sub,
+.phx-shell .phx-flow .theme-show-order-details,
+.phx-shell .phx-flow .theme-cart-details-coupon-wrap label {
+  color: #6b6b6b;
+}
+.phx-shell .phx-flow .theme-cart-details-summary-total-wrap,
+.phx-shell .phx-flow .theme-cart-details-inner > .theme-cart-details-coupon-wrap {
+  border-color: #e0e0de;
+}
+.phx-summary .ph-ship-compact li { border-block-end-color: #e0e0de; }
+.phx-shell .ph-order-help {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 18px;
+  margin-block-start: 36px;
+  padding-block-start: 20px;
+  border-block-start: 1px solid #eee;
+  color: #6b6b6b;
+  font-size: 14px;
+}
+.phx-shell .ph-order-help h2 {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+.phx-shell .ph-order-help p { margin: 0; }
+.phx-shell .ph-order-help a {
+  color: #183d2b;
+  font-weight: 600;
+  text-decoration: none;
+}
+.phx-shell .ph-order-help a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.phx-shell .ph-order-help-icon { display: none; }
+.phx-saved-item { border-radius: 0; background: #fafbf8; }
+.phx-empty h2 { font-weight: 500; color: #1a1a1a; }
+
+@media (max-width: 980px) {
+  .phx-checkout .phx-top-tools { position: static; }
+  .phx-checkout .phx-top { justify-content: space-between; }
+  .phx-cart .phx-grid,
+  .phx-shell .phx-flow .theme-checkout-body {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+  }
+  .phx-cart .phx-item {
+    grid-template-columns: 88px minmax(0, 1fr);
+    grid-template-areas: "photo info" "photo total" "qty actions";
+  }
+  .phx-cart .phx-photo { width: 88px; height: 88px; }
+  .phx-summary,
+  .phx-shell .phx-flow .theme-checkout-body > .theme-cart-details {
+    position: static !important;
+    max-height: none;
+    overflow: visible;
+  }
+}
+@media (max-width: 640px) {
+  .phx-shell .ph-order-journey li { font-size: 12px; }
+  .phx-shell .ph-order-journey li:not(:last-child)::after { width: 12px; margin-inline: 8px; }
+  .phx-shell .phx-flow .theme-checkout-steps li a { font-size: 13px; }
+  .phx-shell .ph-order-help { align-items: flex-start; flex-direction: column; gap: 4px; }
+  .phx-cart .phx-item-actions { justify-content: flex-end; }
 }

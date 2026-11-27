@@ -1213,5 +1213,15 @@ window.PH_I18N.ar = {
     "Select state": "اختر الإمارة",
     "Select State": "اختر الإمارة",
     "Select country": "اختر الدولة",
-    "Enter your phone number": "أدخل رقم الهاتف"
+    "Enter your phone number": "أدخل رقم الهاتف",
+    "Description": "الوصف",
+    "Order progress": "تقدّم الطلب",
+    "The charge and the day are confirmed at checkout.": "تُؤكد رسوم التوصيل واليوم عند إتمام الطلب.",
+    "The charge and the day are confirmed at checkout. Palms, trees and smaller plants are not all moved the same way, so there is no single flat rate.": "تُؤكد رسوم التوصيل واليوم عند إتمام الطلب. النخيل والأشجار والنباتات الأصغر لا تُنقل بالطريقة نفسها، لذلك لا توجد تعرفة واحدة ثابتة.",
+    "From our Al Ajban nursery": "من مشتلنا في العجبان",
+    "Warsan branch and site delivery": "فرع الورسان والتوصيل إلى الموقع",
+    "Northern emirates": "الإمارات الشمالية",
+    "Sharjah, Ajman, Umm Al Quwain, Ras Al Khaimah and Fujairah, scheduled from the nursery": "الشارقة وعجمان وأم القيوين ورأس الخيمة والفجيرة، بموعد يُحدد من المشتل",
+    "Large specimens may need access for a truck, and some sites need a permit.": "قد تحتاج العينات الكبيرة إلى مدخل لشاحنة، وبعض المواقع تحتاج إلى تصريح.",
+    "Delivery across the UAE. The charge and the day are confirmed at checkout.": "توصيل في جميع أنحاء الإمارات. تُؤكد رسوم التوصيل واليوم عند إتمام الطلب."
 };

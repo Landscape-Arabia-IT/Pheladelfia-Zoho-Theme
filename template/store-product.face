@@ -52,9 +52,12 @@
           <p class="ph-buy-ok" data-ph-buy-ok hidden><span data-ph-buy-ok-size data-ph-no-translate></span> <span>added to your cart.</span></p>
           <ul class="ph-buy-trust">
             <li><span class="ph-buy-trust-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 7h11v8H3zM14 10h4l3 3v2h-7z"/><circle cx="7" cy="18" r="1.6"/><circle cx="18" cy="18" r="1.6"/></svg></span><span>Delivered across the UAE</span></li>
+            <li><span class="ph-buy-trust-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3v18M7 8h10M7 16h10"/></svg></span><span>Prices excluding 5% VAT</span></li>
             <li><span class="ph-buy-trust-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3v18M12 8c-4 1-7 0-8-3 3 0 6 2 8 3Zm0 5c4 1 8-1 9-5-4 0-7 2-9 5Z"/></svg></span><span>Clear-trunk sizes, priced per specimen</span></li>
             <li><a href="{{ ph_whatsapp_url }}"><span class="ph-buy-trust-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 19l1.2-3.2A8 8 0 1 1 8.2 18L5 19z"/></svg></span><span>WhatsApp our nursery team</span></a></li>
           </ul>
+          {% assign ph_ship_mode = "full" %}
+          {% include "_delivery-note" %}
           <p class="ph-secure"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg> Secure checkout</p>
           {% if page.is_portal_enabled %}
           <p class="ph-actions"><button class="ph-wish-toggle" type="button" data-zs-wishlist-element data-ph-auth-wishlist{% if product.variants %}{% for variant in product.variants %}{% if forloop.first %} data-zs-wishlist-variant-id="{{ variant.variant_id }}"{% endif %}{% endfor %}{% endif %} hidden aria-pressed="false"><svg class="ph-wish-icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="ph-wish-label">Save to wishlist</span></button></p>
@@ -68,16 +71,11 @@
           <a class="ph-share-link" href="#" data-ph-share-net="linkedin" aria-label="Share on LinkedIn"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4v11H3zm7 0h3.8v1.5h.1c.5-.95 1.8-1.95 3.7-1.95 4 0 4.7 2.6 4.7 6v5.45h-4v-4.8c0-1.15 0-2.65-1.6-2.65s-1.9 1.25-1.9 2.55v4.9h-4z"/></svg></a>
           <button class="ph-share-link ph-share-copy" type="button" data-ph-share-net="copy" aria-label="Copy link"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1.5 1.5"/><path d="M14 10a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1.5-1.5"/></svg></button>
         </div>
-        <ul class="ph-trust-list">
-          <li>{{ ph_address_nursery }}</li>
-          <li>Clear-trunk (CT) heights, priced per specimen</li>
-          <li>Trade lists on request</li>
-        </ul>
       </div>
     </div>
     <section class="ph-product-panel">
-      <p class="ph-kicker">Specimen</p>
-      <h2 class="ph-h3">Details</h2>
+      <details class="ph-accordion" open>
+        <summary>Details</summary>
       <dl class="ph-spec">
         <div class="ph-spec-row">
           <dt>Species</dt>
@@ -100,7 +98,13 @@
           <dd data-ph-spec-stock>—</dd>
         </div>
       </dl>
-      {% if product.description %}<div class="ph-copy" style="margin-top:24px;">{{ product.description }}</div>{% endif %}
+      </details>
+      {% if product.description %}
+      <details class="ph-accordion">
+        <summary>Description</summary>
+        <div class="ph-copy">{{ product.description }}</div>
+      </details>
+      {% endif %}
     </section>
     <p class="ph-copy" style="margin-top:32px;">
       <a class="ph-text-link" href="/all-collections">Back to collections</a>

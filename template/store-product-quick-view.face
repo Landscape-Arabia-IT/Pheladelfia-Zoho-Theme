@@ -66,6 +66,7 @@
       <a class="ph-btn ph-btn-outline" href="{{ product.url }}">Full details</a>
     </div>
     <p class="ph-buy-error" data-theme-error style="display:none;"></p>
+    <p class="ph-qv-ship">Delivery across the UAE. The charge and the day are confirmed at checkout.</p>
     <div class="ph-qv-foot">
       {% if page.is_portal_enabled %}
       <button type="button" class="ph-wish-btn" data-zs-wishlist-element data-ph-auth-wishlist

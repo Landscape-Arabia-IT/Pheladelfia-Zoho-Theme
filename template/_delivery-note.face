@@ -1,0 +1,25 @@
+{% comment %}
+  UAE delivery note shared by the product page, cart and checkout.
+  ph_ship_mode: full (default), compact, or line.
+  Copy stays in English text nodes so js/ph-i18n.js can translate it.
+{% endcomment %}
+<section class="ph-ship{% if ph_ship_mode == 'compact' %} ph-ship-compact{% endif %}{% if ph_ship_mode == 'line' %} ph-ship-line{% endif %}" aria-label="Delivery across the UAE">
+  {% if ph_ship_mode == "line" %}
+  <p><span>Delivery across the UAE</span> <span>The charge and the day are confirmed at checkout.</span></p>
+  {% else %}
+  <h2>Delivery across the UAE</h2>
+  {% if ph_ship_mode == "compact" %}
+  <p class="ph-ship-lead">The charge and the day are confirmed at checkout.</p>
+  {% else %}
+  <p class="ph-ship-lead">The charge and the day are confirmed at checkout. Palms, trees and smaller plants are not all moved the same way, so there is no single flat rate.</p>
+  {% endif %}
+  <ul>
+    <li><strong>Abu Dhabi</strong><span>From our Al Ajban nursery</span></li>
+    <li><strong>Dubai</strong><span>Warsan branch and site delivery</span></li>
+    <li><strong>Northern emirates</strong><span>Sharjah, Ajman, Umm Al Quwain, Ras Al Khaimah and Fujairah, scheduled from the nursery</span></li>
+  </ul>
+  {% if ph_ship_mode != "compact" %}
+  <p class="ph-ship-note">Large specimens may need access for a truck, and some sites need a permit.</p>
+  {% endif %}
+  {% endif %}
+</section>

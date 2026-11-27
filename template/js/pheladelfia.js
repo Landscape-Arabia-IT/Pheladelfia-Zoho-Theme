@@ -2330,6 +2330,196 @@ if (!window.__phJsOnce) {
         encodeURIComponent(window.location.pathname + window.location.search);
     }
 
+    function foldSearchText(value) {
+      return String(value || "")
+        .toLowerCase()
+        .replace(/[\u064b-\u0652\u0670\u0640]/g, "")
+        .replace(/[أإآ]/g, "ا")
+        .replace(/ة/g, "ه")
+        .replace(/ى/g, "ي")
+        .replace(/\s+/g, " ")
+        .trim();
+    }
+
+    function searchTextHits(haystack, query) {
+      var needle = foldSearchText(query);
+      var hay = foldSearchText(haystack);
+      if (!needle || !hay) return false;
+      if (hay.indexOf(needle) >= 0) return true;
+      var tokens = needle.split(" ").filter(Boolean);
+      if (tokens.length < 2) return false;
+      return tokens.every(function (token) {
+        return hay.indexOf(token) >= 0;
+      });
+    }
+
+    var phCategoryCatalog = null;
+    var phCategoryProductCache = {};
+
+    function loadCategoryCatalog() {
+      if (phCategoryCatalog) return phCategoryCatalog;
+      phCategoryCatalog = fetch("/storefront/api/v1/categories", {
+        credentials: "same-origin",
+      })
+        .then(function (res) {
+          return res.ok ? res.json() : null;
+        })
+        .then(function (data) {
+          var roots =
+            (data && data.payload && data.payload.categories) || [];
+          var flat = [];
+          function walk(nodes, ancestors) {
+            (nodes || []).forEach(function (node) {
+              var item = {
+                id: String(node.category_id || ""),
+                name: node.name || "",
+                handle: node.handle || "",
+                ancestors: ancestors,
+              };
+              if (!item.id) return;
+              flat.push(item);
+              walk(node.sub_categories || [], ancestors.concat([item]));
+            });
+          }
+          walk(roots, []);
+          return flat;
+        })
+        .catch(function () {
+          phCategoryCatalog = null;
+          return [];
+        });
+      return phCategoryCatalog;
+    }
+
+    function categoryProducts(category) {
+      if (phCategoryProductCache[category.id])
+        return phCategoryProductCache[category.id];
+      phCategoryProductCache[category.id] = fetch(
+        "/storefront/api/v1/categories/" +
+          encodeURIComponent(category.id) +
+          "/products?per_page=50",
+        { credentials: "same-origin" },
+      )
+        .then(function (res) {
+          return res.ok ? res.json() : null;
+        })
+        .then(function (data) {
+          var categoryPayload =
+            data && data.payload && data.payload.category;
+          return ((categoryPayload && categoryPayload.products) || []).map(
+            function (product) {
+              product.ph_category_name = category.name;
+              return product;
+            },
+          );
+        })
+        .catch(function () {
+          return [];
+        });
+      return phCategoryProductCache[category.id];
+    }
+
+    function findMatchingProducts(query, limit) {
+      return loadCategoryCatalog().then(function (flat) {
+        var wanted = {};
+        flat.forEach(function (category) {
+          var chain = category.ancestors.concat([category]);
+          var hit = chain.some(function (item) {
+            return searchTextHits(item.name + " " + item.handle, query);
+          });
+          if (hit) wanted[category.id] = category;
+        });
+        var ids = Object.keys(wanted);
+        var leaves = ids
+          .filter(function (id) {
+            return !ids.some(function (other) {
+              if (other === id) return false;
+              return wanted[other].ancestors.some(function (item) {
+                return item.id === id;
+              });
+            });
+          })
+          .map(function (id) {
+            return wanted[id];
+          });
+        if (!leaves.length) return [];
+        var max = limit || 6;
+        var index = 0;
+        var seen = {};
+        var products = [];
+        function take(group) {
+          (group || []).forEach(function (product) {
+            var id = String(product.product_id || product.url || "");
+            if (!id || seen[id]) return;
+            var details = [
+              product.name,
+              product.handle,
+              product.url,
+              product.ph_category_name,
+              (product.tags || []).join(" "),
+              (product.variants || [])
+                .map(function (variant) {
+                  return variant.sku || "";
+                })
+                .join(" "),
+            ].join(" ");
+            var ownCategory = leaves.filter(function (category) {
+              return category.name === product.ph_category_name;
+            })[0];
+            var ancestorHit =
+              ownCategory &&
+              ownCategory.ancestors.some(function (item) {
+                return searchTextHits(item.name + " " + item.handle, query);
+              });
+            if (
+              !searchTextHits(details, query) &&
+              !searchTextHits(product.ph_category_name || "", query) &&
+              !ancestorHit
+            )
+              return;
+            seen[id] = true;
+            products.push(product);
+          });
+        }
+        function nextBatch() {
+          if (products.length >= max || index >= leaves.length)
+            return Promise.resolve(products.slice(0, max));
+          var batch = leaves.slice(index, index + 6);
+          index += batch.length;
+          return Promise.all(
+            batch.map(function (category) {
+              return categoryProducts(category);
+            }),
+          ).then(function (groups) {
+            groups.forEach(take);
+            return nextBatch();
+          });
+        }
+        return nextBatch();
+      });
+    }
+
+    function suggestPrice(product, symbol) {
+      if (product.has_variant_price)
+        return (
+          symbol +
+          product.starts_with +
+          " – " +
+          symbol +
+          product.ends_with
+        );
+      return symbol + product.selling_price;
+    }
+
+    function suggestPhoto(product) {
+      var images = product.images || [];
+      for (var i = 0; i < images.length; i++) {
+        if (images[i] && images[i].url && !images[i].is_placeholder_image)
+          return images[i].url + "/400x400";
+      }
+      return "";
+    }
+
     function bindSearchSuggest() {
       var inputs = qsa(
         '.ph-search input[name="q"], .ph-nav-search input[name="q"]',
@@ -2368,49 +2558,23 @@ if (!window.__phJsOnce) {
             box.classList.add("is-loading");
             box.innerHTML = '<p class="ph-suggest-status">Searching…</p>';
             input.setAttribute("aria-expanded", "true");
-            fetch(
-              "/storefront/api/v1/products?search=" + encodeURIComponent(query),
-              { credentials: "same-origin" },
-            )
-              .then(function (res) {
-                return res.ok ? res.json() : null;
-              })
-              .then(function (data) {
+            findMatchingProducts(query, 6)
+              .then(function (products) {
                 if (mine !== seq) return;
                 box.classList.remove("is-loading");
-                var payload = data && data.payload;
-                var products = payload && payload.products;
                 if (!products || !products.length) {
                   box.innerHTML =
                     '<p class="ph-suggest-status">No products found. Try another search.</p>';
+                  box.hidden = false;
                   return;
                 }
                 var symbol =
-                  (payload.currency && payload.currency.symbol) ||
                   (window.zs_currency &&
                     (zs_currency.symbol || zs_currency.currency_symbol)) ||
                   "AED";
                 var html = '<div class="ph-product-grid">';
-                products.slice(0, 6).forEach(function (product) {
-                  var photo = "";
-                  var images = product.images || [];
-                  for (var i = 0; i < images.length; i++) {
-                    if (
-                      images[i] &&
-                      images[i].url &&
-                      !images[i].is_placeholder_image
-                    ) {
-                      photo = images[i].url + "/400x400";
-                      break;
-                    }
-                  }
-                  var price = product.has_variant_price
-                    ? symbol +
-                      product.starts_with +
-                      " – " +
-                      symbol +
-                      product.ends_with
-                    : symbol + product.selling_price;
+                products.forEach(function (product) {
+                  var photo = suggestPhoto(product);
                   html +=
                     '<article class="ph-product-card">' +
                     '<a href="' +
@@ -2428,12 +2592,12 @@ if (!window.__phJsOnce) {
                     '<div class="ph-card-body"><h3 class="ph-h3">' +
                     esc(product.name || "") +
                     '</h3><p class="ph-suggest-price">' +
-                    esc(price) +
+                    esc(suggestPrice(product, symbol)) +
                     "</p></div>" +
                     "</a></article>";
                 });
                 html += "</div>";
-                var action = form.getAttribute("action") || "/search";
+                var action = form.getAttribute("action") || "/search-products";
                 var sep = action.indexOf("?") === -1 ? "?" : "&";
                 box.innerHTML =
                   html +
@@ -2445,8 +2609,9 @@ if (!window.__phJsOnce) {
               .catch(function () {
                 if (mine !== seq) return;
                 box.classList.remove("is-loading");
-                box.hidden = true;
-                input.setAttribute("aria-expanded", "false");
+                box.innerHTML =
+                  '<p class="ph-suggest-status">No products found. Try another search.</p>';
+                box.hidden = false;
               });
           }, 300);
         });
@@ -2495,6 +2660,88 @@ if (!window.__phJsOnce) {
         },
         true,
       );
+    }
+
+    function renderSearchCard(product, symbol) {
+      var photo = suggestPhoto(product);
+      return (
+        '<article class="ph-product-card" data-ph-product-card>' +
+        '<a class="ph-product-link" href="' +
+        esc(product.url || "#") +
+        '">' +
+        '<div class="ph-product-photo">' +
+        (photo
+          ? '<img src="' +
+            esc(photo) +
+            '" alt="' +
+            esc(product.name || "") +
+            '" loading="lazy">'
+          : "") +
+        "</div>" +
+        '<div class="ph-card-body">' +
+        (product.ph_category_name
+          ? '<p class="ph-kicker">' + esc(product.ph_category_name) + "</p>"
+          : "") +
+        '<h3 class="ph-h3">' +
+        esc(product.name || "") +
+        "</h3>" +
+        '<p class="ph-price">' +
+        esc(suggestPrice(product, symbol)) +
+        "</p>" +
+        "</div></a></article>"
+      );
+    }
+
+    function bindSearchResults() {
+      var page = qs("[data-ph-search-page]");
+      if (!page) return;
+      var params = new URLSearchParams(location.search);
+      var query = (params.get("q") || params.get("search") || "").trim();
+      var grid = qs("[data-ph-search-grid]", page);
+      var status = qs("[data-ph-search-status]", page);
+      var more = qs("[data-ph-search-more]", page);
+      function showStatus(message) {
+        if (!status) return;
+        status.hidden = false;
+        status.textContent = message;
+      }
+      if (!query) {
+        if (grid) grid.innerHTML = "";
+        showStatus("No products found. Try another search.");
+        if (more) more.hidden = false;
+        return;
+      }
+      if (grid) {
+        qsa("[data-ph-product-card]", grid).forEach(function (card) {
+          if (!searchTextHits(card.textContent || "", query)) card.hidden = true;
+        });
+      }
+      showStatus("Searching…");
+      findMatchingProducts(query, 48)
+        .then(function (products) {
+          if (!grid) return;
+          if (!products.length) {
+            grid.innerHTML = "";
+            showStatus("No products found. Try another search.");
+            if (more) more.hidden = false;
+            return;
+          }
+          if (status) status.hidden = true;
+          if (more) more.hidden = true;
+          var symbol =
+            (window.zs_currency &&
+              (zs_currency.symbol || zs_currency.currency_symbol)) ||
+            "AED";
+          grid.innerHTML = products
+            .map(function (product) {
+              return renderSearchCard(product, symbol);
+            })
+            .join("");
+        })
+        .catch(function () {
+          showStatus("No products found. Try another search.");
+          if (more) more.hidden = false;
+        });
     }
 
     function bindWishlist() {
@@ -3511,6 +3758,7 @@ if (!window.__phJsOnce) {
       bindCheckoutSummary();
       window.setTimeout(bindCheckoutSummary, 800);
       bindSearchSuggest();
+      bindSearchResults();
       bindWishlist();
       bindWishlistPage();
       bindQuickView();

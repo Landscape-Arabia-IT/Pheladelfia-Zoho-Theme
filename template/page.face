@@ -4,7 +4,9 @@
 {% assign ph_page_title = page.title | lower %}
 {% assign ph_policy = "" %}
 <div data-ph-page-body>
-{% if page.is_home_page || ph_page_url == "/" || ph_page_url == "" || ph_page_url == "index" || ph_page_url == "index.html" || ph_page_url == "home" || ph_page_url == "/home" || ph_page_url == "/home/" || ph_page_url == "/index" || ph_page_url == "/index.html" %}
+{% if ph_page_url contains 'search' || ph_page_title contains 'search' %}
+  {% include "_store-search" %}
+{% elif page.is_home_page || ph_page_url == "/" || ph_page_url == "" || ph_page_url == "index" || ph_page_url == "index.html" || ph_page_url == "home" || ph_page_url == "/home" || ph_page_url == "/home/" || ph_page_url == "/index" || ph_page_url == "/index.html" %}
   {% include "_homepage" %}
 {% elif ph_page_url == "/about" || ph_page_url == "/about/" || ph_page_url == "about" || ph_page_title == "about" || ph_page_title == "about us" || ph_page_title == "من نحن" %}
   {% include "_about" %}

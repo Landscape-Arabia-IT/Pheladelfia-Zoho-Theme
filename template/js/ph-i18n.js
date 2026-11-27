@@ -1223,5 +1223,6 @@ window.PH_I18N.ar = {
     "Northern emirates": "الإمارات الشمالية",
     "Sharjah, Ajman, Umm Al Quwain, Ras Al Khaimah and Fujairah, scheduled from the nursery": "الشارقة وعجمان وأم القيوين ورأس الخيمة والفجيرة، بموعد يُحدد من المشتل",
     "Large specimens may need access for a truck, and some sites need a permit.": "قد تحتاج العينات الكبيرة إلى مدخل لشاحنة، وبعض المواقع تحتاج إلى تصريح.",
-    "Delivery across the UAE. The charge and the day are confirmed at checkout.": "توصيل في جميع أنحاء الإمارات. تُؤكد رسوم التوصيل واليوم عند إتمام الطلب."
+    "Delivery across the UAE. The charge and the day are confirmed at checkout.": "توصيل في جميع أنحاء الإمارات. تُؤكد رسوم التوصيل واليوم عند إتمام الطلب.",
+    "All orders ship from Warsan, Dubai.": "كل الشحن من الورسان، دبي."
 };

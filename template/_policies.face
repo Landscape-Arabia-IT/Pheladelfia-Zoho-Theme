@@ -1,0 +1,164 @@
+{% comment %} ph_policy is legal, refund, privacy, terms, or shipping {% endcomment %}
+<section class="ph-page-banner">
+  <div class="ph-wrap">
+    <nav class="ph-crumbs" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      {% if ph_policy == "legal" %}
+      <span class="ph-crumb-sep">/</span><span aria-current="page">Legal information</span>
+      {% else %}
+      <span class="ph-crumb-sep">/</span><a href="/legal">Legal information</a><span class="ph-crumb-sep">/</span><span aria-current="page">{% if ph_policy == "refund" %}Refunds &amp; returns{% elif ph_policy == "privacy" %}Privacy policy{% elif ph_policy == "terms" %}Terms of service{% else %}Shipping{% endif %}</span>
+      {% endif %}
+    </nav>
+    {% if ph_policy == "legal" %}
+    <h1>Legal information</h1>
+    <p class="ph-lead">Who operates this store, and where to read our policies.</p>
+    {% elif ph_policy == "refund" %}
+    <h1>Refunds &amp; returns</h1>
+    <p class="ph-lead">How to change, cancel, or query an order from our nursery.</p>
+    {% elif ph_policy == "privacy" %}
+    <h1>Privacy policy</h1>
+    <p class="ph-lead">How we handle the information you share with this store.</p>
+    {% elif ph_policy == "terms" %}
+    <h1>Terms of service</h1>
+    <p class="ph-lead">The terms that apply when you use this website and place an order.</p>
+    {% else %}
+    <h1>Shipping</h1>
+    <p class="ph-lead">How we deliver plants and garden products across the UAE.</p>
+    {% endif %}
+    <span class="ph-rule"></span>
+  </div>
+</section>
+
+<section class="ph-section">
+  <div class="ph-wrap ph-policy">
+    <nav class="ph-policy-nav" aria-label="Policies">
+      <a href="/legal"{% if ph_policy == "legal" %} aria-current="page"{% endif %}>Legal information</a>
+      <a href="/refunds"{% if ph_policy == "refund" %} aria-current="page"{% endif %}>Refunds &amp; returns</a>
+      <a href="/privacy"{% if ph_policy == "privacy" %} aria-current="page"{% endif %}>Privacy policy</a>
+      <a href="/terms"{% if ph_policy == "terms" %} aria-current="page"{% endif %}>Terms of service</a>
+      <a href="/shipping"{% if ph_policy == "shipping" %} aria-current="page"{% endif %}>Shipping</a>
+    </nav>
+    <article class="ph-policy-body">
+      {% if ph_policy == "legal" %}
+      <p>This website and online store are operated by Pheladelfia Agricultural LLC, a nursery and specimen-tree supplier established in Abu Dhabi in 2004.</p>
+      <h2>Company</h2>
+      <p>Pheladelfia Agricultural LLC</p>
+      <ul>
+        <li>Nursery: Farm No. 563 &amp; 564, Al Ajban, Muwailih, Abu Dhabi</li>
+        <li>Branch: Warsan, Dubai</li>
+        <li>P.O. Box 39752, UAE</li>
+      </ul>
+      <h2>Contact</h2>
+      <ul>
+        <li>Phone: <a href="{{ ph_phone_tel }}" dir="ltr">{{ ph_phone_display }}</a></li>
+        <li>Email: <a href="mailto:{{ ph_email }}">{{ ph_email }}</a></li>
+        <li>{{ ph_hours }}</li>
+      </ul>
+      <h2>Prices</h2>
+      <p>Prices on this store are in AED and exclude 5% VAT, unless a product page says otherwise.</p>
+      <h2>Policies</h2>
+      <ul>
+        <li><a href="/refunds">Refunds &amp; returns</a> — changes, cancellations, and what we can take back.</li>
+        <li><a href="/shipping">Shipping</a> — delivery across the UAE.</li>
+        <li><a href="/privacy">Privacy policy</a> — how we use your information.</li>
+        <li><a href="/terms">Terms of service</a> — the rules for using this website and ordering.</li>
+      </ul>
+
+      {% elif ph_policy == "refund" %}
+      <p>We supply living plants, palms, trees, and garden products. Please read this before you order. If a delivery is wrong or damaged, contact us as soon as you receive it.</p>
+      <h2>Changes to your order</h2>
+      <p>If you need to change an order, including the delivery address, email us, call the nursery, or visit Al Ajban or the Warsan branch.</p>
+      <p>We will do our best to help. We can only guarantee a change when you ask before the plants are prepared for dispatch.</p>
+      <h2>Cancelling your order</h2>
+      <p>You may cancel an order before it is prepared for delivery. Contact us by email, by phone, or at the nursery.</p>
+      <p>Once the plants are prepared for dispatch, or are already on the way, we may not be able to cancel the order.</p>
+      <h2>Returns and exchanges</h2>
+      <p>If you receive the wrong item, or a plant or product that is damaged or defective on delivery, contact us immediately so we can inspect it and help.</p>
+      <p>An eligible return or exchange must still be in the condition it was delivered, and our team has to approve it.</p>
+      <ul>
+        <li>Inspect living plants when they arrive. We cannot accept a return for damage, a defect, or a wrong item that was not reported at delivery.</li>
+        <li>We do not accept a return or exchange because you changed your mind, including a change of size, species, colour, style, or whether the plant suits your space.</li>
+        <li>Items we have customized for you, including pots modified at your request, cannot be returned or exchanged.</li>
+      </ul>
+      <h2>Delivery charges for an approved exchange</h2>
+      <p>If we approve an exchange, delivery of the replacement may be charged to you. We will tell you the charge before we send the replacement.</p>
+      <h2>Our promise</h2>
+      <p>If there is a problem with your order or its delivery, contact us at once. We will review it and tell you what we can do. Every return and exchange follows this policy.</p>
+
+      {% elif ph_policy == "privacy" %}
+      <p class="ph-policy-meta">Last updated: 27 November 2026</p>
+      <p>This store is operated by Pheladelfia Agricultural LLC and hosted on Zoho Commerce. This policy explains what we collect when you browse, create an account, or place an order, and how we use it.</p>
+      <p>By using the store, you acknowledge this policy.</p>
+      <h2>Information we collect</h2>
+      <ul>
+        <li>Your name, phone number, email address, and delivery or billing address.</li>
+        <li>Order details, including the plants you view, save, or buy.</li>
+        <li>Messages you send us, including the contact form.</li>
+        <li>Account details, if you register.</li>
+        <li>Technical information such as browser type and IP address, through the store platform.</li>
+      </ul>
+      <h2>How we use it</h2>
+      <ul>
+        <li>To take and deliver your order, and to contact you about it.</li>
+        <li>To answer questions and keep your account.</li>
+        <li>To process payment through the store's payment provider.</li>
+        <li>To issue tax invoices and meet legal duties in the UAE.</li>
+        <li>To protect the store from misuse.</li>
+      </ul>
+      <h2>Who we share it with</h2>
+      <p>We share what is needed with Zoho Commerce, which hosts the store, and with the payment and delivery providers who help us complete your order. We do not sell your personal information.</p>
+      <h2>Cookies</h2>
+      <p>The store may use cookies to keep your cart, your sign-in, and your language choice.</p>
+      <h2>How long we keep it</h2>
+      <p>We keep order and account information for as long as we need it to supply you, issue invoices, and meet UAE legal duties.</p>
+      <h2>Your choices</h2>
+      <p>You can ask what information we hold, ask us to correct it, or ask us to delete it where the law allows. Order and invoice records may need to be kept. Email us at the address below.</p>
+      <h2>Children</h2>
+      <p>This store is not meant for children, and we do not knowingly collect their information.</p>
+      <h2>Changes</h2>
+      <p>We may update this policy. The new version will be posted on this page with a new date.</p>
+
+      {% elif ph_policy == "terms" %}
+      <p>If you browse or buy from this store, you agree to these terms and to our privacy policy. Pheladelfia Agricultural LLC is the seller, and you are the person using the website or placing an order.</p>
+      <h2>Using the website</h2>
+      <p>The pages are for general information and may change. We do not promise that every plant shown is in stock at the size you need. Check the product page, or ask the nursery.</p>
+      <h2>Orders and prices</h2>
+      <p>An order is a request until we confirm it. Prices are in AED and exclude 5% VAT unless a page says otherwise. Living plants vary. The size on the product is the size we sell. Photographs show the type of plant.</p>
+      <h2>Your responsibility</h2>
+      <p>You are responsible for checking that a plant suits your site, including sun, soil, access for delivery, and any permit the location requires.</p>
+      <h2>Our content</h2>
+      <p>Text, photographs, and the design of this website belong to Pheladelfia Agricultural LLC or its licensors. Please do not copy them without permission.</p>
+      <h2>Links</h2>
+      <p>Links to other websites are for convenience. We are not responsible for those sites.</p>
+      <h2>Liability</h2>
+      <p>To the extent UAE law allows, we are not liable for losses that come from relying on general information on this website, or from a plant that was not suitable for your site. Nothing in these terms limits liability that the law does not allow us to limit.</p>
+      <h2>Law</h2>
+      <p>These terms are governed by the laws of the United Arab Emirates.</p>
+
+      {% else %}
+      <p>We deliver across the United Arab Emirates. The delivery charge and the day are confirmed at checkout, or by our team before the plants leave the nursery. Palms, trees, and smaller plants are not all moved the same way, so we do not publish one flat rate here.</p>
+      <h2>What to expect</h2>
+      <ul>
+        <li>After you order, we confirm the items and the total, including delivery and VAT where they apply.</li>
+        <li>Delivery is arranged for a time we agree with you, within nursery hours: Monday to Saturday, 8am to 6pm. Sunday is closed.</li>
+        <li>You can update delivery instructions by phone, email, or WhatsApp before the plants are dispatched.</li>
+        <li>Please be available to receive living plants. If nobody is there, we will contact you to rearrange. An unclaimed delivery may be cancelled.</li>
+        <li>Large specimens may need access for a truck, and some sites need a permit. Please arrange that before the delivery day.</li>
+        <li>A tax invoice is provided with the delivery.</li>
+        <li>Plant prices exclude 5% VAT.</li>
+      </ul>
+      <h2>Delays</h2>
+      <p>If something outside our control delays a delivery, we will tell you and agree a new time.</p>
+      {% endif %}
+
+      {% if ph_policy != "legal" %}
+      <div class="ph-policy-contact">
+        <h2>Contact</h2>
+        <p><a href="mailto:{{ ph_email }}">{{ ph_email }}</a></p>
+        <p><a href="{{ ph_phone_tel }}" dir="ltr">{{ ph_phone_display }}</a></p>
+        <p><a href="/contact">Contact us</a></p>
+      </div>
+      {% endif %}
+    </article>
+  </div>
+</section>

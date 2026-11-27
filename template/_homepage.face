@@ -1,45 +1,97 @@
 <!-- ===== Hero ===== -->
-<section class="ph-hero" id="top">
-  <div class="ph-hero-media"><img src="{{ ph_img }}/palm-nursery-rows.jpg" alt="Rows of mature Washingtonia palms at the Pheladelfia nursery in Abu Dhabi" fetchpriority="high"></div>
-  <div class="ph-hero-overlay" aria-hidden="true"></div>
-  <div class="ph-wrap">
-    <div class="ph-hero-copy">
-      <span class="ph-eyebrow ph-anim ph-anim-1">Abu Dhabi nursery · Est. 2004</span>
-      <h1 class="ph-hero-title ph-anim ph-anim-2">Premium Palms &amp; Trees, <em class="ph-text-gradient-gold">Grown in the UAE</em></h1>
-      <p class="ph-hero-lead ph-anim ph-anim-3" style="margin-top: 16px">Specimen palms, native trees and flowering shrubs — acclimatized in our Abu Dhabi nursery and delivered ready to plant across the Emirates.</p>
-      <div class="ph-hero-actions ph-anim ph-anim-4">
-        <a class="ph-btn ph-btn-gold" href="/all-collections">Shop Plants <span aria-hidden="true">→</span></a>
-        <a class="ph-btn ph-btn-ghost" href="{{ ph_url_palm_trees }}">Browse Palms</a>
+<section class="ph-hero ph-hero-slider" id="top" data-ph-slider tabindex="0" aria-roledescription="carousel" aria-label="Featured plants">
+  <div class="ph-hero-slides">
+    <article class="ph-hero-slide is-active">
+      <div class="ph-hero-media"><img src="{{ ph_img }}/palm-nursery-rows.jpg" alt="Rows of mature palms at the Pheladelfia nursery in Abu Dhabi" width="1600" height="1067" fetchpriority="high"></div>
+      <div class="ph-hero-overlay" aria-hidden="true"></div>
+      <div class="ph-wrap">
+        <div class="ph-hero-copy">
+          <span class="ph-eyebrow">Pheladelfia Agricultural LLC · Est. 2004</span>
+          <h1 class="ph-hero-title">Plants, palms &amp; trees for your space</h1>
+          <p class="ph-hero-lead">Browse palms, specimen trees, indoor plants and garden supplies — grown and sourced for the UAE, with prices and sizes listed online.</p>
+          <div class="ph-hero-actions">
+            <a class="ph-btn" href="/all-collections">Shop plants</a>
+            <a class="ph-btn ph-btn-ghost" href="{{ ph_url_palm_trees }}">Explore palms</a>
+          </div>
+        </div>
       </div>
-    </div>
+    </article>
+    <article class="ph-hero-slide">
+      <div class="ph-hero-media"><img src="{{ ph_img }}/ghaf-tree.jpg" alt="Native Ghaf tree" width="1600" height="1067"></div>
+      <div class="ph-hero-overlay" aria-hidden="true"></div>
+      <div class="ph-wrap">
+        <div class="ph-hero-copy">
+          <span class="ph-eyebrow">Shade &amp; native trees</span>
+          <h2 class="ph-hero-title">Trees chosen for the Emirates</h2>
+          <p class="ph-hero-lead">Shade, native and specimen trees, with sizes and prices listed before you order.</p>
+          <div class="ph-hero-actions">
+            <a class="ph-btn" href="{{ ph_url_trees }}">Shop trees</a>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="ph-hero-slide">
+      <div class="ph-hero-media"><img src="{{ ph_img }}/indoor-plants.jpg" alt="Indoor ornamental plants" width="1600" height="1067"></div>
+      <div class="ph-hero-overlay" aria-hidden="true"></div>
+      <div class="ph-wrap">
+        <div class="ph-hero-copy">
+          <span class="ph-eyebrow">Homes, offices &amp; hotels</span>
+          <h2 class="ph-hero-title">Indoor plants, ready to place</h2>
+          <p class="ph-hero-lead">Ornamental plants selected for interiors across the UAE.</p>
+          <div class="ph-hero-actions">
+            <a class="ph-btn" href="{{ ph_url_indoor }}">Shop indoor plants</a>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="ph-hero-slide">
+      <div class="ph-hero-media"><img src="{{ ph_img }}/cacti-succulents.jpeg" alt="Giant cacti and succulents at the Pheladelfia nursery" width="1264" height="848"></div>
+      <div class="ph-hero-overlay" aria-hidden="true"></div>
+      <div class="ph-wrap">
+        <div class="ph-hero-copy">
+          <span class="ph-eyebrow">Desert-ready planting</span>
+          <h2 class="ph-hero-title">Cacti &amp; succulents for the heat</h2>
+          <p class="ph-hero-lead">Giant cacti, succulents and Yucca rostrata grown at our nursery.</p>
+          <div class="ph-hero-actions">
+            <a class="ph-btn" href="{{ ph_url_cacti }}">Shop cacti</a>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+  <div class="ph-hero-controls">
+    <button type="button" class="ph-hero-arrow" data-ph-slide-prev aria-label="Previous slide"><svg data-ph-icon-prev width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>
+    <div class="ph-hero-dots" data-ph-dots></div>
+    <button type="button" class="ph-hero-arrow" data-ph-slide-next aria-label="Next slide"><svg data-ph-icon-next width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+    <button type="button" class="ph-hero-arrow" data-ph-slide-toggle aria-label="Pause slideshow"><svg data-ph-icon-pause width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/></svg><svg data-ph-icon-play width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" hidden><path d="M8 5v14l11-7z"/></svg></button>
+    <p class="ph-sr-only" data-ph-slide-status aria-live="polite"></p>
   </div>
 </section>
 
-<!-- ===== Trust bar ===== -->
-<section class="ph-trustbar">
+<section class="ph-trustbar" aria-label="Why Pheladelfia">
   <div class="ph-wrap">
     <ul class="ph-trust-grid">
       <li class="ph-trust-item">
-        <span class="ph-trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span>
-        <span><span class="ph-trust-label">Since 2004</span><span class="ph-trust-sub">Two decades of growing</span></span>
+        <span class="ph-trust-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7h11v8H3z"/><path d="M14 10h4l3 3v2h-7z"/><circle cx="7" cy="17.5" r="1.6"/><circle cx="17.5" cy="17.5" r="1.6"/></svg></span>
+        <span><span class="ph-trust-label">Delivered across the UAE</span><span class="ph-trust-sub">From our nurseries to your site</span></span>
       </li>
       <li class="ph-trust-item">
-        <span class="ph-trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1"/></svg></span>
-        <span><span class="ph-trust-label">UAE-adapted plants</span><span class="ph-trust-sub">Acclimatized in Abu Dhabi</span></span>
+        <span class="ph-trust-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v18"/><path d="M7 7.5c0-1.5 2-2.5 5-2.5s5 1 5 2.5-2 2.5-5 2.5-5 1-5 2.5 2 2.5 5 2.5 5-1 5-2.5"/></svg></span>
+        <span><span class="ph-trust-label">Prices excluding 5% VAT</span><span class="ph-trust-sub">Listed in AED before you order</span></span>
       </li>
       <li class="ph-trust-item">
-        <span class="ph-trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7h11v8H3z"/><path d="M14 10h4l3 3v2h-7z"/><circle cx="7" cy="17" r="1.6"/><circle cx="17" cy="17" r="1.6"/></svg></span>
-        <span><span class="ph-trust-label">Delivery across the UAE</span><span class="ph-trust-sub">All seven Emirates</span></span>
+        <span class="ph-trust-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21c-4-3-7-6-7-10a7 7 0 1 1 14 0c0 4-3 7-7 10z"/><circle cx="12" cy="10" r="2.2"/></svg></span>
+        <span><span class="ph-trust-label">Growing since 2004</span><span class="ph-trust-sub">Palms and trees for the Emirates</span></span>
       </li>
       <li class="ph-trust-item">
-        <span class="ph-trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3 4 7v5c0 5 3.5 8 8 9 4.5-1 8-4 8-9V7z"/></svg></span>
-        <span><span class="ph-trust-label">Project supply</span><span class="ph-trust-sub">Sourcing to delivery</span></span>
+        <span class="ph-trust-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 20V9l8-5 8 5v11"/><path d="M9 20v-6h6v6"/></svg></span>
+        <span><span class="ph-trust-label">Landscape supply</span><span class="ph-trust-sub">For contractors and projects</span></span>
       </li>
     </ul>
   </div>
 </section>
 
-<!-- ===== Categories ===== -->
+<!-- ===== Shop by category ===== -->
 <section class="ph-section">
   <div class="ph-wrap">
     <div class="ph-sec-head ph-sec-head-center">
@@ -49,135 +101,117 @@
     </div>
     <div class="ph-cat-grid">
       <a class="ph-cat-card" href="{{ ph_url_palm_trees }}">
-        <img src="{{ ph_img }}/palm-grove-fan.jpg" alt="Fan palms at the Pheladelfia nursery" loading="lazy">
+        <img src="{{ ph_img }}/palm-grove-fan.jpg" alt="Fan palms at the Pheladelfia nursery" width="800" height="600" loading="lazy">
         <span class="ph-cat-body">
           <span class="ph-cat-blurb">Fan, date &amp; specimen palms</span>
           <span class="ph-cat-name">Palms <span class="ph-cat-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
         </span>
       </a>
       <a class="ph-cat-card" href="{{ ph_url_trees }}">
-        <img src="{{ ph_img }}/ghaf-tree.jpg" alt="Native Ghaf tree" loading="lazy">
+        <img src="{{ ph_img }}/ghaf-tree.jpg" alt="Native Ghaf tree" width="800" height="600" loading="lazy">
         <span class="ph-cat-body">
           <span class="ph-cat-blurb">Shade &amp; native trees</span>
           <span class="ph-cat-name">Trees <span class="ph-cat-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
         </span>
       </a>
       <a class="ph-cat-card" href="{{ ph_url_rare_trees }}">
-        <img src="{{ ph_img }}/phoenix-canariensis.jpg" alt="Specimen palm tree" loading="lazy">
+        <img src="{{ ph_img }}/phoenix-canariensis.jpg" alt="Specimen palm tree" width="800" height="600" loading="lazy">
         <span class="ph-cat-body">
           <span class="ph-cat-blurb">Heritage &amp; monumental specimens</span>
           <span class="ph-cat-name">Rare &amp; Ancient Trees <span class="ph-cat-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
         </span>
       </a>
+      <a class="ph-cat-card" href="{{ ph_url_cacti }}">
+        <img src="{{ ph_img }}/cacti-succulents.jpeg" alt="Giant cacti and succulents at the Pheladelfia nursery" width="1264" height="848" loading="lazy">
+        <span class="ph-cat-body">
+          <span class="ph-cat-blurb">Giant cacti, succulents &amp; Yucca rostrata</span>
+          <span class="ph-cat-name">Cacti &amp; Succulents <span class="ph-cat-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
+        </span>
+      </a>
       <a class="ph-cat-card" href="{{ ph_url_shrubs }}">
-        <img src="{{ ph_img }}/bougainvillea.jpg" alt="Flowering bougainvillea shrub" loading="lazy">
+        <img src="{{ ph_img }}/bougainvillea.jpg" alt="Flowering bougainvillea shrub" width="800" height="600" loading="lazy">
         <span class="ph-cat-body">
           <span class="ph-cat-blurb">Flowering shrubs &amp; ground covers</span>
           <span class="ph-cat-name">Shrubs &amp; Ground Cover <span class="ph-cat-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
         </span>
       </a>
       <a class="ph-cat-card" href="{{ ph_url_indoor }}">
-        <img src="{{ ph_img }}/indoor-plants.jpg" alt="Indoor ornamental plants" loading="lazy">
+        <img src="{{ ph_img }}/indoor-plants.jpg" alt="Indoor ornamental plants" width="800" height="600" loading="lazy">
         <span class="ph-cat-body">
           <span class="ph-cat-blurb">For homes, offices &amp; hotels</span>
           <span class="ph-cat-name">Indoor Plants <span class="ph-cat-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
         </span>
       </a>
-      <a class="ph-cat-card" href="{{ ph_url_fertilizers }}">
-        <img src="{{ ph_img }}/planters.jpg" alt="Plant pots and garden supplies" loading="lazy">
-        <span class="ph-cat-body">
-          <span class="ph-cat-blurb">Planters, soil &amp; care</span>
-          <span class="ph-cat-name">Pots &amp; Supplies <span class="ph-cat-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
-        </span>
-      </a>
     </div>
+    <p class="ph-cat-more"><a class="ph-text-link" href="/all-collections">All collections &amp; garden supplies <span aria-hidden="true">→</span></a></p>
   </div>
 </section>
 
-<!-- Catalog cards are rendered by the category FACE layout and loaded progressively. -->
+<!-- ===== Featured plants ===== -->
 <section class="ph-section ph-section-sand" data-ph-best-section>
   <div class="ph-wrap">
     <div class="ph-sec-head ph-sec-head-row">
       <div class="ph-sec-head-text">
         <span class="ph-eyebrow">From our nursery</span>
-        <h2 class="ph-sec-title">Explore our plants</h2>
+        <h2 class="ph-sec-title">Featured plants</h2>
+        <p class="ph-sec-sub">Real specimens from our catalogue — prices in AED, exclusive of 5% VAT.</p>
       </div>
-      <div class="ph-carousel-nav">
-        <button class="ph-carousel-btn" type="button" data-ph-carousel-prev aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"/></svg></button>
-        <button class="ph-carousel-btn" type="button" data-ph-carousel-next aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg></button>
-      </div>
+      <a class="ph-btn ph-btn-outline ph-btn-sm" href="/all-collections">Shop all plants</a>
     </div>
-    <div class="ph-carousel" data-ph-best-sellers aria-busy="true"></div>
+    <div class="ph-feature-grid" data-ph-best-sellers aria-busy="true"></div>
     <p class="ph-copy" data-ph-catalog-status><span data-ph-catalog-loading>Loading plants…</span> <a href="/all-collections">Browse collections</a></p>
   </div>
 </section>
 
-<!-- ===== Why us ===== -->
-<section class="ph-why ph-section">
-  <div class="ph-wrap">
-    <div class="ph-why-grid">
-      <div class="ph-gold-frame">
-        <img src="{{ ph_img }}/palm-single-specimen.jpg" alt="A specimen fan palm at our nursery" loading="lazy">
-      </div>
-      <div>
-        <span class="ph-eyebrow">Why Pheladelfia</span>
-        <h2 class="ph-why-title">Rooted in the Emirates for over 20 years</h2>
-        <div class="ph-why-items">
-          <div class="ph-why-item">
-            <span class="ph-why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21c-4-3-7-6-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 4-3 7-7 10z"/></svg></span>
-            <h3>Locally acclimatized</h3>
-            <p>Every plant is hardened in our Abu Dhabi nursery to thrive in UAE heat, wind and soil.</p>
-          </div>
-          <div class="ph-why-item">
-            <span class="ph-why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 19c0-8 5-13 14-14-1 9-6 14-14 14z"/><path d="M5 19c3-5 7-8 11-9"/></svg></span>
-            <h3>Wide variety</h3>
-            <p>Explore palms, trees and ground covers, and ask our team about current nursery availability.</p>
-          </div>
-          <div class="ph-why-item">
-            <span class="ph-why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.5 2.7-6 6-6s6 2.5 6 6"/><circle cx="17" cy="9" r="2.4"/><path d="M15.5 14.5c3 .3 5.5 2.6 5.5 5.5"/></svg></span>
-            <h3>Experienced team</h3>
-            <p>Horticulturists and supply specialists with 20+ years of regional experience.</p>
-          </div>
-          <div class="ph-why-item">
-            <span class="ph-why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 21V9l8-5 8 5v12"/><path d="M9 21v-6h6v6"/></svg></span>
-            <h3>Large-scale capacity</h3>
-            <p>Discuss specimen sizes, quantities and delivery schedules with our project supply team.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Partner logos -->
+<!-- ===== About Pheladelfia (compact) ===== -->
 <section class="ph-section">
   <div class="ph-wrap">
-    <div class="ph-sec-head ph-sec-head-center">
-      <span class="ph-eyebrow">Trusted by</span>
-      <h2 class="ph-sec-title">Our clients</h2>
-    </div>
-    <div class="ph-logo-marquee" dir="ltr">
-      <div class="ph-logo-track" data-ph-logo-track>
-        <span class="ph-logo-item"><img src="{{ ph_img }}/logos/abu-dhabi-municipality%20.jpeg" alt="Abu Dhabi Municipality" loading="lazy"></span>
-        <span class="ph-logo-item"><img src="{{ ph_img }}/logos/adnoc.png" alt="ADNOC" loading="lazy"></span>
-        <span class="ph-logo-item"><img src="{{ ph_img }}/logos/aecom.png" alt="AECOM" loading="lazy"></span>
-        <span class="ph-logo-item"><img src="{{ ph_img }}/logos/al-fattan.png" alt="Al Fattan" loading="lazy"></span>
-        <span class="ph-logo-item"><img src="{{ ph_img }}/logos/al-naboodah%20.jpeg" alt="Al Naboodah" loading="lazy"></span>
-        <span class="ph-logo-item"><img src="{{ ph_img }}/logos/aldar.png" alt="Aldar" loading="lazy"></span>
-        <span class="ph-logo-item"><img src="{{ ph_img }}/logos/currie-brown%20.png" alt="Currie &amp; Brown" loading="lazy"></span>
-        <span class="ph-logo-item"><img src="{{ ph_img }}/logos/damac.png" alt="DAMAC" loading="lazy"></span>
-        <span class="ph-logo-item"><img src="{{ ph_img }}/logos/dubai-municipality.png" alt="Dubai Municipality" loading="lazy"></span>
-        <span class="ph-logo-item"><img src="{{ ph_img }}/logos/modon.png" alt="Modon" loading="lazy"></span>
-        <span class="ph-logo-item"><img src="{{ ph_img }}/logos/multiplex.png" alt="Multiplex" loading="lazy"></span>
-        <span class="ph-logo-item"><img src="{{ ph_img }}/logos/nakheel.jpeg" alt="Nakheel" loading="lazy"></span>
-        <span class="ph-logo-item"><img src="{{ ph_img }}/logos/neom.webp" alt="NEOM" loading="lazy"></span>
-        <span class="ph-logo-item"><img src="{{ ph_img }}/logos/presidential-court%20.jpeg" alt="Presidential Court" loading="lazy"></span>
-        <span class="ph-logo-item"><img src="{{ ph_img }}/logos/rixos.png" alt="Rixos" loading="lazy"></span>
-        <span class="ph-logo-item"><img src="{{ ph_img }}/logos/silal.jpeg" alt="Silal" loading="lazy"></span>
-        <span class="ph-logo-item"><img src="{{ ph_img }}/logos/turner-townsend%20.png" alt="Turner &amp; Townsend" loading="lazy"></span>
+    <div class="ph-about-grid">
+      <div class="ph-about-media">
+        <img src="{{ ph_img }}/palm-single-specimen.jpg" alt="A specimen fan palm at our nursery" width="800" height="1000" loading="lazy">
+      </div>
+      <div class="ph-about-copy">
+        <span class="ph-eyebrow">About Pheladelfia</span>
+        <h2 class="ph-about-title">Growing &amp; supplying the Emirates since 2004</h2>
+        <p>Pheladelfia Agricultural LLC is a specialist nursery and specimen-tree supplier based in Al Ajban, Abu Dhabi, with a branch in Warsan, Dubai. For over two decades we have grown, sourced and delivered palms, trees, indoor plants and garden supplies — acclimatised for the UAE climate and backed by documented quality.</p>
+        <p class="ph-about-points">
+          <span>Al Ajban nursery · Warsan branch</span>
+          <span>Landscape &amp; contractor supply</span>
+          <span>ISO-certified quality &amp; safety</span>
+        </p>
+        <a class="ph-text-link" href="/about">About Pheladelfia <span aria-hidden="true">→</span></a>
       </div>
     </div>
   </div>
 </section>
 
 {% include "_certifications" %}
+
+<!-- ===== Clients (static row) ===== -->
+<section class="ph-section">
+  <div class="ph-wrap">
+    <div class="ph-sec-head ph-sec-head-center">
+      <span class="ph-eyebrow">Trusted by</span>
+      <h2 class="ph-sec-title">Our clients</h2>
+    </div>
+    <ul class="ph-logo-row" aria-label="Clients">
+      <li class="ph-logo-item"><img src="{{ ph_img }}/logos/abu-dhabi-municipality.jpeg" alt="Abu Dhabi Municipality" loading="lazy"></li>
+      <li class="ph-logo-item"><img src="{{ ph_img }}/logos/adnoc.png" alt="ADNOC" loading="lazy"></li>
+      <li class="ph-logo-item"><img src="{{ ph_img }}/logos/aecom.png" alt="AECOM" loading="lazy"></li>
+      <li class="ph-logo-item"><img src="{{ ph_img }}/logos/al-fattan.png" alt="Al Fattan" loading="lazy"></li>
+      <li class="ph-logo-item"><img src="{{ ph_img }}/logos/al-naboodah.jpeg" alt="Al Naboodah" loading="lazy"></li>
+      <li class="ph-logo-item"><img src="{{ ph_img }}/logos/aldar.png" alt="Aldar" loading="lazy"></li>
+      <li class="ph-logo-item"><img src="{{ ph_img }}/logos/currie-brown.png" alt="Currie &amp; Brown" loading="lazy"></li>
+      <li class="ph-logo-item"><img src="{{ ph_img }}/logos/damac.png" alt="DAMAC" loading="lazy"></li>
+      <li class="ph-logo-item"><img src="{{ ph_img }}/logos/dubai-municipality.png" alt="Dubai Municipality" loading="lazy"></li>
+      <li class="ph-logo-item"><img src="{{ ph_img }}/logos/modon.png" alt="Modon" loading="lazy"></li>
+      <li class="ph-logo-item"><img src="{{ ph_img }}/logos/multiplex.png" alt="Multiplex" loading="lazy"></li>
+      <li class="ph-logo-item"><img src="{{ ph_img }}/logos/nakheel.jpeg" alt="Nakheel" loading="lazy"></li>
+      <li class="ph-logo-item"><img src="{{ ph_img }}/logos/neom.webp" alt="NEOM" loading="lazy"></li>
+      <li class="ph-logo-item"><img src="{{ ph_img }}/logos/presidential-court.jpeg" alt="Presidential Court" loading="lazy"></li>
+      <li class="ph-logo-item"><img src="{{ ph_img }}/logos/rixos.png" alt="Rixos" loading="lazy"></li>
+      <li class="ph-logo-item"><img src="{{ ph_img }}/logos/silal.jpeg" alt="Silal" loading="lazy"></li>
+      <li class="ph-logo-item"><img src="{{ ph_img }}/logos/turner-townsend.png" alt="Turner &amp; Townsend" loading="lazy"></li>
+    </ul>
+  </div>
+</section>

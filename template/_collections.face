@@ -13,7 +13,7 @@
 
 <section class="ph-section">
   <div class="ph-wrap">
-    <nav class="ph-coll-index" aria-label="Categories">
+    <nav class="ph-coll-index ph-stagger" aria-label="Categories">
       <div>
         <h2>Outdoor Plants</h2>
         <a href="{{ ph_url_palm_trees }}">Palm Trees</a>

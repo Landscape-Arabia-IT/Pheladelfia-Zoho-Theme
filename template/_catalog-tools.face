@@ -1,0 +1,16 @@
+<div class="ph-catalog-tools">
+  <button type="button" class="ph-filter-trigger" data-ph-filter-toggle aria-expanded="false" aria-controls="ph-catalog-filters">Filters</button>
+  <p class="ph-catalog-count" data-ph-catalog-count role="status" aria-live="polite"></p>
+  {% if page.is_sorting_enabled %}
+  <label class="ph-sort">Sort by
+    <select data-sort-by-products aria-label="Sort by">
+      {% for option in ph_sort_options %}
+      <option value="{{ option.value }}"{% if option.is_selected %} selected{% endif %}>{{ option.name }}</option>
+      {% endfor %}
+    </select>
+  </label>
+  {% endif %}
+</div>
+<div class="ph-catalog-feedback" data-ph-catalog-feedback role="status" aria-live="polite" hidden></div>
+<button class="ph-text-link" type="button" data-ph-catalog-retry hidden>Try again</button>
+{% include "_store-product-selected-filter" %}

@@ -2,8 +2,9 @@
 {% block content %}
 {% assign ph_page_url = page.url | lower %}
 {% assign ph_page_title = page.title | lower %}
+{% assign ph_policy = "" %}
 <div data-ph-page-body>
-{% if page.is_home_page || ph_page_url == "/" || ph_page_url == "home" || ph_page_url == "/home" || ph_page_url == "/home/" || ph_page_url == "/index" || ph_page_url == "/index.html" %}
+{% if page.is_home_page || ph_page_url == "/" || ph_page_url == "" || ph_page_url == "index" || ph_page_url == "index.html" || ph_page_url == "home" || ph_page_url == "/home" || ph_page_url == "/home/" || ph_page_url == "/index" || ph_page_url == "/index.html" %}
   {% include "_homepage" %}
 {% elif ph_page_url == "/about" || ph_page_url == "/about/" || ph_page_url == "about" || ph_page_title == "about" || ph_page_title == "about us" || ph_page_title == "من نحن" %}
   {% include "_about" %}
@@ -13,21 +14,32 @@
   {% include "_nursery" %}
 {% elif ph_page_url == "/all-collections" || ph_page_url == "/all-collections/" || ph_page_url == "/collections" || ph_page_url == "/collections/" || ph_page_title == "collections" || ph_page_title == "المجموعات" %}
   {% include "_collections" %}
-{% elif ph_page_url == "/capabilities" || ph_page_url == "/capabilities/" || ph_page_title == "capabilities" %}
+{% elif ph_page_url == "/capabilities" || ph_page_url == "/capabilities/" || ph_page_url == "capabilities" || ph_page_url == "capabilities/" || ph_page_title == "capabilities" %}
   {% include "_capabilities" %}
-{% elif ph_page_url == "/sustainability" || ph_page_url == "/sustainability/" || ph_page_title == "sustainability" || ph_page_title == "الاستدامة" %}
+{% elif ph_page_url == "/sustainability" || ph_page_url == "/sustainability/" || ph_page_url == "sustainability" || ph_page_url == "sustainability/" || ph_page_title == "sustainability" || ph_page_title == "الاستدامة" %}
   {% include "_sustainability" %}
-{% elif ph_page_url == "/projects" || ph_page_url == "/projects/" || ph_page_title == "projects" || ph_page_title == "المشاريع" %}
-  {% include "_projects" %}
 {% elif ph_page_url == "/contact" || ph_page_url == "/contact/" || ph_page_url == "contact" || ph_page_title == "contact" || ph_page_title == "contact us" || ph_page_title == "تواصل معنا" %}
   {% include "_contact" %}
 {% elif ph_page_url == "/join-us" || ph_page_url == "/join-us/" || ph_page_url == "join-us" || ph_page_url == "/careers" || ph_page_url == "/careers/" || ph_page_url == "careers" || ph_page_title == "join us" || ph_page_title == "careers" || ph_page_title == "انضم إلينا" %}
   {% include "_careers" %}
 {% elif ph_page_url == "/job" || ph_page_url == "/job/" || ph_page_url == "/jobs" || ph_page_url == "/jobs/" || ph_page_url == "job" || ph_page_url == "jobs" || ph_page_title == "job" || ph_page_title == "job details" || ph_page_title == "وظيفة" %}
   {% include "_job" %}
+{% elif ph_page_url == "/legal" || ph_page_url == "/legal/" || ph_page_url == "legal" || ph_page_url == "/legal-information" || ph_page_url == "/policies" || ph_page_url == "/policies/" || ph_page_title == "legal" || ph_page_title == "legal information" || ph_page_title == "المعلومات القانونية" %}
+  {% assign ph_policy = "legal" %}
+{% elif ph_page_url == "/refunds" || ph_page_url == "/refunds/" || ph_page_url == "refunds" || ph_page_url == "/refund-policy" || ph_page_url == "/policies/refund-policy" || ph_page_url == "/returns" || ph_page_title == "refunds" || ph_page_title == "refund policy" || ph_page_title == "returns" || ph_page_title == "الاسترجاع والاستبدال" %}
+  {% assign ph_policy = "refund" %}
+{% elif ph_page_url == "/privacy" || ph_page_url == "/privacy/" || ph_page_url == "privacy" || ph_page_url == "/privacy-policy" || ph_page_url == "/policies/privacy-policy" || ph_page_title == "privacy" || ph_page_title == "privacy policy" || ph_page_title == "سياسة الخصوصية" %}
+  {% assign ph_policy = "privacy" %}
+{% elif ph_page_url == "/terms" || ph_page_url == "/terms/" || ph_page_url == "terms" || ph_page_url == "/terms-of-service" || ph_page_url == "/policies/terms-of-service" || ph_page_title == "terms" || ph_page_title == "terms of service" || ph_page_title == "terms of use" || ph_page_title == "شروط الخدمة" %}
+  {% assign ph_policy = "terms" %}
+{% elif ph_page_url == "/shipping" || ph_page_url == "/shipping/" || ph_page_url == "shipping" || ph_page_url == "/shipping-policy" || ph_page_url == "/policies/shipping-policy" || ph_page_title == "shipping" || ph_page_title == "shipping policy" || ph_page_title == "الشحن" || ph_page_title == "التوصيل" %}
+  {% assign ph_policy = "shipping" %}
 {% else %}
   <section class="ph-page-banner"><div class="ph-wrap"><h1>{{ page.title }}</h1><span class="ph-rule"></span></div></section>
   <section class="ph-store"><div class="ph-wrap">{{ page.content }}</div></section>
+{% endif %}
+{% if ph_policy != "" %}
+  {% include "_policies" %}
 {% endif %}
 </div>
 {% comment %} Ordinary pages only; product/cart/checkout retain their native contexts. {% endcomment %}
@@ -40,7 +52,6 @@
   <template data-ph-route="all-collections">{% include "_collections" %}</template>
   <template data-ph-route="capabilities">{% include "_capabilities" %}</template>
   <template data-ph-route="sustainability">{% include "_sustainability" %}</template>
-  <template data-ph-route="projects">{% include "_projects" %}</template>
   <template data-ph-route="contact">{% include "_contact" %}</template>
   <template data-ph-route="join-us">{% include "_careers" %}</template>
   <template data-ph-route="careers">{% include "_careers" %}</template>

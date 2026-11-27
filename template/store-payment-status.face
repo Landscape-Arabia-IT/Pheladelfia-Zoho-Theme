@@ -1,139 +1,40 @@
-{% extends '_theme' %}
+{% extends "_theme" %}
 {% block content %}
-<section class="ph-store ph-payment-page">
-  <div class="ph-wrap">
-    <div class="ph-payment-card {% if payment_status.order_placed %}is-success{% else %}is-error{% endif %}">
-      {% if payment_status.order_placed %}
-      <div class="ph-payment-icon is-success" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
-      </div>
-      <p class="ph-kicker">Order confirmation</p>
-      <h1 class="ph-h2">Order received</h1>
-      <p class="ph-lead">Thank you. Your payment was successful and we are preparing your order for delivery.</p>
-
-      <div class="ph-payment-details">
-        <div class="ph-payment-detail">
-          <span>Order number</span>
-          <strong>{{ payment_status.salesorder_number }}</strong>
-        </div>
-        <div class="ph-payment-detail">
-          <span>Amount paid</span>
-          <strong>{{ payment_status.amount_formatted }}</strong>
-        </div>
-        {% if payment_status.payment_mode %}
-        <div class="ph-payment-detail">
-          <span>Payment method</span>
-          <strong>{{ payment_status.payment_mode }}</strong>
-        </div>
-        {% endif %}
-        {% if payment_status.customer_email %}
-        <div class="ph-payment-detail">
-          <span>Confirmation email</span>
-          <strong>{{ payment_status.customer_email }}</strong>
-        </div>
-        {% endif %}
-      </div>
-
-      {% if payment_status.order_info %}
-      <div class="ph-payment-order">
-        <h2 class="ph-h3">Order summary</h2>
-        {% for order in payment_status.order_info %}
-          {% if order.line_items %}
-          <ul class="ph-payment-items">
-            {% for item in order.line_items %}
-            <li>
-              <span>{{ item.name }}</span>
-              <strong>{{ item.quantity }} × {{ currency.symbol }}{{ item.rate }}</strong>
-            </li>
-            {% endfor %}
-          </ul>
-          {% endif %}
-          <div class="ph-payment-totals">
-            {% if order.sub_total %}
-            <div class="ph-payment-detail">
-              <span>Subtotal</span>
-              <strong>{{ currency.symbol }}{{ order.sub_total }}</strong>
-            </div>
-            {% endif %}
-            {% if order.shipping_charge && order.shipping_charge > 0 %}
-            <div class="ph-payment-detail">
-              <span>Delivery</span>
-              <strong>{{ currency.symbol }}{{ order.shipping_charge }}</strong>
-            </div>
-            {% endif %}
-            {% if order.tax_total && order.tax_total > 0 %}
-            <div class="ph-payment-detail">
-              <span>VAT</span>
-              <strong>{{ currency.symbol }}{{ order.tax_total }}</strong>
-            </div>
-            {% endif %}
-            <div class="ph-payment-detail is-total">
-              <span>Total</span>
-              <strong>{{ payment_status.amount_formatted }}</strong>
-            </div>
-          </div>
-        {% endfor %}
-      </div>
-      {% endif %}
-
-      <div class="ph-payment-actions">
-        <a class="ph-btn" href="/">Return home</a>
-        <a class="ph-btn ph-btn-outline" href="/all-collections">Continue shopping</a>
-        {% if page.is_portal_enabled %}
-        <a class="ph-btn ph-btn-outline" href="/account/orders">View my orders</a>
-        {% endif %}
-      </div>
-      <p class="ph-payment-note">
-        {% if payment_status.customer_email %}
-        A confirmation email will be sent to {{ payment_status.customer_email }}.
-        {% else %}
-        A confirmation email will be sent to you.
-        {% endif %}
-        Questions? <a href="mailto:{{ ph_email }}">{{ ph_email }}</a>
-      </p>
-      {% else %}
-      <div class="ph-payment-icon is-error" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4m0 4h.01M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
-      </div>
-      <p class="ph-kicker">Payment status</p>
-      <h1 class="ph-h2">Payment needs attention</h1>
-      <p class="ph-lead">We could not confirm this payment. If an amount was deducted, it will be reversed automatically or our team will contact you.</p>
-
-      <div class="ph-payment-details">
-        {% if payment_status.transaction_status %}
-        <div class="ph-payment-detail">
-          <span>Status</span>
-          <strong>{{ payment_status.transaction_status }}</strong>
-        </div>
-        {% endif %}
-        {% if payment_status.salesorder_number %}
-        <div class="ph-payment-detail">
-          <span>Order reference</span>
-          <strong>{{ payment_status.salesorder_number }}</strong>
-        </div>
-        {% endif %}
-        {% if payment_status.customer_email %}
-        <div class="ph-payment-detail">
-          <span>Email</span>
-          <strong>{{ payment_status.customer_email }}</strong>
-        </div>
-        {% endif %}
-      </div>
-
-      {% if payment_status.error %}
-      <div class="ph-payment-error">
-        <span>Error</span>
-        <p>{{ payment_status.error }}</p>
-      </div>
-      {% endif %}
-
-      <div class="ph-payment-actions">
-        <a class="ph-btn" href="/cart">Back to cart</a>
-        <a class="ph-btn ph-btn-outline" href="/">Return home</a>
-      </div>
-      <p class="ph-payment-note">Need help? Contact <a href="mailto:{{ ph_email }}">{{ ph_email }}</a> or call <a href="{{ ph_phone_tel }}" dir="ltr">{{ ph_phone_display }}</a>.</p>
-      {% endif %}
-    </div>
+<div class="phx-shell phx-result">
+{% include "_purchase-header" %}
+<section class="phx-main">
+  <div class="phx-receipt {% if payment_status.order_placed %}is-success{% else %}is-error{% endif %}">
+  {% if payment_status.order_placed %}
+    <div class="phx-result-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="m5 12 4 4L19 6"/></svg></div>
+    <p class="phx-eyebrow">ORDER RECEIVED</p><h1>Thank you.</h1><p>Your order has been received. Keep your order reference for any enquiries.</p>
+  {% else %}
+    <div class="phx-result-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M12 7v6m0 3v1"/></svg></div>
+    <p class="phx-eyebrow">LET’S GET THIS SORTED</p><h1>Payment needs attention</h1><p>We could not confirm this payment. If you see a charge, contact our team with your order reference before trying again.</p>
+  {% endif %}
+  <dl class="phx-receipt-details">
+    {% if payment_status.salesorder_number %}<div><dt>Order reference</dt><dd>{{ payment_status.salesorder_number }}</dd></div>{% endif %}
+    {% if payment_status.amount_formatted %}<div><dt>Order amount</dt><dd>{{ payment_status.amount_formatted }}</dd></div>{% endif %}
+    {% if payment_status.payment_mode %}<div><dt>Payment method</dt><dd>{{ payment_status.payment_mode }}</dd></div>{% endif %}
+    {% if payment_status.transaction_status %}<div><dt>Status</dt><dd>{{ payment_status.transaction_status }}</dd></div>{% endif %}
+    {% if payment_status.customer_email %}<div><dt>Email</dt><dd>{{ payment_status.customer_email }}</dd></div>{% endif %}
+  </dl>
+  {% if payment_status.order_placed %}
+    {% for order in payment_status.order_info %}
+    <div class="phx-receipt-order"><h2>Order summary</h2>
+    {% for item in order.line_items %}<div class="phx-summary-line"><span>{{ item.name }} <small>× {{ item.quantity }}</small></span><strong>{{ currency.symbol }} {{ item.rate }}</strong></div>{% endfor %}
+    {% if order.sub_total %}<div class="phx-summary-line"><span>Subtotal</span><strong>{{ currency.symbol }} {{ order.sub_total }}</strong></div>{% endif %}
+    {% if order.shipping_charge %}<div class="phx-summary-line"><span>Delivery</span><strong>{{ currency.symbol }} {{ order.shipping_charge }}</strong></div>{% endif %}
+    {% if order.tax_total %}<div class="phx-summary-line"><span>VAT</span><strong>{{ currency.symbol }} {{ order.tax_total }}</strong></div>{% endif %}
+    </div>{% endfor %}
+    <a class="phx-button" href="/all-collections">Continue shopping <span aria-hidden="true">→</span></a>
+    {% if page.is_portal_enabled %}<a class="phx-inline-link" href="/account/orders">View my orders</a>{% endif %}
+  {% else %}
+    {% if payment_status.error %}<p class="phx-error" role="alert">{{ payment_status.error }}</p>{% endif %}
+    <a class="phx-button" href="/cart">Back to cart <span aria-hidden="true">→</span></a>
+    <a class="phx-inline-link" href="mailto:{{ ph_email }}">Contact our team</a>
+  {% endif %}
   </div>
 </section>
+{% include "_purchase-footer" %}
+</div>
 {% endblock %}

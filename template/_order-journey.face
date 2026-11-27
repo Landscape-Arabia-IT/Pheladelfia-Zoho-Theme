@@ -1,0 +1,7 @@
+<nav class="ph-order-journey" aria-label="Order progress">
+  <ol>
+    <li{% if ph_order_stage == 'cart' %} class="is-current" aria-current="step"{% endif %}><span class="ph-order-step">01</span><a href="/cart">Shopping cart</a></li>
+    <li{% if ph_order_stage == 'checkout' %} class="is-current" aria-current="step"{% endif %}><span class="ph-order-step">02</span><span>Checkout</span></li>
+    <li{% if ph_order_stage == 'confirmation' %} class="is-current" aria-current="step"{% endif %}><span class="ph-order-step">03</span><span>Order confirmation</span></li>
+  </ol>
+</nav>

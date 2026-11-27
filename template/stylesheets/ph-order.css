@@ -1,0 +1,105 @@
+/* Shared purchase journey. Loaded only on cart, checkout and result layouts. */
+.ph-order-page { padding-block: 2rem 4rem; }
+.ph-order-page > .ph-wrap { max-width: 1240px; }
+.ph-order-journey { margin-block-end: 2.5rem; border-block-end: 1px solid var(--line); }
+.ph-order-journey ol { display: flex; gap: clamp(1rem, 4vw, 3rem); list-style: none; padding: 0 0 1.25rem; margin: 0; }
+.ph-order-journey li { display: flex; align-items: center; gap: .6rem; color: var(--muted-ink); font-size: .82rem; font-weight: 500; }
+.ph-order-journey a { color: inherit; text-decoration: none; }
+.ph-order-journey a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.ph-order-step { display: grid; place-items: center; width: 1.85rem; height: 1.85rem; border: 1px solid var(--line); border-radius: 50%; font-size: .72rem; font-variant-numeric: tabular-nums; }
+.ph-order-journey .is-current { color: var(--forest); font-weight: 700; }
+.ph-order-journey .is-current .ph-order-step { color: white; background: var(--forest); border-color: var(--forest); }
+.ph-order-page .ph-cart-hero, .ph-order-page .ph-checkout-hero { padding: 0 0 2rem; }
+.ph-order-page .ph-h2 { font-size: clamp(2rem, 3.5vw, 3rem); line-height: 1.15; }
+.ph-order-page .ph-lead { max-width: 42rem; color: var(--muted-ink); font-size: .98rem; line-height: 1.7; }
+.ph-order-page .ph-kicker { color: var(--gold-deep); }
+.ph-order-page .ph-btn { min-height: 48px; border-radius: .6rem; font-size: .88rem; letter-spacing: 0; text-transform: none; }
+.ph-order-page :is(button, a, input, select, textarea):focus-visible { outline: 2px solid var(--forest); outline-offset: 4px; }
+.ph-order-help { display: flex; align-items: center; flex-wrap: wrap; gap: 1rem 1.5rem; margin-block-start: 2.5rem; padding: 1.25rem 1.5rem; background: var(--sage); border: 1px solid var(--line); border-radius: .85rem; }
+.ph-order-help-icon { display: grid; place-items: center; width: 2.5rem; height: 2.5rem; color: var(--forest); flex-shrink: 0; }
+.ph-order-help-icon svg { width: 26px; height: 26px; }
+.ph-order-help > div { flex: 1; min-width: 12rem; }
+.ph-order-help h2 { font-family: inherit; font-size: .9rem; font-weight: 700; margin: 0 0 .25rem; color: var(--forest); }
+.ph-order-help p { font-size: .82rem; margin: 0; color: var(--ink-soft); }
+.ph-order-help a { color: var(--forest); font-size: .85rem; font-weight: 600; overflow-wrap: anywhere; padding-block: .5rem; }
+/* Cart: two-column rows keep long plant names and actions inside the card. */
+.ph-cart-page .ph-selection-layout { grid-template-columns: minmax(0, 1fr) minmax(18rem, 22rem); gap: 2rem; align-items: start; }
+.ph-cart-page .ph-selection-list { gap: 0; background: #fff; border: 1px solid var(--line); border-radius: 1rem; overflow: hidden; }
+.ph-cart-page .ph-selection-row { grid-template-columns: 6.5rem minmax(0, 1fr) auto; grid-template-areas: 'photo info total' 'photo qty actions'; gap: .85rem 1.25rem; border: 0; border-block-end: 1px solid var(--line-soft); padding: 1.5rem; border-radius: 0; background: transparent; box-shadow: none; transform: none; }
+.ph-cart-page .ph-selection-row:last-child { border-block-end: 0; }
+.ph-cart-page .ph-selection-row:hover { box-shadow: none; transform: none; }
+.ph-cart-page .ph-selection-photo { grid-area: photo; width: 6.5rem; height: 8rem; background: var(--ivory); border-radius: .65rem; }
+.ph-cart-page .ph-selection-photo img { object-fit: contain; }
+.ph-cart-page .ph-selection-info { grid-area: info; align-self: start; }
+.ph-cart-page .ph-selection-name { font-size: .95rem; line-height: 1.5; overflow-wrap: anywhere; }
+.ph-cart-page .ph-selection-unit { flex-wrap: wrap; gap: .25rem .5rem; margin-block: .6rem 0; }
+.ph-cart-page .ph-selection-unit .ph-price { font-family: inherit; font-size: .85rem; font-weight: 600; }
+.ph-cart-page .ph-selection-qty { grid-area: qty; margin: 0; justify-self: start; }
+.ph-cart-page .ph-selection-qty .ph-qty-box { height: 44px; background: var(--ivory); border: 1px solid var(--line); border-radius: .5rem; }
+.ph-cart-page .ph-selection-qty .ph-qty-btn { width: 44px; height: 42px; }
+.ph-cart-page .ph-selection-qty .ph-qty { width: 2.4rem; background: transparent; font-size: 16px; }
+.ph-cart-page .ph-selection-total { grid-area: total; align-self: start; min-width: 0; margin: 0; padding: 0; border: 0; align-items: end; }
+.ph-cart-page .ph-selection-total strong { font-size: .96rem; font-variant-numeric: tabular-nums; }
+.ph-cart-page .ph-selection-total-label { font-size: .7rem; letter-spacing: .03em; }
+.ph-cart-page .ph-selection-actions { grid-area: actions; display: flex; flex-direction: row; flex-wrap: wrap; justify-content: flex-end; align-items: center; min-width: 0; gap: .25rem .8rem; margin: 0; }
+.ph-cart-page .ph-selection-actions button { min-height: 44px; padding: .3rem 0; background: transparent; border: 0; font: inherit; font-size: .75rem; text-align: start; cursor: pointer; }
+.ph-cart-page .ph-selection-remove { color: var(--danger); }
+.ph-cart-page .ph-selection-summary { position: sticky; top: 12rem; background: var(--paper); border-radius: 1rem; box-shadow: var(--shadow-soft); padding: 1.6rem; }
+.ph-cart-page .ph-selection-summary::before { background: var(--forest); height: 3px; }
+.ph-cart-page .ph-selection-summary .ph-h3 { font-family: var(--font-display); font-size: 1.45rem; }
+html[dir='rtl'] .ph-cart-page .ph-selection-summary .ph-h3 { font-family: var(--font-arabic); }
+.ph-cart-page .ph-selection-summary-row { border: 0; font-size: .85rem; gap: .7rem; }
+.ph-cart-page .ph-selection-summary-row.is-subtotal { border-block-start: 1px solid var(--line); margin-block-start: .5rem; padding-block: 1rem; font-size: 1rem; }
+.ph-summary-estimate { color: var(--muted-ink); font-size: .75rem; text-align: end; }
+.ph-cart-page .ph-selection-note { line-height: 1.7; font-size: .78rem; margin-block: .6rem 1.2rem; }
+.ph-cart-page .ph-selection-summary > .ph-text-link { display: block; text-align: center; padding-block: .5rem; font-size: .82rem; }
+.ph-cart-page .ph-selection-trust { font-size: .8rem; }
+.ph-cart-feedback { padding: 1rem; border: 1px solid var(--line); border-radius: .6rem; background: var(--sage); color: var(--forest); font-size: .9rem; margin-block: 0 1rem; }
+.ph-cart-feedback.is-error { color: var(--danger); background: #fff3ef; border-color: #e9b9ae; }
+.ph-selection-row[aria-busy='true'] { opacity: .55; pointer-events: none; }
+.ph-cart-page .ph-cart-empty { max-width: 42rem; margin: .5rem auto 0; padding: 3rem 1.5rem; background: #fff; border: 1px solid var(--line); border-radius: 1rem; text-align: center; }
+.ph-cart-page .ph-cart-empty .ph-lead { margin-inline: auto; margin-block: .75rem 1.5rem; }
+.ph-cart-page .ph-cart-empty-icon { width: 5rem; height: 5rem; margin-block-end: 1.5rem; }
+/* Checkout: do not replace, reorder or hide native payment fields. */
+.ph-order-page .ph-checkout-hero { display: flex; justify-content: space-between; align-items: center; gap: 1.5rem; }
+.ph-order-page .ph-checkout-back { margin: 0; flex-shrink: 0; font-size: .85rem; padding-block: .75rem; }
+.ph-order-page .ph-checkout-box { max-width: none; margin: 0; padding: 0; border: 0; background: transparent; box-shadow: none; }
+/* Result pages: a calm receipt with a clear primary next action. */
+.ph-payment-page .ph-payment-card { max-width: 52rem; padding: clamp(1.5rem, 4vw, 3rem); background: white; border-radius: 1rem; box-shadow: var(--shadow-soft); }
+.ph-payment-page .ph-payment-card::before { background: var(--forest); height: 3px; }
+.ph-payment-page .ph-payment-card.is-error::before { background: var(--danger); }
+.ph-payment-page .ph-payment-details { gap: 1px; background: var(--line-soft); border: 1px solid var(--line-soft); border-radius: .7rem; overflow: hidden; }
+.ph-payment-page .ph-payment-details .ph-payment-detail { border: 0; border-radius: 0; background: var(--ivory); padding: 1.15rem; }
+.ph-payment-page .ph-payment-detail span { letter-spacing: 0; text-transform: none; font-size: .78rem; }
+.ph-payment-page .ph-payment-order { border-radius: .7rem; }
+.ph-payment-page .ph-payment-order .ph-h3 { text-align: start; font: 700 1rem var(--font-sans); }
+html[dir='rtl'] .ph-payment-page .ph-payment-order .ph-h3 { font-family: var(--font-arabic); }
+.ph-payment-page .ph-payment-items li { align-items: start; }
+.ph-payment-page .ph-payment-items li strong { white-space: normal; text-align: end; }
+.ph-payment-page .ph-payment-note { overflow-wrap: anywhere; line-height: 1.8; }
+.ph-payment-page .ph-order-help { max-width: 52rem; margin-inline: auto; }
+@media (max-width: 1023px) {
+  .ph-cart-page .ph-selection-layout { grid-template-columns: 1fr; }
+  .ph-cart-page .ph-selection-summary { position: static; }
+}
+@media (max-width: 640px) {
+  .ph-order-page { padding-block: 1.25rem 2.5rem; }
+  .ph-order-journey { margin-block-end: 1.75rem; }
+  .ph-order-journey ol { gap: .5rem; justify-content: space-between; }
+  .ph-order-journey li { flex-direction: column; align-items: center; gap: .4rem; font-size: .68rem; text-align: center; flex: 1; }
+  .ph-order-step { width: 1.65rem; height: 1.65rem; }
+  .ph-order-page .ph-checkout-hero { display: block; }
+  .ph-order-page .ph-checkout-back { display: inline-block; margin-block-start: .5rem; }
+  .ph-cart-page .ph-selection-row { grid-template-columns: 4.5rem minmax(0, 1fr); grid-template-areas: 'photo info' 'qty total' 'actions actions'; padding: 1rem; gap: 1rem; }
+  .ph-cart-page .ph-selection-photo { width: 4.5rem; height: 6rem; }
+  .ph-cart-page .ph-selection-total { align-self: center; flex-direction: column; align-items: end; }
+  .ph-cart-page .ph-selection-actions { justify-content: flex-start; border-block-start: 1px solid var(--line-soft); padding-block-start: .25rem; }
+  .ph-cart-page .ph-selection-summary { padding: 1.25rem; }
+  .ph-order-help { padding: 1.1rem; gap: .5rem 1rem; }
+  .ph-order-help > a { flex-basis: 100%; }
+  .ph-payment-page .ph-payment-actions { flex-direction: column; }
+  .ph-payment-page .ph-payment-actions .ph-btn { min-width: 0; width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ph-order-page *, .ph-order-page *::before, .ph-order-page *::after { scroll-behavior: auto; transition: none; animation: none; }
+}

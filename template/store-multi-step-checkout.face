@@ -1,37 +1,13 @@
 {% extends "_theme" %}
 {% block content %}
-<section class="ph-store ph-checkout-page">
-  <div class="ph-wrap">
-    <header class="ph-checkout-hero">
-      <p class="ph-kicker">Secure checkout</p>
-      <h1 class="ph-h2">Checkout</h1>
-      <p class="ph-lead">Complete each step to review your order, choose delivery and pay securely.</p>
-      <a class="ph-text-link ph-checkout-back" href="/cart">Back to cart</a>
-    </header>
-    <div class="ph-checkout-box">{{ checkout.form }}</div>
-    <div class="ph-checkout-trust" aria-label="Checkout assurances">
-      <div class="ph-checkout-trust-item">
-        <span class="ph-checkout-trust-icon" aria-hidden="true">✓</span>
-        <div>
-          <h3 class="ph-h3">Secure payment</h3>
-          <p class="ph-copy">Card and wallet payments are processed securely.</p>
-        </div>
-      </div>
-      <div class="ph-checkout-trust-item">
-        <span class="ph-checkout-trust-icon" aria-hidden="true">✓</span>
-        <div>
-          <h3 class="ph-h3">UAE delivery</h3>
-          <p class="ph-copy">We deliver plants and supplies across the Emirates.</p>
-        </div>
-      </div>
-      <div class="ph-checkout-trust-item">
-        <span class="ph-checkout-trust-icon" aria-hidden="true">✓</span>
-        <div>
-          <h3 class="ph-h3">Nursery support</h3>
-          <p class="ph-copy">Our Al Ajban team can help with order questions.</p>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="phx-shell phx-checkout">
+{% include "_purchase-header" %}
+<section class="phx-main">
+  <header class="phx-title"><h1>Checkout</h1></header>
+  {% include "_delivery-note" %}
+  <div class="phx-flow">{{ checkout.form }}</div>
+  {% include "_checkout-support" %}
 </section>
+{% include "_purchase-footer" %}
+</div>
 {% endblock %}

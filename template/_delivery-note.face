@@ -1,0 +1,4 @@
+{% comment %}
+  One line on cart and checkout. Every order ships from the Warsan branch.
+{% endcomment %}
+<p class="ph-ship ph-ship-line">All orders ship from Warsan, Dubai.</p>

@@ -46,32 +46,32 @@
       <p class="ph-price ph-qv-price" data-ph-qv-price>
         {% if product.has_variant_price %}{{ currency.symbol }}{{ product.starts_with }} – {{ currency.symbol }}{{ product.ends_with }}{% else %}{{ currency.symbol }}{{ product.selling_price }}{% endif %}
       </p>
+      <p class="ph-qv-vat">Exclusive of 5% VAT</p>
     </div>
     {% if product.short_description %}<div class="ph-lead ph-qv-desc">{{ product.short_description }}</div>{% endif %}
     {% if product.variants %}
     <div class="ph-variant-fields">
-      <p class="ph-field-label">Size</p>
-      <div class="ph-size-chips" data-ph-qv-chips>
+      <label class="ph-field-label" for="ph-qv-size-{{ product.product_id }}">Size</label>
+      <select class="ph-select ph-qv-size" id="ph-qv-size-{{ product.product_id }}" data-ph-qv-size>
         {% for variant in product.variants %}
-        <button type="button" class="ph-size-chip{% if variant.is_out_of_stock || variant.hide_add_to_cart || variant.is_available_for_purchase == false %} is-oos{% endif %}"
-          data-ph-qv-chip data-ph-qv-variant="{{ variant.variant_id }}"
-          data-ph-qv-chip-price="{{ variant.selling_price }}"
-          {% if variant.is_out_of_stock || variant.hide_add_to_cart || variant.is_available_for_purchase == false %}data-ph-qv-oos="1" disabled{% endif %}
-          aria-pressed="false">{% for option in variant.options %}{{ option.value }}{% if forloop.last && variant.sku %} · {{ variant.sku }}{% endif %}{% endfor %}</button>
+        {% assign qv_oos = false %}
+        {% if variant.is_out_of_stock || variant.hide_add_to_cart || variant.is_available_for_purchase == false %}{% assign qv_oos = true %}{% endif %}
+        <option value="{{ variant.variant_id }}" data-ph-qv-price="{{ variant.selling_price }}"{% if qv_oos %} disabled data-ph-qv-oos="1"{% endif %}>{% for option in variant.options %}{{ option.value }}{% if forloop.last == false %} · {% endif %}{% endfor %} — {{ currency.symbol }}{{ variant.selling_price }}{% if qv_oos %} — Out of stock{% endif %}</option>
         {% endfor %}
-      </div>
+      </select>
     </div>
     {% endif %}
     <div class="ph-qv-actions">
-      <button class="ph-btn ph-qv-add" type="button" data-ph-qv-add data-ph-qv-variant="{{ qv_variant_id }}"{% if qv_oos_all %} disabled{% endif %}>{% if qv_oos_all %}Out of stock{% else %}Add to selection{% endif %}</button>
+      <button class="ph-btn ph-qv-add" type="button" data-ph-qv-add data-ph-qv-variant="{{ qv_variant_id }}"{% if qv_oos_all %} disabled{% endif %}>{% if qv_oos_all %}Out of stock{% else %}Add to cart{% endif %}</button>
       <a class="ph-btn ph-btn-outline" href="{{ product.url }}">Full details</a>
     </div>
     <p class="ph-buy-error" data-theme-error style="display:none;"></p>
+    <p class="ph-qv-ship">All orders ship from Warsan, Dubai.</p>
     <div class="ph-qv-foot">
       {% if page.is_portal_enabled %}
       <button type="button" class="ph-wish-btn" data-zs-wishlist-element data-ph-auth-wishlist
         {% if qv_variant_id %}data-zs-wishlist-variant-id="{{ qv_variant_id }}"{% endif %}
-        hidden aria-label="Save to wishlist" aria-pressed="false"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.3-9C1.2 8.6 3 5 6.6 5c2 0 3.6 1.1 4.4 2.6C11.8 6.1 13.4 5 15.4 5 19 5 20.8 8.6 19.3 12c-1.8 4.4-7.3 9-7.3 9z"/></svg></button>
+        hidden aria-label="Save to wishlist" aria-pressed="false"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="ph-wish-label">Save to wishlist</span></button>
       {% endif %}
     </div>
   </div>

@@ -1,1 +1,74 @@
-<aside class="ph-filters" data-ph-filters>   <p class="ph-kicker">Refine</p>   <h2 class="ph-h3">Filter the catalog</h2>   {% if category.sub_categories %}   <div class="ph-filter-group" data-ph-filter-group="species">     <h3 class="ph-filter-title">Species</h3>     <ul class="ph-filter-list">       {% for sub in category.sub_categories %}       <li><a href="{{ sub.url }}" data-ph-cat-id="{{ sub.category_id }}">{{ sub.name }}</a></li>       {% endfor %}     </ul>   </div>   {% endif %}   {% if filters %}     {% for set in filters.filter_set %}     <div class="ph-filter-group" data-ph-filter-type="{{ set.type_label }}" data-ph-filter-set="{{ set.id }}">       <h3 class="ph-filter-title">{{ set.name }}</h3>       {% for child in set.children_category_filter %}       <label class="ph-filter-opt">         <input type="checkbox" data-ph-filter="category" data-ph-id="{{ child.id }}">         <span>{{ child.name }}</span>         {% if set.show_product_count %}<em>{{ child.count }}</em>{% endif %}       </label>       {% endfor %}       {% for opt in set.attribute_filter %}       <label class="ph-filter-opt">         <input type="checkbox" data-ph-filter="attribute" data-ph-id="{{ opt.id }}" data-ph-container="{{ opt.container_id }}">         <span>{{ opt.name }}</span>         {% if set.show_product_count %}<em>{{ opt.count }}</em>{% endif %}       </label>       {% endfor %}       {% for opt in set.color_filter %}       <label class="ph-filter-opt">         <input type="checkbox" data-ph-filter="attribute" data-ph-id="{{ opt.id }}" data-ph-container="{{ opt.container_id }}">         <span>{{ opt.name }}</span>         {% if set.show_product_count %}<em>{{ opt.count }}</em>{% endif %}       </label>       {% endfor %}       {% for opt in set.price_filter %}       <label class="ph-filter-opt">         <input type="checkbox" data-ph-filter="price" data-ph-from="{{ opt.from }}" data-ph-to="{{ opt.to }}" data-ph-container="{{ opt.container_id }}">         <span>{{ opt.from }} – {{ opt.to }}</span>         {% if set.show_product_count %}<em>{{ opt.count }}</em>{% endif %}       </label>       {% endfor %}       {% for opt in set.brand_filter %}       <label class="ph-filter-opt">         <input type="checkbox" data-ph-filter="brand" data-ph-id="{{ opt.id }}">         <span>{{ opt.name }}</span>         {% if set.show_product_count %}<em>{{ opt.count }}</em>{% endif %}       </label>       {% endfor %}       {% for opt in set.tag_filter %}       <label class="ph-filter-opt">         <input type="checkbox" data-ph-filter="tag" data-ph-id="{{ opt.id }}">         <span>{{ opt.name }}</span>         {% if set.show_product_count %}<em>{{ opt.count }}</em>{% endif %}       </label>       {% endfor %}     </div>     {% endfor %}   {% endif %}   <div class="ph-filter-group" data-ph-size-host hidden>     <h3 class="ph-filter-title">Size</h3>     <div data-ph-size-options></div>   </div> </aside> 
+{% comment %}Native Zoho facet contract; container_id and filter_option_group_id come from Zoho.{% endcomment %}
+<div class="ph-filters" data-ph-filters>
+  <div class="ph-filter-heading"><h2>Filters</h2><button type="button" class="ph-icon-btn" data-ph-filter-close aria-label="Close filters">×</button></div>
+  {% for set in filters.filter_set %}
+  {% if set.has_filter_options %}
+  <details class="ph-filter-group" data-zs-filter-option-container="{{ set.name }}" data-zs-filter-option-type="{{ set.type }}" open>
+    <summary>{{ set.name }}</summary>
+    <div data-zs-filter-option-values-wrapper>
+      <button type="button" class="ph-filter-clear" data-zs-filter-option-clear style="display:none;">Clear all</button>
+      {% for child in set.children_category_filter %}
+      <a class="ph-filter-category" href="/categories/{{ child.id }}"><span>{{ child.name }}</span>{% if set.show_product_count %}<em>{{ child.count }}</em>{% endif %}</a>
+      {% endfor %}
+      {% for opt in set.attribute_filter %}
+      <label class="ph-filter-opt" data-zs-filter-option-value-container>
+        <input type="checkbox" data-zs-filter-option-value data-zs-filter-option-value-type="5" data-zs-filter-option-value-id="{{ opt.container_id }}" data-zs-filter-option-value-data="{{ opt.id }}" data-zs-filter-option-group-id="{{ set.filter_option_group_id }}" data-zs-filter-option-value-formatted="{{ opt.name }}">
+        <span>{{ opt.name }}</span>
+        {% if set.show_product_count %}<em>{{ opt.count }}</em>{% endif %}
+      </label>
+      {% endfor %}
+      {% for opt in set.color_filter %}
+      <label class="ph-filter-opt" data-zs-filter-option-value-container>
+        <input type="checkbox" data-zs-filter-option-value data-zs-filter-option-value-type="4" data-zs-filter-option-value-id="{{ opt.container_id }}" data-zs-filter-option-value-data="{{ opt.id }}" data-zs-filter-option-group-id="{{ set.filter_option_group_id }}" data-zs-filter-option-value-formatted="{{ opt.name }}_{{ opt.color_code }}">
+        <span>{{ opt.name }}</span>
+        {% if set.show_product_count %}<em>{{ opt.count }}</em>{% endif %}
+      </label>
+      {% endfor %}
+      {% for opt in set.brand_filter %}
+      <label class="ph-filter-opt" data-zs-filter-option-value-container>
+        <input type="checkbox" data-zs-filter-option-value data-zs-filter-option-value-type="8" data-zs-filter-option-value-id="{{ opt.container_id }}" data-zs-filter-option-value-data="{{ opt.id }}" data-zs-filter-option-group-id="{{ set.filter_option_group_id }}" data-zs-filter-option-value-formatted="{{ opt.name }}">
+        <span>{{ opt.name }}</span>
+        {% if set.show_product_count %}<em>{{ opt.count }}</em>{% endif %}
+      </label>
+      {% endfor %}
+      {% for opt in set.tag_filter %}
+      <label class="ph-filter-opt" data-zs-filter-option-value-container>
+        <input type="checkbox" data-zs-filter-option-value data-zs-filter-option-value-type="9" data-zs-filter-option-value-id="{{ opt.container_id }}" data-zs-filter-option-value-data="{{ opt.id }}" data-zs-filter-option-group-id="{{ set.filter_option_group_id }}" data-zs-filter-option-value-formatted="{{ opt.name }}">
+        <span>{{ opt.name }}</span>
+        {% if set.show_product_count %}<em>{{ opt.count }}</em>{% endif %}
+      </label>
+      {% endfor %}
+      {% for opt in set.specification_filter %}
+      <label class="ph-filter-opt" data-zs-filter-option-value-container>
+        <input type="checkbox" data-zs-filter-option-value data-zs-filter-option-value-type="6" data-zs-filter-option-value-id="{{ opt.container_id }}" data-zs-filter-option-value-data="{{ opt.id }}" data-zs-filter-option-group-id="{{ set.filter_option_group_id }}" data-zs-filter-option-value-formatted="{{ opt.name }}">
+        <span>{{ opt.name }}</span>
+        {% if set.show_product_count %}<em>{{ opt.count }}</em>{% endif %}
+      </label>
+      {% endfor %}
+      {% for opt in set.price_filter %}
+      {% assign ph_to = 0 %}{% if opt.to %}{% assign ph_to = opt.to %}{% endif %}
+      <label class="ph-filter-opt" data-zs-filter-option-value-container>
+        <input type="radio" name="ph-price" data-zs-filter-option-value data-zs-filter-option-value-type="2" data-zs-filter-option-value-id="{{ opt.container_id }}" data-zs-filter-option-value-data="{{ opt.from }}_{{ ph_to }}" data-zs-filter-option-value-formatted="">
+        <span data-zs-filter-option-value-price-formatted><span data-zs-filter-option-value-price-min data-zs-selling-price="{{ opt.from }}">{{ opt.from }}</span><span> – </span><span data-zs-filter-option-value-price-max data-zs-selling-price="{{ ph_to }}">{% if ph_to == 0 %}and above{% else %}{{ ph_to }}{% endif %}</span></span>
+        {% if set.show_product_count %}<em>{{ opt.count }}</em>{% endif %}
+      </label>
+      {% endfor %}
+      {% if set.type == 2 %}
+      <div class="ph-price-filter">
+        <label>Minimum price<input type="number" min="0" step="0.01" data-zs-filter-option-price-custom-min-box></label>
+        <label>Maximum price<input type="number" min="0" step="0.01" data-zs-filter-option-price-custom-max-box></label>
+        <button type="button" class="ph-btn ph-btn-outline" data-zs-filter-option-price-custom-btn>Apply</button>
+        <p data-zs-filter-option-price-custom-error-container role="alert" hidden></p>
+      </div>
+      <div data-zs-filter-option-price-custom-container hidden>
+        <div data-zs-filter-option-value-container>
+          <input type="radio" name="ph-price" data-zs-filter-option-value data-zs-filter-option-value-type="2" data-zs-filter-option-value-id="custom_price" data-zs-filter-option-value-data="" data-zs-filter-option-value-formatted="">
+          <span data-zs-filter-option-value-price-formatted><span data-zs-filter-option-price-custom-min-elm data-zs-filter-option-value-price-min></span><span data-zs-filter-option-price-custom-separator> – </span><span data-zs-filter-option-price-custom-max-elm data-zs-filter-option-value-price-max></span></span>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </details>
+  {% endif %}
+  {% endfor %}
+</div>

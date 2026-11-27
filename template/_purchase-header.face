@@ -1,0 +1,5 @@
+<header class="phx-top">
+  <a class="phx-brand" href="/" aria-label="Pheladelfia home"><img src="{{ ph_img }}/logo-full.png" alt="" onerror="this.hidden=true"><span class="phx-word">Pheladelfia<small>AGRICULTURAL LLC</small></span></a>
+  <div class="phx-top-tools"><div class="ph-lang-menu" data-ph-no-translate><button class="ph-lang" type="button" data-ph-lang-toggle aria-label="Language" aria-haspopup="true" aria-expanded="false"><span data-ph-lang-current>EN</span></button><div class="ph-lang-drop" data-ph-lang-drop hidden></div></div><a class="phx-top-link phx-top-cart" href="/all-collections">Continue shopping</a>
+  <a class="phx-top-link phx-top-checkout" href="/cart">Back to cart</a>
+</div></header>

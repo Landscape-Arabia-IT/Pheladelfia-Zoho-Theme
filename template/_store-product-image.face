@@ -1,1 +1,7 @@
-<div class="ph-media-list" data-ph-product-images> {% for image in product.images %} <img src="{{ image.url }}/1600x1600" alt="{{ product.name }}" data-zs-image> {% endfor %} </div> 
+<div class="ph-media-list" data-ph-product-images>
+{% for image in product.images %}
+  {% if image.is_placeholder_image %}{% else %}
+  <img src="{{ image.url }}/600x600" alt="{% if image.alternate_text %}{{ image.alternate_text }}{% else %}{{ product.name }}{% endif %}" width="600" height="600" loading="lazy">
+  {% endif %}
+{% endfor %}
+</div>

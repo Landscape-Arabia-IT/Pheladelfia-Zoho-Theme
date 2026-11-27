@@ -1,7 +1,5 @@
 {% if pagination.has_more_page %}
-<div class="theme-lazy-loading-container" data-lazy-load-products data-current-page-number="{{pagination.current_page}}">
-  <span class="theme-lazy-loading">
-    {{i18n.get("product.pagination.loading")}}
-  </span>
+<div class="ph-pagination" data-has-more-products data-current-page-number="{{ pagination.current_page }}">
+  <button type="button" class="ph-btn ph-btn-outline">Load more plants</button>
 </div>
 {% endif %}

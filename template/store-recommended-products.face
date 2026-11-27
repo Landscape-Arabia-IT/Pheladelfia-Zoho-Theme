@@ -4,7 +4,7 @@
   <h2 class="ph-h3">You may also like</h2>
   <div class="ph-product-grid">
     {% for product in recommended_products.products %}
-      {% include "store-product-list" %}
+      {% include "store-product-list-view" %}
     {% endfor %}
   </div>
 </div>

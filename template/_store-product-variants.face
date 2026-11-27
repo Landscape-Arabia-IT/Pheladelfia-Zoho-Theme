@@ -1,1 +1,41 @@
-<select hidden data-zs-variants>   <option value="-1" data-zs-attributes="[]"></option>   {% for variant in product.variants %}   <option value="{{ variant.variant_id }}" data-ph-option-ids="{% for option in variant.options %}{{ option.id }} {% endfor %}" data-zs-attributes="[]">{{ variant.sku }}</option>   {% endfor %} </select> {% if product.variants %} <div class="ph-variant-fields">   <p class="ph-field-label">Size <span data-ph-size-label></span></p>   <div class="ph-size-chips" data-ph-size-chips>     {% for variant in product.variants %}     <button type="button" class="ph-size-chip" data-ph-size-chip data-ph-variant-id="{{ variant.variant_id }}">{% for option in variant.options %}{{ option.value }}{% endfor %}</button>     {% endfor %}   </div> </div> {% endif %} {% if product.attributes %}   {% for attribute in product.attributes %}   <select class="ph-select ph-sr-only" data-zs-attribute-select data-zs-attribute-id="{{ attribute.id }}" aria-label="{{ attribute.name }}">     <option value="">Select {{ attribute.name }}</option>     {% for option in attribute.options %}     <option value="{{ option.id }}">{{ option.value }}</option>     {% endfor %}   </select>   {% endfor %} {% else %}   {% if product.variants %}   <select class="ph-select ph-sr-only" data-ph-variant-pick aria-label="Size">     <option value="">Select size</option>     {% for variant in product.variants %}     <option value="{{ variant.variant_id }}">{% for option in variant.options %}{{ option.value }} {% endfor %}{{ variant.sku }}</option>     {% endfor %}   </select>   {% endif %} {% endif %} 
+<select hidden data-zs-variants>
+  <option value="-1" data-zs-attributes="[]"></option>
+  {% for variant in product.variants %}
+  <option value="{{ variant.variant_id }}" data-ph-option-ids="{% for option in variant.options %}{{ option.id }} {% endfor %}" data-zs-attributes="[]">{{ variant.sku }}</option>
+  {% endfor %}
+</select>
+{% if product.variants %}
+<div class="ph-variant-fields">
+  <p class="ph-field-label" id="ph-size-label">Size <span data-ph-size-label></span></p>
+  <div class="ph-size-chips" data-ph-size-chips role="listbox" aria-labelledby="ph-size-label">
+    {% for variant in product.variants %}
+    {% assign ph_v_oos = false %}
+    {% if variant.is_out_of_stock || variant.hide_add_to_cart || variant.is_available_for_purchase == false %}{% assign ph_v_oos = true %}{% endif %}
+    <button type="button" class="ph-size-chip{% if ph_v_oos %} is-oos{% endif %}" data-ph-size-chip data-ph-variant-id="{{ variant.variant_id }}" role="option" aria-pressed="false"{% if ph_v_oos %} disabled aria-disabled="true" title="Out of stock"{% endif %}>{% for option in variant.options %}{{ option.value }}{% if forloop.last == false %} · {% endif %}{% endfor %}</button>
+    {% endfor %}
+  </div>
+  <select class="ph-select ph-size-select" id="ph-size-select" data-ph-variant-pick aria-label="Size">
+    <option value="">Select size</option>
+    {% for variant in product.variants %}
+    {% assign ph_v_oos = false %}
+    {% if variant.is_out_of_stock || variant.hide_add_to_cart || variant.is_available_for_purchase == false %}{% assign ph_v_oos = true %}{% endif %}
+    <option value="{{ variant.variant_id }}"{% if ph_v_oos %} disabled{% endif %}>{% for option in variant.options %}{{ option.value }}{% if forloop.last == false %} · {% endif %}{% endfor %}</option>
+    {% endfor %}
+  </select>
+  <p class="ph-ct-note">CT = clear trunk height, measured from soil level to the first branch.</p>
+</div>
+{% endif %}
+<div class="ph-color-fields" data-ph-color-fields hidden>
+  <p class="ph-field-label" data-ph-color-label>Color</p>
+  <div class="ph-color-swatches" data-ph-color-swatches role="listbox" aria-label="Color"></div>
+</div>
+{% if product.attributes %}
+  {% for attribute in product.attributes %}
+  <select class="ph-select ph-sr-only" data-zs-attribute-select data-zs-attribute-id="{{ attribute.id }}" aria-label="{{ attribute.name }}" tabindex="-1">
+    <option value="">Select {{ attribute.name }}</option>
+    {% for option in attribute.options %}
+    <option value="{{ option.id }}">{{ option.value }}</option>
+    {% endfor %}
+  </select>
+  {% endfor %}
+{% endif %}

@@ -451,6 +451,21 @@ html[dir="rtl"] .ph-body .ph-qv .ph-field-label {
 .ph-body .ph-qv .ph-btn {
   border-radius: 4px;
 }
+.ph-header-top > .ph-search .ph-suggest,
+.ph-search-mobile .ph-suggest,
+.ph-nav-search .ph-suggest {
+  z-index: 40;
+  background: #fff;
+  border-color: #e6e8e3;
+  box-shadow: 0 16px 36px rgba(16, 46, 37, 0.16);
+}
+.ph-suggest-status {
+  padding: 0.85rem 0.75rem;
+  line-height: 1.5;
+}
+.ph-search-results .ph-lead {
+  margin: 0.5rem 0 1.5rem;
+}
 .ph-body .ph-qv-ship {
   margin: 4px 0 0;
   color: #6b6b6b;

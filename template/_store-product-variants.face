@@ -14,7 +14,7 @@
     <button type="button" class="ph-size-chip{% if ph_v_oos %} is-oos{% endif %}" data-ph-size-chip data-ph-variant-id="{{ variant.variant_id }}" role="option" aria-pressed="false"{% if ph_v_oos %} disabled aria-disabled="true" title="Out of stock"{% endif %}>{% for option in variant.options %}{{ option.value }}{% if forloop.last == false %} · {% endif %}{% endfor %}</button>
     {% endfor %}
   </div>
-  <select class="ph-select ph-size-select ph-sr-only" id="ph-size-select" data-ph-variant-pick aria-label="Size" tabindex="-1">
+  <select class="ph-select ph-size-select" id="ph-size-select" data-ph-variant-pick aria-label="Size">
     <option value="">Select size</option>
     {% for variant in product.variants %}
     {% assign ph_v_oos = false %}
